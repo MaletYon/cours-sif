@@ -1,0 +1,339 @@
+% ============================================================================
+% Fichier  : partie2/P02_C08_actifs_donnees.tex
+% Titre    : Sécurité des Actifs et des Données
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre III » (classification, protection des données,
+% propriété). Sources : ISO/IEC 27002:2022 (mesures 5.9 à 5.14, 7.10, 8.10) ;
+% NIST SP 800-88 Rev. 1 (2014). La loi n° 2024/017 est seulement mentionnée :
+% ses articles sont à collationner au Journal officiel avant toute citation.
+% ============================================================================
+
+\chapter{Sécurité des Actifs et des Données}
+\label{chap:actifs}
+\chaptermark{Actifs et données}
+
+\epigraph{%
+    « Ce qui n'est pas inventorié n'est pas protégé. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:proprietes}
+et~\ref{chap:risques}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Construire un inventaire des actifs et lui associer des
+          propriétaires.
+    \item Définir un schéma de classification et les règles de
+          manipulation qui en découlent.
+    \item Protéger les données à chaque étape de leur cycle de vie.
+    \item Choisir une méthode d'effacement adaptée au support.
+    \item Maîtriser les supports amovibles et les fuites de données.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : quelles données ont quitté LiZbiZ, et le savait-on~?}
+% ============================================================================
+
+Après l'attaque, le comité demande quelles données figuraient dans les
+40~Go copiés. Personne ne sait répondre~: aucun inventaire ne dit quels
+fichiers contenaient des données de clients, ni qui en était
+responsable. Sans inventaire ni classification, on ne peut ni protéger,
+ni mesurer une fuite, ni prévenir les personnes concernées.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item L'inventaire et les propriétaires (section~\ref{sec:c08-inventaire}).
+    \item La classification (section~\ref{sec:c08-classification}).
+    \item Le cycle de vie des données (section~\ref{sec:c08-cycle}).
+    \item L'effacement sûr (section~\ref{sec:c08-effacement}).
+    \item Supports amovibles et fuites (section~\ref{sec:c08-fuites}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{L'Inventaire et les Propriétaires}
+\label{sec:c08-inventaire}
+% ============================================================================
+
+L'ISO/IEC~27002 fait de l'inventaire des informations et des actifs
+associés la première des mesures organisationnelles sur les
+actifs~\cite{iso27002_2022}. Chaque actif a un \termecle{propriétaire}~:
+une personne de l'activité, et non de l'informatique, qui répond de sa
+protection, fixe ses besoins et valide qui y accède.
+
+\begin{tableaucours}{L{3.0cm}L{2.6cm}L{2.6cm}L{1.6cm}L{2.4cm}}{%
+    \tableauHeader{Actif} &
+    \tableauHeader{Propriétaire} &
+    \tableauHeader{Emplacement} &
+    \tableauHeader{Classe} &
+    \tableauHeader{Supports}
+}
+Fichier des clients & Directeur commercial & Base de Douala & Confidentiel
+& Serveur BD-01 \\
+Factures & Directrice financière & Application intégrée & Interne &
+Serveurs APP-01, APP-02 \\
+Dossiers clients numérisés & Directeur commercial & Partage FS-02 (Garoua)
+& Confidentiel & Serveur FS-02 \\
+Tarifs & Directeur commercial & Messagerie, partage & Confidentiel &
+Service en nuage \\
+Catalogue public & Communication & Portail web & Public & Serveur WEB-01 \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~8.1. Extrait de l'inventaire des actifs
+d'information de LiZbiZ (après l'attaque)}\end{center}
+
+% ============================================================================
+\section{La Classification}
+\label{sec:c08-classification}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Classification}~: affectation d'une information à un niveau de
+sensibilité, selon l'impact de sa divulgation, de son altération ou de sa
+perte. Chaque niveau entraîne des règles de \emph{marquage} et de
+\emph{manipulation}.
+\end{boxdef}
+
+\begin{tableaucours}{L{2.2cm}L{3.4cm}L{6.6cm}}{%
+    \tableauHeader{Niveau} &
+    \tableauHeader{Impact d'une fuite} &
+    \tableauHeader{Règles de manipulation}
+}
+Public & Aucun & Publication libre \\
+Interne & Faible & Diffusion au personnel~; pas de publication \\
+Confidentiel & Important & Accès sur besoin d'en connaître~; chiffrement
+en transit et sur les postes nomades~; pas de stockage personnel \\
+Secret & Grave & Accès nominatif validé par le propriétaire~; chiffrement
+partout~; journalisation de chaque accès \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~8.2. Un schéma de classification à
+quatre niveaux}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Classer tout en « confidentiel ».
+
+\smallskip
+\textbf{Règle~:} une classification trop haute est ignorée, parce
+qu'elle rend le travail impossible. On classe au plus juste, par
+défaut au niveau « interne », et le propriétaire justifie chaque niveau
+supérieur.
+\end{boxalert}
+
+\begin{boxinfo}
+\textbf{Les données personnelles.} Les données qui identifient une
+personne (nom, téléphone, adresse) relèvent en outre d'obligations
+légales~: la loi n°~2024/017 relative à la protection des données à
+caractère personnel en fixe le cadre au Cameroun. Le cours en présente
+les principes au Chapitre~\ref{chap:droit}~; ses articles sont à lire
+dans le texte publié au Journal officiel avant toute application.
+\end{boxinfo}
+
+% ============================================================================
+\section{Le Cycle de Vie des Données}
+\label{sec:c08-cycle}
+% ============================================================================
+
+\begin{tableaucours}{L{2.6cm}L{4.6cm}L{5.0cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Risque} &
+    \tableauHeader{Mesure}
+}
+Création & Donnée non classée & Classification à la création \\
+Stockage & Accès trop larges, vol du support & Contrôle d'accès,
+chiffrement \\
+Usage & Copie, capture d'écran & Moindre privilège, journalisation \\
+Partage & Envoi au mauvais destinataire & Canaux approuvés, chiffrement \\
+Archivage & Perte de lisibilité, conservation trop longue & Durées fixées,
+formats pérennes \\
+Destruction & Données récupérables & Effacement sûr, certificat de
+destruction \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~8.3. Les risques et les mesures du cycle
+de vie}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Des dossiers qui n'auraient pas dû être là}
+\textbf{Constatation.} Le partage FS-02 contenait des dossiers de clients
+numérisés depuis 2015, dont des clients partis depuis plus de cinq ans.
+Aucune durée de conservation n'était fixée.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Une partie des données volées
+n'avait plus d'utilité pour LiZbiZ. Une règle de conservation, appliquée,
+aurait réduit l'ampleur de la fuite~: la donnée la mieux protégée est
+celle que l'on ne garde plus.
+\end{boxscenario}
+
+% ============================================================================
+\section{L'Effacement Sûr}
+\label{sec:c08-effacement}
+% ============================================================================
+
+Supprimer un fichier ne l'efface pas~: le système libère la place, mais
+les données restent lisibles jusqu'à ce qu'elles soient écrasées. Le NIST
+SP~800-88 distingue trois niveaux d'assainissement~\cite{nist80088}.
+
+\begin{tableaucours}{L{2.2cm}L{5.4cm}L{4.6cm}}{%
+    \tableauHeader{Niveau} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Exemple}
+}
+Effacer (\textit{clear}) & Écraser par les commandes normales du
+support & Réécriture complète d'un disque réutilisé en interne \\
+Purger (\textit{purge}) & Rendre la récupération impraticable même en
+laboratoire & Effacement cryptographique, commande d'effacement sécurisé
+du disque \\
+Détruire (\textit{destroy}) & Rendre le support inutilisable &
+Broyage, désintégration \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~8.4. Les niveaux d'assainissement du
+NIST SP~800-88}\end{center}
+
+\begin{boxprocedure}
+\textbf{Sortir un support de l'inventaire}
+\begin{enumerate}
+    \item Identifier le support et la classe la plus haute des données
+          qu'il a contenues.
+    \item Choisir le niveau d'assainissement (effacer, purger, détruire)
+          selon cette classe et la destination du support.
+    \item Exécuter, et vérifier par échantillonnage que les données sont
+          illisibles.
+    \item Établir un certificat~: support, méthode, date, opérateur,
+          vérification.
+    \item Mettre à jour l'inventaire.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{Supports Amovibles et Fuites}
+\label{sec:c08-fuites}
+% ============================================================================
+
+Les supports amovibles ont permis à Stuxnet de franchir un réseau isolé
+(Chapitre~\ref{chap:attaques}) et permettent à un salarié de partir avec
+un fichier. Les mesures~: bloquer les ports par défaut et n'autoriser que
+des supports enregistrés~; chiffrer les supports autorisés~; analyser tout
+support entrant. Les outils de prévention des fuites (DLP) repèrent les
+données classées qui sortent par la messagerie, le web ou un support,
+à condition que la classification existe.
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Tenir l'inventaire technique.} L'administrateur tient la liste des
+serveurs, des postes, des logiciels et de leurs versions, rapprochée
+chaque mois de ce que l'on découvre sur le réseau~: un équipement inconnu
+est un signal.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Faire classer par les métiers.} Le RSSI fournit le schéma et les
+règles~; les propriétaires classent. Il vérifie que les règles de
+manipulation sont appliquées, par exemple par une recherche de fichiers
+confidentiels hors des emplacements prévus.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{L'inventaire} est la première mesure~; chaque actif a un
+          propriétaire métier.
+    \item \textbf{La classification} fixe des règles de marquage et de
+          manipulation~; on classe au plus juste.
+    \item \textbf{Chaque étape du cycle de vie} a ses risques~; une durée de
+          conservation réduit l'ampleur des fuites.
+    \item \textbf{Supprimer n'est pas effacer}~: effacer, purger ou
+          détruire selon la classe et la destination.
+    \item \textbf{Supports amovibles et fuites} se maîtrisent par le
+          blocage, le chiffrement et la détection.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: construire une ligne
+d'inventaire~; proposer un schéma à quatre niveaux et ses règles~;
+associer une mesure à chaque étape du cycle de vie~; choisir entre
+effacer, purger et détruire~; rédiger un certificat d'effacement.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.1. Le propriétaire \niveaubase}]
+Qui doit être propriétaire~: du fichier de paie~; de la base des
+expéditions~; du serveur qui les héberge~? Justifiez.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.2. Classer \niveaubase}]
+Classez avec le schéma du Tableau~8.2~: le catalogue des services~; la
+liste des salaires~; le plan de continuité~; les mots de passe des
+comptes d'administration~; une note de service sur les congés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.3. Supprimer \niveaubase}]
+Expliquez pourquoi un fichier supprimé, puis la corbeille vidée, peut
+encore être récupéré.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.4. Assainir \niveaumoyen}]
+Choisissez le niveau d'assainissement pour~: un portable de la
+comptabilité donné à une école~; un disque de serveur de base de
+données qui part en réparation chez le fabricant~; une clé USB perdue
+puis retrouvée.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.5. Règles de manipulation \niveaumoyen}]
+Rédigez les règles de manipulation d'un document « Confidentiel » pour
+l'impression, l'envoi par courriel, le stockage sur un portable et la
+destruction.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.6. Conservation \niveaumoyen}]
+Proposez des durées de conservation pour~: les dossiers des clients
+actifs~; ceux des clients partis~; les journaux de connexion~; les
+factures. Indiquez pour chacune ce qui la fonde (besoin, obligation
+légale à vérifier).
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.7. Inventaire et détection \niveaumoyen}]
+Un balayage du réseau de LiZbiZ découvre quatre machines absentes de
+l'inventaire. Que faites-vous, dans quel ordre~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.8. La fuite \niveaumoyen}]
+Reprenez la question directrice. Quelles informations auraient permis de
+dire, dès le lundi, quelles données figuraient dans les 40~Go~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.9. Les supports \niveauexpert}]
+Rédigez une politique d'usage des supports amovibles pour la BANQUE
+SANAGA, et dites comment l'auditeur vérifiera son application.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~8.10. Un programme \niveauexpert}]
+Proposez à LiZbiZ un programme de six mois pour inventorier et classer
+ses informations, avec les étapes, les acteurs et les livrables.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO/IEC~27002:2022, mesures sur les actifs~\cite{iso27002_2022}.
+    \item NIST SP~800-88, assainissement des supports~\cite{nist80088}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} L'attaque de Garoua a commencé par une personne
+trompée. Le Chapitre~\ref{chap:humain} traite du facteur humain.
+\end{boxinfo}

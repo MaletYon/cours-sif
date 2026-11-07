@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C19
+Chapitre 19 : Sécurité des applications
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quel cadre du NIST décrit le développement sécurisé ?
+      a) SSDF
+      b) CSF
+      c) RMF
+      d) ABAC
+
+ 2. Quand intégrer la sécurité dans un projet logiciel ?
+      a) Seulement avant la mise en production
+      b) Dès les exigences, jusqu'à la maintenance
+      c) Après le premier incident
+      d) Jamais
+
+ 3. Combien de catégories de menaces compte STRIDE ?
+      a) Quatre
+      b) Cinq
+      c) Six
+      d) Dix
+
+ 4. Dans STRIDE, la lettre S désigne :
+      a) La surveillance
+      b) Le stockage
+      c) La signature
+      d) L'usurpation d'identité (spoofing)
+
+ 5. Dans STRIDE, la lettre D désigne :
+      a) Le déni de service
+      b) La donnée
+      c) Le domaine
+      d) Le débogage
+
+ 6. À quelle propriété s'oppose l'élévation de privilèges (E) ?
+      a) La disponibilité
+      b) L'autorisation
+      c) La confidentialité
+      d) La non-répudiation
+
+ 7. Quelle est la première catégorie de l'OWASP Top 10 (2021) ?
+      a) Injection
+      b) Mauvaise configuration
+      c) Contrôle d'accès défaillant
+      d) Composants vulnérables
+
+ 8. Dans quelle catégorie range-t-on une bibliothèque de 2017 jamais mise à jour ?
+      a) A01
+      b) A03
+      c) A10
+      d) A06
+
+ 9. Quelle catégorie désigne la falsification de requêtes côté serveur ?
+      a) A10
+      b) A01
+      c) A05
+      d) A08
+
+10. Quel référentiel de l'OWASP fixe des exigences vérifiables ?
+      a) Le Top 10
+      b) L'ASVS
+      c) Le CSF
+      d) L'IG1
+
+11. Quelle mesure corrige une injection SQL ?
+      a) Une liste de caractères interdits
+      b) Un pare-feu réseau
+      c) Des requêtes paramétrées
+      d) Un mot de passe plus long
+
+12. Pourquoi une liste de caractères interdits ne suffit-elle pas ?
+      a) Elle est trop lente
+      b) Elle est interdite
+      c) Elle chiffre les données
+      d) Elle se contourne toujours
+
+13. Qu'est-ce qu'une validation positive ?
+      a) N'accepter que ce qui correspond au format attendu
+      b) Refuser certains caractères
+      c) Tout accepter
+      d) Valider après l'enregistrement
+
+14. Sur le portail de l'ANPP, changer l'identifiant dans /paiements?id=10452 montre les paiements d'un autre. De quoi s'agit-il ?
+      a) D'une injection
+      b) D'une référence directe à un objet non sécurisée
+      c) D'un déni de service
+      d) D'une falsification de requête
+
+15. Où le contrôle d'accès doit-il être vérifié ?
+      a) Dans le navigateur
+      b) Dans le pare-feu
+      c) Côté serveur, sur chaque objet
+      d) Nulle part
+
+16. Quelle technique analyse le code source sans l'exécuter ?
+      a) DAST
+      b) Test d'intrusion
+      c) Fuzzing en production
+      d) SAST
+
+17. Quelle technique teste l'application en fonctionnement ?
+      a) DAST
+      b) SAST
+      c) Revue de contrat
+      d) Inventaire
+
+18. Quelle technique détecte les composants vulnérables (A06) ?
+      a) La revue des contrats
+      b) L'analyse des dépendances
+      c) L'inventaire du mobilier
+      d) Le test de charge
+
+19. Où ranger les secrets (mots de passe, clés) d'une application ?
+      a) Dans le code source
+      b) Dans un commentaire
+      c) Dans un coffre ou une configuration protégée, hors du dépôt
+      d) Dans le nom du fichier
+
+20. Sur quel système le cours applique-t-il STRIDE ?
+      a) La messagerie de LiZbiZ
+      b) Le Wi-Fi de BANQUE SANAGA
+      c) Le serveur FS-02
+      d) Le portail de l'ANPP
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. La sécurité s'ajoute à la fin d'un projet.
+      Vrai / Faux
+
+22. Chaque catégorie de STRIDE s'oppose à une propriété de sécurité.
+      Vrai / Faux
+
+23. L'OWASP Top 10 est d'abord un document de sensibilisation.
+      Vrai / Faux
+
+24. Une injection SQL peut rendre une condition toujours vraie.
+      Vrai / Faux
+
+25. Encoder les sorties aide à prévenir l'injection dans les pages web.
+      Vrai / Faux
+
+26. Masquer un bouton dans l'interface suffit à protéger une fonction.
+      Vrai / Faux
+
+27. SAST, DAST, revue de code et test d'intrusion se complètent.
+      Vrai / Faux
+
+28. Un test d'intrusion suffit à garantir l'absence de faille.
+      Vrai / Faux
+
+29. Des pages de débogage laissées en production relèvent de la mauvaise configuration.
+      Vrai / Faux
+
+30. Signer les mises à jour protège l'intégrité des logiciels.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La méthode de Microsoft qui classe les menaces en six catégories s'appelle ______.
+
+32. L'Open Worldwide Application Security Project a pour sigle ______.
+
+33. Une requête SQL qui sépare le code des données est une requête ______.
+
+34. L'analyse statique du code a pour sigle ______.
+
+35. L'analyse dynamique d'une application a pour sigle ______.
+
+36. Le référentiel de vérification de la sécurité des applications de l'OWASP a pour sigle ______.
+
+37. Le cadre du NIST pour le développement sécurisé a pour sigle ______.
+
+38. L'injection est la catégorie A______ de l'OWASP Top 10 (2021).
+
+39. Le contrôle d'accès défaillant est la catégorie A______.
+
+40. Le langage de requête des bases relationnelles a pour sigle ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

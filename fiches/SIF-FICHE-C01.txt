@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C01
+Chapitre 1 : La sécurité de l'information : objets et propriétés
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qu'est-ce qu'un actif essentiel ?
+      a) Une information ou un processus qui a de la valeur
+      b) Un serveur
+      c) Un pare-feu
+      d) Un contrat
+
+ 2. Lequel est un actif support ?
+      a) La facturation
+      b) Le serveur de base de données
+      c) Le fichier des clients
+      d) Le processus de paie
+
+ 3. Pourquoi protège-t-on un serveur ?
+      a) Parce qu'il est cher
+      b) Parce que la loi le nomme
+      c) Parce qu'il porte des actifs essentiels
+      d) Parce qu'il est récent
+
+ 4. Selon la loi n° 2010/012, la cybersécurité comprend des mesures d'ordre :
+      a) Technique seulement
+      b) Juridique seulement
+      c) Financier seulement
+      d) Technique, organisationnel, juridique, financier, humain, procédural et autres
+
+ 5. Quelle propriété est atteinte quand un concurrent lit les tarifs ?
+      a) Confidentialité
+      b) Disponibilité
+      c) Intégrité
+      d) Non-répudiation
+
+ 6. Quelle propriété est atteinte quand la facturation est arrêtée ?
+      a) Confidentialité
+      b) Disponibilité
+      c) Authenticité
+      d) Traçabilité
+
+ 7. Quelle propriété est atteinte quand un montant de virement est modifié ?
+      a) Disponibilité
+      b) Confidentialité
+      c) Intégrité
+      d) Traçabilité
+
+ 8. Quelle propriété empêche un fournisseur de nier avoir envoyé une facture ?
+      a) Disponibilité
+      b) Confidentialité
+      c) Intégrité
+      d) Non-répudiation
+
+ 9. Quelle propriété un compte partagé ruine-t-il ?
+      a) La traçabilité
+      b) La disponibilité
+      c) Le chiffrement
+      d) La redondance
+
+10. Qui a proposé de remplacer la triade par six attributs ?
+      a) Saltzer
+      b) Parker
+      c) Kerckhoffs
+      d) Shannon
+
+11. Que signifie la cotation DICP ?
+      a) Défense, intrusion, contrôle, protection
+      b) Données, information, contrôle, politique
+      c) Disponibilité, intégrité, confidentialité, preuve
+      d) Disponibilité, identité, cryptographie, preuve
+
+12. Pourquoi ne faut-il pas tout coter à 4 ?
+      a) C'est interdit
+      b) La loi impose 3
+      c) Les normes l'interdisent
+      d) Une cotation sert à hiérarchiser ; si tout est critique, rien ne l'est
+
+13. Lequel est une vulnérabilité ?
+      a) Un mot de passe par défaut
+      b) Une crue du Wouri
+      c) Un employé mécontent
+      d) Un groupe criminel
+
+14. Lequel est une menace ?
+      a) Un serveur sans correctif
+      b) Un groupe criminel qui vise une rançon
+      c) Une porte ouverte
+      d) Un mot de passe faible
+
+15. Sur quoi l'organisation peut-elle agir le plus directement ?
+      a) Les menaces
+      b) Les attaquants
+      c) Les vulnérabilités et l'impact
+      d) La météo
+
+16. Quel principe demande de refuser par défaut ?
+      a) Économie de mécanisme
+      b) Conception ouverte
+      c) Acceptabilité psychologique
+      d) Valeurs par défaut sûres
+
+17. Quel principe dit que la sécurité ne repose pas sur le secret du mécanisme ?
+      a) Conception ouverte
+      b) Moindre privilège
+      c) Médiation complète
+      d) Séparation des privilèges
+
+18. La double authentification applique le principe de :
+      a) Économie de mécanisme
+      b) Séparation des privilèges
+      c) Mécanisme le moins partagé
+      d) Conception ouverte
+
+19. Une mesure trop pénible, contournée par les utilisateurs, viole le principe :
+      a) De médiation complète
+      b) De moindre privilège
+      c) D'acceptabilité psychologique
+      d) De conception ouverte
+
+20. En quelle année Saltzer et Schroeder ont-ils publié leurs principes ?
+      a) 1965
+      b) 1995
+      c) 2005
+      d) 1975
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un prestataire peut être un actif support.
+      Vrai / Faux
+
+22. La loi n° 2010/012 définit la confidentialité, l'intégrité et la disponibilité.
+      Vrai / Faux
+
+23. La triade suffit à décrire toutes les pertes possibles.
+      Vrai / Faux
+
+24. Les besoins de sécurité se cotent sur une échelle fixée par la direction.
+      Vrai / Faux
+
+25. La formule risque = vraisemblance × impact est une convention de cotation.
+      Vrai / Faux
+
+26. On choisit ses attaquants.
+      Vrai / Faux
+
+27. Cacher l'adresse d'une page d'administration suffit à la protéger.
+      Vrai / Faux
+
+28. La médiation complète consiste à vérifier chaque accès.
+      Vrai / Faux
+
+29. Le moindre privilège consiste à donner tous les droits pour gagner du temps.
+      Vrai / Faux
+
+30. À Garoua, la faille initiale était humaine et contractuelle avant d'être technique.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La propriété qui garantit l'accès au moment voulu est la ______.
+
+32. La propriété qui permet de savoir qui a fait quoi est la ______.
+
+33. Une faiblesse qu'une menace peut exploiter est une ______.
+
+34. Ne donner que les droits nécessaires à la tâche est le principe du moindre ______.
+
+35. Saltzer et Schroeder ont énoncé ______ principes de conception.
+
+36. Le serveur qui porte la facturation est un actif ______.
+
+37. Dans DICP, le P désigne la ______.
+
+38. La loi camerounaise sur la cybersécurité porte le numéro 2010/______.
+
+39. L'atteinte à la ______ est la conséquence d'un rançongiciel qui arrête un service.
+
+40. Le principe qui demande de faire simple et petit est l'économie de ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

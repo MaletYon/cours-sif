@@ -1,0 +1,343 @@
+% ============================================================================
+% Fichier  : partie1/P01_C05_grandes_attaques.tex
+% Titre    : Histoire des Grandes Attaques
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon, introduction (historique). Sources : Spafford (1989) pour
+% le ver Morris ; Falliere, Murchu et Chien (2011) pour Stuxnet ; rapport du
+% National Audit Office (2017) pour WannaCry ; Greenberg (2019) pour
+% NotPetya ; alerte CISA AA20-352A et déclaration 8-K de SolarWinds (2020).
+% Aucun chiffre n'est donné sans source ; les estimations sont signalées.
+% ============================================================================
+
+\chapter{Histoire des Grandes Attaques}
+\label{chap:attaques}
+\chaptermark{Grandes attaques}
+
+\epigraph{%
+    « Les attaques changent d'outils plus vite que de méthode. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:proprietes}
+à~\ref{chap:crypto-asym}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Lire une attaque historique avec une grille constante.
+    \item Distinguer source primaire, source secondaire et estimation.
+    \item Décrire cinq attaques majeures et leurs mécanismes.
+    \item Dégager les leçons communes et les relier aux mesures du cours.
+    \item Transposer ces leçons au contexte camerounais.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : l'Opération GAROUA était-elle prévisible~?}
+% ============================================================================
+
+Chacun des maillons de l'Opération GAROUA a un précédent célèbre~: un
+correctif publié et non installé, comme pour WannaCry~; un prestataire de
+confiance utilisé comme porte d'entrée, comme pour NotPetya et
+SolarWinds~; un rançongiciel qui détruit plus qu'il ne rançonne. Étudier
+l'histoire, c'est apprendre à reconnaître ce qui revient.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Une grille de lecture (section~\ref{sec:c05-grille}).
+    \item Le ver Morris, 1988 (section~\ref{sec:c05-morris}).
+    \item Stuxnet, 2010 (section~\ref{sec:c05-stuxnet}).
+    \item WannaCry et NotPetya, 2017 (section~\ref{sec:c05-2017}).
+    \item SolarWinds, 2020 (section~\ref{sec:c05-solarwinds}).
+    \item Les leçons communes (section~\ref{sec:c05-lecons}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Une Grille de Lecture}
+\label{sec:c05-grille}
+% ============================================================================
+
+Une attaque se lit avec les mêmes questions, quelle qu'elle soit~:
+
+\begin{tableaucours}{L{3.4cm}L{8.8cm}}{%
+    \tableauHeader{Question} &
+    \tableauHeader{Ce qu'elle cherche}
+}
+Les faits & Quoi, quand, qui a été touché, d'après quelles sources \\
+Le vecteur & Par où l'attaque est-elle entrée~? \\
+Le mécanisme & Comment s'est-elle propagée et qu'a-t-elle fait~? \\
+La mesure manquante & Quelle mesure l'aurait arrêtée ou limitée~? \\
+Le signal ignoré & Qu'aurait-on pu voir avant~? \\
+La leçon & Qu'a-t-elle changé dans les pratiques ou les textes~? \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~5.1. La grille de lecture d'une attaque}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Citer le coût d'une attaque lu dans un article
+de presse comme un fait établi.
+
+\smallskip
+\textbf{Règle~:} on distingue la \emph{source primaire} (le rapport de
+l'organisme touché, d'une autorité, d'un tribunal), la \emph{source
+secondaire} (presse, ouvrage) et l'\emph{estimation}, que l'on présente
+comme telle. Les montants des grandes attaques sont presque toujours des
+estimations.
+\end{boxalert}
+
+% ============================================================================
+\section{Le Ver Morris, 1988}
+\label{sec:c05-morris}
+% ============================================================================
+
+Le 2~novembre~1988, un programme écrit par un étudiant de Cornell, Robert
+T.~Morris, se propage sur l'Internet de l'époque. E.~Spafford, qui l'a
+analysé, décrit trois vecteurs~: un mode de débogage laissé actif dans le
+serveur de messagerie \texttt{sendmail}, un débordement de tampon dans le
+service \texttt{fingerd}, et des mots de passe faibles ou des relations de
+confiance entre machines~\cite{spafford1989}. Une erreur de conception le
+fait se réinstaller sur des machines déjà infectées, qui s'effondrent sous
+la charge. Le nombre de machines touchées n'a jamais été mesuré~; les
+estimations de l'époque parlent de quelques milliers.
+
+\textbf{Ce qu'il a changé.} La création, quelques jours plus tard, du
+premier centre de réponse aux incidents (le CERT/CC à Carnegie Mellon), et
+la première condamnation aux États-Unis au titre de la loi fédérale sur la
+fraude informatique.
+
+% ============================================================================
+\section{Stuxnet, 2010}
+\label{sec:c05-stuxnet}
+% ============================================================================
+
+Découvert en 2010, Stuxnet vise des automates industriels Siemens qui
+pilotent des centrifugeuses. N.~Falliere, L.~O~Murchu et E.~Chien en ont
+publié l'analyse détaillée~\cite{falliere2011}~: propagation par clé USB
+pour franchir l'isolement des réseaux industriels, exploitation de
+plusieurs vulnérabilités inconnues jusque-là, pilotes signés avec des
+certificats volés, et modification discrète de la vitesse des moteurs
+pendant que les opérateurs voyaient des valeurs normales.
+
+\begin{boxinfo}
+\textbf{Ce que Stuxnet enseigne.} Un réseau isolé n'est pas un réseau
+protégé~: une clé USB suffit. Une signature numérique vaut ce que vaut la
+protection de la clé privée qui l'a produite (Chapitre~\ref{chap:crypto-asym}).
+Et une attaque peut viser l'intégrité d'un processus physique, pas
+seulement des données.
+\end{boxinfo}
+
+% ============================================================================
+\section{WannaCry et NotPetya, 2017}
+\label{sec:c05-2017}
+% ============================================================================
+
+\subsection{WannaCry}
+
+Le 12~mai~2017, le rançongiciel WannaCry se propage seul, comme un ver, en
+exploitant une vulnérabilité du protocole de partage de fichiers SMBv1 de
+Windows, pour laquelle Microsoft avait publié un correctif (MS17-010) en
+mars. Au Royaume-Uni, le National Audit Office a établi que des
+établissements du service public de santé ont été touchés, des rendez-vous
+annulés, et que la plupart des machines infectées n'avaient pas reçu le
+correctif~\cite{nao2017wannacry}. La propagation s'arrête quand un
+chercheur enregistre un nom de domaine que le programme interrogeait avant
+d'agir.
+
+\subsection{NotPetya}
+
+Le 27~juin~2017, un programme qui se présente comme un rançongiciel se
+diffuse à partir de la mise à jour piégée d'un logiciel de comptabilité
+ukrainien. Il chiffre de façon irréversible~: c'est une arme de
+destruction déguisée. Il se propage dans les réseaux des entreprises en
+réutilisant des identifiants récupérés en mémoire et la vulnérabilité
+exploitée par WannaCry~; de grandes entreprises internationales voient
+leur informatique arrêtée~\cite{greenberg2019}.
+
+\begin{boxscenario}{Opération GAROUA. Les échos de 2017}
+\textbf{Comme WannaCry}~: un correctif critique, publié huit mois plus
+tôt, n'était pas installé sur le serveur de fichiers. \textbf{Comme
+NotPetya}~: l'attaque est entrée par un acteur de confiance (le
+prestataire) et s'est propagée grâce à des identifiants d'administrateur
+réutilisés sur plusieurs machines.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Les mesures étaient connues depuis
+2017~: correctifs, segmentation, comptes d'administration distincts par
+machine, sauvegardes hors ligne.
+\end{boxscenario}
+
+% ============================================================================
+\section{SolarWinds, 2020}
+\label{sec:c05-solarwinds}
+% ============================================================================
+
+En décembre~2020, on découvre qu'une mise à jour du logiciel de
+supervision Orion, de l'éditeur SolarWinds, contenait une porte dérobée
+insérée dans la chaîne de production du logiciel. L'agence américaine de
+cybersécurité (CISA) a publié une alerte décrivant l'attaque et ses
+indicateurs~\cite{cisa2020solarwinds}~; l'éditeur a déclaré à l'autorité
+boursière qu'environ 18\,000 clients avaient pu installer la version
+compromise~\cite{solarwinds2020}, l'attaquant n'en exploitant ensuite
+qu'une petite partie.
+
+\begin{boxinfo}
+\textbf{Ce que SolarWinds enseigne.} La confiance dans un fournisseur est
+un risque. Une mise à jour signée par l'éditeur peut être malveillante si
+la chaîne de production de l'éditeur est compromise. D'où l'intérêt de
+surveiller le comportement d'un logiciel, même de confiance, et de limiter
+ses droits (Chapitre~\ref{chap:architecture}).
+\end{boxinfo}
+
+% ============================================================================
+\section{Les Leçons Communes}
+\label{sec:c05-lecons}
+% ============================================================================
+
+\begin{tableaucours}{L{2.6cm}L{3.2cm}L{3.2cm}L{3.2cm}}{%
+    \tableauHeader{Attaque} &
+    \tableauHeader{Vecteur} &
+    \tableauHeader{Mesure manquante} &
+    \tableauHeader{Chapitre du cours}
+}
+Morris & Services mal configurés, mots de passe faibles & Durcissement,
+mots de passe & \ref{chap:systemes}, \ref{chap:iam} \\
+Stuxnet & Clé USB, vulnérabilités inconnues & Contrôle des supports,
+détection & \ref{chap:actifs}, \ref{chap:operations} \\
+WannaCry & Faille SMBv1 corrigée depuis deux mois & Correctifs,
+segmentation & \ref{chap:systemes}, \ref{chap:architecture} \\
+NotPetya & Mise à jour piégée d'un fournisseur & Segmentation, comptes
+distincts, sauvegardes & \ref{chap:architecture}, \ref{chap:continuite} \\
+SolarWinds & Chaîne de production d'un éditeur & Moindre privilège,
+surveillance & \ref{chap:architecture}, \ref{chap:operations} \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~5.2. Cinq attaques, une grille}\end{center}
+
+Quatre leçons reviennent~: \textbf{(1)} la plupart des attaques exploitent
+des faiblesses connues~; \textbf{(2)} la confiance accordée à un tiers est
+un vecteur~; \textbf{(3)} un réseau plat transforme une intrusion locale en
+catastrophe générale~; \textbf{(4)} la capacité à reprendre l'activité
+(sauvegardes, plan de continuité) décide de l'issue.
+
+\begin{boxinfo}
+\textbf{Et en Afrique~?} Les attaques survenues en Afrique centrale sont
+rarement documentées par des sources primaires publiques. Le cours ne
+cite que des faits dont la source est accessible~; l'exercice~5.10
+invite à en rechercher, avec la même exigence.
+\end{boxinfo}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Se servir de l'histoire.} L'auditeur transforme chaque leçon en
+point de contrôle~: les correctifs critiques sont-ils installés sous
+trente jours~? Les comptes d'administration sont-ils distincts par
+machine~? Les sauvegardes sont-elles hors ligne et testées~? Les
+fournisseurs ont-ils des droits limités~?
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Une attaque se lit avec une grille}~: faits, vecteur,
+          mécanisme, mesure manquante, signal ignoré, leçon.
+    \item \textbf{Les sources se distinguent}~; les montants sont presque
+          toujours des estimations.
+    \item \textbf{Morris, Stuxnet, WannaCry, NotPetya, SolarWinds}
+          illustrent les mots de passe faibles, l'isolement illusoire, le
+          correctif manquant, le fournisseur piégé.
+    \item \textbf{Quatre leçons}~: faiblesses connues, confiance dans les
+          tiers, réseau plat, capacité de reprise.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: appliquer la grille à une
+attaque~; distinguer source primaire et estimation~; décrire le mécanisme
+des cinq attaques~; associer chaque attaque à une mesure du cours.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.1. La grille \niveaubase}]
+Appliquez la grille du Tableau~5.1 à l'Opération GAROUA.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.2. Quelle attaque~? \niveaubase}]
+Associez chaque phrase à une attaque~: (a) une clé USB franchit un réseau
+isolé~; (b) un correctif publié en mars n'est pas installé en mai~; (c)
+une mise à jour de logiciel de comptabilité détruit des réseaux entiers~;
+(d) un programme se réinstalle sans fin sur les mêmes machines.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.3. Les sources \niveaubase}]
+Classez en source primaire, secondaire ou estimation~: le rapport du
+National Audit Office~; un article qui chiffre le coût mondial de
+NotPetya~; la déclaration 8-K de SolarWinds~; un billet de blogue sur
+Stuxnet.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.4. Le correctif \niveaumoyen}]
+Entre la publication d'un correctif et son installation, une entreprise
+est exposée. Proposez une règle de délai par niveau de gravité, et la
+mesure compensatoire quand un correctif ne peut pas être installé.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.5. L'isolement \niveaumoyen}]
+La SODECO, entreprise fictive de distribution d'électricité, pilote ses
+postes par un réseau industriel « déconnecté d'Internet ». Quelles leçons
+de Stuxnet s'y appliquent~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.6. Le fournisseur \niveaumoyen}]
+LiZbiZ utilise un logiciel de paie mis à jour automatiquement par son
+éditeur. Quelles mesures limitent le risque d'une mise à jour piégée~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.7. Réseau plat \niveaumoyen}]
+Expliquez pourquoi WannaCry et NotPetya ont été dévastateurs dans les
+réseaux plats, et décrivez une segmentation minimale pour LiZbiZ.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.8. Rançongiciel ou destructeur \niveaumoyen}]
+NotPetya ressemblait à un rançongiciel mais ne permettait pas de
+récupérer les données. Qu'est-ce que cela change pour la décision de payer
+une rançon~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.9. Des points de contrôle \niveauexpert}]
+À partir du Tableau~5.2, rédigez dix points de contrôle pour un audit de
+sécurité de la BANQUE SANAGA, chacun avec la preuve attendue.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~5.10. Une affaire africaine \niveauexpert}]
+Recherchez une attaque survenue en Afrique et documentée par une source
+primaire publique (rapport d'une autorité, décision de justice,
+communiqué de l'organisation touchée). Appliquez la grille, en signalant
+le statut de chaque source.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item E.~Spafford, analyse du ver de 1988~\cite{spafford1989}.
+    \item N.~Falliere, L.~O~Murchu, E.~Chien, \emph{W32.Stuxnet
+          Dossier}~\cite{falliere2011}.
+    \item National Audit Office, rapport sur WannaCry~\cite{nao2017wannacry}~;
+          A.~Greenberg, \emph{Sandworm}~\cite{greenberg2019}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Ces attaques ont réussi autant par défaut
+d'organisation que par défaut technique. La Partie~\ref{part:gouvernance}
+commence par la gouvernance~: qui décide, qui est responsable, et selon
+quelle politique.
+\end{boxinfo}

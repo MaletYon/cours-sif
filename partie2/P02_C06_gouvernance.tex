@@ -1,0 +1,403 @@
+% ============================================================================
+% Fichier  : partie2/P02_C06_gouvernance.tex
+% Titre    : Gouvernance de la Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre II » (gouvernance, politiques, rôles) et « Livre
+% VIII » (sécurité administrative). Sources : ISO/IEC 27014:2020 ; ISO/IEC
+% 27001:2022 (clause 5) ; ISO/IEC 27004:2016 ; loi n° 2010/012, art. 26 (1),
+% texte officiel.
+% ============================================================================
+
+\chapter{Gouvernance de la Sécurité}
+\label{chap:gouvernance}
+\chaptermark{Gouvernance}
+
+\epigraph{%
+    « La sécurité se décide en haut,\\
+    se met en œuvre partout, et se vérifie toujours. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:proprietes}
+et~\ref{chap:menaces}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Distinguer gouvernance et management de la sécurité.
+    \item Répartir les rôles et les responsabilités, et les formaliser dans
+          une matrice.
+    \item Construire une politique de sécurité et la documentation qui
+          en découle.
+    \item Définir des indicateurs de sécurité utiles à la direction.
+    \item Intégrer la sécurité aux projets et aux contrats.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : qui était responsable de la sécurité de LiZbiZ~?}
+% ============================================================================
+
+Personne. M.~KOUNOU gérait l'informatique~; SAHEL INFOGÉRANCE exploitait
+deux centres~; la direction pensait que l'antivirus et les pare-feu
+« faisaient la sécurité ». Aucune politique, aucun responsable, aucun
+indicateur. L'Opération GAROUA n'est pas seulement une faille technique~:
+c'est une absence de gouvernance.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Gouverner et manager la sécurité (section~\ref{sec:c06-gouv}).
+    \item Les rôles et les responsabilités (section~\ref{sec:c06-roles}).
+    \item La politique de sécurité (section~\ref{sec:c06-pssi}).
+    \item Les indicateurs (section~\ref{sec:c06-indicateurs}).
+    \item La sécurité dans les projets et les contrats (section~\ref{sec:c06-projets}).
+    \item Une gouvernance pour LiZbiZ (section~\ref{sec:c06-lizbiz}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Gouverner et Manager la Sécurité}
+\label{sec:c06-gouv}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Gouvernance de la sécurité de l'information}~: système par
+lequel la direction oriente et contrôle les activités de sécurité~: elle
+fixe les objectifs, alloue les ressources, accepte les risques et
+vérifie les résultats. Le \termecle{management de la sécurité} met en
+œuvre ces orientations au quotidien~\cite{iso27014_2020}.
+\end{boxdef}
+
+L'ISO/IEC~27014 décrit cinq processus de gouvernance~: \emph{évaluer}
+(la situation et les risques), \emph{orienter} (fixer la politique et les
+priorités), \emph{surveiller} (suivre les résultats), \emph{communiquer}
+(aux parties intéressées) et \emph{assurer} (faire vérifier de façon
+indépendante, par un audit).
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~26, alinéa~1} (texte officiel)~:
+\textit{« Les exploitants des systèmes d'information prennent toutes les
+mesures techniques et administratives afin de garantir la sécurité des
+services offerts. A cet effet, ils se dotent de systèmes normalisés leur
+permettant d'identifier, d'évaluer, de traiter et de gérer continûment les
+risques liés à la sécurité des systèmes d'information dans le cadre des
+services offerts directement ou indirectement. »}
+
+\medskip
+\textbf{Analyse.} La loi exige un dispositif \emph{continu} et
+\emph{normalisé} de gestion des risques~: c'est une obligation de
+gouvernance, pas seulement de moyens techniques. Un exploitant qui n'a ni
+responsable, ni appréciation des risques, ni suivi, comme LiZbiZ avant
+mars, ne peut pas démontrer qu'il la respecte.
+\end{boxjuris}
+
+% ============================================================================
+\section{Les Rôles et les Responsabilités}
+\label{sec:c06-roles}
+% ============================================================================
+
+\begin{tableaucours}{L{3.4cm}L{8.8cm}}{%
+    \tableauHeader{Acteur} &
+    \tableauHeader{Responsabilités}
+}
+Direction générale & Approuve la politique, fixe l'appétence au risque,
+accepte les risques résiduels, alloue le budget \\
+Comité de sécurité & Réunit direction, métiers, informatique et RSSI~;
+arbitre les priorités, suit le plan \\
+RSSI & Propose la politique, apprécie les risques, pilote le plan,
+conseille, contrôle, rend compte \\
+Propriétaires d'actifs & Responsables métier d'une information ou d'un
+processus~; fixent ses besoins de sécurité et valident les droits \\
+Direction informatique & Met en œuvre les mesures techniques~;
+exploite \\
+Utilisateurs & Respectent les règles~; signalent les incidents \\
+Prestataires & Appliquent les exigences du contrat~; rendent compte \\
+Audit & Vérifie, de façon indépendante, que le dispositif fonctionne \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~6.1. Les acteurs de la sécurité}\end{center}
+
+\subsection{Le rattachement du RSSI}
+
+Un RSSI rattaché à la direction informatique contrôle son propre
+supérieur~: il a du mal à signaler qu'un correctif n'est pas installé. Un
+rattachement à la direction générale, ou à une fonction de gestion des
+risques, lui donne l'indépendance nécessaire. C'est un choix de
+gouvernance, que la direction motive par écrit.
+
+\subsection{La matrice RACI}
+
+\begin{tableaucours}{L{4.2cm}cccc}{%
+    \tableauHeader{Activité} &
+    \tableauHeader{DG} &
+    \tableauHeader{RSSI} &
+    \tableauHeader{DSI} &
+    \tableauHeader{Propriétaire}
+}
+Approuver la politique & A & R & C & C \\
+Apprécier les risques & I & A & C & R \\
+Installer les correctifs & I & C & A/R & I \\
+Valider les droits d'accès & I & C & R & A \\
+Accepter un risque résiduel & A & R & C & C \\
+Gérer un incident majeur & A & R & R & C \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~6.2. Matrice RACI (R réalise, A
+approuve et rend compte, C consulté, I informé)}\end{center}
+
+% ============================================================================
+\section{La Politique de Sécurité}
+\label{sec:c06-pssi}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Politique de sécurité des systèmes d'information} (PSSI)~:
+document approuvé par la direction qui énonce les objectifs de sécurité,
+les principes et les responsabilités, et que déclinent des politiques
+thématiques et des procédures. L'ISO/IEC~27001 en fait une exigence de la
+direction (clause~5.2)~\cite{iso27001_2022}.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.6cm}L{5.0cm}L{3.6cm}}{%
+    \tableauHeader{Niveau} &
+    \tableauHeader{Contenu} &
+    \tableauHeader{Approuvé par}
+}
+Politique générale & Objectifs, principes, rôles, engagement & Direction
+générale \\
+Politiques thématiques & Accès, mots de passe, sauvegardes, télétravail,
+prestataires, développement & Comité de sécurité \\
+Standards & Règles techniques précises (configurations, longueurs de clés) &
+RSSI \\
+Procédures & Pas à pas d'une opération (créer un compte, restaurer) &
+Responsable du service \\
+Guides & Recommandations non obligatoires & RSSI \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~6.3. La pyramide documentaire}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Copier la politique d'une autre organisation,
+la faire signer, et la ranger.
+
+\smallskip
+\textbf{Règle~:} une politique part des risques de l'organisation
+(Chapitre~\ref{chap:risques}), est connue de ceux qui l'appliquent, et
+est revue au moins chaque année et après chaque incident majeur. Une
+politique que personne n'applique est une preuve contre l'organisation.
+\end{boxalert}
+
+\begin{boxprocedure}
+\textbf{Faire vivre la politique}
+\begin{enumerate}
+    \item \textbf{Rédiger} à partir de l'appréciation des risques.
+    \item \textbf{Faire approuver} par la direction, avec une date de revue.
+    \item \textbf{Diffuser} à chaque personne concernée, et le tracer.
+    \item \textbf{Former} aux règles qui les concernent.
+    \item \textbf{Contrôler} l'application, par des indicateurs et des
+          audits.
+    \item \textbf{Réviser} après chaque incident et chaque changement
+          majeur.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{Les Indicateurs}
+\label{sec:c06-indicateurs}
+% ============================================================================
+
+L'ISO/IEC~27004 donne une méthode pour mesurer l'efficacité du dispositif
+de sécurité~\cite{iso27004_2016}. Un bon indicateur a une définition, une
+formule, une source, une fréquence, un responsable et une cible.
+
+\begin{tableaucours}{L{4.2cm}L{4.4cm}L{3.6cm}}{%
+    \tableauHeader{Indicateur} &
+    \tableauHeader{Formule} &
+    \tableauHeader{Cible (exemple)}
+}
+Correctifs critiques à jour & Serveurs à jour / serveurs, à 30~jours &
+100~\% \\
+Comptes distants avec double authentification & Comptes protégés /
+comptes distants & 100~\% \\
+Restaurations testées & Tests réussis / tests prévus, par trimestre &
+100~\% \\
+Délai de détection & Médiane entre début d'un incident et sa détection &
+Moins de 24~h \\
+Personnes formées & Formées dans l'année / effectif & Plus de 90~\% \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~6.4. Indicateurs de sécurité pour une
+direction}\end{center}
+
+\begin{boxinfo}
+\textbf{Mesurer aussi ce que l'on ignore.} Un indicateur dont la source
+n'existe pas (aucun journal, aucun inventaire) ne vaut pas zéro~: il vaut
+« inconnu ». Le Chapitre~\ref{chap:mesurer} montre comment le dire
+(\NEK{}) plutôt que de le taire.
+\end{boxinfo}
+
+% ============================================================================
+\section{La Sécurité dans les Projets et les Contrats}
+\label{sec:c06-projets}
+% ============================================================================
+
+La sécurité coûte moins cher quand elle est prévue. Chaque projet
+informatique inclut une analyse de risques, des exigences de sécurité,
+des tests avant mise en production et une validation par le RSSI. Chaque
+contrat avec un prestataire qui touche au système d'information contient
+des clauses de sécurité.
+
+\begin{tableaucours}{L{4.0cm}L{8.2cm}}{%
+    \tableauHeader{Clause} &
+    \tableauHeader{Contenu}
+}
+Exigences de sécurité & Double authentification, correctifs, comptes
+nominatifs \\
+Journaux & Conservation et remise des journaux d'accès sur demande \\
+Notification des incidents & Délai (par exemple 24~h) et contenu \\
+Droit d'audit & Possibilité d'auditer ou de faire auditer le prestataire \\
+Sous-traitance & Autorisation préalable de tout sous-traitant \\
+Réversibilité & Restitution des données et des configurations en fin de
+contrat \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~6.5. Clauses de sécurité d'un contrat
+de prestation}\end{center}
+
+% ============================================================================
+\section{Une Gouvernance pour LiZbiZ}
+\label{sec:c06-lizbiz}
+% ============================================================================
+
+\begin{boxscenario}{Opération GAROUA. Les décisions du conseil d'avril}
+\textbf{Décisions.} Le conseil d'administration de LiZbiZ décide~:
+(1)~de recruter un RSSI rattaché au directeur général~; (2)~de créer un
+comité de sécurité trimestriel~; (3)~d'adopter une politique générale et
+cinq politiques thématiques avant septembre~; (4)~de renégocier le contrat
+de SAHEL INFOGÉRANCE avec les clauses du Tableau~6.5~; (5)~de présenter
+chaque trimestre cinq indicateurs au conseil.
+
+\medskip
+\textbf{Analyse} (confiance moyenne). Ces décisions répondent aux causes
+d'organisation de l'attaque. Leur efficacité ne se jugera qu'aux
+indicateurs, dans six mois~: une décision n'est pas un résultat.
+\end{boxscenario}
+
+\begin{boxmetier}{RSSI}
+\textbf{Parler à la direction.} Le RSSI présente des risques en langage
+métier (jours sans facturation, données exposées, sanctions), propose
+des options chiffrées et laisse la direction décider. Il trace par écrit
+chaque risque accepté.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Vérifier la gouvernance.} L'auditeur demande la politique signée
+et sa date de revue, la nomination du RSSI, les comptes rendus du comité,
+les indicateurs et les risques acceptés. Une politique sans preuve de
+diffusion ni de contrôle se cote comme absente de fait.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{La gouvernance} évalue, oriente, surveille, communique
+          et fait assurer~; le management met en œuvre.
+    \item \textbf{La loi n°~2010/012} (art.~26) impose une gestion continue
+          et normalisée des risques de sécurité.
+    \item \textbf{Les rôles} se formalisent (matrice RACI)~; le RSSI a
+          besoin d'indépendance.
+    \item \textbf{La politique} s'appuie sur les risques, se diffuse, se
+          contrôle et se révise~; elle se décline en politiques thématiques,
+          standards et procédures.
+    \item \textbf{Les indicateurs} ont une formule, une source, une cible~;
+          une source absente donne « inconnu », pas zéro.
+    \item \textbf{Les contrats} portent des clauses de sécurité.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: citer les cinq
+processus de gouvernance de l'ISO/IEC~27014~; remplir une matrice RACI~;
+décrire la pyramide documentaire~; rédiger un indicateur complet~; lister
+six clauses de sécurité d'un contrat.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.1. Gouverner ou manager~? \niveaubase}]
+Classez~: approuver la politique~; installer un pare-feu~; accepter un
+risque résiduel~; former les utilisateurs~; fixer le budget de sécurité~;
+revoir les droits d'accès.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.2. Le texte de l'article 26 \niveaubase}]
+Relevez, dans l'article~26, les quatre verbes qui décrivent la gestion des
+risques, et associez à chacun une activité concrète.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.3. RACI \niveaumoyen}]
+Complétez la matrice RACI pour~: créer un compte~; supprimer un compte
+d'un salarié parti~; restaurer une sauvegarde~; choisir un prestataire.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.4. Rattachement \niveaumoyen}]
+La BANQUE SANAGA hésite à rattacher son RSSI au DSI ou au directeur des
+risques. Donnez deux arguments pour chaque option et votre recommandation.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.5. Pyramide \niveaubase}]
+Classez dans la pyramide documentaire~: « les mots de passe comptent au
+moins 14~caractères »~; « LiZbiZ protège les données de ses clients »~;
+« pour restaurer une base, suivre les étapes 1 à 9 »~; « politique de
+télétravail ».
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.6. Un indicateur \niveaumoyen}]
+Rédigez la fiche complète de l'indicateur « délai d'installation des
+correctifs critiques »~: définition, formule, source, fréquence,
+responsable, cible.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.7. Le contrat \niveaumoyen}]
+Pour chaque clause du Tableau~6.5, dites quel maillon de l'Opération
+GAROUA elle aurait touché.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.8. La politique copiée \niveaumoyen}]
+Un auditeur trouve chez l'ANPP une politique de 60~pages, copiée d'une
+banque européenne, signée en 2019 et jamais revue. Rédigez la
+constatation et la recommandation.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.9. Le tableau de bord \niveauexpert}]
+Proposez au conseil de LiZbiZ un tableau de bord trimestriel de six
+indicateurs, et dites pour chacun ce que LiZbiZ pourrait mesurer
+aujourd'hui, et ce qui serait « inconnu ».
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~6.10. La politique générale \niveauexpert}]
+Rédigez la politique générale de sécurité de LiZbiZ en une page~: objet,
+champ, objectifs, principes, rôles, révision.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO/IEC~27014, gouvernance de la sécurité de
+          l'information~\cite{iso27014_2020}.
+    \item ISO/IEC~27004, mesure de la sécurité~\cite{iso27004_2016}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} La gouvernance décide sur la base des risques. Le
+Chapitre~\ref{chap:risques} montre comment les apprécier et les traiter.
+\end{boxinfo}

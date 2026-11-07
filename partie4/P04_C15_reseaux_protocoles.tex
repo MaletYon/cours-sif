@@ -1,0 +1,320 @@
+% ============================================================================
+% Fichier  : partie4/P04_C15_reseaux_protocoles.tex
+% Titre    : Sécurité des Réseaux (1) : Protocoles et Attaques
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre V » (modèles OSI et TCP/IP, protocoles). Sources :
+% RFC 826 (ARP), RFC 4987 (inondation SYN), RFC 5452 (résistance du DNS aux
+% réponses falsifiées), RFC 4033 (DNSSEC) ; Stevens, TCP/IP Illustrated.
+% ============================================================================
+
+\chapter{Sécurité des Réseaux (1) : Protocoles et Attaques}
+\label{chap:reseaux1}
+\chaptermark{Protocoles et attaques réseau}
+
+\epigraph{%
+    « Les protocoles d'Internet ont été conçus pour des machines\\
+    qui se faisaient confiance. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Bases des réseaux (modèle TCP/IP,
+adressage)~; Chapitre~\ref{chap:menaces}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Rattacher les attaques réseau aux couches qu'elles visent.
+    \item Expliquer l'usurpation ARP et l'empoisonnement DNS.
+    \item Décrire l'inondation SYN et les dénis de service par
+          amplification.
+    \item Repérer les protocoles en clair et leurs remplaçants sûrs.
+    \item Lire une capture réseau pour y trouver une attaque.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : que voit celui qui écoute le réseau d'une agence~?}
+% ============================================================================
+
+Lors de l'enquête sur l'Opération GAROUA, l'équipe capture une heure de
+trafic sur le réseau de l'agence de Garoua. Elle y trouve, en clair, le
+mot de passe d'un serveur FTP, des requêtes d'administration en HTTP et
+un balayage de ports venu d'un poste interne. Ce chapitre apprend à lire
+ces traces, et à comprendre pourquoi les protocoles les laissent passer.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Les couches et leurs attaques (section~\ref{sec:c15-couches}).
+    \item Usurper sur le réseau local~: ARP (section~\ref{sec:c15-arp}).
+    \item Tromper la résolution de noms~: DNS (section~\ref{sec:c15-dns}).
+    \item Saturer~: les dénis de service (section~\ref{sec:c15-dos}).
+    \item Les protocoles en clair (section~\ref{sec:c15-clair}).
+    \item Lire une capture (section~\ref{sec:c15-capture}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Les Couches et leurs Attaques}
+\label{sec:c15-couches}
+% ============================================================================
+
+\begin{tableaucours}{L{2.8cm}L{3.6cm}L{5.8cm}}{%
+    \tableauHeader{Couche TCP/IP} &
+    \tableauHeader{Protocoles} &
+    \tableauHeader{Attaques typiques}
+}
+Accès au réseau & Ethernet, Wi-Fi, ARP & Écoute, usurpation ARP, saturation
+des tables des commutateurs \\
+Internet & IP, ICMP & Usurpation d'adresse IP, fragmentation, inondation
+ICMP \\
+Transport & TCP, UDP & Inondation SYN, balayage de ports, détournement de
+session \\
+Application & DNS, HTTP, SMTP, FTP & Empoisonnement DNS, interception de
+protocoles en clair, injections \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~15.1. Les attaques par couche}\end{center}
+
+% ============================================================================
+\section{Usurper sur le Réseau Local : ARP}
+\label{sec:c15-arp}
+% ============================================================================
+
+Le protocole ARP associe une adresse IP à une adresse matérielle (MAC) sur
+un réseau local~\cite{rfc826}. Il n'authentifie rien~: une machine accepte
+une réponse ARP qu'elle n'a pas demandée.
+
+\begin{boxdef}
+\termecle{Usurpation ARP} (\textit{ARP spoofing})~: envoi de fausses
+réponses ARP qui associent l'adresse IP de la passerelle à l'adresse MAC
+de l'attaquant~; le trafic des victimes passe alors par lui (homme du
+milieu).
+\end{boxdef}
+
+\textbf{Contre-mesures}~: inspection ARP dynamique sur les commutateurs,
+segmentation en petits réseaux virtuels, et surtout chiffrement des
+échanges (TLS), qui rend l'interception inutile.
+
+% ============================================================================
+\section{Tromper la Résolution de Noms : DNS}
+\label{sec:c15-dns}
+% ============================================================================
+
+Le DNS traduit les noms en adresses. Un \termecle{empoisonnement de cache}
+consiste à faire accepter par un résolveur une fausse réponse, qui envoie
+ensuite tous ses utilisateurs vers le serveur de l'attaquant. En 2008,
+D.~Kaminsky a montré qu'une attaque de ce type était bien plus facile
+qu'on ne le pensait~; la réponse a été de rendre aléatoires le port
+source et l'identifiant des requêtes~\cite{rfc5452}. DNSSEC va plus loin
+en signant les réponses~\cite{rfc4033}.
+
+\begin{boxalert}
+\textbf{Violation typique.} Laisser un résolveur DNS interne répondre aux
+requêtes venues d'Internet (résolveur ouvert).
+
+\smallskip
+\textbf{Règle~:} un résolveur ne sert que ses utilisateurs~; ouvert, il
+sert aussi les attaquants, notamment pour l'amplification
+(section~\ref{sec:c15-dos}).
+\end{boxalert}
+
+% ============================================================================
+\section{Saturer : les Dénis de Service}
+\label{sec:c15-dos}
+% ============================================================================
+
+\begin{tableaucours}{L{3.4cm}L{5.0cm}L{3.8cm}}{%
+    \tableauHeader{Attaque} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Contre-mesure}
+}
+Inondation SYN & Ouvrir des milliers de connexions TCP sans les achever,
+pour épuiser la mémoire du serveur & Témoins SYN (\textit{SYN
+cookies})~\cite{rfc4987} \\
+Amplification & Envoyer de petites requêtes avec l'adresse de la victime,
+à des serveurs qui répondent par de grosses réponses (DNS, NTP) &
+Fermer les services ouverts, filtrer les adresses usurpées \\
+Déni de service applicatif & Saturer une fonction coûteuse (recherche,
+connexion) & Limitation de débit, cache \\
+Déni de service distribué & Des milliers de machines (botnet) & Service
+de filtrage de l'opérateur ou d'un fournisseur spécialisé \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~15.2. Les dénis de service}\end{center}
+
+Le \termecle{facteur d'amplification} est le rapport entre la taille de
+la réponse et celle de la requête. Une requête de 60~octets qui provoque
+une réponse de 3\,000~octets amplifie 50~fois~: 1~Mbit/s envoyé par
+l'attaquant devient 50~Mbit/s reçus par la victime.
+
+% ============================================================================
+\section{Les Protocoles en Clair}
+\label{sec:c15-clair}
+% ============================================================================
+
+\begin{tableaucours}{L{2.8cm}L{4.6cm}L{4.8cm}}{%
+    \tableauHeader{Protocole en clair} &
+    \tableauHeader{Ce qui circule lisiblement} &
+    \tableauHeader{Remplaçant}
+}
+Telnet & Identifiants et commandes & SSH \\
+FTP & Identifiants et fichiers & SFTP, FTPS \\
+HTTP & Formulaires, cookies de session & HTTPS (TLS) \\
+SMTP sans TLS & Contenu des courriels & SMTP avec STARTTLS ou TLS \\
+SNMP v1, v2c & Chaîne de communauté, configuration & SNMPv3 avec
+authentification et chiffrement \\
+POP3, IMAP sans TLS & Identifiants, courriels & POP3S, IMAPS \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~15.3. Protocoles en clair et remplaçants}\end{center}
+
+% ============================================================================
+\section{Lire une Capture}
+\label{sec:c15-capture}
+% ============================================================================
+
+\begin{boxoutils}{Filtres de capture et d'affichage}
+\begin{lstlisting}
+# capturer le trafic d'une interface dans un fichier
+tcpdump -i eth0 -w agence.pcap
+# Wireshark : quelques filtres d'affichage
+ftp.request.command == "USER" || ftp.request.command == "PASS"
+http.request.method == "POST"
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+arp.duplicate-address-detected
+\end{lstlisting}
+Le troisième filtre isole les débuts de connexion~: un grand nombre de
+SYN vers des ports différents d'une même machine signe un balayage.
+\end{boxoutils}
+
+\begin{boxscenario}{Opération GAROUA. Une heure de trafic à Garoua}
+\textbf{Constatations} (capture du 10~mars, 9~h à 10~h)~:
+\begin{itemize}
+    \item 4 connexions FTP vers le serveur de dépôt des bordereaux~;
+          identifiant et mot de passe lisibles en clair~;
+    \item des requêtes HTTP vers l'interface d'administration d'une
+          imprimante réseau, avec le mot de passe par défaut~;
+    \item depuis le poste PC-GAR-07, des paquets SYN vers 1\,000~ports de
+          chacun des 12~serveurs, en moins de deux minutes.
+\end{itemize}
+
+\textbf{Analyse} (confiance moyenne). Le balayage depuis PC-GAR-07 laisse
+penser que ce poste est encore compromis, ou utilisé par un outil non
+autorisé~: il faut l'isoler et l'examiner avant de conclure. Les mots de
+passe FTP et de l'imprimante doivent être changés et les protocoles
+remplacés.
+\end{boxscenario}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Reconnaître les motifs.} L'analyste reconnaît un balayage (une
+source, de nombreux ports), une inondation SYN (de nombreuses sources, des
+connexions jamais achevées) et une usurpation ARP (deux adresses MAC pour
+la même adresse IP).
+\end{boxmetier}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Éteindre le clair.} L'administrateur inventorie les services en
+clair, les remplace, et bloque leurs ports aux frontières des zones.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Chaque couche} a ses attaques~; les protocoles anciens
+          n'authentifient rien.
+    \item \textbf{L'usurpation ARP} place l'attaquant au milieu~; le
+          chiffrement la rend inutile.
+    \item \textbf{L'empoisonnement DNS} se combat par l'aléa des requêtes
+          et par DNSSEC~; un résolveur ne doit pas être ouvert.
+    \item \textbf{Les dénis de service} épuisent ou amplifient~; les
+          témoins SYN et le filtrage les limitent.
+    \item \textbf{Les protocoles en clair} ont tous un remplaçant chiffré.
+    \item \textbf{Une capture} se lit avec des filtres~; une constatation
+          réseau appelle souvent une vérification sur la machine.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: rattacher une attaque à
+sa couche~; expliquer l'usurpation ARP et ses contre-mesures~; calculer un
+facteur d'amplification~; citer le remplaçant de chaque protocole en
+clair~; écrire un filtre Wireshark pour un balayage.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.1. Quelle couche~? \niveaubase}]
+Rattachez à une couche~: inondation SYN~; empoisonnement DNS~; usurpation
+ARP~; écoute du Wi-Fi~; injection SQL.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.2. Remplacer \niveaubase}]
+Donnez le remplaçant sûr de Telnet, FTP, HTTP et SNMPv2c, et le port
+habituel de chacun.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.3. Amplification \niveaubase}]
+Une requête de 40~octets provoque une réponse de 4\,000~octets. Quel est
+le facteur d'amplification~? Quel débit reçoit la victime si l'attaquant
+envoie 2~Mbit/s~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.4. ARP \niveaumoyen}]
+Dans une table ARP, deux adresses IP différentes ont la même adresse MAC.
+Qu'en déduisez-vous~? Quelles vérifications faites-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.5. SYN cookies \niveaumoyen}]
+Expliquez pourquoi les témoins SYN protègent contre l'inondation SYN sans
+conserver d'état pour les connexions incomplètes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.6. Filtres \niveaumoyen}]
+Écrivez les filtres Wireshark qui isolent~: les requêtes DNS vers un
+serveur extérieur à l'entreprise~; les connexions Telnet~; les réponses
+ICMP « port inaccessible ».
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.7. Le balayage \niveaumoyen}]
+Reprenez le scénario de Garoua. Rédigez séparément la constatation et
+l'analyse sur PC-GAR-07, et les trois actions à mener.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.8. Le résolveur ouvert \niveaumoyen}]
+Le résolveur DNS de l'ANPP répond aux requêtes venues d'Internet. Quels
+risques pour l'ANPP et pour les autres~? Quelle correction~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.9. Un plan de chiffrement \niveauexpert}]
+Proposez à LiZbiZ un plan pour supprimer en six mois tous les protocoles
+en clair~: inventaire, priorités, remplacement, contrôle.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~15.10. Le portail sous DDoS \niveauexpert}]
+Le portail de suivi de LiZbiZ subit un déni de service distribué la
+veille des fêtes. Rédigez la procédure de réponse et les mesures
+préventives à négocier avec l'opérateur.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item RFC~826 (ARP), RFC~4987 (inondation SYN), RFC~5452 et RFC~4033
+          (DNS)~\cite{rfc826,rfc4987,rfc5452,rfc4033}.
+    \item W.~R.~Stevens, \emph{TCP/IP Illustrated}~\cite{stevens1994}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Connaître les attaques ne suffit pas~: il faut les
+arrêter et les voir. Le Chapitre~\ref{chap:reseaux2} présente les
+équipements et les protocoles qui protègent le réseau.
+\end{boxinfo}

@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C17
+Chapitre 17 : Identités et accès
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Que signifie le sigle IAAA ?
+      a) Identification, authentification, autorisation, traçabilité
+      b) Inventaire, analyse, audit, alerte
+      c) Intégrité, accès, audit, archivage
+      d) Identité, annuaire, accès, antivirus
+
+ 2. Quelle étape ruine un compte partagé ?
+      a) L'identification seule
+      b) La traçabilité
+      c) Le chiffrement
+      d) La sauvegarde
+
+ 3. Prouver que l'on est bien la personne annoncée, c'est :
+      a) S'identifier
+      b) Être autorisé
+      c) S'authentifier
+      d) Être tracé
+
+ 4. Quel document du NIST donne les recommandations sur les mots de passe ?
+      a) SP 800-61
+      b) SP 800-41
+      c) SP 800-88
+      d) SP 800-63B
+
+ 5. Que recommande le NIST SP 800-63B sur le changement périodique des mots de passe ?
+      a) Ne pas l'imposer sans indice de compromission
+      b) Tous les 30 jours
+      c) Tous les ans
+      d) Tous les jours
+
+ 6. Contre quoi compare-t-on un nouveau mot de passe ?
+      a) L'annuaire téléphonique
+      b) Les listes de mots de passe divulgués
+      c) Le nom du DG
+      d) Rien
+
+ 7. Quelle qualité d'un mot de passe compte le plus ?
+      a) Ses majuscules
+      b) Son changement mensuel
+      c) Sa longueur
+      d) Sa date de création
+
+ 8. Un mot de passe et un code PIN forment-ils deux facteurs ?
+      a) Oui
+      b) Seulement en entreprise
+      c) Seulement le soir
+      d) Non, ce sont deux éléments de la même catégorie
+
+ 9. Quelle méthode résiste à l'hameçonnage ?
+      a) FIDO2 et WebAuthn
+      b) Le code par SMS
+      c) La question secrète
+      d) Le mot de passe long
+
+10. Pourquoi le code reçu par SMS est-il le second facteur le plus faible ?
+      a) Il est trop long
+      b) Il peut être détourné (échange de carte SIM) ou relayé
+      c) Il est gratuit
+      d) Il est chiffré
+
+11. Quel est l'intérêt de l'authentification unique ?
+      a) Supprimer les comptes
+      b) Supprimer les journaux
+      c) Réduire le nombre de mots de passe
+      d) Rendre l'accès anonyme
+
+12. Quel est le revers de l'authentification unique ?
+      a) Elle multiplie les mots de passe
+      b) Elle supprime le second facteur
+      c) Aucun
+      d) Elle concentre le risque sur le fournisseur d'identité
+
+13. Que doit-on faire d'un compte au départ d'un salarié ?
+      a) Le désactiver le jour du départ
+      b) Le garder actif
+      c) Le donner à son successeur
+      d) Le transformer en compte partagé
+
+14. Les comptes d'administrateur doivent être :
+      a) Utilisés pour lire les courriels
+      b) Distincts des comptes de travail quotidien
+      c) Partagés
+      d) Sans mot de passe
+
+15. Combien de comptes actifs compte l'annuaire de LiZbiZ après l'attaque ?
+      a) 150
+      b) 148
+      c) 212
+      d) 46
+
+16. Combien de comptes de salariés partis (orphelins) la revue trouve-t-elle ?
+      a) 9
+      b) 10
+      c) 18
+      d) 27
+
+17. Combien de comptes de service la revue compte-t-elle ?
+      a) 18
+      b) 10
+      c) 14
+      d) 27
+
+18. Combien de comptes ont des droits d'administrateur du domaine ?
+      a) 2
+      b) 14
+      c) 9
+      d) 46
+
+19. Quel délai la mesure M-17 fixe-t-elle pour désactiver les écarts ?
+      a) 24 heures
+      b) Un mois
+      c) Huit jours
+      d) Un an
+
+20. À quelle fréquence la mesure M-17 prévoit-elle la revue des comptes ?
+      a) Mensuelle
+      b) Annuelle
+      c) Jamais
+      d) Trimestrielle
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un compte partagé empêche de savoir qui a fait quoi.
+      Vrai / Faux
+
+22. Une politique qui impose un changement tous les 30 jours suit le NIST SP 800-63B.
+      Vrai / Faux
+
+23. « Lizbiz2026! » est un mot de passe prévisible.
+      Vrai / Faux
+
+24. Le second facteur doit appartenir à une autre catégorie que le premier.
+      Vrai / Faux
+
+25. Un second facteur rend tout hameçonnage impossible, quelle que soit la méthode.
+      Vrai / Faux
+
+26. Un annuaire centralise les comptes et les groupes d'une organisation.
+      Vrai / Faux
+
+27. Les comptes de service peuvent garder le même mot de passe indéfiniment.
+      Vrai / Faux
+
+28. Deux salariés présents n'ont pas de compte dans l'annuaire de LiZbiZ.
+      Vrai / Faux
+
+29. La revue des droits vérifie que le cycle de vie fonctionne.
+      Vrai / Faux
+
+30. Le principe du moindre privilège donne à chacun les droits utiles à sa fonction, sans plus.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le cadre identification, authentification, autorisation, traçabilité a pour sigle ______.
+
+32. La norme d'authentification par clé qui résiste à l'hameçonnage est FIDO______.
+
+33. L'authentification unique a pour sigle anglais ______.
+
+34. Un compte d'un salarié parti resté actif est un compte ______.
+
+35. L'annuaire de LiZbiZ compte ______ comptes actifs.
+
+36. Un compte qui peut modifier la configuration du système est un compte à ______.
+
+37. Les recommandations du NIST sur les mots de passe figurent dans le SP 800-______.
+
+38. L'authentification qui combine au moins deux facteurs est dite ______.
+
+39. LiZbiZ compte ______ salariés.
+
+40. L'API web d'authentification par clé publique s'appelle ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

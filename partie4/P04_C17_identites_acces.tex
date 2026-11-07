@@ -1,0 +1,346 @@
+% ============================================================================
+% Fichier  : partie4/P04_C17_identites_acces.tex
+% Titre    : Identités et Accès
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre VI » (IAAA, authentification, contrôle d'accès).
+% Sources : NIST SP 800-63B (2017) ; W3C Web Authentication (2019) ;
+% OASIS SAML 2.0 (2005) ; OpenID Connect Core 1.0 (2014) ; CIS Controls 5
+% et 6. Chiffres de la revue des comptes : cas fictif, cohérents entre eux.
+% ============================================================================
+
+\chapter{Identités et Accès}
+\label{chap:iam}
+\chaptermark{Identités et accès}
+
+\epigraph{%
+    « Un mot de passe prouve que l'on connaît un secret,\\
+    pas que l'on est la bonne personne. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:crypto-sym},
+\ref{chap:crypto-asym} et~\ref{chap:modeles}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Distinguer identification, authentification, autorisation et
+          traçabilité.
+    \item Choisir des facteurs d'authentification et une politique de mots
+          de passe fondée sur le NIST.
+    \item Expliquer l'authentification résistante à l'hameçonnage.
+    \item Décrire l'authentification unique (SAML, OpenID Connect).
+    \item Gérer le cycle de vie des comptes et les comptes à privilèges.
+    \item Conduire une revue des droits.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : qui pouvait se connecter au système de LiZbiZ~?}
+% ============================================================================
+
+Après l'attaque, LiZbiZ extrait la liste des comptes de son annuaire~: 212
+comptes actifs pour 150~salariés. Parmi eux, des comptes de salariés
+partis, des comptes partagés, des comptes de service jamais revus, et le
+compte du prestataire, utilisé par plusieurs techniciens. Personne ne
+pouvait dire qui avait réellement accès à quoi. C'est le sujet de ce
+chapitre.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Identifier, authentifier, autoriser, tracer (section~\ref{sec:c17-iaaa}).
+    \item Les facteurs et les mots de passe (section~\ref{sec:c17-facteurs}).
+    \item L'authentification forte (section~\ref{sec:c17-mfa}).
+    \item L'authentification unique et les annuaires (section~\ref{sec:c17-sso}).
+    \item Le cycle de vie et les privilèges (section~\ref{sec:c17-cycle}).
+    \item La revue des droits (section~\ref{sec:c17-revue}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Identifier, Authentifier, Autoriser, Tracer}
+\label{sec:c17-iaaa}
+% ============================================================================
+
+\begin{tableaucours}{L{3.2cm}L{4.6cm}L{4.4cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Question} &
+    \tableauHeader{Exemple}
+}
+Identification & Qui prétendez-vous être~? & Saisir son identifiant \\
+Authentification & Le prouvez-vous~? & Mot de passe et second facteur \\
+Autorisation & Qu'avez-vous le droit de faire~? & Le rôle « comptable »
+donne accès aux paiements \\
+Traçabilité & Qu'avez-vous fait~? & Journal des actions, compte
+nominatif \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~17.1. Le cadre IAAA}\end{center}
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~4, point~10} (texte officiel)~:
+\textit{« Authentification~: critère de sécurité défini par un processus
+mis en oeuvre notamment pour vérifier l'identité d'une personne physique
+ou morale et s'assurer que l'identité fournie correspond à l'identité de
+cette personne préalablement enregistrée. »}
+\end{boxjuris}
+
+Un compte partagé ruine la traçabilité~: si cinq techniciens utilisent le
+même compte, aucun journal ne dira lequel a agi.
+
+% ============================================================================
+\section{Les Facteurs et les Mots de Passe}
+\label{sec:c17-facteurs}
+% ============================================================================
+
+On distingue trois catégories de facteurs~: ce que l'on \emph{sait}
+(mot de passe, code), ce que l'on \emph{possède} (téléphone, clé
+physique, carte) et ce que l'on \emph{est} (empreinte, visage).
+L'authentification \emph{multifacteur} combine des facteurs de catégories
+différentes~: deux mots de passe ne font pas deux facteurs.
+
+\begin{tableaucours}{L{5.0cm}L{7.2cm}}{%
+    \tableauHeader{Recommandation du NIST SP~800-63B} &
+    \tableauHeader{Raison}
+}
+Longueur minimale, et accepter les longues phrases & La longueur fait la
+résistance~\cite{nist80063b} \\
+Pas de règles de composition imposées & Elles produisent des mots de passe
+prévisibles (« Lizbiz2026! ») \\
+Pas de changement périodique imposé & On change seulement en cas de
+compromission~; sinon les utilisateurs incrémentent \\
+Comparer aux listes de mots de passe divulgués & Bloquer les mots de passe
+déjà connus des attaquants \\
+Limiter les tentatives & Contre la force brute en ligne \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~17.2. Politique de mots de passe
+fondée sur le NIST}\end{center}
+
+% ============================================================================
+\section{L'Authentification Forte}
+\label{sec:c17-mfa}
+% ============================================================================
+
+Tous les seconds facteurs ne se valent pas. Un code reçu par SMS peut être
+détourné (échange de carte SIM, Chapitre~\ref{chap:menaces})~; un code
+saisi sur une fausse page peut être relayé en temps réel par l'attaquant.
+Les authentificateurs \emph{résistants à l'hameçonnage} (clés FIDO2,
+WebAuthn) signent un défi lié au domaine du site~: sur une fausse page, ils
+ne répondent pas~\cite{w3c2019webauthn}.
+
+\begin{tableaucours}{L{3.6cm}L{4.4cm}L{4.2cm}}{%
+    \tableauHeader{Second facteur} &
+    \tableauHeader{Forces} &
+    \tableauHeader{Faiblesses}
+}
+Code par SMS & Simple, sans équipement & Échange de SIM, interception,
+relais \\
+Application à code (TOTP) & Hors du réseau téléphonique & Relayable sur
+une fausse page \\
+Notification à valider & Simple & Lassitude~: l'utilisateur valide une
+demande qu'il n'a pas faite \\
+Clé FIDO2, WebAuthn & Résiste à l'hameçonnage & Coût, gestion des pertes \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~17.3. Les seconds facteurs}\end{center}
+
+% ============================================================================
+\section{L'Authentification Unique et les Annuaires}
+\label{sec:c17-sso}
+% ============================================================================
+
+Un \termecle{annuaire} (Active Directory, LDAP) centralise les comptes et
+les groupes. L'\termecle{authentification unique} (SSO) permet de
+s'authentifier une fois auprès d'un fournisseur d'identité, qui atteste
+ensuite l'identité auprès des applications~: par des assertions SAML~2.0
+\cite{oasis2005saml} ou des jetons OpenID Connect~\cite{oidc2014}. Le SSO
+réduit le nombre de mots de passe et centralise la double
+authentification~; il concentre aussi le risque~: le fournisseur
+d'identité devient une cible majeure, à protéger en priorité.
+
+% ============================================================================
+\section{Le Cycle de Vie et les Privilèges}
+\label{sec:c17-cycle}
+% ============================================================================
+
+\begin{boxprocedure}
+\textbf{Le cycle de vie d'un compte}
+\begin{enumerate}
+    \item \textbf{Arrivée}~: création sur demande des ressources humaines,
+          avec le rôle validé par le responsable.
+    \item \textbf{Mobilité}~: retrait des droits de l'ancien poste avant
+          l'ajout de ceux du nouveau.
+    \item \textbf{Absence longue}~: suspension.
+    \item \textbf{Départ}~: désactivation le jour même, suppression après
+          le délai fixé.
+    \item \textbf{Revue périodique}~: rapprochement des comptes avec le
+          personnel et des droits avec les rôles.
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{boxdef}
+\termecle{Compte à privilèges}~: compte qui peut modifier la configuration,
+les droits ou la sécurité d'un système (administrateur, compte de service
+puissant). La \emph{gestion des accès à privilèges} (PAM) les place dans
+un coffre, délivre leurs mots de passe à la demande, enregistre les
+sessions et les renouvelle après usage.
+\end{boxdef}
+
+% ============================================================================
+\section{La Revue des Droits}
+\label{sec:c17-revue}
+% ============================================================================
+
+\begin{boxscenario}{Opération GAROUA. La revue des 212 comptes}
+\textbf{Constatations} (rapprochement de l'annuaire et du fichier du
+personnel, 15~mars)~:
+
+\medskip
+\begin{tableaucours}{L{6.6cm}c}{%
+    \tableauHeader{Catégorie} &
+    \tableauHeader{Comptes}
+}
+Comptes nominatifs de salariés présents & 148 \\
+Comptes de salariés partis (orphelins) & 27 \\
+Comptes partagés (agences, prestataire) & 9 \\
+Comptes de service & 18 \\
+Comptes sans titulaire identifiable & 10 \\
+\textbf{Total} & \textbf{212} \\
+\end{tableaucours}
+
+\medskip
+Deux salariés présents n'ont pas de compte (148 sur 150). Parmi les
+comptes actifs, 14 ont des droits d'administrateur du domaine, dont
+3 comptes orphelins et le compte partagé du prestataire. Aucun compte
+distant n'a de second facteur.
+
+\medskip
+\textbf{Analyse} (confiance élevée). 46~comptes (orphelins, partagés et
+sans titulaire) ne correspondent à aucune personne responsable~: ce sont
+autant de portes que personne ne surveille.
+\end{boxscenario}
+
+\begin{boxobjet}{M-17 · Revue trimestrielle des comptes}
+\textbf{Objectif~:} qu'aucun compte ne reste actif sans titulaire ni
+besoin. \textbf{Mise en œuvre~:} extraction de l'annuaire, rapprochement
+avec le fichier du personnel, validation des droits par chaque
+responsable, désactivation des écarts sous huit jours.
+\textbf{Vérification~:} l'auditeur refait le rapprochement et compte les
+écarts restants.
+\end{boxobjet}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Réduire les administrateurs.} L'administrateur ramène les comptes
+d'administrateur du domaine au strict nécessaire (quelques personnes
+nommées), sépare leurs comptes d'administration de leurs comptes de
+travail, et active le second facteur sur tous.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Refaire le rapprochement.} L'auditeur ne se contente pas de la
+procédure~: il extrait lui-même les comptes et les rapproche du
+personnel. Le nombre d'écarts est la preuve de l'efficacité de la revue.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{IAAA}~: identification, authentification, autorisation,
+          traçabilité~; un compte partagé ruine la traçabilité.
+    \item \textbf{Les mots de passe} se veulent longs, sans changement
+          périodique imposé, comparés aux listes divulguées.
+    \item \textbf{Le second facteur} combine des catégories différentes~;
+          FIDO2 et WebAuthn résistent à l'hameçonnage.
+    \item \textbf{Le SSO} réduit les mots de passe et concentre le risque
+          sur le fournisseur d'identité.
+    \item \textbf{Le cycle de vie} des comptes et la gestion des privilèges
+          ferment les portes oubliées~; la revue des droits le vérifie.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: distinguer les quatre
+étapes IAAA~; citer les trois catégories de facteurs~; énoncer la
+politique de mots de passe du NIST~; expliquer pourquoi FIDO2 résiste à
+l'hameçonnage~; décrire le cycle de vie d'un compte~; conduire un
+rapprochement comptes-personnel.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.1. IAAA \niveaubase}]
+Classez~: saisir son badge~; valider un code reçu~; recevoir l'accès au
+module de paie~; consulter le journal de ses connexions.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.2. Multifacteur~? \niveaubase}]
+Lesquelles de ces combinaisons sont multifacteurs~: mot de passe et
+question secrète~; carte et code PIN~; empreinte et visage~; mot de passe
+et clé FIDO2~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.3. Les chiffres de la revue \niveaubase}]
+Vérifiez que les catégories du scénario totalisent 212 comptes, et
+calculez la part des comptes sans responsable.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.4. La politique de mots de passe \niveaumoyen}]
+La politique actuelle de la BANQUE SANAGA impose 8~caractères, quatre
+types de caractères et un changement tous les 30~jours. Réécrivez-la selon
+le NIST SP~800-63B et justifiez chaque changement.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.5. Le relais \niveaumoyen}]
+Décrivez comment une fausse page peut relayer en temps réel un code TOTP,
+et pourquoi une clé FIDO2 l'empêche.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.6. Le compte du prestataire \niveaumoyen}]
+Proposez l'organisation des accès de SAHEL INFOGÉRANCE~: comptes,
+facteurs, droits, horaires, journalisation.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.7. Comptes de service \niveaumoyen}]
+Les 18~comptes de service de LiZbiZ ont des mots de passe qui ne changent
+jamais et des droits d'administrateur. Quels risques~? Quelles mesures~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.8. SSO \niveaumoyen}]
+Quels avantages et quels risques l'authentification unique apporte-t-elle
+à LiZbiZ~? Quelles protections exige le fournisseur d'identité~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.9. Le plan de remédiation \niveauexpert}]
+À partir de la revue des 212~comptes, rédigez un plan de remédiation en
+trente jours, par priorité, avec les responsables.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~17.10. Un script de rapprochement \niveauexpert}]
+Écrivez, en Python, un programme qui lit un export de l'annuaire et le
+fichier du personnel (deux fichiers CSV) et produit la liste des comptes
+orphelins, partagés et sans titulaire.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-63B~\cite{nist80063b}.
+    \item W3C, \emph{Web Authentication}~\cite{w3c2019webauthn}~; SAML~2.0
+          et OpenID Connect~\cite{oasis2005saml,oidc2014}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Les comptes donnent accès à des systèmes~; encore
+faut-il que ces systèmes soient solides. Le Chapitre~\ref{chap:systemes}
+traite de leur durcissement et de leur maintien en condition de sécurité.
+\end{boxinfo}

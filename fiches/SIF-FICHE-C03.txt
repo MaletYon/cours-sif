@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C03
+Chapitre 3 : Cryptographie (1) : symétrique, hachage, intégrité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Que dit le principe de Kerckhoffs ?
+      a) Le système doit rester sûr même si l'algorithme est connu ; seule la clé est secrète
+      b) L'algorithme doit rester secret
+      c) Il faut changer d'algorithme chaque année
+      d) Les clés doivent être courtes
+
+ 2. Retrouver le clair sans la clé s'appelle :
+      a) Déchiffrer
+      b) Décrypter
+      c) Chiffrer
+      d) Hacher
+
+ 3. Dans le chiffrement symétrique :
+      a) Deux clés différentes sont utilisées
+      b) Aucune clé n'est utilisée
+      c) La même clé chiffre et déchiffre
+      d) La clé est publique
+
+ 4. Quelle est la norme actuelle de chiffrement par blocs ?
+      a) DES
+      b) MD5
+      c) RSA
+      d) AES
+
+ 5. Pourquoi DES a-t-il été abandonné ?
+      a) Sa clé de 56 bits est trop courte
+      b) Il est trop lent
+      c) Il est asymétrique
+      d) Il est secret
+
+ 6. Quelle taille de bloc utilise AES ?
+      a) 64 bits
+      b) 128 bits
+      c) 256 bits
+      d) 512 bits
+
+ 7. Quel mode est à proscrire, car deux blocs identiques donnent le même chiffré ?
+      a) CBC
+      b) CTR
+      c) ECB
+      d) GCM
+
+ 8. Quel mode assure confidentialité et intégrité ?
+      a) ECB
+      b) CBC
+      c) CTR seul
+      d) GCM
+
+ 9. Que risque un chiffré non authentifié ?
+      a) D'être modifié sans être lu
+      b) D'être lu sans clé
+      c) D'être trop long
+      d) Rien
+
+10. Quelle propriété empêche de trouver deux messages de même empreinte ?
+      a) Résistance à la préimage
+      b) Résistance aux collisions
+      c) Résistance au chiffrement
+      d) Résistance au bruit
+
+11. Quelle fonction est cassée et interdite pour la sécurité ?
+      a) SHA-256
+      b) SHA-3
+      c) MD5
+      d) SHA-512
+
+12. En quelle année la première collision publique de SHA-1 a-t-elle été publiée ?
+      a) 2005
+      b) 2010
+      c) 2023
+      d) 2017
+
+13. Quelle commande vérifie une liste d'empreintes ?
+      a) sha256sum -c MANIFESTE
+      b) ls -l
+      c) openssl enc
+      d) grep
+
+14. Que fait intervenir un MAC, contrairement à une empreinte ?
+      a) Un certificat
+      b) Une clé secrète
+      c) Un horodatage
+      d) Rien
+
+15. Quel mécanisme apporte la non-répudiation ?
+      a) L'empreinte
+      b) Le HMAC
+      c) La signature
+      d) Le chiffrement symétrique
+
+16. Comment stocker un mot de passe ?
+      a) En clair
+      b) Chiffré avec AES
+      c) Avec SHA-256 sans sel
+      d) Avec une fonction lente et salée (Argon2, bcrypt)
+
+17. À quoi sert le sel ?
+      a) À empêcher les tables précalculées
+      b) À accélérer le hachage
+      c) À chiffrer la base
+      d) À remplacer le mot de passe
+
+18. Le chiffrement du disque protège contre :
+      a) Un administrateur sur le serveur allumé
+      b) Le vol du disque éteint
+      c) Un logiciel malveillant sur le poste
+      d) Une copie par un utilisateur autorisé
+
+19. Pourquoi les dossiers chiffrés de Garoua ont-ils été lisibles par l'attaquant ?
+      a) La clé était sur Internet
+      b) AES est cassé
+      c) Il les a copiés depuis le serveur allumé avec des droits d'administrateur
+      d) Le chiffrement était en ECB
+
+20. Que faut-il faire d'une clé de chiffrement ?
+      a) La laisser dans le code
+      b) L'écrire dans le manuel
+      c) La partager avec tous
+      d) La stocker hors du système qu'elle protège et la sauvegarder à part
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Une clé de 128 bits offre 2 puissance 128 possibilités.
+      Vrai / Faux
+
+22. La force brute est l'attaque la plus courante contre AES.
+      Vrai / Faux
+
+23. AES-GCM est un chiffrement authentifié.
+      Vrai / Faux
+
+24. Ajouter un zéro dans un message change toute son empreinte SHA-256.
+      Vrai / Faux
+
+25. Une empreinte seule protège l'intégrité contre un attaquant.
+      Vrai / Faux
+
+26. Le NIST recommande des mots de passe longs plutôt que des changements fréquents.
+      Vrai / Faux
+
+27. Un HMAC apporte la non-répudiation.
+      Vrai / Faux
+
+28. Une donnée fausse, signée, reste fausse.
+      Vrai / Faux
+
+29. Une clé perdue peut rendre les données irrécupérables.
+      Vrai / Faux
+
+30. Un algorithme maison gardé secret apporte de fortes garanties.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. L'algorithme de chiffrement symétrique normalisé par la FIPS 197 est l'______.
+
+32. Le mode d'opération authentifié recommandé est le mode ______.
+
+33. La valeur de taille fixe calculée par une fonction de hachage est une ______.
+
+34. La construction standard de MAC fondée sur le hachage s'appelle ______.
+
+35. La valeur aléatoire propre à chaque compte ajoutée avant le hachage est le ______.
+
+36. Selon Kerckhoffs, seule la ______ est secrète.
+
+37. La famille de fonctions de hachage définie par la FIPS 180-4 est SHA-______.
+
+38. L'ancien algorithme à clé de 56 bits s'appelle le ______.
+
+39. Le mode qui chiffre chaque bloc indépendamment s'appelle ______.
+
+40. Une fonction de hachage de mots de passe recommandée est Argon2 ou ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

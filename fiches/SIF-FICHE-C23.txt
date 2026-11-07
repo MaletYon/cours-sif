@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C23
+Chapitre 23 : Continuité et reprise
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Que fixe l'analyse d'impact sur l'activité ?
+      a) Les durées d'interruption et les pertes de données admissibles par activité
+      b) Le prix des serveurs
+      c) La liste des salariés
+      d) La couleur des badges
+
+ 2. Que désigne le RTO ?
+      a) La perte de données maximale admissible
+      b) La durée maximale d'interruption admissible
+      c) Le coût de reprise
+      d) Le délai de détection
+
+ 3. Que désigne le RPO ?
+      a) La durée maximale d'interruption admissible
+      b) Le nombre de sauvegardes
+      c) La perte de données maximale admissible
+      d) La durée de rétention
+
+ 4. Quel RTO LiZbiZ retient-il pour la facturation ?
+      a) 4 heures
+      b) 24 heures
+      c) 5 jours
+      d) 48 heures
+
+ 5. Quel RPO LiZbiZ retient-il pour la facturation ?
+      a) 4 heures
+      b) 1 heure
+      c) 24 heures
+      d) 48 heures
+
+ 6. Quel RTO LiZbiZ retient-il pour le suivi des expéditions ?
+      a) 1 heure
+      b) 24 heures
+      c) 48 heures
+      d) 5 jours
+
+ 7. Quand LiZbiZ a-t-il repris sa facturation ?
+      a) Le 6 mars
+      b) Le 9 mars
+      c) Le 16 mars
+      d) Le 2 avril
+
+ 8. Combien de données de facturation LiZbiZ a-t-il perdues ?
+      a) Environ quatre heures
+      b) Environ une journée
+      c) Aucune
+      d) Environ six semaines, depuis la copie de fin janvier
+
+ 9. Que dit la règle 3-2-1 ?
+      a) Trois copies, sur deux supports, dont une hors site
+      b) Trois serveurs, deux pare-feu, un SOC
+      c) Trois mots de passe, deux facteurs, un compte
+      d) Trois jours, deux semaines, un mois
+
+10. Que faut-il ajouter à la règle 3-2-1 contre les rançongiciels ?
+      a) Un antivirus
+      b) Une copie hors ligne ou immuable
+      c) Une copie sur le même serveur
+      d) Rien
+
+11. Un RPO de 4 heures exige :
+      a) Une sauvegarde par semaine
+      b) Une sauvegarde par mois
+      c) Au moins une sauvegarde toutes les 4 heures, ou une réplication
+      d) Aucune sauvegarde
+
+12. Pourquoi la réplication n'est-elle pas une sauvegarde ?
+      a) Elle est trop lente
+      b) Elle coûte trop cher
+      c) Elle est interdite
+      d) Elle recopie aussi le chiffrement ou la suppression
+
+13. Quelle est la seule preuve qu'une sauvegarde sert ?
+      a) Un test de restauration réussi
+      b) Le rapport du fournisseur
+      c) Sa taille
+      d) Sa date
+
+14. Quel plan permet de continuer l'activité pendant la crise ?
+      a) Le plan de reprise
+      b) Le plan de continuité d'activité
+      c) Le plan de formation
+      d) Le plan comptable
+
+15. Quel plan rétablit les systèmes informatiques ?
+      a) Le plan de continuité
+      b) Le plan de communication
+      c) Le plan de reprise d'activité
+      d) Le plan de carrière
+
+16. Quelle norme ISO traite du management de la continuité d'activité ?
+      a) ISO/IEC 27001
+      b) ISO 31000
+      c) ISO/IEC 27037
+      d) ISO 22301
+
+17. Quel document du NIST traite de la planification de la contingence ?
+      a) SP 800-34
+      b) SP 800-61
+      c) SP 800-92
+      d) SP 800-207
+
+18. Quelle stratégie de secours a le RTO le plus court ?
+      a) Le site froid
+      b) Le site chaud
+      c) Le site tiède
+      d) Aucune
+
+19. Quelle stratégie de secours coûte le moins ?
+      a) Le site tiède
+      b) Le site chaud
+      c) Le site froid
+      d) Le double site actif
+
+20. À quelle fréquence la mesure M-23 prévoit-elle un test de restauration ?
+      a) Mensuelle
+      b) Annuelle
+      c) Jamais
+      d) Trimestrielle
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. LiZbiZ avait fixé ses objectifs de reprise avant l'attaque.
+      Vrai / Faux
+
+22. Le RTO de la messagerie de LiZbiZ est de 24 heures.
+      Vrai / Faux
+
+23. Une copie immuable empêche un administrateur compromis de l'effacer.
+      Vrai / Faux
+
+24. La sauvegarde doit dépendre du domaine de production.
+      Vrai / Faux
+
+25. La copie hors site doit être chiffrée et sa clé conservée ailleurs.
+      Vrai / Faux
+
+26. PCA, PRA et plan de crise répondent au même besoin.
+      Vrai / Faux
+
+27. Un site chaud a des systèmes prêts et des données répliquées.
+      Vrai / Faux
+
+28. Un site froid permet une reprise en quelques heures.
+      Vrai / Faux
+
+29. Une restauration se chronomètre.
+      Vrai / Faux
+
+30. Un plan jamais testé est fiable.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La durée maximale d'interruption admissible a pour sigle ______.
+
+32. La perte de données maximale admissible a pour sigle ______.
+
+33. La règle trois copies, deux supports, une hors site s'appelle la règle ______.
+
+34. Le plan de continuité d'activité a pour sigle ______.
+
+35. Le plan de reprise d'activité a pour sigle ______.
+
+36. L'analyse d'impact sur l'activité a pour sigle anglais ______.
+
+37. La norme ISO de continuité d'activité est l'ISO ______.
+
+38. Un site avec systèmes prêts et données répliquées est un site ______.
+
+39. LiZbiZ a repris sa facturation le ______ mars.
+
+40. Une copie qui ne peut être ni modifiée ni effacée est dite ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

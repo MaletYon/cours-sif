@@ -1,0 +1,305 @@
+% ============================================================================
+% Fichier  : partie4/P04_C20_nuage_mobiles.tex
+% Titre    : Sécurité du Nuage et des Mobiles
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : NIST SP 800-145 (définition du nuage, 2011) ; CSA Cloud Controls
+% Matrix v4 ; ISO/IEC 27017:2015 ; NIST SP 800-124 Rev. 2 (mobiles, 2023) ;
+% OWASP MASVS.
+% ============================================================================
+
+\chapter{Sécurité du Nuage et des Mobiles}
+\label{chap:nuage}
+\chaptermark{Nuage et mobiles}
+
+\epigraph{%
+    « Le nuage, c'est l'ordinateur de quelqu'un d'autre~;\\
+    la configuration, c'est toujours la vôtre. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:architecture},
+\ref{chap:iam} et~\ref{chap:applications}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Définir les modèles de service et de déploiement du nuage.
+    \item Répartir les responsabilités entre fournisseur et client.
+    \item Prévenir les erreurs de configuration les plus fréquentes.
+    \item Protéger les identités, les journaux et les clés dans le nuage.
+    \item Sécuriser une flotte de téléphones et les applications mobiles.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : la messagerie de LiZbiZ était-elle à l'abri parce qu'elle était dans le nuage~?}
+% ============================================================================
+
+La messagerie de LiZbiZ, hébergée par un grand fournisseur, n'a pas été
+chiffrée en mars. La direction en conclut que « le nuage est sûr ». Une
+vérification montre pourtant que les comptes d'administration de la
+messagerie n'ont pas de second facteur et que les journaux d'accès ne
+sont pas conservés. Le fournisseur protège son infrastructure~; la
+configuration et les comptes restent l'affaire du client.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Les modèles du nuage (section~\ref{sec:c20-modeles}).
+    \item La responsabilité partagée (section~\ref{sec:c20-partage}).
+    \item Les erreurs de configuration (section~\ref{sec:c20-config}).
+    \item Identités, journaux et clés (section~\ref{sec:c20-identites}).
+    \item Les mobiles (section~\ref{sec:c20-mobiles}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Les Modèles du Nuage}
+\label{sec:c20-modeles}
+% ============================================================================
+
+Le NIST définit l'informatique en nuage par cinq caractéristiques
+(libre-service à la demande, accès par le réseau, mutualisation des
+ressources, élasticité, service mesuré), trois modèles de service et
+quatre modèles de déploiement~\cite{nist2011sp800145}.
+
+\begin{tableaucours}{L{2.4cm}L{5.0cm}L{4.8cm}}{%
+    \tableauHeader{Modèle} &
+    \tableauHeader{Le fournisseur livre} &
+    \tableauHeader{Exemple}
+}
+IaaS & Machines virtuelles, stockage, réseau & Serveurs loués \\
+PaaS & Plateforme d'exécution, bases gérées & Base de données gérée \\
+SaaS & Application complète & Messagerie, paie en ligne \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~20.1. Les modèles de service}\end{center}
+
+Les modèles de déploiement sont le nuage public, privé, communautaire et
+hybride.
+
+% ============================================================================
+\section{La Responsabilité Partagée}
+\label{sec:c20-partage}
+% ============================================================================
+
+\begin{tableaucours}{L{4.0cm}ccc}{%
+    \tableauHeader{Couche} &
+    \tableauHeader{IaaS} &
+    \tableauHeader{PaaS} &
+    \tableauHeader{SaaS}
+}
+Données et comptes & Client & Client & Client \\
+Configuration de l'application & Client & Client & Client \\
+Application & Client & Client & Fournisseur \\
+Système d'exploitation & Client & Fournisseur & Fournisseur \\
+Infrastructure physique & Fournisseur & Fournisseur & Fournisseur \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~20.2. Qui protège quoi selon le modèle}\end{center}
+
+Dans tous les modèles, le client reste responsable de ses données, de ses
+comptes et de sa configuration. La CSA décrit les contrôles à répartir
+entre les deux parties dans sa Cloud Controls Matrix~\cite{csa2021ccm}~;
+l'ISO/IEC~27017 complète l'ISO/IEC~27002 pour le nuage~\cite{iso27017_2015}.
+
+% ============================================================================
+\section{Les Erreurs de Configuration}
+\label{sec:c20-config}
+% ============================================================================
+
+\begin{tableaucours}{L{4.4cm}L{7.8cm}}{%
+    \tableauHeader{Erreur fréquente} &
+    \tableauHeader{Mesure}
+}
+Stockage d'objets ouvert au public & Interdire l'accès public par défaut au
+niveau du compte \\
+Comptes d'administration sans second facteur & Second facteur obligatoire,
+comptes d'urgence protégés \\
+Clés d'accès dans le code ou anciennes & Coffre de secrets, rotation \\
+Groupes de sécurité ouverts à tout Internet & Filtrer par adresse et par
+port \\
+Journaux désactivés ou trop courts & Activer et exporter les journaux \\
+Ressources oubliées & Inventaire, étiquettes, revue des coûts \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~20.3. Erreurs de configuration et mesures}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Rendre un espace de stockage public « pour
+partager un fichier avec un client », puis oublier.
+
+\smallskip
+\textbf{Règle~:} on partage par un lien limité dans le temps ou par un
+accès nominatif~; l'accès public est bloqué par défaut au niveau du
+compte, et toute exception est revue.
+\end{boxalert}
+
+% ============================================================================
+\section{Identités, Journaux et Clés}
+\label{sec:c20-identites}
+% ============================================================================
+
+Dans le nuage, le périmètre est l'identité~: qui tient un compte
+d'administration de la console tient l'infrastructure. Les journaux
+d'activité du fournisseur (connexions, changements de configuration,
+appels d'interface) doivent être activés, exportés et conservés hors du
+compte qu'ils surveillent. Pour les données les plus sensibles, le client
+peut garder la maîtrise des clés de chiffrement (clés gérées par le
+client), au prix d'une gestion plus lourde.
+
+\begin{boxscenario}{Opération GAROUA. La messagerie vérifiée}
+\textbf{Constatations.} Trois comptes d'administration de la messagerie,
+sans second facteur~; journaux d'accès conservés 7~jours seulement, sans
+export~; règle de transfert automatique, créée en février, qui envoie à
+une adresse externe les courriels contenant le mot « facture ».
+
+\medskip
+\textbf{Analyse} (confiance moyenne). La règle de transfert est un signe
+classique de compromission d'une boîte~; sa création en février coïncide
+avec l'hameçonnage. Faute de journaux au-delà de 7~jours, on ne peut pas
+établir qui l'a créée~: la question reste ouverte (\NEK{}).
+\end{boxscenario}
+
+% ============================================================================
+\section{Les Mobiles}
+\label{sec:c20-mobiles}
+% ============================================================================
+
+Les téléphones portent la messagerie, les codes d'authentification et
+souvent le Mobile Money~: ce sont des postes de travail à part entière. Le
+NIST décrit leur gestion en entreprise~\cite{nist800124}.
+
+\begin{tableaucours}{L{4.0cm}L{8.2cm}}{%
+    \tableauHeader{Mesure} &
+    \tableauHeader{Effet}
+}
+Gestion de flotte (MDM) & Inventaire, configuration imposée, effacement à
+distance \\
+Séparation professionnel et personnel & Conteneur professionnel sur les
+appareils personnels (BYOD) \\
+Verrouillage et chiffrement & Protègent les données en cas de perte \\
+Applications depuis les magasins officiels & Limitent les applications
+piégées \\
+Mises à jour du système & Corrigent les failles exploitées \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~20.4. Sécuriser une flotte mobile}\end{center}
+
+Pour les développeurs d'applications mobiles, l'OWASP publie un référentiel
+d'exigences, le MASVS~: stockage des données, cryptographie,
+authentification, communications, protection du code~\cite{owaspmasvs}.
+
+\begin{boxmetier}{RSSI}
+\textbf{Ne pas déléguer sa vigilance.} Le RSSI exige du fournisseur ses
+rapports d'assurance, mais vérifie lui-même ce qui relève du client~:
+comptes, configuration, journaux, partages.
+\end{boxmetier}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Surveiller la console.} L'analyste alerte sur les connexions
+d'administration inhabituelles, la création de règles de transfert, la
+désactivation des journaux et l'ouverture d'un stockage au public.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Le nuage} se décline en IaaS, PaaS et SaaS, et en
+          déploiements public, privé, communautaire, hybride.
+    \item \textbf{La responsabilité est partagée}~: données, comptes et
+          configuration restent toujours au client.
+    \item \textbf{Les erreurs de configuration} (stockage public, comptes
+          sans second facteur, journaux absents) sont la première cause
+          d'incident.
+    \item \textbf{L'identité est le périmètre}~; les journaux s'exportent
+          hors du compte surveillé.
+    \item \textbf{Les mobiles} sont des postes de travail~: gestion de
+          flotte, séparation, chiffrement, mises à jour~; MASVS pour les
+          applications.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: définir IaaS, PaaS et
+SaaS~; remplir le tableau de responsabilité partagée~; citer cinq erreurs
+de configuration~; dire pourquoi exporter les journaux~; proposer les
+mesures d'une flotte mobile.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.1. Quel modèle~? \niveaubase}]
+Classez~: une messagerie en ligne~; une machine virtuelle louée~; une base
+de données gérée par le fournisseur.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.2. Qui est responsable~? \niveaubase}]
+Pour une messagerie en SaaS, qui est responsable~: du correctif du serveur~;
+du second facteur des administrateurs~; des règles de transfert~; de la
+sauvegarde des courriels~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.3. Le stockage public \niveaubase}]
+Pourquoi un stockage d'objets public est-il si dangereux~? Quelle mesure
+au niveau du compte l'empêche~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.4. La règle de transfert \niveaumoyen}]
+Rédigez séparément la constatation et l'analyse sur la règle de transfert
+de la messagerie de LiZbiZ, et les actions à mener.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.5. Les journaux \niveaumoyen}]
+Proposez une configuration des journaux de la messagerie~: événements,
+export, durée de conservation, alertes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.6. BYOD \niveaumoyen}]
+Les commerciaux de LiZbiZ utilisent leurs téléphones personnels.
+Proposez une politique qui protège LiZbiZ sans surveiller la vie privée
+des salariés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.7. Clés \niveaumoyen}]
+Quels avantages et quels risques présente la gestion des clés de
+chiffrement par le client~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.8. Un téléphone perdu \niveaumoyen}]
+Le téléphone du directeur financier, qui porte son second facteur et
+l'accès au Mobile Money de l'entreprise, est perdu. Rédigez la procédure.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.9. Migrer \niveauexpert}]
+LiZbiZ veut déplacer son application intégrée vers un IaaS. Rédigez les
+dix exigences de sécurité à intégrer au projet.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~20.10. Revue de configuration \niveauexpert}]
+Construisez une liste de contrôle de vingt points pour revoir la
+configuration d'un compte SaaS de messagerie, avec la preuve attendue
+pour chacun.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-145 et SP~800-124~\cite{nist2011sp800145,nist800124}.
+    \item CSA Cloud Controls Matrix~\cite{csa2021ccm}~; ISO/IEC~27017~\cite{iso27017_2015}.
+    \item OWASP MASVS~\cite{owaspmasvs}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Les mesures sont en place~; encore faut-il vérifier
+qu'elles fonctionnent. Le Chapitre~\ref{chap:evaluer} traite de
+l'évaluation de la sécurité.
+\end{boxinfo}

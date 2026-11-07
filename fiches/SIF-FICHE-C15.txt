@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C15
+Chapitre 15 : Sécurité des réseaux (1) : protocoles et attaques
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. À quelle couche appartient l'usurpation ARP ?
+      a) Accès au réseau
+      b) Application
+      c) Transport
+      d) Internet
+
+ 2. À quelle couche appartient l'inondation SYN ?
+      a) Accès au réseau
+      b) Transport
+      c) Internet
+      d) Application
+
+ 3. À quelle couche appartient l'empoisonnement DNS ?
+      a) Transport
+      b) Internet
+      c) Application
+      d) Accès au réseau
+
+ 4. Que fait ARP ?
+      a) Il chiffre le trafic
+      b) Il traduit les noms en adresses
+      c) Il filtre les ports
+      d) Il associe une adresse IP à une adresse MAC
+
+ 5. Pourquoi ARP est-il vulnérable ?
+      a) Il n'authentifie rien
+      b) Il est chiffré
+      c) Il est trop lent
+      d) Il est récent
+
+ 6. Quelle mesure rend l'interception par usurpation ARP inutile ?
+      a) Un mot de passe plus long
+      b) Le chiffrement des échanges (TLS)
+      c) Un antivirus
+      d) Un disque chiffré
+
+ 7. Qui a montré en 2008 qu'empoisonner un cache DNS était plus facile qu'on ne le pensait ?
+      a) E. Spafford
+      b) M. Vanhoef
+      c) D. Kaminsky
+      d) B. Lampson
+
+ 8. Quelle extension signe les réponses DNS ?
+      a) DHCP
+      b) SNMP
+      c) TLS
+      d) DNSSEC
+
+ 9. Qu'est-ce qu'un résolveur ouvert ?
+      a) Un résolveur qui répond aux requêtes venues d'Internet
+      b) Un résolveur gratuit
+      c) Un résolveur chiffré
+      d) Un résolveur interne fermé
+
+10. Quelle contre-mesure protège contre l'inondation SYN ?
+      a) Le chiffrement
+      b) Les témoins SYN
+      c) L'antivirus
+      d) Le NAT
+
+11. Une requête de 60 octets provoque une réponse de 3 000 octets. Quel est le facteur d'amplification ?
+      a) 5
+      b) 30
+      c) 50
+      d) 300
+
+12. Quels services sont souvent utilisés pour l'amplification ?
+      a) SSH et SFTP
+      b) HTTPS et IMAPS
+      c) Aucun
+      d) DNS et NTP
+
+13. Contre un déni de service distribué de grande ampleur, on s'appuie sur :
+      a) Le filtrage de l'opérateur ou d'un fournisseur spécialisé
+      b) Un antivirus
+      c) Un mot de passe
+      d) Un bastion
+
+14. Quel est le remplaçant sûr de Telnet ?
+      a) FTP
+      b) SSH
+      c) HTTP
+      d) SNMPv1
+
+15. Quel est le remplaçant sûr de FTP ?
+      a) Telnet
+      b) HTTP
+      c) SFTP ou FTPS
+      d) TFTP
+
+16. Quelle version de SNMP apporte authentification et chiffrement ?
+      a) v1
+      b) v2c
+      c) v4
+      d) v3
+
+17. Quel filtre Wireshark isole les débuts de connexion TCP ?
+      a) tcp.flags.syn == 1 && tcp.flags.ack == 0
+      b) http
+      c) arp
+      d) dns
+
+18. Que signe une source qui envoie des SYN vers de très nombreux ports ?
+      a) Une sauvegarde
+      b) Un balayage de ports
+      c) Une mise à jour
+      d) Une connexion normale
+
+19. Dans la capture de Garoua, quel poste a balayé les serveurs ?
+      a) FS-02
+      b) APP-01
+      c) PC-GAR-07
+      d) WEB-01
+
+20. Quel outil en ligne de commande capture le trafic dans un fichier ?
+      a) grep
+      b) ssh
+      c) ls
+      d) tcpdump
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Les protocoles d'Internet ont été conçus pour des machines qui se faisaient confiance.
+      Vrai / Faux
+
+22. Une machine accepte une réponse ARP qu'elle n'a pas demandée.
+      Vrai / Faux
+
+23. Rendre aléatoires le port source et l'identifiant des requêtes protège contre l'empoisonnement.
+      Vrai / Faux
+
+24. L'amplification utilise l'adresse de la victime comme source des requêtes.
+      Vrai / Faux
+
+25. HTTP chiffre les formulaires.
+      Vrai / Faux
+
+26. Chaque protocole en clair a un remplaçant chiffré.
+      Vrai / Faux
+
+27. Une constatation réseau suffit toujours à conclure sans examiner la machine.
+      Vrai / Faux
+
+28. Dans la capture de Garoua, des identifiants FTP circulaient en clair.
+      Vrai / Faux
+
+29. Un résolveur doit servir tous les internautes.
+      Vrai / Faux
+
+30. Un déni de service applicatif peut viser une fonction coûteuse comme la recherche.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le protocole qui associe une adresse IP à une adresse MAC est ______.
+
+32. L'extension de sécurité qui signe les réponses DNS est ______.
+
+33. Les témoins qui protègent contre l'inondation SYN sont les SYN ______.
+
+34. Le remplaçant chiffré de Telnet est ______.
+
+35. L'outil graphique d'analyse de captures le plus répandu est ______.
+
+36. Le rapport entre la taille de la réponse et celle de la requête est le facteur d'______.
+
+37. Le port habituel de HTTPS est ______.
+
+38. L'usurpation ARP place l'attaquant en position d'homme du ______.
+
+39. Envoyer des SYN vers de nombreux ports d'une machine est un ______ de ports.
+
+40. Faire accepter une fausse réponse par un résolveur est un empoisonnement de ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C21
+Chapitre 21 : Évaluer la sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle évaluation liste automatiquement les failles connues sans les exploiter ?
+      a) L'analyse de vulnérabilités
+      b) Le test d'intrusion
+      c) L'équipe rouge
+      d) L'audit de conformité
+
+ 2. Quelle évaluation exploite les failles pour mesurer jusqu'où un attaquant irait ?
+      a) L'analyse de vulnérabilités
+      b) Le test d'intrusion
+      c) L'inventaire
+      d) La revue de direction
+
+ 3. Quelle évaluation compare l'organisation à un référentiel ?
+      a) Le test d'intrusion
+      b) L'équipe rouge
+      c) L'audit
+      d) Le balayage
+
+ 4. Quelle évaluation teste aussi la détection et la réponse, sans prévenir les équipes ?
+      a) L'analyse de vulnérabilités
+      b) L'audit
+      c) L'inventaire
+      d) L'équipe rouge
+
+ 5. Quel document du NIST décrit les techniques de test et d'évaluation ?
+      a) SP 800-115
+      b) SP 800-61
+      c) SP 800-34
+      d) SP 800-92
+
+ 6. Que doit fixer l'autorisation écrite d'un test ?
+      a) Seulement le prix
+      b) Le périmètre, les méthodes, la fenêtre et les contacts
+      c) Le nom de l'attaquant
+      d) Rien
+
+ 7. Quel article réprime le test sans autorisation ?
+      a) Article 25
+      b) Article 42
+      c) Article 65, alinéa 2 de la loi n° 2010/012
+      d) Article 7
+
+ 8. Pour le portail de l'ANPP, quelle méthode est exclue du test ?
+      a) La recherche de failles
+      b) La lecture du code
+      c) Le rapport
+      d) Le déni de service
+
+ 9. Où se déroule le test du portail de l'ANPP ?
+      a) Sur une copie isolée
+      b) En production, sans prévenir
+      c) Sur le site d'un concurrent
+      d) Sur Internet entier
+
+10. Quelles sont les phases d'un test d'intrusion selon le NIST SP 800-115 ?
+      a) Acheter, installer, oublier
+      b) Planifier, découvrir, attaquer, rendre compte
+      c) Chiffrer, signer, publier
+      d) Observer, attendre, partir
+
+11. En boîte noire, le testeur dispose :
+      a) De tout le code source
+      b) Des mots de passe d'administrateur
+      c) D'aucune information préalable
+      d) Des plans du réseau
+
+12. En boîte blanche, le testeur dispose :
+      a) D'aucune information
+      b) D'une adresse IP seulement
+      c) D'un nom de domaine
+      d) De la documentation et du code
+
+13. En boîte grise, le testeur dispose :
+      a) De connaissances partielles, par exemple un compte utilisateur
+      b) De tout
+      c) De rien
+      d) Du budget
+
+14. Quel score décrit la gravité technique d'une vulnérabilité ?
+      a) Le RTO
+      b) Le CVSS
+      c) Le ROI
+      d) Le PIB
+
+15. Que croiser pour prioriser une vulnérabilité ?
+      a) Seulement le score
+      b) La couleur du rapport
+      c) Gravité, exposition, valeur de l'actif et exploitation connue
+      d) L'ordre alphabétique
+
+16. Quel score CVSS a la faille de la bibliothèque de documents du portail ?
+      a) 5,3
+      b) 7,5
+      c) 8,1
+      d) 9,8
+
+17. Quelle priorité reçoit SMBv1 actif sur un serveur interne (CVSS 8,1) ?
+      a) Priorité 2 (15 jours)
+      b) Priorité 1 (72 h)
+      c) Priorité 3 (90 jours)
+      d) Aucune
+
+18. Quelle partie du rapport s'adresse à la direction ?
+      a) Les captures d'écran
+      b) La synthèse
+      c) Les journaux bruts
+      d) Les annexes techniques
+
+19. Que doit dire un rapport de test sur ce qui n'a pas été testé ?
+      a) Rien
+      b) Il affirme que tout est sûr
+      c) Il en dit les limites
+      d) Il le cache
+
+20. Comment vérifier qu'une faille signalée est corrigée ?
+      a) En croyant le prestataire
+      b) En supprimant le rapport
+      c) On ne vérifie pas
+      d) Par un nouveau test de contrôle
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Une analyse de vulnérabilités et un test d'intrusion répondent à la même question.
+      Vrai / Faux
+
+22. Aucun test ne commence sans autorisation écrite.
+      Vrai / Faux
+
+23. Le testeur peut élargir le périmètre s'il trouve une piste intéressante.
+      Vrai / Faux
+
+24. La découverte comprend la recherche des services et des versions.
+      Vrai / Faux
+
+25. Le score CVSS seul suffit à prioriser.
+      Vrai / Faux
+
+26. Une faille exploitée activement et exposée à Internet passe en premier.
+      Vrai / Faux
+
+27. Un rapport sépare constatations et recommandations.
+      Vrai / Faux
+
+28. L'absence de faille trouvée prouve l'absence de faille.
+      Vrai / Faux
+
+29. L'audit vérifie la conformité à un référentiel.
+      Vrai / Faux
+
+30. La fenêtre du test indique les dates et heures autorisées.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le système de notation de la gravité des vulnérabilités a pour sigle ______.
+
+32. Un test où le testeur ne reçoit aucune information est en boîte ______.
+
+33. Un test avec documentation et code est en boîte ______.
+
+34. L'exercice qui simule un attaquant réel sans prévenir les défenseurs est mené par une équipe ______.
+
+35. Le document NIST sur les tests de sécurité est le SP 800-______.
+
+36. Le test du portail de l'ANPP se termine le 7 ______.
+
+37. La première partie d'un rapport, destinée à la direction, est la ______.
+
+38. Une faille de priorité 1 se corrige sous ______ heures.
+
+39. Le protocole de partage de fichiers obsolète trouvé sur un serveur est SMBv______.
+
+40. L'identifiant public d'une vulnérabilité connue a pour sigle ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

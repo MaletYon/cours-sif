@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-P00
+Chapitre 0 : Prologue : une nuit à Garoua
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quel est le secteur d'activité de LiZbiZ ?
+      a) La logistique
+      b) La banque
+      c) L'énergie
+      d) Les télécommunications
+
+ 2. Combien de centres de données LiZbiZ exploite-t-elle ?
+      a) Deux
+      b) Quatre
+      c) Trois
+      d) Douze
+
+ 3. Qui exploite les centres de Garoua et de Bafoussam depuis septembre 2026 ?
+      a) La DSI de LiZbiZ
+      b) L'ANTIC
+      c) SAHEL INFOGÉRANCE
+      d) AUDIX CONSEIL
+
+ 4. Qui était responsable de la sécurité de LiZbiZ avant l'attaque ?
+      a) Le RSSI
+      b) Le prestataire
+      c) Le commissaire aux comptes
+      d) Personne n'avait été désigné
+
+ 5. Comment l'attaquant a-t-il obtenu le mot de passe du technicien ?
+      a) Par une fausse page de connexion envoyée par courriel
+      b) Par force brute
+      c) Par un virus sur clé USB
+      d) Par un complice interne
+
+ 6. Qu'est-ce qui manquait sur la passerelle d'accès distant ?
+      a) Un certificat
+      b) La double authentification
+      c) Un pare-feu
+      d) Un antivirus
+
+ 7. Comment l'attaquant a-t-il obtenu des droits d'administrateur ?
+      a) En devinant le mot de passe du DG
+      b) En achetant un accès
+      c) En exploitant un serveur dont un correctif critique n'était pas installé
+      d) Par la messagerie
+
+ 8. Quel volume de données a été copié vers un stockage externe, environ ?
+      a) 4 Go
+      b) 400 Go
+      c) 4 To
+      d) 40 Go
+
+ 9. Pourquoi la restauration rapide était-elle impossible ?
+      a) Les sauvegardes, sur un partage du domaine, avaient été supprimées
+      b) Le prestataire refusait
+      c) La loi l'interdit
+      d) Les serveurs étaient neufs
+
+10. À quelle heure le chiffrement a-t-il commencé le 5 mars ?
+      a) 19 h 00
+      b) 21 h 40
+      c) 23 h 12
+      d) 07 h 30
+
+11. Quelle erreur M. ABENA a-t-il commise à 22 h 05 ?
+      a) Il a appelé la police
+      b) Il a payé la rançon
+      c) Il a redémarré les serveurs
+      d) Il a coupé Internet
+
+12. Que demande le message de rançon ?
+      a) Un virement de 10 millions FCFA
+      b) La démission du DG
+      c) Rien
+      d) 85 000 dollars en cryptoactifs
+
+13. Comment classer « les serveurs de Garoua et de Douala sont chiffrés » ?
+      a) Constatation
+      b) Opinion
+      c) Hypothèse
+      d) Recommandation
+
+14. Comment classer « l'attaque vient du prestataire » le lundi matin ?
+      a) Constatation
+      b) Hypothèse
+      c) Opinion
+      d) Certitude
+
+15. Qu'est-ce qu'une constatation ?
+      a) Un jugement de la direction
+      b) Une explication plausible
+      c) Un fait vérifiable par un tiers, appuyé sur une trace
+      d) Une rumeur
+
+16. Que dit le cours de la réponse « je ne sais pas » ?
+      a) Il faut la cacher
+      b) Elle vaut oui
+      c) Elle vaut non
+      d) Il faut la signaler (NEK)
+
+17. Quelle partie du cours traite de la segmentation du réseau et des correctifs ?
+      a) Partie IV
+      b) Partie I
+      c) Partie II
+      d) Partie III
+
+18. Quelle partie traite de la loi camerounaise ?
+      a) Partie II
+      b) Partie III
+      c) Partie V
+      d) Partie VI
+
+19. Quel métier aurait vu la connexion de 23 h 12, si les journaux avaient été collectés ?
+      a) Le développeur
+      b) Le commissaire aux comptes
+      c) L'analyste SOC
+      d) Le juriste
+
+20. Quel métier aurait installé le correctif et séparé les sauvegardes du domaine ?
+      a) L'auditeur
+      b) Le RSSI seul
+      c) Le DG
+      d) L'administrateur systèmes et réseaux
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. LiZbiZ possède douze agences.
+      Vrai / Faux
+
+22. La messagerie de LiZbiZ est hébergée dans le nuage.
+      Vrai / Faux
+
+23. L'attaquant a été présent plusieurs jours avant le chiffrement.
+      Vrai / Faux
+
+24. Le compte du technicien était protégé par une double authentification.
+      Vrai / Faux
+
+25. Redémarrer un serveur compromis préserve la mémoire vive.
+      Vrai / Faux
+
+26. « On peut tout restaurer depuis les sauvegardes » était une affirmation exacte.
+      Vrai / Faux
+
+27. Une décision prise sur une opinion présentée comme un fait est une mauvaise décision.
+      Vrai / Faux
+
+28. Un antivirus remplace le métier de RSSI.
+      Vrai / Faux
+
+29. Une attaque est une chaîne dont chaque maillon peut être coupé.
+      Vrai / Faux
+
+30. L'auditeur de sécurité aurait pu relever l'absence de double authentification avant l'attaque.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le courriel trompeur du 19 février est un exemple d'______.
+
+32. Le logiciel qui chiffre les données et exige une rançon est un ______.
+
+33. La première connexion de l'attaquant a eu lieu le 2 mars à 23 h ______.
+
+34. Une explication plausible, qui reste à vérifier, est une ______.
+
+35. La réponse « connaissance insuffisante » s'écrit ______.
+
+36. Le directeur général de LiZbiZ s'appelle M. ______.
+
+37. Le responsable informatique de LiZbiZ s'appelle M. ______.
+
+38. Le technicien d'astreinte qui a redémarré les serveurs s'appelle M. ______.
+
+39. Le responsable de la sécurité des systèmes d'information a pour sigle ______.
+
+40. L'opération fictive du prologue s'appelle l'Opération ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

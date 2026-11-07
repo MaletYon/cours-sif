@@ -1,0 +1,350 @@
+% ============================================================================
+% Fichier  : partie4/P04_C19_applications.tex
+% Titre    : Sécurité des Applications
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre IX » (méthodes de développement, SSDLC,
+% vulnérabilités, tests). Sources : NIST SP 800-218 (SSDF, 2022) ; Shostack
+% (2014, STRIDE) ; OWASP Top 10 (2021) ; OWASP ASVS (4.0) ; OWASP SAMM.
+% Opération MEFOU : portail de paiement fictif de l'ANPP.
+% ============================================================================
+
+\chapter{Sécurité des Applications}
+\label{chap:applications}
+\chaptermark{Sécurité des applications}
+
+\epigraph{%
+    « Toute donnée qui vient de l'extérieur est hostile\\
+    jusqu'à preuve du contraire. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Programmation (Python ou PHP), bases de
+données SQL~; Chapitres~\ref{chap:proprietes} et~\ref{chap:iam}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Intégrer la sécurité à chaque étape du cycle de développement.
+    \item Modéliser les menaces d'une application avec STRIDE.
+    \item Reconnaître les vulnérabilités de l'OWASP Top~10 et les corriger.
+    \item Écrire des requêtes paramétrées et valider les entrées.
+    \item Choisir entre revue de code, SAST, DAST et analyse des
+          dépendances.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : comment un numéro dans une adresse a-t-il exposé des milliers de bénéficiaires~?}
+% ============================================================================
+
+L'ANPP, agence publique de paiement, ouvre un portail où chaque
+bénéficiaire consulte ses paiements à l'adresse
+\texttt{/paiements?id=10452}. Un étudiant remarque qu'en changeant le
+numéro, il voit les paiements d'un autre. L'application vérifiait que
+l'utilisateur était connecté, pas qu'il consultait \emph{ses} données. Ce
+chapitre traite de ces erreurs de conception et de code, et de la manière
+de les éviter.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Le cycle de développement sécurisé (section~\ref{sec:c19-ssdlc}).
+    \item Modéliser les menaces (section~\ref{sec:c19-stride}).
+    \item L'OWASP Top~10 (section~\ref{sec:c19-top10}).
+    \item Les injections (section~\ref{sec:c19-injection}).
+    \item Le contrôle d'accès applicatif (section~\ref{sec:c19-acces}).
+    \item Tester la sécurité d'une application (section~\ref{sec:c19-tests}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Le Cycle de Développement Sécurisé}
+\label{sec:c19-ssdlc}
+% ============================================================================
+
+Le NIST a publié un cadre de développement logiciel sécurisé (SSDF), qui
+organise les pratiques en quatre groupes~: préparer l'organisation,
+protéger le logiciel, produire un logiciel bien sécurisé, et répondre aux
+vulnérabilités~\cite{nist800218}.
+
+\begin{tableaucours}{L{2.8cm}L{9.4cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Activité de sécurité}
+}
+Exigences & Exigences de sécurité (authentification, journalisation,
+données sensibles), par exemple tirées de l'ASVS \\
+Conception & Modélisation des menaces~; choix d'architecture \\
+Développement & Règles de codage~; bibliothèques reconnues~; pas de
+secret dans le code~; revue par les pairs \\
+Vérification & Analyse statique, tests dynamiques, analyse des
+dépendances~; tests d'intrusion pour les applications exposées \\
+Mise en production & Configuration durcie~; secrets dans un coffre \\
+Maintenance & Correctifs, veille sur les dépendances, traitement des
+signalements (Chapitre~\ref{chap:ethique}) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~19.1. La sécurité dans le cycle de
+développement}\end{center}
+
+% ============================================================================
+\section{Modéliser les Menaces}
+\label{sec:c19-stride}
+% ============================================================================
+
+La \termecle{modélisation des menaces} examine la conception d'une
+application pour trouver ce qui peut mal tourner, avant d'écrire le code.
+La méthode STRIDE classe les menaces en six catégories, chacune opposée à
+une propriété~\cite{shostack2014}.
+
+\begin{tableaucours}{L{3.6cm}L{3.4cm}L{5.2cm}}{%
+    \tableauHeader{Menace} &
+    \tableauHeader{Propriété violée} &
+    \tableauHeader{Exemple sur le portail de l'ANPP}
+}
+Usurpation (\textit{Spoofing}) & Authenticité & Se connecter avec le
+compte d'un autre \\
+Altération (\textit{Tampering}) & Intégrité & Modifier le RIB d'un
+bénéficiaire \\
+Répudiation & Non-répudiation & Nier avoir modifié un RIB, faute de
+journal \\
+Divulgation (\textit{Information disclosure}) & Confidentialité & Voir les
+paiements d'un autre \\
+Déni de service & Disponibilité & Saturer la recherche \\
+Élévation de privilèges & Autorisation & Accéder aux fonctions
+d'administration \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~19.2. STRIDE appliqué au portail de l'ANPP}\end{center}
+
+% ============================================================================
+\section{L'OWASP Top 10}
+\label{sec:c19-top10}
+% ============================================================================
+
+L'OWASP Top~10 (2021) liste les dix catégories de risques les plus
+fréquentes des applications web~\cite{owasp2021top10}. C'est un outil de
+sensibilisation~; pour fixer des exigences vérifiables, on utilise
+l'ASVS~\cite{owasp2021asvs}.
+
+\begin{tableaucours}{L{1.6cm}L{5.6cm}L{5.0cm}}{%
+    \tableauHeader{Rang} &
+    \tableauHeader{Catégorie} &
+    \tableauHeader{Mesure principale}
+}
+A01 & Contrôle d'accès défaillant & Vérifier les droits sur chaque objet \\
+A02 & Défaillances cryptographiques & TLS, chiffrement, hachage des mots de
+passe \\
+A03 & Injection & Requêtes paramétrées, encodage des sorties \\
+A04 & Conception non sécurisée & Modélisation des menaces \\
+A05 & Mauvaise configuration & Durcissement, pas de pages de débogage \\
+A06 & Composants vulnérables & Inventaire et mise à jour des dépendances \\
+A07 & Identification et authentification & Second facteur, gestion des
+sessions \\
+A08 & Intégrité des logiciels et des données & Signer les mises à jour,
+contrôler la chaîne de production \\
+A09 & Journalisation et surveillance & Journaliser les événements de
+sécurité \\
+A10 & Falsification de requêtes côté serveur & Filtrer les adresses
+appelées par le serveur \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~19.3. L'OWASP Top~10 (2021)}\end{center}
+
+% ============================================================================
+\section{Les Injections}
+\label{sec:c19-injection}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Injection}~: vulnérabilité par laquelle une donnée fournie par
+l'utilisateur est interprétée comme une commande (SQL, système, LDAP).
+L'\termecle{injection SQL} en est la forme la plus connue.
+\end{boxdef}
+
+\begin{boxoutils}{Une requête vulnérable, puis corrigée}
+\begin{lstlisting}[language=Python]
+import sqlite3
+con = sqlite3.connect("anpp.db")
+
+def paiements_vulnerable(nom):
+    # la donnee est collee dans la requete : NE PAS FAIRE
+    return con.execute(
+        "SELECT * FROM paiements WHERE beneficiaire = '" + nom + "'").fetchall()
+
+def paiements_corrige(nom):
+    # requete parametree : la donnee reste une donnee
+    return con.execute(
+        "SELECT * FROM paiements WHERE beneficiaire = ?", (nom,)).fetchall()
+\end{lstlisting}
+Avec la valeur \texttt{x' OR '1'='1}, la première fonction renvoie tous
+les paiements~: la condition devient toujours vraie. La seconde cherche
+un bénéficiaire nommé littéralement \texttt{x' OR '1'='1}, et ne trouve
+rien.
+\end{boxoutils}
+
+\begin{boxalert}
+\textbf{Violation typique.} Corriger une injection en supprimant les
+apostrophes.
+
+\smallskip
+\textbf{Règle~:} une liste de caractères interdits se contourne toujours.
+La correction est structurelle~: requête paramétrée, et validation des
+entrées selon ce qui est \emph{attendu} (un identifiant est un nombre).
+\end{boxalert}
+
+% ============================================================================
+\section{Le Contrôle d'Accès Applicatif}
+\label{sec:c19-acces}
+% ============================================================================
+
+\begin{boxscenario}{Opération MEFOU. Le paramètre id}
+\textbf{Constatation.} Le portail de l'ANPP renvoie les paiements de
+l'enregistrement dont le numéro figure dans l'adresse, pour tout
+utilisateur connecté. Les numéros sont consécutifs.
+
+\medskip
+\textbf{Analyse} (confiance élevée). C'est une référence directe à un
+objet non sécurisée (catégorie A01)~: l'application vérifie
+l'authentification, pas l'autorisation sur l'objet. La correction~:
+vérifier côté serveur, à chaque requête, que l'enregistrement appartient
+à l'utilisateur connecté, et journaliser les refus. Des numéros
+imprévisibles compliquent l'attaque mais ne la corrigent pas.
+\end{boxscenario}
+
+% ============================================================================
+\section{Tester la Sécurité d'une Application}
+\label{sec:c19-tests}
+% ============================================================================
+
+\begin{tableaucours}{L{3.0cm}L{4.8cm}L{4.4cm}}{%
+    \tableauHeader{Technique} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Trouve bien}
+}
+Revue de code & Lecture par un pair, guidée par une liste & Défauts de
+logique, contrôle d'accès \\
+SAST & Analyse automatique du code source & Injections, secrets dans le
+code \\
+DAST & Attaque automatique de l'application en fonctionnement &
+Configuration, injections exposées \\
+Analyse des dépendances & Comparaison des bibliothèques aux CVE &
+Composants vulnérables (A06) \\
+Test d'intrusion & Attaque manuelle et autorisée & Enchaînements, logique
+métier (Chapitre~\ref{chap:evaluer}) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~19.4. Techniques de test des applications}\end{center}
+
+\begin{boxmetier}{Développeur}
+\textbf{Les réflexes du développeur.} Requêtes paramétrées~; contrôle des
+droits sur chaque objet, côté serveur~; aucun secret dans le code ni dans
+le dépôt~; dépendances inventoriées et mises à jour~; journalisation des
+événements de sécurité~; revue par un pair avant chaque fusion.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Auditer un développement.} L'auditeur demande les exigences de
+sécurité, la modélisation des menaces, les résultats des analyses
+automatiques et leur traitement, et vérifie par sondage que les
+vulnérabilités signalées ont été corrigées.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{La sécurité s'intègre au cycle de développement}, des
+          exigences à la maintenance (SSDF du NIST).
+    \item \textbf{STRIDE} classe les menaces en six catégories, une par
+          propriété.
+    \item \textbf{L'OWASP Top~10} sensibilise~; l'ASVS fixe des exigences
+          vérifiables.
+    \item \textbf{L'injection} se corrige par des requêtes paramétrées et
+          une validation positive.
+    \item \textbf{Le contrôle d'accès} se vérifie sur chaque objet, côté
+          serveur.
+    \item \textbf{Revue, SAST, DAST, dépendances et intrusion} se
+          complètent.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: placer une activité de
+sécurité à chaque étape du cycle~; appliquer STRIDE~; citer les catégories
+du Top~10~; corriger une injection SQL~; expliquer une référence directe
+non sécurisée~; choisir une technique de test.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.1. STRIDE \niveaubase}]
+Associez une catégorie STRIDE à~: un utilisateur nie avoir passé une
+commande~; un attaquant modifie un prix dans le panier~; une page
+d'erreur affiche le mot de passe de la base.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.2. Top 10 \niveaubase}]
+Classez dans le Top~10~: une bibliothèque de 2017 jamais mise à jour~; des
+mots de passe hachés avec MD5~; un mode débogage actif en production.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.3. L'injection \niveaubase}]
+Expliquez pourquoi la valeur \texttt{x' OR '1'='1} renvoie tous les
+paiements avec la fonction vulnérable.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.4. Corriger \niveaumoyen}]
+Réécrivez en requête paramétrée une requête qui recherche les expéditions
+d'un client par son numéro et sa ville.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.5. Le paramètre id \niveaumoyen}]
+Écrivez, en pseudo-code, la vérification que le portail de l'ANPP aurait
+dû faire, et la ligne de journal en cas de refus.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.6. Secrets \niveaumoyen}]
+Un développeur a publié sur un dépôt de code le fichier de configuration
+contenant le mot de passe de la base. Que faites-vous, dans l'ordre~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.7. Choisir les tests \niveaumoyen}]
+Pour le portail de suivi de LiZbiZ, proposez une combinaison de tests
+avant la mise en production, et leur ordre.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.8. Validation positive \niveaumoyen}]
+Écrivez les règles de validation des champs~: numéro de suivi (dix
+chiffres), adresse électronique, montant en FCFA.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.9. Modéliser \niveauexpert}]
+Modélisez avec STRIDE l'application de paiement des fournisseurs de LiZbiZ
+(saisie, validation, virement), et proposez une mesure par menace.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~19.10. Exigences \niveauexpert}]
+Rédigez dix exigences de sécurité vérifiables, inspirées de l'ASVS, pour
+le cahier des charges de la refonte du portail de l'ANPP.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-218 (SSDF)~\cite{nist800218}.
+    \item A.~Shostack, \emph{Threat Modeling}~\cite{shostack2014}.
+    \item OWASP Top~10 et ASVS~\cite{owasp2021top10,owasp2021asvs}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} De plus en plus d'applications vivent dans le nuage
+et sur les téléphones. Le Chapitre~\ref{chap:nuage} en traite les risques
+propres.
+\end{boxinfo}

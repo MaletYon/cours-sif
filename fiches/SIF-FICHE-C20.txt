@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C20
+Chapitre 20 : Sécurité du nuage et des mobiles
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Dans quel modèle le client gère-t-il le système d'exploitation ?
+      a) IaaS
+      b) PaaS
+      c) SaaS
+      d) Aucun
+
+ 2. Une messagerie en ligne prête à l'emploi relève du modèle :
+      a) IaaS
+      b) SaaS
+      c) PaaS
+      d) Site froid
+
+ 3. Une plateforme où le client déploie seulement son code relève du modèle :
+      a) IaaS
+      b) SaaS
+      c) PaaS
+      d) Bastion
+
+ 4. Lequel n'est pas un modèle de déploiement du nuage ?
+      a) Public
+      b) Privé
+      c) Hybride
+      d) Plat
+
+ 5. Que reste-t-il toujours sous la responsabilité du client ?
+      a) Les données, les comptes et la configuration
+      b) Le bâtiment du fournisseur
+      c) Les serveurs physiques
+      d) Le réseau du fournisseur
+
+ 6. En SaaS, qui protège l'application elle-même ?
+      a) Le client
+      b) Le fournisseur
+      c) Personne
+      d) L'ANTIC
+
+ 7. Quelle est la première cause d'incident dans le nuage ?
+      a) Les tremblements de terre
+      b) Les pannes de courant
+      c) Les erreurs de configuration
+      d) Le vol de serveurs
+
+ 8. Quel exemple est une erreur de configuration ?
+      a) Un chiffrement activé
+      b) Un second facteur exigé
+      c) Des journaux exportés
+      d) Un espace de stockage public contenant des données internes
+
+ 9. Que devient le périmètre dans le nuage ?
+      a) L'identité
+      b) Le pare-feu
+      c) Le bâtiment
+      d) Le câble
+
+10. Combien de jours les journaux d'accès de la messagerie en ligne de LiZbiZ étaient-ils conservés ?
+      a) 30
+      b) 7
+      c) 90
+      d) 365
+
+11. Pourquoi exporter les journaux hors du compte surveillé ?
+      a) Pour économiser
+      b) Pour les publier
+      c) Un attaquant qui prend le compte peut les effacer
+      d) Ce n'est pas utile
+
+12. Quel risque présente une règle de transfert automatique des courriels créée par un attaquant ?
+      a) Une panne de courant
+      b) Aucune
+      c) Un ralentissement
+      d) Une fuite silencieuse de la correspondance
+
+13. Qui doit maîtriser les clés de chiffrement des données les plus sensibles ?
+      a) Le client, par un service de gestion de clés ou ses propres clés
+      b) N'importe quel utilisateur
+      c) Le public
+      d) Personne
+
+14. Comment considérer un téléphone professionnel ?
+      a) Comme un objet personnel sans règle
+      b) Comme un poste de travail à gérer
+      c) Comme un serveur
+      d) Comme un pare-feu
+
+15. Que permet une solution de gestion de flotte mobile ?
+      a) Lire les messages privés
+      b) Supprimer les mises à jour
+      c) Imposer le verrouillage, le chiffrement et l'effacement à distance
+      d) Rien
+
+16. Que fait-on en premier quand un téléphone professionnel est perdu ?
+      a) On attend
+      b) On publie l'information
+      c) On achète un autre téléphone sans rien faire
+      d) On le verrouille ou l'efface à distance et on révoque ses accès
+
+17. Quel référentiel de l'OWASP vise la sécurité des applications mobiles ?
+      a) MASVS
+      b) ASVS
+      c) STRIDE
+      d) CSF
+
+18. Qu'est-ce que le BYOD ?
+      a) Une sauvegarde
+      b) L'usage d'appareils personnels pour le travail
+      c) Un pare-feu
+      d) Un protocole
+
+19. Quelle mesure sépare données professionnelles et personnelles sur un appareil ?
+      a) Un mot de passe partagé
+      b) Le Bluetooth
+      c) Un conteneur ou un profil professionnel
+      d) Aucune
+
+20. Quelle erreur touchait la messagerie en ligne de LiZbiZ ?
+      a) Aucune
+      b) Un chiffrement trop fort
+      c) Trop de sauvegardes
+      d) Comptes sans second facteur et journaux trop courts
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Passer au nuage transfère toute la sécurité au fournisseur.
+      Vrai / Faux
+
+22. La part du client diminue de l'IaaS au SaaS, sans disparaître.
+      Vrai / Faux
+
+23. Un espace de stockage public peut exposer des données à tout Internet.
+      Vrai / Faux
+
+24. Dans le nuage, un compte sans second facteur est une porte d'entrée.
+      Vrai / Faux
+
+25. Sept jours de journaux suffisent pour reconstituer une attaque de plusieurs semaines.
+      Vrai / Faux
+
+26. Un téléphone non mis à jour est une faiblesse pour l'organisation.
+      Vrai / Faux
+
+27. Le BYOD ne pose aucun problème de sécurité.
+      Vrai / Faux
+
+28. Le nuage hybride combine plusieurs modèles de déploiement.
+      Vrai / Faux
+
+29. En IaaS, le fournisseur gère le système d'exploitation du client.
+      Vrai / Faux
+
+30. Le chiffrement de l'appareil protège les données en cas de perte.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. L'infrastructure en tant que service a pour sigle ______.
+
+32. Le logiciel en tant que service a pour sigle ______.
+
+33. La plateforme en tant que service a pour sigle ______.
+
+34. Le modèle qui répartit la sécurité entre fournisseur et client est la responsabilité ______.
+
+35. Dans le nuage, le nouveau périmètre est l'______.
+
+36. L'usage d'appareils personnels au travail a pour sigle ______.
+
+37. Le référentiel de l'OWASP pour les applications mobiles a pour sigle ______.
+
+38. La messagerie en ligne de LiZbiZ conservait ses journaux ______ jours.
+
+39. La première cause d'incident dans le nuage est l'erreur de ______.
+
+40. L'effacement d'un appareil perdu se fait à ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

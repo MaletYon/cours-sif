@@ -1,0 +1,142 @@
+% ============================================================================
+% Fichier  : front/02_mode_emploi.tex
+% Titre    : Mode d'emploi du cours
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+
+\chapter*{Mode d'emploi du cours}
+\addcontentsline{toc}{chapter}{Mode d'emploi du cours}
+\markboth{Mode d'emploi}{Mode d'emploi}
+
+\section*{Structure générale}
+
+Le cours compte un prologue et six parties, soit 26~chapitres, pour
+60~heures en présentiel réparties en trente séances de deux heures. Les
+fiches d'auto-évaluation et les dix laboratoires de NDAP SUKULU sont des
+travaux à faire hors de ces 60~heures.
+
+\begin{tableaucours}{L{1.6cm}L{4.4cm}L{4.4cm}L{1.8cm}}{%
+    \tableauHeader{Partie} &
+    \tableauHeader{Thème} &
+    \tableauHeader{Compétences visées} &
+    \tableauHeader{Niveau}
+}
+Prologue & Une nuit à Garoua & Lire un incident, séparer constatation et
+opinion & \niveaubase \\
+I & Fondements & Propriétés, menaces, cryptographie, histoire &
+\niveaubase \\
+II & Gouvernance et risques & Rôles, politique, risques, actifs, facteur
+humain & \niveaubase \\
+III & Normes et droit & Référentiels, loi camerounaise, éthique &
+\niveaubase \\
+IV & Sécurité technique & Architecture, réseaux, identités, systèmes,
+applications, nuage, opérations & \niveaumoyen \\
+V & Défis avancés & Continuité, investigation, technologies émergentes &
+\niveaumoyen{} à \niveauexpert \\
+VI & Mesurer & Indicateurs, \OUI{}~/ \NON{}~/ \NEK{} & \niveauexpert \\
+\end{tableaucours}
+
+\section*{Les trente séances}
+
+\begin{tableaucours}{L{1.4cm}L{8.4cm}L{2.4cm}}{%
+    \tableauHeader{Séance} &
+    \tableauHeader{Contenu} &
+    \tableauHeader{Partie}
+}
+1 & Prologue~: une nuit à Garoua & Prologue \\
+2 & Objets et propriétés (Ch.~\ref{chap:proprietes}) & I \\
+3 & Menaces et attaques (Ch.~\ref{chap:menaces}) & I \\
+4 & Cryptographie symétrique (Ch.~\ref{chap:crypto-sym}) & I \\
+5 & Cryptographie asymétrique (Ch.~\ref{chap:crypto-asym}) & I \\
+6 & Grandes attaques (Ch.~\ref{chap:attaques}) & I \\
+7 & Gouvernance (Ch.~\ref{chap:gouvernance}) & II \\
+8 & Risques (Ch.~\ref{chap:risques}) & II \\
+9 & Actifs et données (Ch.~\ref{chap:actifs}) & II \\
+10 & Facteur humain (Ch.~\ref{chap:humain}) & II \\
+11 & Normes et référentiels (Ch.~\ref{chap:normes}) & III \\
+12 & Droit (Ch.~\ref{chap:droit}) & III \\
+13 & Éthique (Ch.~\ref{chap:ethique}) & III \\
+14 & Modèles formels (Ch.~\ref{chap:modeles}) & IV \\
+15 & Architecture (Ch.~\ref{chap:architecture}) & IV \\
+16 & Réseaux~: protocoles et attaques (Ch.~\ref{chap:reseaux1}) & IV \\
+17 & Réseaux~: équipements (Ch.~\ref{chap:reseaux2}) & IV \\
+18--19 & Identités et accès (Ch.~\ref{chap:iam}) & IV \\
+20 & Sécurité des systèmes (Ch.~\ref{chap:systemes}) & IV \\
+21--22 & Sécurité des applications (Ch.~\ref{chap:applications}) & IV \\
+23 & Nuage et mobiles (Ch.~\ref{chap:nuage}) & IV \\
+24 & Évaluer la sécurité (Ch.~\ref{chap:evaluer}) & IV \\
+25--26 & Opérations et incidents (Ch.~\ref{chap:operations}) & IV \\
+27 & Continuité et reprise (Ch.~\ref{chap:continuite}) & V \\
+28 & Investigation numérique (Ch.~\ref{chap:investigation}) & V \\
+29 & Défis émergents (Ch.~\ref{chap:emergents}) & V \\
+30 & Mesurer la sécurité~; synthèse (Ch.~\ref{chap:mesurer}) & VI \\
+\end{tableaucours}
+
+\section*{Les encadrés}
+
+\begin{boxdef}
+\textbf{Définition}. Introduit un terme avec sa définition~; les termes
+définis sont indexés et repris dans le glossaire (Annexe~\ref{ann:glossaire}).
+\end{boxdef}
+
+\begin{boxscenario}{Titre du scénario}
+\textbf{Scénario opérationnel}. Un épisode d'une des opérations du
+cours~: GAROUA et LIZBIZ (LiZbiZ), WOURI (BANQUE SANAGA), MEFOU (ANPP).
+\end{boxscenario}
+
+\begin{boxobjet}{M-xx · Intitulé}
+\textbf{Mesure de sécurité}. Présente une mesure sous une forme
+constante~: objectif, menace couverte, mise en œuvre, vérification.
+\end{boxobjet}
+
+\begin{boxprocedure}
+\textbf{Procédure opérationnelle}. Dit, pas à pas, ce qu'il faut faire.
+\end{boxprocedure}
+
+\begin{boxmetier}{RSSI}
+\textbf{Application métier}. Traduit le chapitre en gestes concrets pour
+l'un des métiers visés~: RSSI, administrateur systèmes et réseaux, analyste
+SOC, développeur, auditeur de sécurité.
+\end{boxmetier}
+
+\begin{boxjuris}
+Cite un texte de loi d'après sa version officielle, puis en tire la
+portée pour la sécurité.
+\end{boxjuris}
+
+\begin{boxalert}
+\textbf{Violation typique} et \textbf{règle}~: une erreur fréquente, et ce
+qu'il faut faire à la place.
+\end{boxalert}
+
+\begin{boxexo}
+\textbf{Exercice}. Dix par chapitre, gradués en trois niveaux~:
+\niveaubase\ fondamental, \niveaumoyen\ intermédiaire, \niveauexpert\
+expert. Les corrigés figurent dans le livret de correction.
+\end{boxexo}
+
+\section*{Conventions}
+
+\begin{itemize}
+    \item Chaque analyse indique un niveau de confiance~: faible, moyenne ou
+          élevée, et reste séparée de la constatation.
+    \item Les \termecle{termes clés} apparaissent en gras~; les normes
+          s'écrivent \norme{ISO/IEC~27001}, les lois camerounaises
+          \loicam{n°~2010/012}.
+    \item Les seuils et les échelles proposés (cotation des risques, délais
+          de correctifs) sont des conventions pédagogiques, à adapter par
+          chaque organisation.
+\end{itemize}
+
+\section*{Matériel d'accompagnement}
+
+\begin{itemize}
+    \item \textbf{Annexes}~: glossaire, outils, modèles et procédures,
+          textes juridiques et normatifs, bibliographie commentée, contacts
+          (Annexes~\ref{ann:glossaire} à~\ref{ann:contacts}).
+    \item \textbf{Livret de correction}~: corrigés des exercices et des
+          fiches, réservé au formateur.
+    \item \textbf{NDAP SUKULU}~: fiches d'auto-évaluation et laboratoires,
+          présentés dans la section qui suit.
+\end{itemize}

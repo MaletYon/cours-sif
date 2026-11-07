@@ -1,0 +1,316 @@
+% ============================================================================
+% Fichier  : partie3/P03_C12_ethique.tex
+% Titre    : Éthique et Responsabilité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : code d'éthique de l'ISC2 (quatre canons) ; code de déontologie
+% professionnelle de l'ISACA ; code d'éthique de l'ACM (2018) ; ISO/IEC
+% 29147:2018 et ISO/IEC 30111:2019 (divulgation et traitement des
+% vulnérabilités) ; loi n° 2010/012, art. 44 et 65 (texte officiel).
+% ============================================================================
+
+\chapter{Éthique et Responsabilité}
+\label{chap:ethique}
+\chaptermark{Éthique}
+
+\epigraph{%
+    « Celui qui détient les clés n'est pas propriétaire de la maison. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:gouvernance}
+et~\ref{chap:droit}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Expliquer pourquoi les métiers de la sécurité ont besoin d'une
+          éthique propre.
+    \item Présenter les codes de l'ISC2, de l'ISACA et de l'ACM.
+    \item Conduire une divulgation coordonnée de vulnérabilité.
+    \item Résoudre un dilemme avec une méthode écrite.
+    \item Situer les limites légales et éthiques des tests et de la
+          surveillance.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : que doit faire celui qui a tous les droits~?}
+% ============================================================================
+
+L'administrateur de LiZbiZ peut lire chaque courriel, chaque fichier,
+chaque journal. Pendant l'enquête sur l'Opération GAROUA, le directeur
+lui demande de « regarder les messages » d'un salarié qu'il soupçonne. Il
+en a la capacité technique~; en a-t-il le droit, et doit-il le faire~?
+Les métiers de la sécurité donnent un pouvoir réel sur la vie des autres~:
+ils exigent une éthique explicite.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Pourquoi une éthique de la sécurité (section~\ref{sec:c12-pourquoi}).
+    \item Les codes professionnels (section~\ref{sec:c12-codes}).
+    \item La divulgation des vulnérabilités (section~\ref{sec:c12-divulgation}).
+    \item Résoudre un dilemme (section~\ref{sec:c12-dilemme}).
+    \item Les limites des tests et de la surveillance (section~\ref{sec:c12-limites}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Pourquoi une Éthique de la Sécurité}
+\label{sec:c12-pourquoi}
+% ============================================================================
+
+Les professionnels de la sécurité ont des accès privilégiés, des
+compétences offensives et des informations sur les faiblesses des
+autres. Les mêmes gestes servent à protéger ou à nuire~: un balayage de
+ports, la lecture d'un journal, le contournement d'une protection. Ce qui
+les distingue est le mandat, le but et la manière. C'est pourquoi les
+organisations professionnelles ont adopté des codes, dont la violation peut
+entraîner le retrait d'une certification.
+
+% ============================================================================
+\section{Les Codes Professionnels}
+\label{sec:c12-codes}
+% ============================================================================
+
+\begin{tableaucours}{L{2.4cm}L{9.8cm}}{%
+    \tableauHeader{Code} &
+    \tableauHeader{Principes essentiels}
+}
+ISC2 & Quatre canons~: protéger la société, le bien commun et
+l'infrastructure~; agir honorablement, honnêtement, justement,
+responsablement et légalement~; rendre un service diligent et compétent
+aux mandants~; faire progresser et protéger la profession~\cite{isc2ethics} \\
+ISACA & Soutenir les normes~; objectivité, diligence~; légalité~;
+confidentialité~; compétence~; informer les parties
+concernées~\cite{isaca2024ethique} \\
+ACM & Contribuer au bien de la société~; éviter de nuire~; honnêteté~;
+respect de la vie privée~; confidentialité~; qualité du
+travail~\cite{acm2018code} \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~12.1. Trois codes d'éthique}\end{center}
+
+Les trois codes convergent~: légalité, honnêteté, compétence,
+confidentialité, et une responsabilité qui dépasse le seul employeur
+(la société, les personnes concernées).
+
+% ============================================================================
+\section{La Divulgation des Vulnérabilités}
+\label{sec:c12-divulgation}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Divulgation coordonnée}~: processus par lequel la personne qui
+découvre une vulnérabilité la signale d'abord à l'éditeur ou à
+l'exploitant, lui laisse un délai raisonnable pour corriger, puis la rend
+publique de façon concertée. L'ISO/IEC~29147 décrit la réception des
+signalements par un éditeur~\cite{iso29147_2018}~; l'ISO/IEC~30111 leur
+traitement interne~\cite{iso30111_2019}.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.4cm}L{8.8cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Bonne pratique}
+}
+Découverte & Ne pas aller au-delà de ce qui prouve la vulnérabilité~;
+ne pas consulter ni copier de données \\
+Signalement & À l'éditeur ou à l'exploitant, par le canal prévu (adresse
+dédiée, CERT national) \\
+Délai & Convenir d'un délai de correction (souvent de l'ordre de 90~jours) \\
+Correction & L'éditeur corrige et informe ses clients \\
+Publication & Description concertée, sans code d'exploitation prêt à
+l'emploi avant la correction \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~12.2. Les étapes de la divulgation coordonnée}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Démontrer une faille du portail de l'ANPP en
+téléchargeant la liste des bénéficiaires, « pour être pris au sérieux ».
+
+\smallskip
+\textbf{Règle~:} la preuve s'arrête au minimum nécessaire. Consulter ou
+copier des données, c'est passer de la découverte à l'atteinte, avec ses
+conséquences pénales (Chapitre~\ref{chap:droit}).
+\end{boxalert}
+
+% ============================================================================
+\section{Résoudre un Dilemme}
+\label{sec:c12-dilemme}
+% ============================================================================
+
+\begin{boxprocedure}
+\textbf{Une méthode en six étapes}
+\begin{enumerate}
+    \item \textbf{Établir les faits}, séparés des suppositions.
+    \item \textbf{Identifier les parties} concernées et leurs intérêts.
+    \item \textbf{Repérer les règles}~: loi, politique interne, code
+          professionnel, contrat.
+    \item \textbf{Lister les options}, y compris refuser ou demander un
+          avis.
+    \item \textbf{Évaluer chaque option} au regard des règles et des
+          conséquences pour chaque partie.
+    \item \textbf{Décider et documenter}, par écrit, la décision et ses
+          raisons.
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{boxscenario}{Opération GAROUA. « Regardez ses messages »}
+\textbf{Faits.} Le directeur soupçonne un comptable d'avoir aidé
+l'attaquant, sans élément précis. Il demande à l'administrateur de lire
+sa messagerie.
+
+\medskip
+\textbf{Règles.} La loi interdit d'intercepter ou de stocker des
+communications sans consentement, sauf autorisation légale (art.~44,
+Chapitre~\ref{chap:droit}). La politique de LiZbiZ ne prévoit aucune
+procédure d'accès à une boîte personnelle.
+
+\medskip
+\textbf{Décision} (confiance élevée). L'administrateur refuse de lire les
+messages de sa propre initiative, conserve les journaux de connexion qui
+relèvent de l'enquête, et renvoie le directeur vers le conseil juridique
+et, s'il y a lieu, vers une plainte qui permettra aux enquêteurs d'agir
+dans un cadre légal. Il consigne la demande et sa réponse.
+\end{boxscenario}
+
+% ============================================================================
+\section{Les Limites des Tests et de la Surveillance}
+\label{sec:c12-limites}
+% ============================================================================
+
+\begin{tableaucours}{L{4.0cm}L{8.2cm}}{%
+    \tableauHeader{Activité} &
+    \tableauHeader{Condition éthique et légale}
+}
+Test d'intrusion & Autorisation écrite du responsable du système~;
+périmètre et fenêtre définis (Chapitre~\ref{chap:evaluer}) \\
+Hameçonnage simulé & Approbation de la direction~; pas de sanction
+individuelle (Chapitre~\ref{chap:humain}) \\
+Surveillance des journaux & Finalité de sécurité déclarée~; accès limité~;
+durée de conservation fixée \\
+Accès à une boîte de messagerie & Cadre légal et procédure écrite~; jamais
+à l'initiative de l'administrateur \\
+Recherche de vulnérabilités sur Internet & Seulement sur ses propres
+systèmes ou avec autorisation \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~12.3. Les conditions des activités sensibles}\end{center}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Le pouvoir de l'administrateur.} L'administrateur signe une charte
+qui rappelle ses obligations de confidentialité et ce qu'il ne doit pas
+faire sans procédure. Il trace ses propres accès aux données sensibles.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Rester dans le mandat.} L'auditeur ne teste que ce que sa lettre
+de mission autorise, ne conserve que les preuves nécessaires, et ne
+divulgue ses constats qu'au commanditaire.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Les métiers de la sécurité} donnent un pouvoir qui exige
+          une éthique explicite~: le mandat, le but et la manière font la
+          différence.
+    \item \textbf{Les codes} de l'ISC2, de l'ISACA et de l'ACM convergent~:
+          légalité, honnêteté, compétence, confidentialité, responsabilité
+          envers la société.
+    \item \textbf{La divulgation coordonnée} (ISO/IEC~29147 et~30111)
+          protège les utilisateurs et le découvreur.
+    \item \textbf{Un dilemme} se résout par une méthode écrite et
+          documentée.
+    \item \textbf{Tests et surveillance} exigent autorisation, finalité et
+          procédure.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: citer les quatre canons
+de l'ISC2~; décrire la divulgation coordonnée~; appliquer la méthode en
+six étapes~; dire à quelles conditions un test ou une surveillance est
+admissible.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.1. Le même geste \niveaubase}]
+Pour trois gestes techniques (balayage de ports, lecture d'un journal,
+contournement d'un mot de passe), décrivez un usage légitime et un usage
+illégitime.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.2. Les canons \niveaubase}]
+Rattachez à un canon de l'ISC2~: refuser une mission qu'on ne sait pas
+conduire~; signaler une faille qui menace un hôpital~; ne pas mentir sur
+ses certifications.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.3. La découverte \niveaumoyen}]
+Un étudiant découvre que le portail de résultats de son école affiche les
+notes de tous les étudiants en changeant un numéro dans l'adresse. Que
+doit-il faire, et ne pas faire~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.4. Le délai \niveaumoyen}]
+L'éditeur ne répond pas après 90~jours. Quelles options restent au
+découvreur, et lesquelles sont responsables~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.5. La méthode \niveaumoyen}]
+Appliquez la méthode en six étapes à ce cas~: un client important de
+LiZbiZ demande à l'administrateur la liste des expéditions d'un
+concurrent, « contre un geste ».
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.6. Surveiller les salariés \niveaumoyen}]
+La BANQUE SANAGA veut enregistrer tous les sites consultés par ses
+agents. À quelles conditions est-ce acceptable~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.7. Le conflit d'intérêts \niveaumoyen}]
+Le RSSI de LiZbiZ est aussi actionnaire de SAHEL INFOGÉRANCE. Analysez la
+situation et proposez une solution.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.8. La charte \niveaumoyen}]
+Rédigez la charte d'un administrateur systèmes~: obligations, interdits,
+traçabilité de ses accès.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.9. Une politique de divulgation \niveauexpert}]
+Rédigez la politique de divulgation de vulnérabilités de LiZbiZ, publiée
+sur son site~: canal, engagements, délais, ce que LiZbiZ demande aux
+découvreurs.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~12.10. Le dilemme du RSSI \niveauexpert}]
+Le directeur général demande au RSSI de ne pas signaler l'incident au
+conseil d'administration avant la clôture des comptes. Appliquez la
+méthode et rédigez la réponse du RSSI.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item Les codes de l'ISC2, de l'ISACA et de
+          l'ACM~\cite{isc2ethics,isaca2024ethique,acm2018code}.
+    \item ISO/IEC~29147 et 30111~\cite{iso29147_2018,iso30111_2019}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} La Partie~\ref{part:technique} passe à la sécurité
+technique, en commençant par les modèles formels qui fondent le contrôle
+d'accès.
+\end{boxinfo}

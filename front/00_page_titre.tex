@@ -1,0 +1,110 @@
+% ==============================================================================
+% Fichier : front/00_page_titre.tex
+% Titre   : Page de titre - Sécurité Informatique
+% Auteur  : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version : 1.0 -- novembre 2026 (charte des cours de l'ENSPY)
+% ==============================================================================
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+% --- Fond décoratif : bandeaux bleu marine et filets or ---
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[CouleurPrimaire]
+        (current page.north west) rectangle
+        ([yshift=-3.6cm] current page.north east);
+    \fill[CouleurAccent]
+        ([yshift=-3.6cm] current page.north west) rectangle
+        ([yshift=-4.0cm] current page.north east);
+    \fill[CouleurPrimaire]
+        (current page.south west) rectangle
+        ([yshift=2.5cm] current page.south east);
+    \fill[CouleurAccent]
+        ([yshift=2.5cm] current page.south west) rectangle
+        ([yshift=2.9cm] current page.south east);
+    % En-tête institutionnel, posé dans le bandeau supérieur
+    \node[align=center, text=white] at ([yshift=-1.8cm] current page.north) {%
+        {\fontsize{11}{13}\selectfont
+        \textsc{République du Cameroun}}\\[0.3ex]
+        {\color{CouleurAccent!60!white}\rule{0.4\paperwidth}{0.4pt}}\\[0.6ex]
+        {\fontsize{10}{12}\selectfont\textbf{\tutelle}}\\[0.2ex]
+        {\fontsize{9}{11}\selectfont \institutionprimaire}\\[0.2ex]
+        {\fontsize{9}{11}\selectfont \unitepedago}};
+    % Logos : Université de Yaoundé I à gauche, ENSPY à droite (cours de l'ENSPY)
+    \node[fill=white, rounded corners=4pt, inner sep=2pt]
+        at ([xshift=1.75cm, yshift=-1.8cm] current page.north west)
+        {\includegraphics[height=2.6cm]{figures/logos/uy1_logo.png}};
+    \node[fill=white, rounded corners=4pt, inner sep=2pt]
+        at ([xshift=-1.75cm, yshift=-1.8cm] current page.north east)
+        {\includegraphics[height=2.6cm]{figures/logos/enspy_logo.jpg}};
+    % Année et version, posées dans le bandeau inférieur
+    \node[align=center] at ([yshift=1.25cm] current page.south) {%
+        {\color{white}\bfseries\large Année académique \anneescolaire}\\[0.3ex]
+        {\color{CouleurAccent!70!white}\small
+        Version 1.0 | Document pédagogique de l'UE \codeUE}};
+\end{tikzpicture}
+
+\vspace*{0.6cm}
+
+% --- Titre principal (sur deux lignes) ---
+\begin{center}
+    {\color{CouleurPrimaire}\rule{0.85\textwidth}{1.2pt}}\\[1.2ex]
+    {\fontsize{26}{32}\selectfont\bfseries\color{CouleurPrimaire}
+        Sécurité\\[0.4ex]
+        Informatique}\\[0.8ex]
+    {\color{CouleurAccent}\rule{0.85\textwidth}{2pt}}\\[0.5ex]
+    {\color{CouleurPrimaire}\rule{0.85\textwidth}{0.5pt}}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+    {\fontsize{13}{16}\selectfont\itshape\color{CouleurSecondaire}
+        Protéger, détecter, répondre~:\\
+        les fondements et la pratique de la cybersécurité}
+\end{center}
+
+\vspace{0.5cm}
+
+% --- Cartouche sigle et code UE ---
+\begin{center}
+    \begin{tikzpicture}
+        \node[draw=CouleurPrimaire, fill=CouleurPrimaire, rounded corners=6pt,
+              inner xsep=14pt, inner ysep=6pt]{%
+            \color{white}\bfseries\large \sigleCours{} - UE~\codeUE
+        };
+    \end{tikzpicture}
+\end{center}
+
+\vspace{1.0cm}
+
+% --- Schéma de la discipline : les six fonctions du NIST CSF 2.0 ---
+\begin{center}
+\begin{tikzpicture}[
+    f/.style = {draw=CouleurBordDef, fill=CouleurDef, rounded corners=3pt,
+        minimum width=2.2cm, minimum height=0.8cm, align=center,
+        font=\small\bfseries\color{CouleurPrimaire}},
+    arrow/.style = {-{Stealth[length=4pt]}, thick, color=CouleurSecondaire}]
+\node[f, fill=CouleurPrimaire, text=white] (g) at (5.6, 1.3) {\color{white}Gouverner};
+\foreach \t [count=\i] in {Identifier, Protéger, Détecter, Répondre, Rétablir}
+    \node[f] (n\i) at (2.8*\i - 2.8, 0) {\t};
+\foreach \i [evaluate=\i as \j using int(\i+1)] in {1,2,3,4}
+    \draw[arrow] (n\i) -- (n\j);
+\foreach \i in {1,...,5} \draw[thin, CouleurSecondaire] (g.south) -- (n\i.north);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.6cm}
+
+\begin{center}
+    {\large\bfseries\color{CouleurPrimaire}
+        \auteurcours}\\[0.5ex]
+    {\normalsize\color{CouleurSecondaire}
+       Enseignant Chercheur | \laboratoire{} | ENSPY}\\[0.2ex]
+    {\small\color{CouleurBordInfo}
+        \institutionprimaire{} · \tutelle}\\[0.2ex]
+    {\small\color{CouleurBordInfo}
+        \href{mailto:maletyon@proton.me}{maletyon@proton.me}}
+\end{center}
+
+\end{titlepage}

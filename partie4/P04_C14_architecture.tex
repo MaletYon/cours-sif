@@ -1,0 +1,317 @@
+% ============================================================================
+% Fichier  : partie4/P04_C14_architecture.tex
+% Titre    : Architecture de Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre IV » (principes, segmentation). Sources : Saltzer
+% et Schroeder (1975) ; NIST SP 800-207 (architecture zéro confiance, 2020) ;
+% CIS Controls v8.
+% ============================================================================
+
+\chapter{Architecture de Sécurité}
+\label{chap:architecture}
+\chaptermark{Architecture}
+
+\epigraph{%
+    « Supposer que l'attaquant est déjà à l'intérieur,\\
+    et construire en conséquence. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:proprietes},
+\ref{chap:menaces} et~\ref{chap:modeles}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Appliquer la défense en profondeur à un système d'information.
+    \item Découper un réseau en zones de confiance et définir les flux
+          autorisés.
+    \item Isoler l'administration et les sauvegardes.
+    \item Expliquer les principes de l'architecture zéro confiance.
+    \item Proposer une architecture cible pour un cas réel.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : pourquoi un mot de passe volé a-t-il ouvert les quatre centres~?}
+% ============================================================================
+
+Le réseau de LiZbiZ était \emph{plat}~: une fois entré par l'accès
+distant de Garoua, l'attaquant voyait les serveurs de Douala, de Yaoundé
+et de Bafoussam, les sauvegardes et les contrôleurs de domaine. Rien ne
+séparait le poste d'un technicien du cœur du système. Une architecture de
+sécurité organise les séparations qui transforment une intrusion locale en
+incident limité.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item La défense en profondeur (section~\ref{sec:c14-profondeur}).
+    \item Les zones et les flux (section~\ref{sec:c14-zones}).
+    \item Isoler l'administration et les sauvegardes (section~\ref{sec:c14-admin}).
+    \item L'architecture zéro confiance (section~\ref{sec:c14-zt}).
+    \item Une architecture cible pour LiZbiZ (section~\ref{sec:c14-cible}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{La Défense en Profondeur}
+\label{sec:c14-profondeur}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Défense en profondeur}~: superposition de mesures indépendantes,
+de natures différentes, de sorte que la défaillance de l'une ne suffise
+pas à compromettre l'ensemble.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.0cm}L{9.2cm}}{%
+    \tableauHeader{Couche} &
+    \tableauHeader{Mesures}
+}
+Organisation & Politique, rôles, sensibilisation, contrats \\
+Physique & Contrôle d'accès aux salles, alimentation, climatisation \\
+Périmètre & Pare-feu, filtrage du courriel, accès distant authentifié \\
+Réseau interne & Segmentation, filtrage entre zones, détection \\
+Systèmes & Durcissement, correctifs, comptes distincts, EDR \\
+Applications & Développement sécurisé, contrôle d'accès applicatif \\
+Données & Chiffrement, classification, sauvegardes hors ligne \\
+Détection et réponse & Journaux centralisés, surveillance, plan d'incident \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~14.1. Les couches de la défense en profondeur}\end{center}
+
+L'Opération GAROUA a traversé toutes les couches parce que chacune
+manquait ou était faible~: pas de second facteur au périmètre, pas de
+segmentation, un correctif absent, des sauvegardes accessibles, aucune
+détection.
+
+% ============================================================================
+\section{Les Zones et les Flux}
+\label{sec:c14-zones}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Zone de confiance}~: ensemble de systèmes de même sensibilité et
+de même exposition, séparé des autres par un filtrage qui n'autorise que
+les flux nécessaires. La \termecle{DMZ} (zone démilitarisée) accueille les
+services exposés à Internet.
+\end{boxdef}
+
+\begin{tableaucours}{L{2.8cm}L{4.4cm}L{5.0cm}}{%
+    \tableauHeader{Zone} &
+    \tableauHeader{Contenu} &
+    \tableauHeader{Flux autorisés (exemples)}
+}
+Internet & Tout & Vers la DMZ, en HTTPS seulement \\
+DMZ & Portail de suivi, relais de messagerie, passerelle d'accès distant &
+Vers les applications, sur des ports précis \\
+Applications & Serveurs de l'application intégrée & Depuis la DMZ et les
+postes, vers les bases \\
+Données & Bases de données, partages de fichiers & Depuis les seules
+applications \\
+Postes & Postes des agences & Vers les applications, pas vers les bases \\
+Administration & Bastion, outils d'administration & Vers toutes les
+zones, en entrée depuis aucune \\
+Sauvegarde & Serveurs et stockage de sauvegarde & En entrée, les seuls
+flux de sauvegarde \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~14.2. Zones de confiance et flux d'une
+entreprise comme LiZbiZ}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Créer des réseaux virtuels séparés, mais
+autoriser « tout » entre eux « pour que cela fonctionne ».
+
+\smallskip
+\textbf{Règle~:} une zone sans filtrage n'est qu'une étiquette. Chaque
+flux entre zones est décrit (source, destination, port, motif,
+propriétaire) dans une matrice, et tout le reste est refusé par défaut.
+\end{boxalert}
+
+% ============================================================================
+\section{Isoler l'Administration et les Sauvegardes}
+\label{sec:c14-admin}
+% ============================================================================
+
+Les comptes d'administration sont la cible de toute attaque avancée~:
+qui les tient, tient le système. Trois règles les protègent.
+
+\begin{enumerate}
+    \item \textbf{Administrer depuis un poste dédié}, ou un \emph{bastion}
+          qui concentre et enregistre les sessions, jamais depuis un poste
+          qui navigue sur Internet ou lit des courriels.
+    \item \textbf{Séparer les niveaux}~: les comptes qui administrent le
+          domaine ne servent pas sur les postes de travail, où leurs
+          identifiants pourraient être volés en mémoire.
+    \item \textbf{Isoler les sauvegardes}~: une zone, des comptes et un
+          stockage immuable qui ne dépendent pas du domaine de production
+          (Chapitre~\ref{chap:modeles}, mesure M-13).
+\end{enumerate}
+
+% ============================================================================
+\section{L'Architecture Zéro Confiance}
+\label{sec:c14-zt}
+% ============================================================================
+
+L'architecture « périmétrique » fait confiance à ce qui est à l'intérieur
+du réseau. L'architecture \termecle{zéro confiance}, décrite par le NIST
+SP~800-207, n'accorde aucune confiance implicite à l'emplacement réseau~:
+chaque accès à une ressource est décidé au moment de la demande, selon
+l'identité, l'état du poste et le contexte, et pour la seule
+ressource~\cite{nist800207}.
+
+\begin{tableaucours}{L{4.6cm}L{7.6cm}}{%
+    \tableauHeader{Principe} &
+    \tableauHeader{Traduction}
+}
+Toute ressource est protégée & Même un serveur « interne » exige une
+authentification \\
+Toute communication est sécurisée & Chiffrement, quel que soit le réseau \\
+Accès par session, au plus juste & Une session ne donne accès qu'à une
+ressource \\
+Décision dynamique & Identité, état du poste, heure, comportement \\
+Surveillance continue & L'état des actifs et des accès est mesuré en
+permanence \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~14.3. Les principes du zéro confiance
+(d'après le NIST SP~800-207)}\end{center}
+
+\begin{boxinfo}
+\textbf{Une démarche, pas un produit.} Le zéro confiance se construit
+progressivement~: authentification forte partout, inventaire des
+ressources, segmentation fine, décisions d'accès centralisées. Une
+entreprise qui n'a ni inventaire ni identités maîtrisées commence par là.
+\end{boxinfo}
+
+% ============================================================================
+\section{Une Architecture Cible pour LiZbiZ}
+\label{sec:c14-cible}
+% ============================================================================
+
+\begin{boxscenario}{Opération GAROUA. L'architecture après l'attaque}
+\textbf{Proposition du RSSI.} (1)~Passerelle d'accès distant en DMZ, avec
+double authentification et comptes nominatifs pour le prestataire, qui
+n'ouvrent que les serveurs qu'il exploite~; (2)~séparation, dans chaque
+centre, des zones applications, données, postes, administration et
+sauvegarde~; (3)~filtrage entre centres limité à la réplication des
+bases~; (4)~administration par un bastion qui enregistre les sessions~;
+(5)~sauvegardes immuables dans une zone isolée, avec une copie hors
+ligne~; (6)~journaux de toutes les zones centralisés et surveillés.
+
+\medskip
+\textbf{Analyse} (confiance moyenne). Avec cette architecture, le mot de
+passe volé n'aurait ouvert que la passerelle (second facteur manquant),
+et même avec lui, seulement les serveurs du prestataire, sans accès au
+domaine ni aux sauvegardes.
+\end{boxscenario}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Tenir la matrice des flux.} L'administrateur tient la matrice des
+flux autorisés entre zones, la confronte chaque trimestre aux règles des
+pare-feu, et supprime les règles sans propriétaire.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Faire valider l'architecture.} Le RSSI fait valider l'architecture
+cible par la direction, avec un plan de migration par étapes et le risque
+traité à chaque étape.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{La défense en profondeur} superpose des mesures
+          indépendantes, de l'organisation aux données.
+    \item \textbf{Les zones de confiance} ne valent que par le filtrage des
+          flux entre elles, refusé par défaut.
+    \item \textbf{L'administration et les sauvegardes} s'isolent~: poste
+          dédié ou bastion, niveaux séparés, stockage immuable.
+    \item \textbf{Le zéro confiance} supprime la confiance implicite dans
+          le réseau~; c'est une démarche progressive.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: décrire les couches de la
+défense en profondeur~; découper un réseau en zones et rédiger la matrice
+des flux~; expliquer pourquoi isoler l'administration~; énoncer les
+principes du zéro confiance~; proposer une architecture cible.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.1. Les couches \niveaubase}]
+Pour chaque couche du Tableau~14.1, dites ce qui manquait chez LiZbiZ en
+mars.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.2. Quelle zone~? \niveaubase}]
+Placez dans une zone~: le serveur de messagerie relais~; la base des
+clients~; le poste de la comptable~; le serveur de sauvegarde~; la console
+de supervision.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.3. Réseau plat \niveaubase}]
+Expliquez en cinq lignes pourquoi un réseau plat aggrave l'impact d'un
+rançongiciel.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.4. La matrice des flux \niveaumoyen}]
+Rédigez la matrice des flux (source, destination, port, motif,
+propriétaire) entre les zones DMZ, applications et données de LiZbiZ.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.5. Le bastion \niveaumoyen}]
+Quels avantages apporte un bastion d'administration~? Quels risques
+crée-t-il, et comment les traiter~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.6. Le prestataire \niveaumoyen}]
+Concevez l'accès de SAHEL INFOGÉRANCE au système de LiZbiZ selon les
+principes du zéro confiance.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.7. L'agence \niveaumoyen}]
+Une agence de la BANQUE SANAGA a des guichets, un distributeur
+automatique et une borne Wi-Fi pour les clients. Proposez ses zones et les
+flux autorisés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.8. Indépendance des mesures \niveaumoyen}]
+Deux pare-feu du même fabricant, avec les mêmes règles, en série~:
+est-ce de la défense en profondeur~? Justifiez.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.9. La migration \niveauexpert}]
+Proposez un plan en quatre étapes pour passer de l'architecture actuelle
+de LiZbiZ à l'architecture cible, avec le risque réduit à chaque étape.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~14.10. Rejouer l'attaque \niveauexpert}]
+Rejouez l'Opération GAROUA étape par étape sur l'architecture cible, et
+dites où elle s'arrête et qui la détecte.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-207, \emph{Zero Trust Architecture}~\cite{nist800207}.
+    \item R.~Anderson, \emph{Security Engineering}~\cite{anderson2020}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} L'architecture repose sur le réseau. Les
+Chapitres~\ref{chap:reseaux1} et~\ref{chap:reseaux2} en étudient les
+protocoles, les attaques et les équipements.
+\end{boxinfo}

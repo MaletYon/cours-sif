@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C02
+Chapitre 2 : Menaces, vulnérabilités et attaques
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle source de menace vise surtout l'argent par la rançon ou la revente de données ?
+      a) Le groupe criminel
+      b) L'État
+      c) Le militant
+      d) L'opportuniste
+
+ 2. Quelle source dispose d'un accès légitime ?
+      a) Le militant
+      b) Le complice interne
+      c) L'opportuniste
+      d) Le groupe criminel extérieur
+
+ 3. Stuxnet est un exemple de menace :
+      a) Opportuniste
+      b) Accidentelle
+      c) Étatique
+      d) Militante
+
+ 4. Quel logiciel se propage seul par le réseau en exploitant une faille ?
+      a) Le virus
+      b) Le cheval de Troie
+      c) Le logiciel espion
+      d) Le ver
+
+ 5. Quel logiciel se présente comme un logiciel utile ?
+      a) Le cheval de Troie
+      b) Le ver
+      c) Le botnet
+      d) Le rançongiciel
+
+ 6. Qu'est-ce que la double extorsion ?
+      a) Deux rançons pour deux serveurs
+      b) Voler les données avant de les chiffrer, et menacer de les publier
+      c) Chiffrer deux fois
+      d) Attaquer deux entreprises
+
+ 7. Pourquoi l'antivirus n'a-t-il pas suffi à Garoua ?
+      a) Il était éteint
+      b) Il était trop récent
+      c) L'attaquant utilisait des outils d'administration légitimes
+      d) Il bloquait tout
+
+ 8. L'hameçonnage ciblé vise :
+      a) Des milliers de personnes au hasard
+      b) Des serveurs
+      c) Des routeurs
+      d) Une personne ou un service précis
+
+ 9. La fraude au président consiste à :
+      a) Se faire passer pour un dirigeant qui ordonne un virement urgent
+      b) Pirater le site de la présidence
+      c) Voler un ordinateur
+      d) Saturer un service
+
+10. Lequel était un signal du courriel du 19 février ?
+      a) Une signature électronique
+      b) Une urgence artificielle
+      c) Un domaine officiel
+      d) Une pièce jointe chiffrée
+
+11. Quelle attaque vise surtout la disponibilité ?
+      a) L'écoute
+      b) L'usurpation
+      c) Le déni de service distribué
+      d) L'injection
+
+12. Le bourrage d'identifiants consiste à :
+      a) Saturer un serveur
+      b) Chiffrer des données
+      c) Modifier un DNS
+      d) Réutiliser des identifiants ayant fuité ailleurs
+
+13. Qui a décrit la chaîne d'intrusion en sept étapes en 2011 ?
+      a) Des chercheurs de Lockheed Martin
+      b) Le NIST
+      c) L'ANSSI
+      d) L'OWASP
+
+14. Dans ATT&CK, une tactique désigne :
+      a) Un logiciel
+      b) Le but de l'attaquant à une étape
+      c) Un correctif
+      d) Une vulnérabilité
+
+15. À Garoua, la copie de 40 Go relève de la tactique :
+      a) Accès initial
+      b) Découverte
+      c) Exfiltration
+      d) Impact
+
+16. Quelle mesure coupait l'accès initial à Garoua ?
+      a) La sauvegarde
+      b) La segmentation
+      c) Le chiffrement du disque
+      d) La double authentification
+
+17. Qu'est-ce qu'une CVE ?
+      a) Un identifiant public de vulnérabilité
+      b) Un logiciel de sécurité
+      c) Une norme ISO
+      d) Un virus
+
+18. Sur quelle échelle se note le CVSS ?
+      a) 0 à 5
+      b) 0 à 10
+      c) 1 à 16
+      d) 0 à 100
+
+19. Que mesure le score CVSS ?
+      a) Le risque pour l'organisation
+      b) Le coût du correctif
+      c) La gravité technique de la vulnérabilité
+      d) La probabilité d'attaque
+
+20. Quelle métrique de base demande si l'utilisateur doit cliquer ?
+      a) Vecteur d'attaque
+      b) Complexité
+      c) Privilèges requis
+      d) Interaction
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Une entreprise de logistique est surtout visée par les criminels et les complices internes.
+      Vrai / Faux
+
+22. L'antivirus reconnaît surtout ce qu'il a déjà vu.
+      Vrai / Faux
+
+23. Un botnet est un réseau de machines infectées pilotées à distance.
+      Vrai / Faux
+
+24. Un second facteur rend inutile le vol d'un mot de passe par hameçonnage simple.
+      Vrai / Faux
+
+25. L'ingénierie sociale exploite des failles logicielles.
+      Vrai / Faux
+
+26. Il suffit de couper la chaîne à un endroit pour arrêter l'attaque.
+      Vrai / Faux
+
+27. ATT&CK décrit des techniques observées dans des attaques réelles.
+      Vrai / Faux
+
+28. Il faut toujours corriger d'abord la CVE au score le plus élevé, quel que soit le contexte.
+      Vrai / Faux
+
+29. Un score CVSS de 9,8 correspond à une gravité critique.
+      Vrai / Faux
+
+30. L'écoute du trafic en clair vise la confidentialité.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Un logiciel conçu pour nuire à l'insu de l'utilisateur est un logiciel ______.
+
+32. La forme la plus répandue d'ingénierie sociale est l'______.
+
+33. La base qui décrit tactiques et techniques des attaquants s'appelle MITRE ______.
+
+34. Le système commun de notation de la gravité des vulnérabilités a pour sigle ______.
+
+35. Une attaque qui s'interpose entre deux parties est l'attaque de l'homme du ______.
+
+36. Le logiciel qui se propage seul est un ______.
+
+37. Une personne qui dispose d'un accès légitime et en abuse est une menace ______.
+
+38. La tactique qui consiste à obtenir des droits supérieurs est l'élévation de ______.
+
+39. Un identifiant de vulnérabilité commence par le préfixe ______.
+
+40. Un déni de service lancé depuis des milliers de machines est dit ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

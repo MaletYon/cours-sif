@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C09
+Chapitre 9 : Le facteur humain
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qui a décrit les leviers de l'influence ?
+      a) R. Cialdini
+      b) E. Spafford
+      c) D. Parker
+      d) L. Cox
+
+ 2. « Votre compte sera suspendu dans 24 h » utilise le levier :
+      a) De la réciprocité
+      b) De l'urgence
+      c) De la sympathie
+      d) De la preuve sociale
+
+ 3. Un faux directeur qui ordonne un virement utilise le levier :
+      a) De la réciprocité
+      b) De l'engagement
+      c) De l'autorité
+      d) De la sympathie
+
+ 4. « Tous vos collègues ont déjà validé » utilise le levier :
+      a) De l'autorité
+      b) De l'urgence
+      c) De la réciprocité
+      d) De la preuve sociale
+
+ 5. Quand retirer les accès d'un salarié qui part ?
+      a) Le jour même
+      b) Dans le mois
+      c) À la fin de l'année
+      d) Jamais
+
+ 6. Lors d'un changement de poste, que faut-il faire d'abord ?
+      a) Ajouter les nouveaux droits
+      b) Retirer les anciens droits
+      c) Ne rien changer
+      d) Supprimer le compte
+
+ 7. Avant l'emploi, que vérifie-t-on de façon proportionnée au poste ?
+      a) Le salaire
+      b) Les réseaux sociaux privés
+      c) Les antécédents
+      d) La famille
+
+ 8. Quel document du NIST traite des programmes de sensibilisation ?
+      a) SP 800-88
+      b) SP 800-61
+      c) SP 800-115
+      d) SP 800-50
+
+ 9. Quel format de sensibilisation est préférable ?
+      a) Des séquences courtes et répétées
+      b) Une journée par an
+      c) Un document de 60 pages
+      d) Aucune formation
+
+10. Que faut-il faire d'un signalement ?
+      a) Le punir
+      b) Le récompenser
+      c) L'ignorer
+      d) Le cacher
+
+11. Quelle condition s'impose à une campagne d'hameçonnage simulé ?
+      a) Sanctions individuelles
+      b) Secret total vis-à-vis de la direction
+      c) Approbation de la direction et absence de sanction individuelle
+      d) Diffusion des noms des cliqueurs
+
+12. Quel est l'indicateur le plus utile d'une campagne ?
+      a) Le taux de clic
+      b) Le nombre de courriels envoyés
+      c) Le coût
+      d) Le taux de signalement
+
+13. À la BANQUE SANAGA, combien d'agents ont signalé en juillet, sur 200 ?
+      a) 77
+      b) 8
+      c) 24
+      d) 41
+
+14. Quel est le taux de clic de juillet à la BANQUE SANAGA ?
+      a) 31 %
+      b) 12 %
+      c) 19 %
+      d) 4 %
+
+15. Quel organisme a étudié des centaines de cas de menace interne ?
+      a) L'ANTIC
+      b) L'OWASP
+      c) Le CERT de Carnegie Mellon
+      d) Le NIST seul
+
+16. Lequel est un signal possible de menace interne ?
+      a) Un accès en heures ouvrées
+      b) Une formation suivie
+      c) Un mot de passe long
+      d) Des téléchargements inhabituels avant un départ
+
+17. Quelle mesure empêche une seule personne de commettre et cacher une fraude ?
+      a) La séparation des tâches
+      b) Le chiffrement
+      c) La sauvegarde
+      d) Le pare-feu
+
+18. Lequel n'est pas une forme de menace interne selon le CERT ?
+      a) Le sabotage
+      b) Le déni de service distribué externe
+      c) Le vol de propriété intellectuelle
+      d) La fraude
+
+19. Que conclut le cours sur le technicien de Garoua ?
+      a) Il est seul fautif
+      b) Il fallait le licencier
+      c) Le blâmer est inutile ; il manquait formation et second facteur
+      d) Il était complice
+
+20. Que se passe-t-il pendant l'emploi ?
+      a) Rien
+      b) Seulement la paie
+      c) Seulement l'audit
+      d) Information, formation, procédure disciplinaire connue, signalement
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. L'ingénierie sociale exploite des réactions humaines normales.
+      Vrai / Faux
+
+22. Les comptes d'un salarié parti peuvent rester actifs quelques mois sans risque.
+      Vrai / Faux
+
+23. Certaines obligations de confidentialité survivent au contrat.
+      Vrai / Faux
+
+24. Un module commun suffit pour toutes les populations.
+      Vrai / Faux
+
+25. Les résultats d'une campagne se présentent de façon agrégée.
+      Vrai / Faux
+
+26. Sanctionner ceux qui cliquent améliore le taux de signalement.
+      Vrai / Faux
+
+27. Des signaux précèdent souvent un acte de menace interne.
+      Vrai / Faux
+
+28. Le moindre privilège limite ce qu'un initié peut faire.
+      Vrai / Faux
+
+29. Un geste simple de signalement doit être donné à chacun.
+      Vrai / Faux
+
+30. La vigilance parfaite de chacun est une stratégie de sécurité fiable.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. L'auteur qui a décrit six leviers de l'influence est ______.
+
+32. Le risque lié à une personne ayant un accès légitime est la menace ______.
+
+33. L'indicateur clé d'une campagne simulée est le taux de ______.
+
+34. Le NIST distingue sensibilisation, formation et ______.
+
+35. Lors d'un départ, on récupère le ______.
+
+36. Le levier qui pousse à rendre ce que l'on a reçu est la ______.
+
+37. Empêcher une seule personne de saisir et valider s'appelle la séparation des ______.
+
+38. Le taux de signalement de juillet à la BANQUE SANAGA est de ______ %.
+
+39. Le document du NIST sur la sensibilisation porte le numéro SP 800-______.
+
+40. Le faux technicien qui demande un accès pratique le ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

@@ -1,0 +1,726 @@
+% ==============================================================================
+% Fichier     : Style_SIF.sty
+% Titre       : Feuille de style — IT Governance, COBIT et ITIL
+% Auteur      : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Institution : ENSP Yaoundé — Université de Yaoundé I — LIMSI
+% Version     : 1.0  (octobre 2026)
+% Description : Feuille de style du cours GCI (UE MSN-2S3-MSI03). Gabarit issu
+%               de Style_IN.sty (TPIN). Pas de cadre fil rouge CRO dans ce cours.
+% Compatibilité: pdfLaTeX — compiler avec biber (bibliographie) et makeindex.
+% Métiers validés (boxmetier) : DSI, Responsable GRC, Auditeur SI,
+%   Responsable des services IT, RSSI.
+% ==============================================================================
+
+% Date au format AAAA/MM/JJ obligatoire (sinon erreur « Missing number »).
+\ProvidesPackage{Style_SIF}[2026/11/07 v1.0 Cours SIF (SEC3266)]
+
+% ==============================================================================
+% I. PACKAGES REQUIS
+% ==============================================================================
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[provide=*,french]{babel}
+\RequirePackage{lmodern}
+\RequirePackage[protrusion=true,expansion=false]{microtype}
+\RequirePackage[safe]{tipa}   % safe : ne redefinit pas \| \: \; utilises en maths
+
+% --- Mise en page ---
+\RequirePackage[
+    top=2.5cm, bottom=2.5cm,
+    left=2.8cm, right=2.5cm,
+    headheight=15pt,
+    marginparwidth=1.8cm
+]{geometry}
+
+% --- Couleurs ---
+\RequirePackage[dvipsnames, table]{xcolor}
+
+% --- Graphiques & Figures ---
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{wrapfig}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows, calc, patterns, matrix, fit, decorations.pathreplacing}
+
+% --- Tableaux ---
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{array}
+% Colonne de largeur fixe alignée à gauche (évite les blancs des cellules
+% justifiées étroites) : \begin{tableaucours}{L{3cm}L{5cm}}...
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\RequirePackage{colortbl}
+
+% --- Mathématiques ---
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+
+% --- Environnements décoratifs ---
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{varwidth}
+\RequirePackage{adjustbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+% --- Listes ---
+\RequirePackage[shortlabels]{enumitem}   % shortlabels : \begin{enumerate}[(a)]
+
+% --- Code source ---
+\RequirePackage{listings}
+\RequirePackage{lstautogobble}
+
+% --- En-têtes et pieds de page ---
+\RequirePackage{fancyhdr}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Hyperréférences ---
+\RequirePackage[
+    colorlinks=true,
+    linkcolor=CouleurPrimaire,
+    urlcolor=CouleurSecondaire,
+    citecolor=CouleurAccent,
+    bookmarks=true,
+    bookmarksnumbered=true
+]{hyperref}
+% Les metadonnees PDF (titre, sujet, mots-cles) sont posees par \hypersetup
+% dans le document maitre.
+
+% --- Bibliographie ---
+\RequirePackage[
+    backend=biber,
+    style=ieee,
+    sorting=nyt
+]{biblatex}
+
+% --- Index ---
+\RequirePackage{makeidx}
+\makeindex
+
+% --- Glossaires ---
+\RequirePackage[toc, acronym]{glossaries}
+
+% --- Divers ---
+\RequirePackage{epigraph}
+\RequirePackage{csquotes}       % \textelp{} dans les citations de lois
+\RequirePackage{pifont}
+\RequirePackage{marvosym}
+\RequirePackage{setspace}
+\RequirePackage{pdflscape}
+\RequirePackage{afterpage}
+\RequirePackage{fontawesome5}   % Icônes pour niveaux de classification
+
+
+% ==============================================================================
+% II. PALETTE CHROMATIQUE
+% ==============================================================================
+
+% Couleurs institutionnelles — tons bleu marine / or
+\definecolor{CouleurPrimaire}{RGB}{0, 47, 108}       % Bleu marine profond
+\definecolor{CouleurSecondaire}{RGB}{0, 102, 179}    % Bleu universitaire
+\definecolor{CouleurAccent}{RGB}{196, 142, 0}        % Or institutionnel
+\definecolor{CouleurTexte}{RGB}{30, 30, 30}          % Quasi-noir
+
+% Couleurs fonctionnelles (boîtes et alertes)
+\definecolor{CouleurDef}{RGB}{230, 244, 255}         % Bleu très clair (définitions)
+\definecolor{CouleurBordDef}{RGB}{0, 102, 179}       % Bordure bleu vif
+\definecolor{CouleurAlerte}{RGB}{255, 243, 225}      % Ambre pâle (alertes)
+\definecolor{CouleurBordAlerte}{RGB}{204, 102, 0}    % Orange foncé
+\definecolor{CouleurLizbiz}{RGB}{230, 255, 236}      % Vert très clair (cas pratique)
+\definecolor{CouleurBordLizbiz}{RGB}{34, 139, 34}    % Vert forêt
+\definecolor{CouleurInfo}{RGB}{245, 245, 245}        % Gris clair (info)
+\definecolor{CouleurBordInfo}{RGB}{120, 120, 120}    % Gris moyen
+\definecolor{CouleurCode}{RGB}{245, 247, 250}        % Fond code
+\definecolor{CouleurBordCode}{RGB}{70, 130, 180}     % Bleu acier
+
+% Couleurs des encadrés propres au cours (noms hérités de TPIN)
+\definecolor{CouleurPNC}{RGB}{0, 70, 0}              % Vert police
+\definecolor{CouleurBordPNC}{RGB}{0, 120, 0}         % Vert clair PNC
+\definecolor{CouleurPNCFond}{RGB}{240, 255, 240}     % Vert très pâle
+\definecolor{CouleurCustody}{RGB}{139, 0, 0}         % Rouge chaîne
+\definecolor{CouleurBordCustody}{RGB}{180, 0, 0}     % Rouge vif
+\definecolor{CouleurCustodyFond}{RGB}{255, 240, 240} % Rose très pâle
+\definecolor{CouleurArtefact}{RGB}{70, 50, 0}        % Brun artefact
+\definecolor{CouleurBordArtefact}{RGB}{139, 100, 20} % Brun doré
+\definecolor{CouleurArtefactFond}{RGB}{255, 250, 235}% Ivoire
+\definecolor{CouleurScenario}{RGB}{0, 80, 120}       % Bleu scénario
+\definecolor{CouleurBordScenario}{RGB}{0, 130, 180}  % Bleu clair
+\definecolor{CouleurScenarioFond}{RGB}{230, 248, 255}% Bleu glacé
+
+% Niveaux de classification (traffic light)
+\definecolor{CouleurNiv1}{RGB}{0, 128, 0}            % Vert — niveau 1 (fondamental)
+\definecolor{CouleurNiv2}{RGB}{255, 140, 0}          % Orange — niveau 2 (intermédiaire)
+\definecolor{CouleurNiv3}{RGB}{200, 0, 0}            % Rouge — niveau 3 (expert)
+
+% Couleurs de tableau alternées
+\definecolor{TableauPair}{RGB}{242, 246, 251}
+\definecolor{TableauImpair}{RGB}{255, 255, 255}
+\definecolor{TableauEntete}{RGB}{0, 47, 108}
+
+
+% ==============================================================================
+% III. POLICES ET TYPOGRAPHIE
+% ==============================================================================
+
+\setstretch{1.15}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.4ex}
+\setlength{\epigraphwidth}{0.72\textwidth}
+\setlength{\epigraphrule}{0.4pt}
+
+
+% ==============================================================================
+% IV. STYLES DE CHAPITRES ET SECTIONS
+% ==============================================================================
+
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+
+% --- Style de chapitre ---
+\titleformat{\chapter}[display]
+    {\normalfont\bfseries\color{CouleurPrimaire}}
+    {%
+        \filleft
+        \begin{tikzpicture}
+            \fill[CouleurPrimaire] (0,0) rectangle (1.2,1.2);
+            \node[white, font=\fontsize{28}{28}\selectfont\bfseries]
+                at (0.6,0.6) {\thechapter};
+        \end{tikzpicture}
+    }
+    {-0.5ex}
+    {\filright\fontsize{18}{22}\selectfont\MakeUppercase}
+    [\vspace{0.5ex}{\color{CouleurAccent}\titlerule[2pt]}\vspace{1ex}]
+
+\titlespacing*{\chapter}{0pt}{10pt}{25pt}
+
+% --- Style de section ---
+\titleformat{\section}
+    {\normalfont\large\bfseries\color{CouleurPrimaire}}
+    {\colorbox{CouleurPrimaire}{\color{white}\,\thesection\,}}
+    {0.7em}{}
+    [\vspace{-0.4ex}{\color{CouleurSecondaire}\titlerule[0.8pt]}]
+
+\titlespacing*{\section}{0pt}{1.4ex plus 0.5ex}{0.8ex plus 0.3ex}
+
+% --- Style de sous-section ---
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries\color{CouleurSecondaire}}
+    {\thesubsection}{0.6em}{}
+
+\titlespacing*{\subsection}{0pt}{1.2ex plus 0.4ex}{0.5ex plus 0.2ex}
+
+% --- Style de sous-sous-section ---
+\titleformat{\subsubsection}
+    {\normalfont\normalsize\itshape\color{CouleurAccent}}
+    {\thesubsubsection}{0.5em}{}
+
+\titlespacing*{\subsubsection}{0pt}{0.8ex plus 0.3ex}{0.3ex plus 0.1ex}
+
+
+% ==============================================================================
+% V. EN-TÊTES ET PIEDS DE PAGE
+% ==============================================================================
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{CouleurPrimaire}\hrule width\headwidth height\headrulewidth}
+\renewcommand{\footrule}{\color{CouleurAccent}\hrule width\headwidth height\footrulewidth}
+
+\fancyhead[LE]{\small\color{CouleurPrimaire}\leftmark}
+\fancyhead[RO]{\small\color{CouleurPrimaire}\rightmark}
+% Le sigle et le code UE passent en pied de page : en en-tête, ils se
+% superposaient aux titres longs de chapitre et de section.
+
+\fancyfoot[C]{\small\color{CouleurPrimaire}\thepage}
+\fancyfoot[LE,RO]{\small\color{CouleurTexte}\textit{\titreCours}}
+\fancyfoot[LO,RE]{\small\color{CouleurAccent}\textit{\sigleCours{} · UE\,\codeUE}}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyfoot[C]{\small\color{CouleurPrimaire}\thepage}
+    \fancyfoot[LE,RO]{\small\color{CouleurTexte}\textit{\textcopyright{} MaletYon}}
+}
+
+
+% ==============================================================================
+% VI. TABLE DES MATIÈRES (TITLETOC)
+% ==============================================================================
+
+\contentsmargin{0pt}
+
+\titlecontents{chapter}
+    [1.5em]
+    {\addvspace{1ex}\bfseries\color{CouleurPrimaire}}
+    {\contentslabel{1.5em}}
+    {\hspace*{-1.5em}}
+    {\hfill\contentspage}
+    [\addvspace{0.3ex}]
+
+\titlecontents{section}
+    [3.8em]{\small}
+    {\contentslabel{2.3em}}
+    {\hspace*{-2.3em}}
+    {\ \titlerule*[0.5pc]{.}\contentspage}
+
+\titlecontents{subsection}
+    [6.5em]{\footnotesize\color{CouleurBordInfo}}
+    {\contentslabel{3em}}
+    {\hspace*{-3em}}
+    {\ \titlerule*[0.5pc]{.}\contentspage}
+
+
+% ==============================================================================
+% VII. ENVIRONNEMENTS TCOLORBOX — HÉRITÉS
+% ==============================================================================
+
+% --- A. Boîte Définition ---
+\newtcolorbox{boxdef}[1][]{
+    enhanced, breakable,
+    colback=CouleurDef, colframe=CouleurBordDef,
+    fonttitle=\bfseries\color{white},
+    title={$\blacksquare$\quad Définition},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurBordDef, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- B. Boîte Alerte ---
+\newtcolorbox{boxalert}[1][]{
+    enhanced, breakable,
+    colback=CouleurAlerte, colframe=CouleurBordAlerte,
+    fonttitle=\bfseries\color{white},
+    title={\ding{72}\quad Attention},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurBordAlerte, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- C. Cas pratique (entreprise ou organisation fil rouge du cours) ---
+% Usage : \begin{boxcas}{Nom de l'organisation} ... \end{boxcas}
+\newtcolorbox{boxcas}[2][]{
+    enhanced, breakable,
+    colback=CouleurLizbiz, colframe=CouleurBordLizbiz,
+    fonttitle=\bfseries\color{white},
+    title={\ding{110}\quad Cas Pratique · #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurBordLizbiz, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- D. Boîte Information ---
+\newtcolorbox{boxinfo}[1][]{
+    enhanced, breakable,
+    colback=CouleurInfo, colframe=CouleurBordInfo,
+    fonttitle=\bfseries,
+    title={\ding{108}\quad Note},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurBordInfo, rounded corners},
+    arc=3pt, boxrule=0.6pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- E. Objectifs de chapitre ---
+\newtcolorbox{boxobjectifs}[1][]{
+    enhanced, breakable,
+    colback=white, colframe=CouleurPrimaire,
+    fonttitle=\bfseries\color{white},
+    title={\ding{70}\quad Objectifs du chapitre},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurPrimaire, rounded corners},
+    arc=4pt, boxrule=1.2pt, left=8pt, right=8pt, top=10pt, bottom=8pt, #1
+}
+
+% --- F. Résumé / À retenir ---
+\newtcolorbox{boxresume}[1][]{
+    enhanced, breakable,
+    colback=white, colframe=CouleurAccent,
+    fonttitle=\bfseries\color{white},
+    title={\ding{72}\quad À retenir},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurAccent, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- G. Exercice ---
+\newtcolorbox{boxexo}[1][]{
+    enhanced, breakable,
+    colback=white, colframe=CouleurSecondaire,
+    fonttitle=\bfseries\color{white},
+    title={\ding{45}\quad Exercice},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurSecondaire, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- H. Théorème ---
+\newtcolorbox{boiteTheoreme}[2][]{
+    enhanced,
+    attach boxed title to top left={xshift=4mm, yshift=-3mm}, varwidth boxed title*=-12mm,
+    fonttitle=\bfseries\scshape,
+    colbacktitle=CouleurPrimaire, colframe=CouleurPrimaire,
+    colback=CouleurDef, coltitle=white,
+    boxrule=0.8pt, arc=3pt,
+    boxed title style={colframe=CouleurPrimaire, arc=3pt, boxrule=0.8pt},
+    title={\strut #2}, #1   % accolades : le titre peut contenir des virgules
+}
+
+% --- I. Remarque ---
+\newtcolorbox{boiteRemarque}[2][]{
+    enhanced,
+    attach boxed title to top left={xshift=4mm, yshift=-3mm}, varwidth boxed title*=-12mm,
+    fonttitle=\bfseries\scshape,
+    colbacktitle=CouleurAccent, colframe=CouleurAccent,
+    colback=CouleurAlerte, coltitle=white,
+    boxrule=0.8pt, arc=3pt,
+    boxed title style={colframe=CouleurAccent, arc=3pt, boxrule=0.8pt},
+    title={\strut #2}, #1   % accolades : le titre peut contenir des virgules
+}
+
+
+% ==============================================================================
+% VIII. ENVIRONNEMENTS TCOLORBOX — SPÉCIFIQUES AU COURS
+% ==============================================================================
+% Pas d'encadré de cadre fil rouge (CRO) dans ce cours.
+
+% --- K. Scénario opérationnel (fait avancer un cas fil rouge du cours) ---
+\newtcolorbox{boxscenario}[2][]{
+    enhanced, breakable,
+    colback=CouleurScenarioFond, colframe=CouleurBordScenario,
+    fonttitle=\bfseries\color{white},
+    title={\faSearch\quad Scénario Opérationnel · #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurScenario, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- L. Fiche d'assertion : attributs d'un contrôle du gabarit canonique
+%        (objectif, critère, question, risque, conséquence) ---
+% Usage : \begin{boxobjet}{D.3.2.1 — Revue périodique des habilitations}
+\newtcolorbox{boxobjet}[2][]{
+    enhanced, breakable,
+    colback=CouleurArtefactFond, colframe=CouleurBordArtefact,
+    fonttitle=\bfseries\color{white},
+    title={\faIcon{clipboard-list}\quad \libelleObjet{} · #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurArtefact, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- M. Papier de travail : ce que le dossier doit contenir pour qu'un
+%        constat soit opposable (preuve, source, empreinte, test) ---
+\newtcolorbox{boxprocedure}[1][]{
+    enhanced, breakable,
+    colback=CouleurCustodyFond, colframe=CouleurBordCustody,
+    fonttitle=\bfseries\color{white},
+    title={\faIcon{check-square}\quad \libelleProcedure},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurCustody, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- N. Application métier ---
+% Usage : \begin{boxmetier}{DSI} ... \end{boxmetier}
+% Métiers validés UNIQUEMENT : Auditeur SI, Contrôleur interne, Auditeur de
+% sécurité, RSSI, Gestionnaire de risques, Responsable de la conformité.
+\newtcolorbox{boxmetier}[2][]{
+    enhanced, breakable,
+    colback=CouleurPNCFond, colframe=CouleurBordPNC,
+    fonttitle=\bfseries\color{white},
+    title={\faIcon{briefcase}\quad Application #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurPNC, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- O. Outils et commandes (référence rapide opérationnelle) ---
+\newtcolorbox{boxoutils}[2][]{
+    enhanced, breakable,
+    colback=CouleurCode, colframe=CouleurBordCode,
+    fonttitle=\bfseries\color{white},
+    title={\faTerminal\quad Outils · #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurBordCode, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- P. Jurisprudence / Droit applicable ---
+\newtcolorbox{boxjuris}[1][]{
+    enhanced, breakable,
+    colback=white, colframe=CouleurAccent,
+    fonttitle=\bfseries\color{white},
+    title={\faBalanceScale\quad Jurisprudence \& Droit applicable},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurAccent!80!black, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+
+% --- Q. Indicateur de niveau (bannière de chapitre) ---
+% Usage : \niveauChapitre{Fondamental}{Ce chapitre ne requiert aucun prérequis.}
+\newcommand{\niveauChapitre}[2]{%
+    \begin{tcolorbox}[
+        enhanced,
+        colback=white,
+        colframe=CouleurBordInfo,
+        arc=2pt, boxrule=0.5pt,
+        left=4pt, right=4pt, top=4pt, bottom=4pt,
+        before upper={\small}
+    ]
+    \textbf{Niveau :}~\textit{#1}\quad\textbullet\quad #2
+    \end{tcolorbox}%
+}
+
+
+% ==============================================================================
+% IX. STYLE DE CODE SOURCE (LISTINGS)
+% ==============================================================================
+
+\lstdefinestyle{StyleCode}{
+    backgroundcolor=\color{CouleurCode},
+    basicstyle=\ttfamily\footnotesize\color{CouleurTexte},
+    keywordstyle=\bfseries\color{CouleurSecondaire},
+    commentstyle=\itshape\color{gray!70},
+    stringstyle=\color{CouleurBordAlerte},
+    numberstyle=\tiny\color{gray},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    frameround=tttt,
+    rulecolor=\color{CouleurBordCode},
+    autogobble=true,
+    xleftmargin=12pt,
+    xrightmargin=4pt,
+    aboveskip=8pt,
+    belowskip=6pt,
+    literate=
+        {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1
+        {à}{{\`a}}1 {â}{{\^a}}1 {ç}{{\c{c}}}1 {ù}{{\`u}}1
+        {û}{{\^u}}1 {î}{{\^i}}1 {ô}{{\^o}}1
+        {ï}{{\"i}}1 {ü}{{\"u}}1 {œ}{{\oe}}2
+        {É}{{\'E}}1 {È}{{\`E}}1 {Ê}{{\^E}}1 {À}{{\`A}}1 {Ç}{{\c{C}}}1
+        {—}{{---}}1 {–}{{--}}1 {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1
+        {’}{{'}}1 {…}{{...}}3 {→}{{$\rightarrow$}}2 {←}{{$\leftarrow$}}2
+        {✓}{{\checkmark}}1 {×}{{$\times$}}1 {°}{{\textdegree}}1
+}
+
+\lstset{style=StyleCode}
+
+% Langages spéciaux
+\lstdefinelanguage{SQL}{
+    keywords={SELECT, FROM, WHERE, AND, OR, NOT, INSERT, INTO, VALUES,
+              UPDATE, SET, DELETE, CREATE, TABLE, ALTER, DROP, INDEX,
+              JOIN, LEFT, RIGHT, INNER, OUTER, ON, GROUP, BY, ORDER,
+              HAVING, AS, DISTINCT, UNION, ALL, IN, EXISTS, LIKE,
+              IS, NULL, BETWEEN, CASE, WHEN, THEN, ELSE, END,
+              PRIMARY, KEY, FOREIGN, REFERENCES, UNIQUE, CHECK,
+              DATABASE, USE, SHOW, DESCRIBE, GRANT, REVOKE},
+    sensitive=false,
+    morecomment=[l]{--},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]', morestring=[b]"
+}
+
+\lstdefinelanguage{bash_forensique}{
+    keywords={sudo, dd, dcfldd, hashdeep, md5sum, sha256sum, sha1sum,
+              fdisk, mmls, fls, istat, icat, fsstat, blkcat,
+              volatility, vol, python3, strings, xxd, hexdump,
+              wireshark, tshark, tcpdump, nmap, adb, autopsy,
+              foremost, scalpel, photorec, testdisk, binwalk},
+    sensitive=true,
+    morecomment=[l]{\#},
+    morestring=[b]",
+    morestring=[b]'
+}
+
+
+% ==============================================================================
+% X. LISTES PERSONNALISÉES
+% ==============================================================================
+
+\setlist[itemize,1]{
+    leftmargin=1.8em,
+    label={\color{CouleurPrimaire}\ding{227}},
+    itemsep=0.3ex
+}
+\setlist[itemize,2]{
+    leftmargin=1.5em,
+    label={\color{CouleurSecondaire}$\triangleright$},
+    itemsep=0.2ex
+}
+\setlist[itemize,3]{
+    leftmargin=1.2em,
+    label={\color{CouleurAccent}$\bullet$},
+    itemsep=0.1ex
+}
+\setlist[enumerate,1]{
+    leftmargin=2em,
+    label={\color{CouleurPrimaire}\bfseries\arabic*.},
+    itemsep=0.3ex
+}
+\setlist[enumerate,2]{
+    leftmargin=1.8em,
+    label={\color{CouleurSecondaire}\alph*)},
+    itemsep=0.2ex
+}
+
+
+% ==============================================================================
+% XI. TABLEAUX
+% ==============================================================================
+
+% La couleur de fond de la ligne d'en-tete est posee par tableaucours ;
+% \tableauHeader ne fait que la mise en forme du texte de chaque cellule.
+\newcommand{\tableauHeader}[1]{%
+    \color{white}\bfseries #1%
+}
+\newcommand{\ligneTableau}[1]{%
+    \rowcolor{TableauPair} #1
+}
+
+% [H] : le tableau reste a sa place (sa legende manuelle le suit) et peut
+% etre utilise a l'interieur des encadres tcolorbox.
+\newenvironment{tableaucours}[2]{%
+    \begin{table}[H]
+    \centering\small
+    \rowcolors{2}{TableauPair}{TableauImpair}
+    \begin{adjustbox}{max width=\linewidth}\begin{tabular}{#1}
+    \toprule
+    \rowcolor{TableauEntete}#2 \\
+    \midrule
+}{%
+    \bottomrule
+    \end{tabular}\end{adjustbox}
+    \end{table}
+}
+
+
+% ==============================================================================
+% XII. COMMANDES UTILITAIRES
+% ==============================================================================
+
+% Terme clé (indexé automatiquement)
+\newcommand{\termecle}[1]{%
+    \textbf{\color{CouleurPrimaire}#1}\index{#1}%
+}
+
+% Sigle ou acronyme
+\newcommand{\sigle}[1]{\textsc{#1}}
+
+% Note de marge
+\newcommand{\notemarge}[1]{%
+    \marginpar{\footnotesize\color{CouleurBordInfo}\itshape #1}%
+}
+
+% Icônes de niveau
+\newcommand{\niveaubase}{\textcolor{CouleurNiv1}{\ding{72}\ding{73}\ding{73}}}
+\newcommand{\niveaumoyen}{\textcolor{CouleurNiv2}{\ding{72}\ding{72}\ding{73}}}
+\newcommand{\niveauexpert}{\textcolor{CouleurNiv3}{\ding{72}\ding{72}\ding{72}}}
+
+% Référence à une norme
+\newcommand{\norme}[1]{\textbf{\color{CouleurAccent}[#1]}}
+
+% Référence à la loi camerounaise
+\newcommand{\loicam}[1]{\textbf{\color{CouleurAccent}Loi~#1}}
+
+% Séparateur décoratif
+\newcommand{\separateur}{%
+    \begin{center}
+        \color{CouleurAccent}
+        \rule{0.4\linewidth}{0.4pt}\quad\ding{109}\quad\rule{0.4\linewidth}{0.4pt}
+    \end{center}
+    \vspace{0.5ex}
+}
+
+% Niveau de capacité COBIT (inline)
+% Usage : \capacite{2}{DSS02} pour « DSS02 — niveau 2 »
+\newcommand{\capacite}[2]{%
+    \textit{#2}~\colorbox{CouleurPrimaire}{\color{white}\footnotesize\bfseries~niv.~#1~}%
+}
+
+
+\definecolor{CouleurCROFond}{RGB}{243,238,250}
+\definecolor{CouleurBordCRO}{RGB}{110,60,160}
+\definecolor{CouleurCRO}{RGB}{110,60,160}
+% --- Lecture auditologique (fil rouge du cours) ---
+% Usage : \begin{boxlecture}{Domaine D — contrôle d'accès} ... \lecture{0,40}{0,35}{1,20}
+%   Lecture d'un domaine par ses trois mesures (article A1, HAL hal-05701270) :
+%   µ (conformité), U (incertitude, part des NEK), H (entropie, en bits).
+\newtcolorbox{boxlecture}[2][]{
+    enhanced, breakable,
+    colback=CouleurCROFond, colframe=CouleurBordCRO,
+    fonttitle=\bfseries\color{white},
+    title={\faIcon{balance-scale}\quad Lecture auditologique · #2},
+    attach boxed title to top left={yshift=-2mm, xshift=4mm}, varwidth boxed title*=-12mm,
+    boxed title style={colback=CouleurCRO, rounded corners},
+    arc=3pt, boxrule=0.8pt, left=6pt, right=6pt, top=8pt, bottom=6pt, #1
+}
+% Triplet de lecture µ, U, H (inline)
+\newcommand{\lecture}[3]{%
+    \colorbox{CouleurCRO}{\color{white}\footnotesize\bfseries
+    ~$\mu=#1$~·~$U=#2$~·~$H=#3$~bit~}%
+}
+% Réponses de l'instrument trichotomique
+\newcommand{\OUI}{\textsc{oui}}
+\newcommand{\NON}{\textsc{non}}
+\newcommand{\NEK}{\textsc{nek}}
+
+% --- Variables du cours ---
+\newcommand{\auteurcours}{MINKA MI NGUIDJOÏ Thierry Emmanuel}
+\newcommand{\institutionprimaire}{École Nationale Supérieure Polytechnique de Yaoundé}
+\newcommand{\tutelle}{Université de Yaoundé I}
+\newcommand{\unitepedago}{Département de Génie Informatique · Niveau 3}
+\newcommand{\laboratoire}{LIMSI}
+\newcommand{\anneescolaire}{2026--2027}
+\newcommand{\titreCours}{Sécurité Informatique}
+\newcommand{\sigleCours}{SIF}
+\newcommand{\codeUE}{SEC3266}
+% Libellés des encadrés propres à la discipline (section VIII) :
+\newcommand{\libelleObjet}{Mesure de sécurité}
+\newcommand{\libelleProcedure}{Procédure opérationnelle}
+
+
+% ==============================================================================
+% XIII. ENVIRONNEMENTS MATHÉMATIQUES
+% ==============================================================================
+
+\theoremstyle{definition}
+\newtheorem{theoreme}{Théorème}[chapter]
+\newtheorem{definition}{Définition}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{corollaire}{Corollaire}[chapter]
+\newtheorem{lemme}{Lemme}[chapter]
+\newtheorem{axiome}{Axiome}
+
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}[chapter]
+\newtheorem{exemple}{Exemple}[chapter]
+
+
+% ==============================================================================
+% XIV. PARAMÈTRES FINAUX
+% ==============================================================================
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\hyphenpenalty=800
+\exhyphenpenalty=800
+
+\color{CouleurTexte}
+
+\endinput
+% ==============================================================================
+% Fin de Style_SIF.sty — Sécurité Informatique
+% ==============================================================================

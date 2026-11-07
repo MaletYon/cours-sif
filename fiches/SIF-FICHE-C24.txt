@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C24
+Chapitre 24 : Premiers pas en investigation numérique
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle règle concilie réponse à l'incident et preuve ?
+      a) Préserver avant d'éradiquer
+      b) Éradiquer avant de préserver
+      c) Ne rien faire
+      d) Tout effacer
+
+ 2. Que faut-il préserver avant d'éradiquer ?
+      a) Le mobilier
+      b) Images, mémoire, journaux et empreintes
+      c) Les factures papier seulement
+      d) Rien
+
+ 3. Quel document recommande de collecter d'abord les données les plus volatiles ?
+      a) La RFC 791
+      b) L'ISO 22301
+      c) La RFC 3227
+      d) Le NIST SP 800-40
+
+ 4. Par quoi commence l'ordre de volatilité ?
+      a) Le disque dur
+      b) Les sauvegardes
+      c) Les documents papier
+      d) La mémoire vive et l'état du système
+
+ 5. Qu'a effacé le redémarrage des serveurs à 22 h 05 ?
+      a) La mémoire des serveurs
+      b) Les sauvegardes
+      c) Les disques
+      d) Les courriels
+
+ 6. Qui a redémarré les serveurs ?
+      a) M. ETEME
+      b) M. ABENA
+      c) Mme NKENG
+      d) M. KOUNOU
+
+ 7. Quelle norme décrit l'identification, la collecte, l'acquisition et la préservation des preuves numériques ?
+      a) ISO/IEC 27001
+      b) ISO/IEC 27035
+      c) ISO/IEC 27037
+      d) ISO 22301
+
+ 8. Combien d'étapes compte l'ISO/IEC 27037 ?
+      a) Deux
+      b) Trois
+      c) Six
+      d) Quatre
+
+ 9. Calculer l'empreinte d'une image relève de l'étape :
+      a) D'acquisition
+      b) D'identification
+      c) De collecte
+      d) De communication
+
+10. Quelle empreinte calcule-t-on sur le disque source ?
+      a) MD4
+      b) SHA-256
+      c) CRC-8
+      d) Base64
+
+11. Quel appareil empêche toute écriture sur le disque source ?
+      a) Un routeur
+      b) Un pare-feu
+      c) Un bloqueur d'écriture
+      d) Un onduleur
+
+12. Quel format d'image forensique est cité dans le cours ?
+      a) MP3
+      b) DOCX
+      c) ZIP
+      d) E01
+
+13. Que trace la chaîne de conservation ?
+      a) Chaque détention et chaque manipulation d'une preuve
+      b) Le prix de la preuve
+      c) La taille du disque
+      d) La météo
+
+14. Que provoque une rupture de la chaîne de conservation ?
+      a) Elle renforce la preuve
+      b) Elle fragilise la preuve
+      c) Rien
+      d) Elle double la peine
+
+15. À qui appartient l'enquête pénale ?
+      a) À l'entreprise
+      b) Au prestataire
+      c) Aux officiers de police judiciaire
+      d) Au RSSI
+
+16. Quels articles de la loi n° 2010/012 encadrent l'action des officiers de police judiciaire ?
+      a) Articles 25 et 26
+      b) Articles 65 et 68
+      c) Articles 7 et 8
+      d) Articles 52 et 53
+
+17. Quel est le rôle de l'entreprise victime ?
+      a) Préserver les preuves et les remettre
+      b) Mener l'enquête pénale
+      c) Juger les suspects
+      d) Perquisitionner
+
+18. Qui désigne un expert judiciaire ?
+      a) L'entreprise
+      b) Le juge
+      c) Le prestataire
+      d) Le RSSI
+
+19. Quelles UE prolongent ce chapitre ?
+      a) INF1011 et INF1012
+      b) GES2010 et GES2020
+      c) SEC4031 et SEC4052
+      d) Aucune
+
+20. Que doit-on faire d'une machine compromise allumée ?
+      a) L'éteindre aussitôt
+      b) La formater
+      c) La redémarrer
+      d) L'isoler du réseau et préserver sa mémoire
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. La réponse à l'incident et la préservation de la preuve peuvent se concilier.
+      Vrai / Faux
+
+22. Le disque dur est plus volatil que la mémoire vive.
+      Vrai / Faux
+
+23. Le redémarrage de 22 h 05 a détruit des preuves.
+      Vrai / Faux
+
+24. On travaille sur la copie, jamais sur l'original.
+      Vrai / Faux
+
+25. Une empreinte identique avant et après prouve que l'image n'a pas changé.
+      Vrai / Faux
+
+26. Une fiche de chaîne de conservation indique qui détient la preuve, quand et pourquoi.
+      Vrai / Faux
+
+27. La chaîne de conservation est facultative dans une affaire pénale.
+      Vrai / Faux
+
+28. Le RSSI peut perquisitionner le domicile d'un suspect.
+      Vrai / Faux
+
+29. L'entreprise victime peut déposer plainte.
+      Vrai / Faux
+
+30. L'identification consiste à repérer les supports et les données utiles.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La RFC sur la collecte des preuves porte le numéro ______.
+
+32. La norme sur les preuves numériques est l'ISO/IEC ______.
+
+33. Le document qui trace chaque détention d'une preuve est la chaîne de ______.
+
+34. L'appareil qui empêche l'écriture sur un disque est un ______ d'écriture.
+
+35. L'algorithme d'empreinte recommandé est SHA-______.
+
+36. Les officiers de police judiciaire ont pour sigle ______.
+
+37. On collecte d'abord les données les plus ______.
+
+38. La règle est de préserver avant d'______.
+
+39. Les serveurs ont été redémarrés à 22 h ______.
+
+40. Les perquisitions en matière de cybercriminalité sont visées par l'article ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

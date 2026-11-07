@@ -1,0 +1,326 @@
+% ============================================================================
+% Fichier  : partie4/P04_C16_reseaux_equipements.tex
+% Titre    : Sécurité des Réseaux (2) : Équipements et Protocoles Sûrs
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre V » (périphériques, communications sécurisées).
+% Sources : NIST SP 800-41 Rev. 1 (pare-feu) ; NIST SP 800-94 (IDPS) ;
+% RFC 7296 (IKEv2) ; Vanhoef et Piessens (2017, KRACK) ; IEEE 802.1X.
+% ============================================================================
+
+\chapter{Sécurité des Réseaux (2) : Équipements et Protocoles Sûrs}
+\label{chap:reseaux2}
+\chaptermark{Équipements et protocoles sûrs}
+
+\epigraph{%
+    « Un pare-feu applique une politique~;\\
+    il ne la remplace pas. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:architecture}
+et~\ref{chap:reseaux1}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Distinguer les types de pare-feu et lire une table de règles.
+    \item Repérer les règles trop permissives, ombrées ou inutiles.
+    \item Expliquer le fonctionnement et les limites des IDS et IPS.
+    \item Choisir un réseau privé virtuel (IPsec, TLS, WireGuard).
+    \item Sécuriser un réseau Wi-Fi d'entreprise.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : les pare-feu de LiZbiZ servaient-ils à quelque chose~?}
+% ============================================================================
+
+LiZbiZ avait un pare-feu dans chaque centre. Lors de l'enquête, la revue
+des règles de Garoua montre que la première règle autorisait « tout
+trafic » depuis le réseau du prestataire, et qu'une règle plus précise,
+écrite plus bas, n'était jamais appliquée. Un pare-feu mal réglé donne
+une impression de sécurité sans la sécurité.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Les pare-feu (section~\ref{sec:c16-parefeu}).
+    \item Auditer une table de règles (section~\ref{sec:c16-regles}).
+    \item Détecter et prévenir les intrusions (section~\ref{sec:c16-ids}).
+    \item Les réseaux privés virtuels (section~\ref{sec:c16-vpn}).
+    \item Le Wi-Fi (section~\ref{sec:c16-wifi}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Les Pare-feu}
+\label{sec:c16-parefeu}
+% ============================================================================
+
+\begin{tableaucours}{L{3.2cm}L{5.0cm}L{4.0cm}}{%
+    \tableauHeader{Type} &
+    \tableauHeader{Ce qu'il examine} &
+    \tableauHeader{Limite}
+}
+Filtrage sans état & Chaque paquet isolément~: adresses, ports, protocole
+& Ne sait pas si un paquet appartient à une connexion légitime \\
+Filtrage avec état & Les connexions~: n'accepte une réponse que si la
+demande est sortie & Ne voit pas le contenu applicatif \\
+Pare-feu applicatif, mandataire & Le contenu d'un protocole (HTTP,
+DNS) & Plus lent~; limité aux protocoles qu'il connaît \\
+Pare-feu de nouvelle génération & État, applications, utilisateurs,
+réputation, parfois inspection du chiffré & Complexité, coût \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~16.1. Les types de pare-feu~\cite{nist80041}}\end{center}
+
+Un pare-feu lit ses règles \emph{dans l'ordre} et applique la première qui
+correspond. La dernière règle est un refus général~: tout ce qui n'est
+pas explicitement autorisé est interdit (valeur par défaut sûre,
+Chapitre~\ref{chap:proprietes}).
+
+% ============================================================================
+\section{Auditer une Table de Règles}
+\label{sec:c16-regles}
+% ============================================================================
+
+\begin{tableaucours}{cL{2.6cm}L{2.6cm}L{1.8cm}L{1.6cm}L{2.6cm}}{%
+    \tableauHeader{N°} &
+    \tableauHeader{Source} &
+    \tableauHeader{Destination} &
+    \tableauHeader{Port} &
+    \tableauHeader{Action} &
+    \tableauHeader{Commentaire}
+}
+1 & Réseau prestataire & Tout & Tout & Autoriser & « temporaire, 2026 » \\
+2 & Réseau prestataire & Serveurs Garoua & 22, 3389 & Autoriser & Maintenance \\
+3 & Postes & Serveur APP-03 & 443 & Autoriser & APP-03 retiré en 2025 \\
+4 & Tout & Portail & 443 & Autoriser & Portail de suivi \\
+5 & Postes & Internet & Tout & Autoriser & Navigation \\
+6 & Tout & Tout & Tout & Refuser & Règle finale \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~16.2. Règles du pare-feu de Garoua (extrait,
+mars)}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. La revue des règles}
+\textbf{Constatations.} La règle~1 autorise tout depuis le réseau du
+prestataire~: elle \emph{ombre} la règle~2, qui ne s'applique jamais. La
+règle~3 vise un serveur retiré~: elle est inutile. La règle~5 autorise
+tous les ports vers Internet depuis les postes~: c'est par elle que sont
+sortis les 40~Go.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Supprimer la règle~1, limiter la
+règle~2 aux serveurs et aux heures de maintenance, supprimer la règle~3,
+restreindre la règle~5 aux ports web via un mandataire filtrant. Chaque
+règle doit avoir un propriétaire et une date de revue.
+\end{boxscenario}
+
+\begin{boxprocedure}
+\textbf{Revoir une table de règles}
+\begin{enumerate}
+    \item Repérer les règles « tout » (source, destination ou port).
+    \item Repérer les règles ombrées par une règle plus large située
+          au-dessus.
+    \item Repérer les règles qui visent des systèmes retirés, ou jamais
+          utilisées (compteurs à zéro).
+    \item Vérifier que chaque règle a un motif, un propriétaire et une date.
+    \item Vérifier la règle finale de refus et la journalisation des refus.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{Détecter et Prévenir les Intrusions}
+\label{sec:c16-ids}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{IDS} (système de détection d'intrusion)~: analyse le trafic ou
+l'activité d'une machine et émet des alertes. \termecle{IPS} (système de
+prévention)~: placé en coupure, il bloque ce qu'il détecte. La détection
+repose sur des \emph{signatures} (motifs d'attaques connues) ou sur des
+\emph{anomalies} (écarts au comportement habituel)~\cite{nist80094}.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.4cm}L{4.4cm}L{4.4cm}}{%
+    \tableauHeader{Méthode} &
+    \tableauHeader{Forces} &
+    \tableauHeader{Faiblesses}
+}
+Signatures & Précise sur les attaques connues~; peu de faux positifs &
+Aveugle aux attaques nouvelles et au trafic chiffré \\
+Anomalies & Peut voir l'inconnu & Faux positifs nombreux~; apprentissage
+long \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~16.3. Signatures et anomalies}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Installer un IDS et ne jamais lire ses alertes.
+
+\smallskip
+\textbf{Règle~:} un détecteur sans personne pour traiter ses alertes ne
+détecte rien. On règle les signatures pour réduire les faux positifs, et
+on organise le traitement des alertes (Chapitre~\ref{chap:operations}).
+\end{boxalert}
+
+% ============================================================================
+\section{Les Réseaux Privés Virtuels}
+\label{sec:c16-vpn}
+% ============================================================================
+
+Un \termecle{réseau privé virtuel} (VPN) crée un tunnel chiffré et
+authentifié entre deux réseaux, ou entre un poste et un réseau.
+
+\begin{tableaucours}{L{2.6cm}L{5.0cm}L{4.6cm}}{%
+    \tableauHeader{Technologie} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Usage}
+}
+IPsec (IKEv2) & Chiffrement au niveau IP, négociation des clés par
+IKEv2~\cite{rfc7296} & Liaisons entre sites (Douala et Garoua) \\
+VPN TLS & Tunnel au-dessus de TLS & Accès distant des nomades \\
+WireGuard & Protocole récent, code réduit, cryptographie moderne & Accès
+distant et liaisons entre sites \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~16.4. Les réseaux privés virtuels}\end{center}
+
+Un VPN protège le transport~; il ne vérifie ni la santé du poste ni la
+légitimité de l'utilisateur au-delà de son authentification. C'est
+pourquoi l'accès distant exige un second facteur et ne doit ouvrir que les
+ressources nécessaires (Chapitre~\ref{chap:architecture}).
+
+% ============================================================================
+\section{Le Wi-Fi}
+\label{sec:c16-wifi}
+% ============================================================================
+
+\begin{tableaucours}{L{2.4cm}L{9.8cm}}{%
+    \tableauHeader{Protection} &
+    \tableauHeader{Statut}
+}
+WEP & Cassé~; à proscrire \\
+WPA2-Personnel & Clé partagée~; vulnérable aux dictionnaires si la phrase
+est faible~; la vulnérabilité KRACK (2017) a exigé des
+correctifs~\cite{vanhoef2017} \\
+WPA3-Personnel & Authentification SAE, résistante aux attaques par
+dictionnaire hors ligne \\
+WPA2/WPA3-Entreprise & Authentification individuelle par 802.1X et un
+serveur RADIUS~; recommandée en entreprise \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~16.5. Les protections du Wi-Fi}\end{center}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Faire vivre les règles.} L'administrateur revoit les règles des
+pare-feu chaque trimestre, supprime ce qui n'a plus de motif, et
+journalise les refus. Il sépare le Wi-Fi des visiteurs du réseau interne.
+\end{boxmetier}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Régler la détection.} L'analyste ajuste les signatures de l'IDS au
+contexte (désactive celles qui visent des systèmes absents, crée des
+règles propres à l'entreprise) et suit le taux de faux positifs.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Les pare-feu} filtrent sans état, avec état, ou au niveau
+          applicatif~; les règles se lisent dans l'ordre, avec un refus
+          final.
+    \item \textbf{Une table de règles s'audite}~: règles « tout », ombrées,
+          inutiles, sans propriétaire.
+    \item \textbf{IDS et IPS} détectent par signatures ou anomalies~; sans
+          traitement des alertes, ils ne servent à rien.
+    \item \textbf{Les VPN} (IPsec, TLS, WireGuard) protègent le transport,
+          pas la légitimité de l'accès.
+    \item \textbf{Le Wi-Fi d'entreprise} utilise WPA3 ou 802.1X~; WEP est
+          à proscrire.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: distinguer filtrage sans
+état, avec état et applicatif~; repérer une règle ombrée~; conduire la
+revue d'une table de règles~; comparer signatures et anomalies~; choisir
+un VPN et une protection Wi-Fi.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.1. Avec ou sans état \niveaubase}]
+Pourquoi un filtrage avec état permet-il de n'écrire qu'une règle pour la
+navigation web des postes, là où un filtrage sans état en demande deux~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.2. L'ordre \niveaubase}]
+Dans le Tableau~16.2, quelle règle s'applique à une connexion du réseau
+du prestataire vers le contrôleur de domaine, port 445~? Et après
+suppression de la règle~1~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.3. Wi-Fi \niveaubase}]
+Une agence utilise encore WEP pour son Wi-Fi interne. Que recommandez-vous,
+et pourquoi~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.4. Réécrire les règles \niveaumoyen}]
+Réécrivez la table du Tableau~16.2 après la revue, avec motifs,
+propriétaires et dates.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.5. Faux positifs \niveaumoyen}]
+L'IDS de la BANQUE SANAGA produit 4\,000~alertes par jour, dont 98~\% de
+faux positifs. Combien de vraies alertes par jour~? Que faire pour que
+l'équipe puisse les traiter~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.6. IPS ou IDS \niveaumoyen}]
+Faut-il placer un IPS en coupure devant le système central de la BANQUE
+SANAGA~? Pesez le risque d'un blocage à tort.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.7. VPN \niveaumoyen}]
+Choisissez le VPN pour~: relier Douala et Garoua~; donner l'accès aux
+commerciaux nomades~; donner l'accès au prestataire. Justifiez.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.8. Le Wi-Fi des visiteurs \niveaumoyen}]
+Concevez le Wi-Fi d'une agence~: réseau du personnel et réseau des
+visiteurs, authentification, séparation, filtrage.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.9. Le filtrage sortant \niveauexpert}]
+Proposez une politique de filtrage sortant pour LiZbiZ qui aurait arrêté
+ou signalé l'exfiltration des 40~Go, sans bloquer l'activité.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~16.10. Un programme de revue \niveauexpert}]
+Rédigez la procédure trimestrielle de revue des pare-feu de LiZbiZ et
+l'indicateur qui en rend compte au comité de sécurité.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-41 (pare-feu) et SP~800-94 (détection
+          d'intrusion)~\cite{nist80041,nist80094}.
+    \item RFC~7296 (IKEv2)~\cite{rfc7296}~; M.~Vanhoef et F.~Piessens sur
+          KRACK~\cite{vanhoef2017}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Le réseau filtre les flux~; il faut encore savoir qui
+les émet. Le Chapitre~\ref{chap:iam} traite des identités et des accès.
+\end{boxinfo}

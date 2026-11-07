@@ -1,0 +1,397 @@
+% ============================================================================
+% Fichier  : partie1/P01_C03_crypto_symetrique.tex
+% Titre    : Cryptographie (1) : Symétrique, Hachage, Intégrité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : Kerckhoffs (1883) ; FIPS 197 (AES) ; NIST SP 800-38A et 38D
+% (modes) ; FIPS 180-4 et FIPS 202 (SHA-2, SHA-3) ; RFC 2104 (HMAC) ;
+% NIST SP 800-63B (mémorisation des secrets) ; Wang et Yu (2005), Stevens et
+% al. (2017) pour les collisions MD5 et SHA-1 ; loi n° 2010/012, art. 4,
+% point 31. Empreintes de l'encadré Outils calculées le 07/11/2026.
+% ============================================================================
+
+\chapter{Cryptographie (1) : Symétrique, Hachage, Intégrité}
+\label{chap:crypto-sym}
+\chaptermark{Cryptographie symétrique}
+
+\epigraph{%
+    « Il faut que le système n'exige pas le secret,\\
+    et qu'il puisse sans inconvénient tomber entre les mains de l'ennemi. »%
+}{Auguste Kerckhoffs, 1883}
+
+\niveauChapitre{Fondamental}{Chapitre~\ref{chap:proprietes}~; notions
+d'arithmétique binaire.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Énoncer le principe de Kerckhoffs et le vocabulaire de la
+          cryptographie.
+    \item Expliquer le chiffrement symétrique, par flot et par blocs, et le
+          rôle des modes d'opération.
+    \item Décrire les propriétés d'une fonction de hachage et ses usages.
+    \item Distinguer empreinte, code d'authentification de message (MAC) et
+          signature.
+    \item Stocker correctement des mots de passe.
+    \item Dire ce que la cryptographie ne garantit pas.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : le chiffrement aurait-il protégé les données volées~?}
+% ============================================================================
+
+À Garoua, l'attaquant a copié 40~Go de dossiers clients. S'ils avaient été
+chiffrés, la copie aurait-elle été inutile~? La réponse dépend de ce qui
+était chiffré, avec quoi, et surtout de l'endroit où se trouvait la clé. Ce
+chapitre donne les outils pour répondre.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Le vocabulaire et le principe de Kerckhoffs (section~\ref{sec:c03-vocab}).
+    \item Le chiffrement symétrique (section~\ref{sec:c03-sym}).
+    \item Les modes d'opération (section~\ref{sec:c03-modes}).
+    \item Les fonctions de hachage (section~\ref{sec:c03-hash}).
+    \item Codes d'authentification et mots de passe (section~\ref{sec:c03-mac}).
+    \item Ce que la cryptographie ne garantit pas (section~\ref{sec:c03-limites}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Le Vocabulaire et le Principe de Kerckhoffs}
+\label{sec:c03-vocab}
+% ============================================================================
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~4, point~31} (texte officiel)~:
+\textit{« Cryptographie~: application des mathématiques permettant d'écrire
+l'information, de manière à la rendre inintelligible à ceux ne possédant
+pas les capacités de la déchiffrer. »}
+\end{boxjuris}
+
+\begin{boxdef}
+\termecle{Chiffrement}~: transformation d'un \emph{texte clair} en
+\emph{texte chiffré} au moyen d'un algorithme et d'une \emph{clé}.
+\termecle{Déchiffrement}~: opération inverse, avec la clé. Le
+\emph{décryptement} désigne la retrouvaille du clair \emph{sans} la clé~:
+c'est l'attaque.
+\end{boxdef}
+
+En 1883, A.~Kerckhoffs pose qu'un système de chiffrement doit rester sûr
+même si l'adversaire connaît l'algorithme~\cite{kerckhoffs1883}~: seule
+la clé est secrète. C'est le principe de conception ouverte du
+Chapitre~\ref{chap:proprietes}. Un algorithme « maison », gardé secret,
+n'apporte aucune garantie~; un algorithme public, étudié depuis des années
+par la communauté, en apporte.
+
+% ============================================================================
+\section{Le Chiffrement Symétrique}
+\label{sec:c03-sym}
+% ============================================================================
+
+Dans le chiffrement \termecle{symétrique}, la même clé sert à chiffrer et à
+déchiffrer. Il est rapide et convient aux grands volumes~; sa difficulté
+est de partager la clé (Chapitre~\ref{chap:crypto-asym}).
+
+\begin{tableaucours}{L{3.0cm}L{5.0cm}L{4.2cm}}{%
+    \tableauHeader{Algorithme} &
+    \tableauHeader{Caractéristiques} &
+    \tableauHeader{Statut}
+}
+DES (1977) & Blocs de 64~bits, clé de 56~bits & Abandonné~: clé trop
+courte \\
+3DES & Trois passes de DES & Retiré par le NIST \\
+AES (2001) & Blocs de 128~bits, clés de 128, 192 ou 256~bits & Norme
+actuelle (FIPS~197)~\cite{fips197} \\
+ChaCha20 & Chiffrement par flot, rapide en logiciel & Recommandé, utilisé
+dans TLS~1.3 \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~3.1. Algorithmes symétriques}\end{center}
+
+\subsection{La force d'une clé}
+
+Une clé de \(n\)~bits offre \(2^n\) possibilités. À un billion
+(\(10^{12}\)) d'essais par seconde, l'espace de \(2^{56}\) clés du DES se
+parcourt en une vingtaine d'heures~; celui de \(2^{128}\) clés d'AES
+demanderait environ \(10^{19}\)~années. La force brute n'est pas le
+problème~: les attaques réelles visent la clé là où elle est stockée, ou
+le mauvais usage de l'algorithme.
+
+% ============================================================================
+\section{Les Modes d'Opération}
+\label{sec:c03-modes}
+% ============================================================================
+
+AES chiffre des blocs de 16~octets. Pour chiffrer un fichier, il faut un
+\termecle{mode d'opération}, qui dit comment enchaîner les
+blocs~\cite{nist80038a}.
+
+\begin{tableaucours}{L{2.4cm}L{6.0cm}L{3.8cm}}{%
+    \tableauHeader{Mode} &
+    \tableauHeader{Principe} &
+    \tableauHeader{À retenir}
+}
+ECB & Chaque bloc chiffré indépendamment & À proscrire~: deux blocs
+identiques donnent le même chiffré \\
+CBC & Chaque bloc combiné avec le chiffré précédent, avec un vecteur
+d'initialisation & Confidentialité seule, vecteur imprévisible \\
+CTR & Chiffrement d'un compteur, combiné au clair & Parallélisable~;
+jamais deux fois le même compteur \\
+GCM & CTR plus un code d'authentification & Chiffrement
+\emph{authentifié}~: confidentialité et intégrité~\cite{nist80038d} \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~3.2. Les modes d'opération}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Chiffrer sans authentifier (ECB ou CBC seuls).
+
+\smallskip
+\textbf{Règle~:} un chiffré non authentifié peut être modifié sans être
+lu~; un attaquant change des bits du montant d'un virement sans connaître
+la clé. On utilise un chiffrement authentifié (AES-GCM, ChaCha20-Poly1305).
+\end{boxalert}
+
+% ============================================================================
+\section{Les Fonctions de Hachage}
+\label{sec:c03-hash}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Fonction de hachage cryptographique}~: fonction qui associe à
+un message de taille quelconque une \termecle{empreinte} de taille fixe,
+avec trois propriétés~: résistance à la \emph{préimage} (retrouver un
+message à partir de l'empreinte est impraticable), à la \emph{seconde
+préimage} (trouver un autre message de même empreinte est impraticable),
+et aux \emph{collisions} (trouver deux messages de même empreinte est
+impraticable).
+\end{boxdef}
+
+\begin{tableaucours}{L{2.8cm}L{2.2cm}L{7.2cm}}{%
+    \tableauHeader{Fonction} &
+    \tableauHeader{Empreinte} &
+    \tableauHeader{Statut}
+}
+MD5 & 128~bits & Collisions trouvées en 2004-2005~\cite{wang2005}~;
+interdit pour la sécurité \\
+SHA-1 & 160~bits & Première collision publique en 2017~\cite{stevens2017}~;
+à abandonner \\
+SHA-256, SHA-512 & 256, 512~bits & Famille SHA-2 (FIPS~180-4)~\cite{fips1804}~;
+recommandée \\
+SHA-3 & 224 à 512~bits & FIPS~202~\cite{fips202}~; alternative de
+conception différente \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~3.3. Fonctions de hachage}\end{center}
+
+\begin{boxoutils}{Une empreinte change entièrement}
+\begin{lstlisting}[language=Python]
+import hashlib
+for m in [b"Virement 500000 FCFA", b"Virement 5000000 FCFA"]:
+    print(hashlib.sha256(m).hexdigest())
+# 6c82206c2a2b225f5f3ca81065c406972d4e95f04fbdac861cb49d16ce8b9393
+# da51d0470e5547e7e81c3cde35325d5514ecf71a5c94553c9e4728f1131639d1
+\end{lstlisting}
+Un seul zéro ajouté change toute l'empreinte. En ligne de commande~:
+\texttt{sha256sum fichier} calcule l'empreinte d'un fichier, et
+\texttt{sha256sum -c MANIFESTE} vérifie une liste d'empreintes.
+\end{boxoutils}
+
+% ============================================================================
+\section{Codes d'Authentification et Mots de Passe}
+\label{sec:c03-mac}
+% ============================================================================
+
+\subsection{Empreinte, MAC, signature}
+
+Une empreinte seule ne protège pas l'intégrité contre un attaquant~: il
+modifie le message et recalcule l'empreinte. Un \termecle{code
+d'authentification de message} (MAC) fait intervenir une clé secrète~:
+sans elle, impossible de produire un code valide. HMAC en est la
+construction standard~\cite{rfc2104}.
+
+\begin{tableaucours}{L{2.8cm}L{2.6cm}L{3.4cm}L{3.4cm}}{%
+    \tableauHeader{Mécanisme} &
+    \tableauHeader{Clé} &
+    \tableauHeader{Protège contre} &
+    \tableauHeader{Non-répudiation~?}
+}
+Empreinte & Aucune & L'erreur accidentelle & Non \\
+MAC (HMAC) & Secrète, partagée & La modification par qui n'a pas la clé &
+Non~: les deux parties ont la clé \\
+Signature & Privée et publique & La modification, et l'usurpation & Oui
+(Chapitre~\ref{chap:crypto-asym}) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~3.4. Empreinte, MAC et signature}\end{center}
+
+\subsection{Stocker des mots de passe}
+
+Un mot de passe ne se stocke ni en clair, ni chiffré, ni haché par une
+simple fonction rapide comme SHA-256~: un attaquant qui vole la base
+essaie des milliards de mots de passe par seconde. On utilise une fonction
+\emph{lente} et \emph{salée} (Argon2, bcrypt, PBKDF2)~: le \termecle{sel},
+aléatoire et propre à chaque compte, empêche les tables précalculées, et la
+lenteur réduit le nombre d'essais. Le NIST décrit ces exigences, et
+recommande des mots de passe longs plutôt que des changements
+fréquents~\cite{nist80063b}.
+
+% ============================================================================
+\section{Ce que la Cryptographie ne Garantit pas}
+\label{sec:c03-limites}
+% ============================================================================
+
+\begin{boxscenario}{Opération GAROUA. Des données chiffrées, mais lisibles}
+\textbf{Constatation.} Les dossiers clients étaient stockés sur un
+volume chiffré du serveur de fichiers. L'attaquant, devenu administrateur
+du domaine, les a copiés \emph{depuis le serveur en fonctionnement}~: le
+système les déchiffrait pour lui comme pour tout utilisateur autorisé.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Le chiffrement du disque protège
+contre le vol du disque, pas contre un attaquant qui a les droits
+d'administrateur sur la machine allumée. Pour protéger contre ce
+scénario, il fallait limiter les droits (Chapitre~\ref{chap:iam}) et
+détecter la copie (Chapitre~\ref{chap:operations}).
+\end{boxscenario}
+
+\begin{itemize}
+    \item La cryptographie protège des données, pas un système dont
+          l'attaquant a le contrôle.
+    \item Elle vaut ce que vaut la protection de ses clés.
+    \item Elle ne dit rien de l'exactitude de ce qui a été chiffré~: une
+          donnée fausse, signée, reste fausse.
+\end{itemize}
+
+\begin{boxprocedure}
+\textbf{Gérer une clé de chiffrement}
+\begin{enumerate}
+    \item \textbf{Générer} la clé avec un générateur aléatoire
+          cryptographique, jamais à partir d'un mot.
+    \item \textbf{Stocker} la clé hors du système qu'elle protège (module
+          matériel, coffre de clés).
+    \item \textbf{Restreindre} son usage aux seuls services qui en ont
+          besoin, et le journaliser.
+    \item \textbf{Renouveler} la clé à échéance et en cas de soupçon.
+    \item \textbf{Sauvegarder} la clé à part~: une clé perdue rend les
+          données irrécupérables.
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{boxmetier}{Développeur}
+\textbf{Ne jamais inventer sa cryptographie.} Le développeur utilise une
+bibliothèque reconnue, un chiffrement authentifié, un générateur
+aléatoire cryptographique, et une fonction lente et salée pour les mots
+de passe. Il ne laisse aucune clé dans le code source.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Principe de Kerckhoffs}~: seule la clé est secrète.
+    \item \textbf{AES} est la norme symétrique~; on l'emploie dans un mode
+          \emph{authentifié} (GCM).
+    \item \textbf{Une fonction de hachage} résiste à la préimage, à la
+          seconde préimage et aux collisions~; MD5 et SHA-1 sont cassés.
+    \item \textbf{Empreinte, MAC, signature} n'offrent pas les mêmes
+          garanties~; seule la signature apporte la non-répudiation.
+    \item \textbf{Les mots de passe} se stockent avec une fonction lente et
+          salée.
+    \item \textbf{La cryptographie} ne protège pas un système dont
+          l'attaquant a pris le contrôle.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: énoncer le principe de
+Kerckhoffs~; expliquer pourquoi ECB est à proscrire~; citer les trois
+propriétés d'une fonction de hachage~; distinguer empreinte, MAC et
+signature~; expliquer le rôle du sel~; dire ce que le chiffrement de
+disque protège et ne protège pas.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.1. Vocabulaire \niveaubase}]
+Distinguez chiffrer, déchiffrer et décrypter, avec un exemple pour chacun.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.2. Kerckhoffs \niveaubase}]
+Un éditeur vante un algorithme de chiffrement « secret, donc
+inviolable ». Que répondez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.3. Force brute \niveaubase}]
+Combien de fois plus de clés une clé de 128~bits offre-t-elle qu'une clé
+de 56~bits~? Exprimez le rapport en puissance de~2.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.4. ECB \niveaumoyen}]
+Une image en noir et blanc est chiffrée avec AES en mode ECB. Pourquoi
+peut-on encore deviner son contenu~? Quel mode recommandez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.5. Empreinte ou MAC \niveaumoyen}]
+LiZbiZ transmet chaque soir le fichier des paiements à sa banque, avec son
+empreinte SHA-256 dans le même courriel. Quelle attaque cette protection
+n'empêche-t-elle pas~? Que proposez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.6. Mots de passe \niveaumoyen}]
+La base de l'application de LiZbiZ stocke les mots de passe hachés avec
+SHA-256, sans sel. Décrivez l'attaque possible après un vol de la base,
+et la correction.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.7. Vérifier un lot \niveaumoyen}]
+Écrivez, en Python, une fonction qui reçoit un dossier et un manifeste
+d'empreintes SHA-256, et renvoie la liste des fichiers modifiés ou
+manquants.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.8. Le chiffrement de disque \niveaumoyen}]
+Pour chacun des scénarios, dites si le chiffrement du disque protège les
+données~: vol d'un ordinateur portable éteint~; attaquant administrateur
+du serveur allumé~; disque jeté sans effacement~; logiciel malveillant
+sur le poste de l'utilisateur.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.9. Une politique \niveauexpert}]
+Rédigez, pour LiZbiZ, une politique d'usage de la cryptographie d'une page~:
+algorithmes autorisés, modes, longueurs de clés, stockage des mots de
+passe, gestion des clés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~3.10. Les données volées \niveauexpert}]
+Reprenez la question directrice. Proposez une architecture dans laquelle
+la copie des dossiers clients par un administrateur du domaine aurait été
+inutile, et dites ce qu'elle coûte en exploitation.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item FIPS~197 (AES), FIPS~180-4 (SHA-2) et FIPS~202
+          (SHA-3)~\cite{fips197,fips1804,fips202}.
+    \item NIST SP~800-38D (GCM) et SP~800-63B (secrets
+          mémorisés)~\cite{nist80038d,nist80063b}.
+    \item J.~Katz et Y.~Lindell, \emph{Introduction to Modern
+          Cryptography}~\cite{katz2020}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} La cryptographie symétrique suppose une clé
+partagée. Comment la partager avec un inconnu, et comment prouver qui a
+signé~? C'est l'objet de la cryptographie asymétrique
+(Chapitre~\ref{chap:crypto-asym}).
+\end{boxinfo}

@@ -1,0 +1,74 @@
+%% ============================================================================
+%% Fichier  : annexes/Ann_A_glossaire.tex
+%% Titre    : Glossaire
+%% Version  : 1.0 -- novembre 2026
+%% ============================================================================
+
+\chapter{Glossaire}
+\label{ann:glossaire}
+
+Ce glossaire reprend, sous une forme abrégée, les notions définies dans les
+chapitres. Le renvoi indique le chapitre où la notion est présentée.
+
+\begin{description}
+    \item[Actif essentiel, actif support] Information ou processus qui a de la valeur~; élément (matériel, logiciel, personne, prestataire) sur lequel il repose (Ch.~\ref{chap:proprietes}).
+    \item[Analyse d'impact sur l'activité (BIA)] Étude qui fixe, par activité, la durée d'interruption et la perte de données admissibles (Ch.~\ref{chap:continuite}).
+    \item[Appétence au risque] Niveau de risque que la direction accepte~; il fixe les zones de la cartographie (Ch.~\ref{chap:risques}).
+    \item[Architecture zéro confiance] Architecture qui n'accorde aucune confiance implicite à l'emplacement réseau~; chaque accès est décidé à la demande (Ch.~\ref{chap:architecture}).
+    \item[Authentification multifacteur] Combinaison de facteurs de catégories différentes~: ce que l'on sait, possède, est (Ch.~\ref{chap:iam}).
+    \item[Bastion] Point d'administration unique, qui concentre et enregistre les sessions (Ch.~\ref{chap:architecture}).
+    \item[Bell-LaPadula] Modèle de confidentialité~: pas de lecture vers le haut, pas d'écriture vers le bas (Ch.~\ref{chap:modeles}).
+    \item[Biba] Modèle d'intégrité~: pas de lecture vers le bas, pas d'écriture vers le haut (Ch.~\ref{chap:modeles}).
+    \item[Certificat] Document signé par une autorité de certification qui lie une clé publique à une identité (Ch.~\ref{chap:crypto-asym}).
+    \item[Chaîne d'attaque] Description d'une intrusion en étapes successives, dont chacune peut être interrompue (Ch.~\ref{chap:menaces}).
+    \item[Chaîne de conservation] Suite d'enregistrements qui retrace la détention d'une pièce, de sa collecte à sa production en justice (Ch.~\ref{chap:investigation}).
+    \item[Chiffrement authentifié] Chiffrement qui garantit aussi l'intégrité (AES-GCM, ChaCha20-Poly1305) (Ch.~\ref{chap:crypto-sym}).
+    \item[Clark-Wilson] Modèle d'intégrité fondé sur les transactions bien formées et la séparation des tâches (Ch.~\ref{chap:modeles}).
+    \item[Classification] Affectation d'une information à un niveau de sensibilité, avec des règles de manipulation (Ch.~\ref{chap:actifs}).
+    \item[Confidentialité, intégrité, disponibilité] Les trois propriétés fondamentales, définies par la loi n°~2010/012 (art.~4) (Ch.~\ref{chap:proprietes}).
+    \item[Constatation, hypothèse, opinion] Fait vérifiable~; explication à vérifier~; jugement sans trace ni démarche (Prologue).
+    \item[CVE, CVSS] Identifiant public d'une vulnérabilité~; notation de sa gravité de 0 à~10 (Ch.~\ref{chap:menaces}).
+    \item[Déclaration d'applicabilité] Document d'un SMSI qui liste les mesures retenues ou exclues, avec leur justification (Ch.~\ref{chap:normes}).
+    \item[Défense en profondeur] Superposition de mesures indépendantes, de natures différentes (Ch.~\ref{chap:architecture}).
+    \item[Déni de service] Attaque qui rend un service indisponible, par saturation ou amplification (Ch.~\ref{chap:reseaux1}).
+    \item[Divulgation coordonnée] Signalement d'une vulnérabilité à l'éditeur, délai de correction, puis publication concertée (Ch.~\ref{chap:ethique}).
+    \item[DMZ] Zone qui accueille les services exposés à Internet (Ch.~\ref{chap:architecture}).
+    \item[Durcissement] Réduction de la surface d'attaque d'un système (Ch.~\ref{chap:systemes}).
+    \item[EBIOS Risk Manager] Méthode d'appréciation des risques par scénarios, en cinq ateliers (Ch.~\ref{chap:risques}).
+    \item[EDR] Outil qui enregistre le comportement des machines, détecte et permet de répondre (Ch.~\ref{chap:systemes}).
+    \item[Empreinte (hachage)] Valeur de taille fixe calculée sur des données~; toute modification la change (Ch.~\ref{chap:crypto-sym}).
+    \item[Hameçonnage] Message trompeur qui pousse à révéler un secret ou à agir (Ch.~\ref{chap:menaces}).
+    \item[HMAC] Code d'authentification de message fondé sur une fonction de hachage et une clé secrète (Ch.~\ref{chap:crypto-sym}).
+    \item[IDS, IPS] Systèmes de détection, ou de prévention, d'intrusion (Ch.~\ref{chap:reseaux2}).
+    \item[Infrastructure à clés publiques] Autorités, règles et moyens qui émettent, publient, révoquent et vérifient des certificats (Ch.~\ref{chap:crypto-asym}).
+    \item[Ingénierie sociale] Manipulation d'une personne par la confiance, l'urgence, l'autorité ou la peur (Ch.~\ref{chap:menaces}).
+    \item[Injection] Donnée interprétée comme une commande (SQL, système) (Ch.~\ref{chap:applications}).
+    \item[Injection d'instructions] Texte malveillant qui détourne les instructions d'un modèle de langage (Ch.~\ref{chap:emergents}).
+    \item[Instrument OUI / NON / NEK] Grille dont chaque question admet une troisième réponse~: connaissance insuffisante (Ch.~\ref{chap:mesurer}).
+    \item[Menace interne] Risque lié à une personne disposant d'un accès légitime (Ch.~\ref{chap:humain}).
+    \item[Menace, vulnérabilité, risque] Cause potentielle d'incident~; faiblesse exploitable~; effet de l'incertitude sur les objectifs (Ch.~\ref{chap:proprietes}).
+    \item[Mode d'opération] Manière d'enchaîner les blocs d'un chiffrement par blocs (ECB, CBC, CTR, GCM) (Ch.~\ref{chap:crypto-sym}).
+    \item[Moindre privilège] Ne donner que les droits nécessaires à la tâche (Ch.~\ref{chap:proprietes}).
+    \item[Mu, U, H] Conformité, incertitude et entropie des réponses d'une grille (Ch.~\ref{chap:mesurer}).
+    \item[Non-répudiation] Propriété qui empêche l'auteur d'une action de la nier~; assurée par la signature (Ch.~\ref{chap:crypto-asym}).
+    \item[Ordre de volatilité] Règle qui impose de collecter d'abord les données qui disparaissent le plus vite (Ch.~\ref{chap:investigation}).
+    \item[Pare-feu] Équipement qui filtre les flux selon des règles lues dans l'ordre (Ch.~\ref{chap:reseaux2}).
+    \item[Politique de sécurité (PSSI)] Document approuvé par la direction, décliné en politiques thématiques, standards et procédures (Ch.~\ref{chap:gouvernance}).
+    \item[Post-quantique] Se dit d'un algorithme conçu pour résister à un ordinateur quantique (FIPS~203 à~205) (Ch.~\ref{chap:crypto-asym}).
+    \item[Rançongiciel] Logiciel qui chiffre les données et exige une rançon, souvent après les avoir volées (Ch.~\ref{chap:menaces}).
+    \item[RBAC, ABAC] Contrôle d'accès par rôles~; par attributs du sujet, de l'objet et du contexte (Ch.~\ref{chap:modeles}).
+    \item[Règle 3-2-1] Trois copies, deux supports, une hors site~; plus une copie immuable ou hors ligne (Ch.~\ref{chap:continuite}).
+    \item[Responsabilité partagée] Répartition des contrôles entre fournisseur de nuage et client (Ch.~\ref{chap:nuage}).
+    \item[RSSI] Responsable de la sécurité des systèmes d'information (Ch.~\ref{chap:gouvernance}).
+    \item[RTO, RPO] Durée d'interruption admissible~; perte de données admissible (Ch.~\ref{chap:continuite}).
+    \item[Sel] Valeur aléatoire propre à chaque compte, ajoutée avant le hachage d'un mot de passe (Ch.~\ref{chap:crypto-sym}).
+    \item[SIEM] Outil qui collecte, conserve et corrèle les journaux de sécurité (Ch.~\ref{chap:operations}).
+    \item[Signature numérique] Valeur calculée avec une clé privée, vérifiable par la clé publique (Ch.~\ref{chap:crypto-asym}).
+    \item[SMSI] Système de management de la sécurité de l'information (ISO/IEC~27001) (Ch.~\ref{chap:normes}).
+    \item[SOC] Centre opérationnel de sécurité~: surveillance, détection, réponse (Ch.~\ref{chap:operations}).
+    \item[STRIDE] Classification des menaces~: usurpation, altération, répudiation, divulgation, déni de service, élévation de privilèges (Ch.~\ref{chap:applications}).
+    \item[Surface d'attaque] Ensemble des points par lesquels un attaquant peut interagir avec un système (Ch.~\ref{chap:systemes}).
+    \item[Test d'intrusion] Attaque autorisée qui démontre les chemins d'un attaquant (Ch.~\ref{chap:evaluer}).
+    \item[Usurpation ARP] Fausses réponses ARP qui placent l'attaquant au milieu des échanges (Ch.~\ref{chap:reseaux1}).
+    \item[Zone de confiance] Ensemble de systèmes séparé des autres par un filtrage des flux (Ch.~\ref{chap:architecture}).
+\end{description}

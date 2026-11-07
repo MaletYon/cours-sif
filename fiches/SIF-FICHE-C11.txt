@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C11
+Chapitre 11 : Le droit de la sécurité au Cameroun et en Afrique
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle loi traite de la cybersécurité et de la cybercriminalité au Cameroun ?
+      a) Loi n° 2010/012
+      b) Loi n° 2010/013
+      c) Loi n° 2024/017
+      d) Loi n° 2018/012
+
+ 2. Quelle loi institue l'ANTIC ?
+      a) Loi n° 2010/012
+      b) Loi n° 2010/013 sur les communications électroniques
+      c) Loi n° 2024/017
+      d) Le code pénal
+
+ 3. Selon l'article 7, l'ANTIC est chargée :
+      a) De la police judiciaire
+      b) De la fiscalité
+      c) De la régulation des activités de sécurité électronique
+      d) Des télécommunications seules
+
+ 4. De quand date la loi n° 2024/017 ?
+      a) 21 décembre 2010
+      b) 1er janvier 2024
+      c) Elle n'est pas datée
+      d) 23 décembre 2024
+
+ 5. Combien de temps les opérateurs conservent-ils les données de connexion et de trafic (art. 25) ?
+      a) Dix ans
+      b) Un an
+      c) Cinq ans
+      d) Vingt ans
+
+ 6. Qui assure la confidentialité des communications selon l'article 42 ?
+      a) L'ANTIC
+      b) Les opérateurs et exploitants des réseaux et des systèmes
+      c) La police
+      d) Les utilisateurs
+
+ 7. Que permet la conservation des journaux ?
+      a) D'économiser de l'espace
+      b) De supprimer les preuves
+      c) D'enquêter et de prouver le respect de la loi
+      d) Rien
+
+ 8. Quel article réprime « tout accès non autorisé » ?
+      a) Article 42
+      b) Article 25
+      c) Article 7
+      d) Article 65, alinéa 2
+
+ 9. Que prévoit l'article 68, alinéa 2 ?
+      a) Le doublement des peines en cas de suppression ou modification de données
+      b) L'acquittement
+      c) Une amende fixe
+      d) Une médiation
+
+10. Quel article vise l'accès sans droit, en violation des mesures de sécurité, pour obtenir des données ?
+      a) Article 65
+      b) Article 69
+      c) Article 68
+      d) Article 74
+
+11. Quelle est la peine d'emprisonnement prévue à l'article 69 ?
+      a) 1 à 2 ans
+      b) 2 à 5 ans
+      c) 5 à 10 ans
+      d) 10 à 20 ans
+
+12. À qui appartient la qualification pénale des faits ?
+      a) Au RSSI
+      b) Au DG
+      c) À l'ANTIC
+      d) Au juge
+
+13. Un administrateur « teste » sans autorisation le système d'un partenaire. Quel article est en cause ?
+      a) Article 65, alinéa 2
+      b) Article 25
+      c) Article 42
+      d) Article 8
+
+14. Quel article de la loi n° 2010/012 pose le droit au respect de la vie privée ?
+      a) Article 65
+      b) Article 41
+      c) Article 7
+      d) Article 26
+
+15. Que faut-il faire avant d'appliquer la loi n° 2024/017 ?
+      a) Se fier à un article de presse
+      b) Rien
+      c) La lire dans le texte officiel publié au Journal officiel
+      d) Demander au prestataire
+
+16. Quelle convention de l'Union africaine traite de cybersécurité et de données personnelles ?
+      a) Budapest
+      b) Lomé
+      c) Genève
+      d) Malabo
+
+17. Quelle convention du Conseil de l'Europe est le premier traité sur la cybercriminalité ?
+      a) Budapest
+      b) Malabo
+      c) Kampala
+      d) Vienne
+
+18. Que faut-il vérifier avant d'invoquer une convention ?
+      a) Sa traduction
+      b) L'état des ratifications sur le site du dépositaire
+      c) Son prix
+      d) Sa longueur
+
+19. Quel est le premier réflexe juridique après un incident ?
+      a) Payer la rançon
+      b) Communiquer sur les réseaux sociaux
+      c) Conserver les preuves
+      d) Licencier un suspect
+
+20. Que dit le cours du paiement d'une rançon ?
+      a) Il garantit la restitution
+      b) Il est obligatoire
+      c) Il est remboursé par l'État
+      d) Il ne garantit ni restitution ni non-publication et finance le crime
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. L'ANTIC est l'autorité de certification racine.
+      Vrai / Faux
+
+22. La conservation des journaux est seulement une bonne pratique, sans base légale.
+      Vrai / Faux
+
+23. L'intention pédagogique rend légal un test non autorisé.
+      Vrai / Faux
+
+24. Le RSSI décrit les faits et conserve les preuves, sans qualifier.
+      Vrai / Faux
+
+25. L'article 74 réprime l'atteinte à l'intimité de la vie privée.
+      Vrai / Faux
+
+26. Le cours affirme que le Cameroun a ratifié la Convention de Budapest.
+      Vrai / Faux
+
+27. La décision de payer une rançon appartient à la direction, avec son conseil juridique.
+      Vrai / Faux
+
+28. Il faut désigner publiquement un coupable dès le lundi.
+      Vrai / Faux
+
+29. L'article 29 impose aux exploitants de conserver les données de connexion et de trafic.
+      Vrai / Faux
+
+30. L'article 68 vise l'accès ou le maintien frauduleux avec perturbation.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. L'Agence nationale des technologies de l'information et de la communication a pour sigle ______.
+
+32. Selon l'article 25, la durée de conservation est de ______ ans.
+
+33. L'accès non autorisé est réprimé par l'article ______, alinéa 2.
+
+34. La convention de l'Union africaine de 2014 est la Convention de ______.
+
+35. La loi sur la protection des données personnelles porte le numéro 2024/______.
+
+36. Les peines de l'article 68 sont ______ en cas de suppression de données.
+
+37. Le traité de 2001 sur la cybercriminalité est la Convention de ______.
+
+38. La confidentialité des communications est l'objet de l'article ______.
+
+39. Après un incident, on porte ______ auprès de la police, de la gendarmerie ou du procureur.
+
+40. La loi n° 2010/013 régit les communications ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

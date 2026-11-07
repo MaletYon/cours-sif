@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C22
+Chapitre 22 : Opérations de sécurité et incidents
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Que fait un centre opérationnel de sécurité ?
+      a) Il surveille en continu, détecte, analyse et déclenche la réponse
+      b) Il vend des logiciels
+      c) Il rédige les contrats
+      d) Il gère la paie
+
+ 2. Quel niveau du SOC trie les alertes ?
+      a) Niveau 2
+      b) Niveau 1
+      c) Niveau 3
+      d) Le responsable
+
+ 3. Quel niveau du SOC mène la recherche proactive de menaces ?
+      a) Niveau 1
+      b) Niveau 2
+      c) Niveau 3
+      d) Aucun
+
+ 4. Que ne peut-on pas externaliser quand on confie la surveillance à un prestataire ?
+      a) La collecte des journaux
+      b) La corrélation
+      c) Le tri des alertes
+      d) La décision
+
+ 5. Que fait un SIEM ?
+      a) Il centralise et corrèle les journaux
+      b) Il chiffre les disques
+      c) Il remplace les sauvegardes
+      d) Il filtre le Wi-Fi
+
+ 6. De quoi dépend la valeur d'une règle de corrélation ?
+      a) De sa couleur
+      b) Des journaux que le SIEM reçoit
+      c) De son nom
+      d) Du prix du SIEM seul
+
+ 7. À quelle heure l'attaquant s'est-il connecté le 2 mars ?
+      a) 7 h 30
+      b) 21 h 40
+      c) 23 h 12
+      d) 22 h 05
+
+ 8. Combien de temps s'est écoulé entre la première connexion et la détection ?
+      a) 12 heures
+      b) 36 heures
+      c) 11 jours
+      d) 80 heures et 18 minutes
+
+ 9. Quel document du NIST décrit le cycle de réponse aux incidents ?
+      a) SP 800-61
+      b) SP 800-115
+      c) SP 800-34
+      d) SP 800-40
+
+10. Combien de phases compte le cycle de réponse présenté dans le cours ?
+      a) Deux
+      b) Quatre
+      c) Six
+      d) Dix
+
+11. Quelle phase vient avant l'éradication ?
+      a) Les leçons
+      b) La préparation seule
+      c) Le confinement
+      d) La publication
+
+12. Quelle norme ISO traite de la gestion des incidents de sécurité ?
+      a) ISO/IEC 27001
+      b) ISO 22301
+      c) ISO/IEC 27037
+      d) ISO/IEC 27035
+
+13. Sous quel délai escalade-t-on un incident critique à la direction générale ?
+      a) Sous 1 heure
+      b) Sous 4 heures
+      c) Dans la journée
+      d) Dans la semaine
+
+14. Un compte à privilèges compromis est un incident de gravité :
+      a) Basse
+      b) Haute
+      c) Moyenne
+      d) Nulle
+
+15. Un courriel d'hameçonnage signalé et bloqué est un incident de gravité :
+      a) Critique
+      b) Haute
+      c) Basse
+      d) Moyenne
+
+16. Quel est le premier geste du guide de réponse au rançongiciel ?
+      a) Éteindre les machines
+      b) Payer la rançon
+      c) Restaurer immédiatement
+      d) Isoler les machines touchées sans les éteindre
+
+17. À quelle heure le technicien d'astreinte a-t-il redémarré les serveurs ?
+      a) 22 h 05
+      b) 21 h 40
+      c) 23 h 12
+      d) 7 h 30
+
+18. Quand les mots de passe d'administration de LiZbiZ ont-ils été changés ?
+      a) Le 5 mars
+      b) Le 9 mars
+      c) Le 6 mars
+      d) Le 16 mars
+
+19. Que mesure le MTTD ?
+      a) Le délai moyen de restauration
+      b) Le nombre de serveurs
+      c) Le délai moyen de détection
+      d) Le coût de l'incident
+
+20. Que mesure la couverture des journaux ?
+      a) La taille des disques
+      b) Le nombre de salariés
+      c) La durée des sauvegardes
+      d) La part des systèmes critiques qui envoient leurs journaux au SIEM
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un SOC peut être externalisé.
+      Vrai / Faux
+
+22. Un SIEM qui ne reçoit pas les journaux des serveurs critiques peut quand même détecter leur compromission.
+      Vrai / Faux
+
+23. LiZbiZ a découvert l'attaque parce que tout était chiffré.
+      Vrai / Faux
+
+24. On éradique avant de confiner.
+      Vrai / Faux
+
+25. La réponse aux incidents préserve les preuves.
+      Vrai / Faux
+
+26. Le retour d'expérience fait partie du cycle de réponse.
+      Vrai / Faux
+
+27. La grille de gravité est une convention à adapter à l'organisation.
+      Vrai / Faux
+
+28. Il faut réinitialiser les mots de passe d'administration depuis un poste sain.
+      Vrai / Faux
+
+29. À 7 h 30 le 6 mars, les liaisons entre sites étaient coupées.
+      Vrai / Faux
+
+30. Une règle qui produit 200 alertes par semaine dont 3 vraies a un taux de faux positifs élevé.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. L'outil qui centralise et corrèle les journaux a pour sigle ______.
+
+32. Le centre opérationnel de sécurité a pour sigle ______.
+
+33. Le délai moyen de détection a pour sigle ______.
+
+34. Le délai moyen de réponse a pour sigle ______.
+
+35. Le document NIST sur la réponse aux incidents est le SP 800-______.
+
+36. On ______ avant d'éradiquer.
+
+37. Face à un rançongiciel, on isole les machines sans les ______.
+
+38. Un incident qui arrête l'activité de plusieurs sites est de gravité ______.
+
+39. La matrice des techniques d'attaque utilisée pour mesurer la couverture est ATT&______.
+
+40. La norme ISO de gestion des incidents est l'ISO/IEC ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

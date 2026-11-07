@@ -1,0 +1,307 @@
+% ============================================================================
+% Fichier  : partie4/P04_C21_evaluer.tex
+% Titre    : Évaluer la Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre VII » (types de tests, étapes d'un test
+% d'intrusion). Sources : NIST SP 800-115 (2008) ; ISO 19011:2018 ;
+% ISO/IEC 27007:2020 ; CVSS v3.1 ; loi n° 2010/012, art. 65 (2) et 69 (texte
+% officiel, cités au Chapitre 11).
+% ============================================================================
+
+\chapter{Évaluer la Sécurité}
+\label{chap:evaluer}
+\chaptermark{Évaluer la sécurité}
+
+\epigraph{%
+    « Un test ne trouve que ce qu'il a cherché,\\
+    dans le temps qu'il avait. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:menaces},
+\ref{chap:droit}, \ref{chap:ethique} et~\ref{chap:applications}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Distinguer analyse de vulnérabilités, test d'intrusion et audit.
+    \item Rédiger l'autorisation et le cadre d'un test.
+    \item Décrire les phases d'un test d'intrusion.
+    \item Prioriser les vulnérabilités trouvées.
+    \item Lire et exploiter un rapport de test.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : comment savoir que les mesures fonctionnent~?}
+% ============================================================================
+
+Six mois après l'attaque, LiZbiZ a mis en place la double
+authentification, segmenté son réseau et renégocié le contrat de son
+prestataire. Le conseil demande~: « sommes-nous protégés~? » Seule une
+évaluation peut répondre, à condition d'en choisir le type, d'en fixer le
+cadre et de lire ses résultats avec prudence.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Trois façons d'évaluer (section~\ref{sec:c21-types}).
+    \item Le cadre et l'autorisation (section~\ref{sec:c21-cadre}).
+    \item Les phases d'un test d'intrusion (section~\ref{sec:c21-phases}).
+    \item Prioriser les vulnérabilités (section~\ref{sec:c21-prioriser}).
+    \item Le rapport (section~\ref{sec:c21-rapport}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Trois Façons d'Évaluer}
+\label{sec:c21-types}
+% ============================================================================
+
+\begin{tableaucours}{L{3.2cm}L{4.6cm}L{4.4cm}}{%
+    \tableauHeader{Évaluation} &
+    \tableauHeader{Question} &
+    \tableauHeader{Résultat}
+}
+Analyse de vulnérabilités & Quelles faiblesses connues sont présentes~? &
+Une liste, à trier \\
+Test d'intrusion & Un attaquant peut-il atteindre tel objectif~? & Des
+chemins d'attaque démontrés \\
+Audit de sécurité & Les mesures exigées existent-elles et
+fonctionnent-elles~? & Des écarts à un référentiel, avec leurs preuves \\
+Exercice d'équipe rouge & L'organisation détecte-t-elle et répond-elle~?
+& Une mesure de la détection et de la réponse \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~21.1. Les types d'évaluation}\end{center}
+
+Le NIST SP~800-115 décrit ces techniques et la manière de les
+organiser~\cite{nist2008sp800115}~; l'ISO~19011 et l'ISO/IEC~27007
+encadrent l'audit~\cite{iso19011_2018,iso27007_2020}.
+
+% ============================================================================
+\section{Le Cadre et l'Autorisation}
+\label{sec:c21-cadre}
+% ============================================================================
+
+Un test non autorisé est un accès non autorisé, puni par la loi
+(art.~65, al.~2, Chapitre~\ref{chap:droit}). Tout test commence donc par
+une autorisation écrite.
+
+\begin{boxprocedure}
+\textbf{La note d'autorisation d'un test}
+\begin{enumerate}
+    \item \textbf{Signataire} habilité à autoriser pour chaque système
+          (et l'hébergeur ou le fournisseur s'il y en a un).
+    \item \textbf{Périmètre}~: adresses, applications, comptes de test~;
+          ce qui est exclu.
+    \item \textbf{Méthodes} autorisées et interdites (déni de service,
+          ingénierie sociale).
+    \item \textbf{Fenêtre}~: dates et heures.
+    \item \textbf{Contacts} d'urgence des deux côtés, et procédure d'arrêt.
+    \item \textbf{Traitement des données} rencontrées et des résultats.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{Les Phases d'un Test d'Intrusion}
+\label{sec:c21-phases}
+% ============================================================================
+
+\begin{tableaucours}{L{3.0cm}L{9.2cm}}{%
+    \tableauHeader{Phase} &
+    \tableauHeader{Contenu}
+}
+Planification & Objectifs, règles d'engagement, autorisation \\
+Découverte & Reconnaissance passive (sources ouvertes), puis active
+(balayage, énumération des services) \\
+Attaque & Exploitation des vulnérabilités, élévation de privilèges,
+déplacement, jusqu'à l'objectif ou la fin de la fenêtre \\
+Rapport & Constatations, preuves, gravité, recommandations \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~21.2. Les phases d'un test d'intrusion
+(d'après le NIST SP~800-115)}\end{center}
+
+Les tests se conduisent en \emph{boîte noire} (sans information), en
+\emph{boîte grise} (avec un compte utilisateur) ou en \emph{boîte
+blanche} (avec le code et la documentation). La boîte grise est souvent
+le meilleur compromis pour une application.
+
+\begin{boxscenario}{Opération MEFOU. Le test du nouveau portail de l'ANPP}
+\textbf{Cadre.} Boîte grise, deux comptes de bénéficiaires de test, du 3
+au 7~mai, de 18~h à 6~h, sur une copie isolée~; déni de service exclu~;
+note signée par le directeur général de l'ANPP et par l'hébergeur.
+
+\medskip
+\textbf{Constatations} (rapport du testeur, preuves en annexe)~: le
+contrôle d'accès par objet est désormais vérifié (le défaut décrit au
+Chapitre~\ref{chap:applications} est corrigé)~; une bibliothèque de
+génération de documents présente une CVE critique exploitable à
+distance~; les messages d'erreur révèlent la version du serveur.
+\end{boxscenario}
+
+% ============================================================================
+\section{Prioriser les Vulnérabilités}
+\label{sec:c21-prioriser}
+% ============================================================================
+
+Une analyse de vulnérabilités sur un grand parc produit des centaines de
+résultats. On les trie en croisant la gravité technique (CVSS,
+Chapitre~\ref{chap:menaces}) avec l'exposition, la valeur de l'actif et
+l'exploitation connue.
+
+\begin{tableaucours}{L{4.4cm}ccL{2.8cm}}{%
+    \tableauHeader{Vulnérabilité} &
+    \tableauHeader{CVSS} &
+    \tableauHeader{Exposée} &
+    \tableauHeader{Priorité}
+}
+Bibliothèque de documents du portail & 9,8 & Oui & 1 (72~h) \\
+Version du serveur affichée & 5,3 & Oui & 3 \\
+Faille d'un poste de test isolé & 8,8 & Non & 3 \\
+Protocole SMBv1 actif sur un serveur & 8,1 & Interne & 2 (15~jours) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~21.3. Prioriser selon la gravité et le contexte}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Conclure « le système est sûr » parce que le
+test n'a rien trouvé.
+
+\smallskip
+\textbf{Règle~:} un rapport dit « aucune vulnérabilité exploitable n'a
+été trouvée dans le périmètre et la durée du test », jamais « le système
+est sûr ». Ce qui n'a pas été testé reste inconnu.
+\end{boxalert}
+
+% ============================================================================
+\section{Le Rapport}
+\label{sec:c21-rapport}
+% ============================================================================
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Partie} &
+    \tableauHeader{Contenu}
+}
+Synthèse & Pour la direction~: objectifs, résultat global, risques
+principaux, en langage métier \\
+Cadre & Périmètre, dates, méthodes, limites \\
+Constatations & Pour chaque vulnérabilité~: description, preuve,
+gravité, systèmes touchés \\
+Recommandations & Correction, priorité, mesure provisoire \\
+Annexes & Preuves, journaux du testeur, outils et versions \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~21.4. La structure d'un rapport de test}\end{center}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Faire le lien avec le risque.} L'auditeur traduit chaque
+constatation en risque pour l'organisation et la rattache au registre
+(Chapitre~\ref{chap:risques})~; il vérifie ensuite, par un test de
+contrôle, que la correction est effective.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Commander et suivre.} Le RSSI choisit le type d'évaluation selon
+la question posée, signe ou fait signer l'autorisation, et suit les
+corrections jusqu'à leur vérification.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Analyse de vulnérabilités, test d'intrusion, audit et
+          équipe rouge} répondent à des questions différentes.
+    \item \textbf{Aucun test sans autorisation écrite}~: périmètre,
+          méthodes, fenêtre, contacts.
+    \item \textbf{Un test d'intrusion} planifie, découvre, attaque et rend
+          compte~; en boîte noire, grise ou blanche.
+    \item \textbf{On priorise} en croisant gravité, exposition, valeur et
+          exploitation connue.
+    \item \textbf{Un rapport} sépare synthèse, cadre, constatations et
+          recommandations, et dit ses limites.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: choisir un type
+d'évaluation~; rédiger une note d'autorisation~; nommer les quatre phases
+d'un test~; prioriser des vulnérabilités~; structurer un rapport et
+formuler ses limites.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.1. Quel type~? \niveaubase}]
+Quel type d'évaluation pour~: « nos serveurs ont-ils des correctifs
+manquants~? »~; « un attaquant peut-il atteindre la paie depuis
+Internet~? »~; « appliquons-nous notre politique d'accès~? »
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.2. Les boîtes \niveaubase}]
+Pour un test du portail de suivi de LiZbiZ, quelles informations le
+testeur reçoit-il en boîte noire, grise et blanche~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.3. La note \niveaumoyen}]
+Rédigez la note d'autorisation d'un test d'intrusion du réseau de
+l'agence de Garoua.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.4. Prioriser \niveaumoyen}]
+Classez cinq vulnérabilités de votre choix, en justifiant chaque rang par
+la gravité, l'exposition et la valeur de l'actif.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.5. La limite \niveaumoyen}]
+Réécrivez la phrase « le portail de l'ANPP est sécurisé » d'un rapport,
+de façon exacte.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.6. Le prestataire testeur \niveaumoyen}]
+LiZbiZ veut confier le test d'intrusion à SAHEL INFOGÉRANCE, qui exploite
+déjà ses centres. Qu'en pensez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.7. Vérifier la correction \niveaumoyen}]
+Comment vérifier que la bibliothèque vulnérable du portail a bien été
+mise à jour, et que la vulnérabilité n'est plus exploitable~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.8. Synthèse \niveaumoyen}]
+Rédigez la synthèse d'une demi-page du test de l'ANPP pour son directeur
+général.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.9. Un programme d'évaluation \niveauexpert}]
+Proposez à la BANQUE SANAGA un programme annuel d'évaluation~: types,
+périmètres, fréquences, prestataires, budget relatif.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~21.10. Rejouer GAROUA \niveauexpert}]
+Concevez un exercice d'équipe rouge qui rejoue l'Opération GAROUA sur
+l'architecture cible (Chapitre~\ref{chap:architecture})~: objectifs,
+règles, mesures de la détection.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-115~\cite{nist2008sp800115}.
+    \item ISO~19011 et ISO/IEC~27007~\cite{iso19011_2018,iso27007_2020}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} L'évaluation est ponctuelle~; la surveillance est
+permanente. Le Chapitre~\ref{chap:operations} traite des opérations de
+sécurité et de la réponse aux incidents.
+\end{boxinfo}

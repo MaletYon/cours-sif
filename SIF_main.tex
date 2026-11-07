@@ -1,0 +1,205 @@
+% ============================================================================
+% Fichier     : SIF_main.tex
+% Titre       : Sécurité Informatique
+% Auteur      : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Institution : ENSP Yaoundé · Université de Yaoundé I · LIMSI
+% Version     : 1.0 -- novembre 2026
+% ============================================================================
+
+\documentclass[12pt, twoside, openright, a4paper]{book}
+
+% --- Feuille de style unifiée ---
+\usepackage{Style_SIF}
+\raggedbottom  % évite les blancs étirés entre un tableau et sa légende
+
+% --- Bibliographie ---
+\addbibresource{bibliographie/SIF_references.bib}
+
+% ============================================================================
+% MÉTADONNÉES PDF
+% ============================================================================
+\hypersetup{
+    pdftitle={Sécurité Informatique},
+    pdfauthor={MINKA MI NGUIDJOÏ Thierry Emmanuel},
+    pdfsubject={SEC3266 · Génie Informatique, niveau 3 · ENSP Yaoundé I},
+    pdfkeywords={sécurité informatique, cybersécurité, cryptographie, réseaux, gestion des risques, ISO 27001, NIST CSF}
+}
+
+\begin{document}
+
+% --------------------------------------------------------------------------
+% ÉLÉMENTS PRÉLIMINAIRES (pages romaines)
+% --------------------------------------------------------------------------
+\frontmatter
+
+    \input{front/00_page_titre}
+    \cleardoublepage
+
+    \input{front/01_avant_propos}
+    \cleardoublepage
+
+    \input{front/02_mode_emploi}
+    \cleardoublepage
+
+    \input{front/03_ndap_sukulu}
+    \cleardoublepage
+
+    \tableofcontents
+    \cleardoublepage
+
+    \listoffigures
+    \listoftables
+    \cleardoublepage
+
+% CORPS (pages arabes)
+% Numérotation des chapitres CONTINUE sur tout le cours : le prologue est le
+% chapitre 0, puis C01 à C21, un numéro par fichier.
+% --------------------------------------------------------------------------
+\mainmatter
+
+    \part*{Prologue Opérationnel}
+    \addcontentsline{toc}{part}{Prologue Opérationnel}
+        \setcounter{chapter}{-1}
+        \IfFileExists{partie0/P00_une_nuit_a_garoua.tex}{\input{partie0/P00_une_nuit_a_garoua}}{}
+
+    \part{Fondements de la Sécurité de l'Information}
+    \label{part:fondements}
+
+        \IfFileExists{partie1/P01_C01_proprietes_securite.tex}{\input{partie1/P01_C01_proprietes_securite}}{}
+        \IfFileExists{partie1/P01_C02_menaces_attaques.tex}{\input{partie1/P01_C02_menaces_attaques}}{}
+        \IfFileExists{partie1/P01_C03_crypto_symetrique.tex}{\input{partie1/P01_C03_crypto_symetrique}}{}
+        \IfFileExists{partie1/P01_C04_crypto_asymetrique.tex}{\input{partie1/P01_C04_crypto_asymetrique}}{}
+        \IfFileExists{partie1/P01_C05_grandes_attaques.tex}{\input{partie1/P01_C05_grandes_attaques}}{}
+
+    \part{Gouvernance et Gestion des Risques}
+    \label{part:gouvernance}
+
+        \IfFileExists{partie2/P02_C06_gouvernance.tex}{\input{partie2/P02_C06_gouvernance}}{}
+        \IfFileExists{partie2/P02_C07_risques.tex}{\input{partie2/P02_C07_risques}}{}
+        \IfFileExists{partie2/P02_C08_actifs_donnees.tex}{\input{partie2/P02_C08_actifs_donnees}}{}
+        \IfFileExists{partie2/P02_C09_facteur_humain.tex}{\input{partie2/P02_C09_facteur_humain}}{}
+
+    \part{Cadre Normatif et Juridique}
+    \label{part:normatif}
+
+        \IfFileExists{partie3/P03_C10_normes.tex}{\input{partie3/P03_C10_normes}}{}
+        \IfFileExists{partie3/P03_C11_droit.tex}{\input{partie3/P03_C11_droit}}{}
+        \IfFileExists{partie3/P03_C12_ethique.tex}{\input{partie3/P03_C12_ethique}}{}
+
+    \part{Sécurité Technique}
+    \label{part:technique}
+
+        \IfFileExists{partie4/P04_C13_modeles_formels.tex}{\input{partie4/P04_C13_modeles_formels}}{}
+        \IfFileExists{partie4/P04_C14_architecture.tex}{\input{partie4/P04_C14_architecture}}{}
+        \IfFileExists{partie4/P04_C15_reseaux_protocoles.tex}{\input{partie4/P04_C15_reseaux_protocoles}}{}
+        \IfFileExists{partie4/P04_C16_reseaux_equipements.tex}{\input{partie4/P04_C16_reseaux_equipements}}{}
+        \IfFileExists{partie4/P04_C17_identites_acces.tex}{\input{partie4/P04_C17_identites_acces}}{}
+        \IfFileExists{partie4/P04_C18_systemes.tex}{\input{partie4/P04_C18_systemes}}{}
+        \IfFileExists{partie4/P04_C19_applications.tex}{\input{partie4/P04_C19_applications}}{}
+        \IfFileExists{partie4/P04_C20_nuage_mobiles.tex}{\input{partie4/P04_C20_nuage_mobiles}}{}
+        \IfFileExists{partie4/P04_C21_evaluer.tex}{\input{partie4/P04_C21_evaluer}}{}
+        \IfFileExists{partie4/P04_C22_operations_incidents.tex}{\input{partie4/P04_C22_operations_incidents}}{}
+
+    \part{Défis Avancés}
+    \label{part:avance}
+
+        \IfFileExists{partie5/P05_C23_continuite.tex}{\input{partie5/P05_C23_continuite}}{}
+        \IfFileExists{partie5/P05_C24_investigation.tex}{\input{partie5/P05_C24_investigation}}{}
+        \IfFileExists{partie5/P05_C25_emergents.tex}{\input{partie5/P05_C25_emergents}}{}
+
+    \part{Mesurer la Sécurité}
+    \label{part:mesure}
+
+        \IfFileExists{partie6/P06_C26_mesurer.tex}{\input{partie6/P06_C26_mesurer}}{}
+
+% --------------------------------------------------------------------------
+% ANNEXES
+% --------------------------------------------------------------------------
+\appendix
+
+    \input{annexes/Ann_A_glossaire}
+    \input{annexes/Ann_B_outils}
+    \input{annexes/Ann_C_templates}
+    \input{annexes/Ann_D_textes}
+    \input{annexes/Ann_E_bibliographie}
+    \input{annexes/Ann_F_contacts}
+
+% --------------------------------------------------------------------------
+% ÉLÉMENTS FINAUX
+% --------------------------------------------------------------------------
+\backmatter
+
+    \nocite{*}
+    \printbibliography[heading=bibintoc, title={Références bibliographiques}]
+
+    \printindex
+
+% ==============================================================================
+% 4ÈME DE COUVERTURE
+% ==============================================================================
+\clearpage
+\thispagestyle{empty}
+\pagecolor{CouleurPrimaire}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[CouleurAccent]
+        (current page.south west) rectangle
+        ([yshift=1.8cm] current page.south east);
+    \fill[CouleurAccent]
+        ([yshift=-1.4cm] current page.north west) rectangle
+        ([yshift=-1.7cm] current page.north east);
+\end{tikzpicture}
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{CouleurAccent}\rule{0.6\linewidth}{1pt}}\\[1.5ex]
+    {\color{white}\Large\bfseries À propos de ce cours}\\[1.5ex]
+    {\color{CouleurAccent}\rule{0.6\linewidth}{1pt}}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{minipage}{0.75\textwidth}
+\color{white!85!gray}\setstretch{1.4}
+Sécuriser un système d'information, c'est connaître ce que l'on protège,
+contre qui, avec quelles mesures, et savoir vérifier qu'elles fonctionnent.
+Ce cours en donne les fondements, les méthodes et la pratique.
+
+\medskip
+
+Il progresse en six parties, précédées d'un prologue : les fondements et la
+cryptographie, la gouvernance et les risques, le cadre normatif et
+juridique, la sécurité technique (architecture, réseaux, identités,
+systèmes, applications, nuage, opérations), les défis avancés, et la mesure
+de la sécurité.
+
+\medskip
+
+Chaque notion est ancrée dans les standards internationaux (ISO/IEC, NIST,
+OWASP, CIS) et dans le droit camerounais et africain. Le cours s'adresse aux
+élèves ingénieurs en génie informatique de l'ENSP Yaoundé et aux
+professionnels qui exercent comme RSSI, administrateurs systèmes et réseaux,
+analystes SOC, développeurs ou auditeurs de sécurité.
+\end{minipage}
+\end{center}
+
+\vfill
+
+\begin{center}
+    {\color{CouleurAccent}\rule{0.7\linewidth}{1.2pt}}\\[1.2ex]
+    {\color{white}\large\bfseries MINKA MI NGUIDJOÏ Thierry Emmanuel}\\[0.4ex]
+    {\color{white!80!gray}\small
+        CISA~·~CISM~·~CGEIT~·~CRISC~·~CDPSE~·~ISO 27001~·~ISO 22301~·~ISO 9001}\\[0.3ex]
+    {\color{white!70!gray}\footnotesize\itshape
+        Chercheur au laboratoire d'Ingénierie Mathématiques et des Systèmes d'Information}\\[0.3ex]
+    {\color{white!70!gray}\footnotesize\itshape
+        Chercheur~|~Cryptologue~|~Auditeur Senior~|~Expert Judiciaire~|~GRC \& Sécurité de l'Information}\\[1.2ex]
+    {\color{CouleurAccent}\rule{0.7\linewidth}{1.2pt}}
+\end{center}
+
+\vspace{1cm}
+
+\afterpage{\nopagecolor}
+\end{document}

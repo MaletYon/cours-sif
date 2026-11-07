@@ -1,0 +1,444 @@
+% ============================================================================
+% Fichier  : partie1/P01_C01_proprietes_securite.tex
+% Titre    : La Sécurité de l'Information : Objets et Propriétés
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre I » (archivé). Définitions de la loi n° 2010/012,
+% art. 4 (points 24, 33, 38, 48, 58), lues dans le texte officiel ; ISO/IEC
+% 27000 ; principes de Saltzer et Schroeder (1975) ; hexade de Parker (1998).
+% ============================================================================
+
+\chapter{La Sécurité de l'Information : Objets et Propriétés}
+\label{chap:proprietes}
+\chaptermark{Objets et propriétés}
+
+\epigraph{%
+    « Sécuriser, c'est d'abord dire ce que l'on protège,\\
+    et contre quelle perte. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Aucun prérequis~; le Prologue
+(Chapitre~\ref{chap:prologue}) fournit le cas.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Définir information, système d'information, actif, sécurité de
+          l'information et cybersécurité.
+    \item Énoncer les propriétés de sécurité et les rattacher aux
+          définitions de la loi n°~2010/012.
+    \item Exprimer les besoins de sécurité d'un actif sur une échelle.
+    \item Distinguer menace, vulnérabilité, impact et risque.
+    \item Appliquer les principes de conception de Saltzer et Schroeder.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : qu'a-t-on perdu, au juste, à Garoua~?}
+% ============================================================================
+
+Le lundi matin, M.~ETEME dit que « la sécurité a été percée ». La phrase
+ne permet aucune décision. LiZbiZ a perdu l'usage de sa facturation, elle
+a peut-être perdu le secret de ses données clients, et elle ne sait plus si
+ses données de stock sont exactes. Ce sont trois pertes différentes, qui
+appellent trois réponses différentes. Ce chapitre donne le vocabulaire
+qui permet de les nommer.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Information, système d'information, actif (section~\ref{sec:c01-objets}).
+    \item Sécurité de l'information et cybersécurité (section~\ref{sec:c01-securite}).
+    \item Les propriétés de sécurité (section~\ref{sec:c01-proprietes}).
+    \item Exprimer des besoins de sécurité (section~\ref{sec:c01-besoins}).
+    \item Menace, vulnérabilité, risque (section~\ref{sec:c01-risque}).
+    \item Les principes de conception (section~\ref{sec:c01-principes}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Information, Système d'Information, Actif}
+\label{sec:c01-objets}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Système d'information}~: selon la \loicam{n°~2010/012}
+(art.~4, point~72), « dispositif isolé ou groupe de dispositifs
+interconnectés ou apparentés, assurant par lui-même ou par un ou plusieurs
+de ses éléments, conformément à un programme, un traitement automatisé de
+données ».
+
+\medskip
+\termecle{Actif}~: tout élément qui a de la valeur pour l'organisation.
+On distingue les \emph{actifs essentiels} (informations et processus
+métier) et les \emph{actifs supports} (matériels, logiciels, réseaux,
+personnes, locaux, prestataires) sur lesquels ils reposent.
+\end{boxdef}
+
+La distinction entre actifs essentiels et actifs supports est la clé de
+toute démarche de sécurité~: on protège un serveur \emph{parce qu'}il porte
+la facturation, et c'est la valeur de la facturation qui fixe l'effort.
+L'ISO/IEC~27000 en donne le vocabulaire commun~\cite{iso27000_2018}.
+
+\begin{tableaucours}{L{3.4cm}L{4.2cm}L{4.6cm}}{%
+    \tableauHeader{Actif essentiel} &
+    \tableauHeader{Actifs supports} &
+    \tableauHeader{Touché le 5 mars~?}
+}
+Facturation & Application intégrée, serveurs de Douala et de Garoua &
+Oui~: serveurs chiffrés \\
+Données des clients & Base de données, partage de fichiers & Oui~: copie
+probable de 40~Go \\
+Suivi des expéditions & Portail web, base de données & Indirectement~:
+données non mises à jour \\
+Messagerie & Service en nuage & Non, d'après les premiers éléments \\
+Sauvegardes & Partage réseau du domaine & Oui~: supprimées \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~1.1. Actifs de LiZbiZ et Opération GAROUA}\end{center}
+
+% ============================================================================
+\section{Sécurité de l'Information et Cybersécurité}
+\label{sec:c01-securite}
+% ============================================================================
+
+La \termecle{sécurité de l'information} protège l'information sous toutes
+ses formes~: numérique, papier, orale. La \termecle{sécurité informatique}
+protège les systèmes qui la traitent. La \termecle{cybersécurité} désigne
+la sécurité de ce qui passe par les réseaux numériques.
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~4, point~33} (texte officiel)~:
+\textit{« Cybersécurité~: ensemble de mesures de prévention, de protection
+et de dissuasion d'ordre technique, organisationnel, juridique, financier,
+humain, procédural et autres actions permettant d'atteindre les objectifs
+de sécurité fixés à travers les réseaux de communications électroniques,
+les systèmes d'information et pour la protection de la vie privée des
+personnes. »}
+
+\medskip
+\textbf{Analyse.} La définition légale insiste sur la diversité des
+mesures~: la technique n'en est qu'une parmi sept. À Garoua, la faille
+initiale était humaine (un mot de passe donné à une fausse page) et
+contractuelle (aucune exigence imposée au prestataire), avant d'être
+technique.
+\end{boxjuris}
+
+% ============================================================================
+\section{Les Propriétés de Sécurité}
+\label{sec:c01-proprietes}
+% ============================================================================
+
+\subsection{La triade}
+
+Trois propriétés forment le socle, que la loi définit~:
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~4} (texte officiel)
+
+\medskip
+\textbf{Point~24}~: \textit{« Confidentialité~: maintien du secret des
+informations et des transactions afin de prévenir la divulgation non
+autorisée d'informations aux non destinataires permettant la lecture,
+l'écoute, la copie illicite d'origine intentionnelle ou accidentelle durant
+leur stockage, traitement ou transfert. »}
+
+\medskip
+\textbf{Point~48}~: \textit{« Intégrité des données~: critère de sécurité
+définissant l'état d'un réseau de communications électroniques, d'un
+système d'information ou d'un équipement terminal qui est demeuré intact et
+permet de s'assurer que les ressources n'ont pas été altérées (modifiées ou
+détruites) d'une façon tant intentionnelle qu'accidentelle, de manière à
+assurer leur exactitude, leur fiabilité et leur pérennité. »}
+
+\medskip
+\textbf{Point~38}~: \textit{« Disponibilité~: critère de sécurité
+permettant que les ressources des réseaux de communications électroniques,
+des systèmes d'information ou des équipements terminaux soient accessibles
+et utilisables selon les besoins (le facteur temps). »}
+\end{boxjuris}
+
+\subsection{Au-delà de la triade}
+
+La triade ne suffit pas à décrire toutes les pertes. On lui ajoute
+habituellement trois propriétés, et D.~Parker a proposé de remplacer la
+triade par six attributs~\cite{parker1998}.
+
+\begin{tableaucours}{L{3.0cm}L{5.0cm}L{4.2cm}}{%
+    \tableauHeader{Propriété} &
+    \tableauHeader{Question posée} &
+    \tableauHeader{Mesures typiques}
+}
+Confidentialité & Seules les personnes autorisées peuvent-elles lire~? &
+Contrôle d'accès, chiffrement \\
+Intégrité & L'information est-elle exacte et complète~? & Hachage,
+signatures, contrôles de saisie \\
+Disponibilité & Est-elle accessible quand on en a besoin~? & Redondance,
+sauvegardes, plan de continuité \\
+Authenticité & L'origine est-elle bien celle que l'on croit~? &
+Authentification, signature \\
+Non-répudiation & L'auteur peut-il nier son action~? & Signature, journaux
+protégés, horodatage \\
+Traçabilité (imputabilité) & Peut-on savoir qui a fait quoi~? & Comptes
+nominatifs, journalisation \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~1.2. Les propriétés de sécurité}\end{center}
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~4, point~58} (texte officiel)~:
+\textit{« Non répudiation~: critère de sécurité assurant la disponibilité
+de preuves qui peuvent être opposées à un tiers et utilisées pour prouver
+la traçabilité d'une communication électronique qui a eu lieu. »}
+\end{boxjuris}
+
+\begin{boxscenario}{Opération GAROUA. Trois pertes, trois propriétés}
+\textbf{Disponibilité}~: la facturation est arrêtée depuis le 5~mars à
+21~h~40. \textbf{Confidentialité}~: 40~Go de dossiers clients ont
+probablement été copiés. \textbf{Intégrité}~: tant que l'on ignore ce que
+l'attaquant a modifié pendant trois jours de présence, on ne peut plus se
+fier aux données de stock. \textbf{Traçabilité}~: le compte du technicien,
+partagé entre plusieurs personnes chez le prestataire, ne permet pas de
+savoir qui s'est réellement connecté.
+\end{boxscenario}
+
+% ============================================================================
+\section{Exprimer des Besoins de Sécurité}
+\label{sec:c01-besoins}
+% ============================================================================
+
+Un besoin de sécurité dit jusqu'où une propriété doit être garantie pour
+un actif essentiel. On l'exprime sur une échelle commune, fixée par la
+direction, souvent de~1 (faible) à~4 (critique)~: c'est la cotation
+\textbf{DICP} (disponibilité, intégrité, confidentialité, preuve).
+
+\begin{tableaucours}{L{3.6cm}cccc}{%
+    \tableauHeader{Actif essentiel} &
+    \tableauHeader{D} &
+    \tableauHeader{I} &
+    \tableauHeader{C} &
+    \tableauHeader{P}
+}
+Facturation & 4 & 4 & 2 & 3 \\
+Données des clients & 2 & 3 & 4 & 2 \\
+Suivi des expéditions & 3 & 3 & 2 & 1 \\
+Paiements des fournisseurs & 3 & 4 & 3 & 4 \\
+Messagerie & 3 & 2 & 3 & 2 \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~1.3. Besoins de sécurité de LiZbiZ
+(cotation proposée, à valider par la direction)}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Coter tout à 4 « pour être tranquille ».
+
+\smallskip
+\textbf{Règle~:} une cotation sert à hiérarchiser. Si tout est critique,
+rien ne l'est, et le budget se disperse. Chaque cote se justifie par
+l'impact d'une perte~: combien de jours sans facturer l'entreprise
+peut-elle supporter~?
+\end{boxalert}
+
+% ============================================================================
+\section{Menace, Vulnérabilité, Risque}
+\label{sec:c01-risque}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Menace}~: cause potentielle d'un incident indésirable
+(un groupe criminel, un employé négligent, une inondation).
+\termecle{Vulnérabilité}~: faiblesse qu'une menace peut exploiter. La
+\loicam{n°~2010/012} (art.~4, point~73) la définit comme un « défaut de
+sécurité se traduisant soit intentionnellement, soit accidentellement par
+une violation de la politique de sécurité ». \termecle{Risque}~: effet de
+l'incertitude sur les objectifs~; en sécurité, la combinaison de la
+vraisemblance d'un scénario et de son impact.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.0cm}L{4.4cm}L{4.8cm}}{%
+    \tableauHeader{Notion} &
+    \tableauHeader{Opération GAROUA} &
+    \tableauHeader{Ce que l'on peut y faire}
+}
+Menace & Groupe criminel qui vise une rançon & Peu de chose~: on ne
+choisit pas ses attaquants \\
+Vulnérabilités & Accès distant à un facteur~; correctif manquant~;
+sauvegardes accessibles & Les corriger \\
+Impact & Arrêt de la facturation, fuite de données & Le réduire
+(sauvegardes hors ligne, plan de continuité) \\
+Risque & Vraisemblance élevée, impact critique & Le traiter~: réduire,
+transférer, éviter ou accepter (Chapitre~\ref{chap:risques}) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~1.4. Les notions appliquées à l'Opération
+GAROUA}\end{center}
+
+On écrit souvent \(\text{risque} = \text{vraisemblance} \times
+\text{impact}\). C'est une convention de cotation, utile pour classer,
+dont le Chapitre~\ref{chap:risques} montre les limites.
+
+% ============================================================================
+\section{Les Principes de Conception}
+\label{sec:c01-principes}
+% ============================================================================
+
+En 1975, J.~Saltzer et M.~Schroeder ont énoncé huit principes de
+conception des mécanismes de protection, qui restent la référence de tout
+architecte~\cite{saltzer1975}.
+
+\begin{tableaucours}{L{4.0cm}L{8.2cm}}{%
+    \tableauHeader{Principe} &
+    \tableauHeader{Ce qu'il demande}
+}
+Économie de mécanisme & Faire simple et petit~: ce qui est simple se
+vérifie \\
+Valeurs par défaut sûres & Refuser par défaut~; n'autoriser
+qu'explicitement \\
+Médiation complète & Vérifier chaque accès, pas seulement le premier \\
+Conception ouverte & La sécurité ne repose pas sur le secret du
+mécanisme, mais sur celui des clés \\
+Séparation des privilèges & Exiger deux conditions plutôt qu'une (par
+exemple deux facteurs) \\
+Moindre privilège & Ne donner que les droits nécessaires à la tâche \\
+Mécanisme le moins partagé & Limiter ce qui est commun à plusieurs
+utilisateurs \\
+Acceptabilité psychologique & Une mesure trop pénible sera contournée \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~1.5. Les huit principes de Saltzer et
+Schroeder}\end{center}
+
+\begin{boxobjet}{M-01 · Double authentification de l'accès distant}
+\textbf{Objectif~:} empêcher qu'un mot de passe volé suffise à entrer.
+\textbf{Menace couverte~:} hameçonnage, réutilisation de mots de passe.
+\textbf{Mise en œuvre~:} un second facteur (application, clé physique)
+exigé pour toute connexion distante, prestataires compris.
+\textbf{Principe~:} séparation des privilèges.
+\textbf{Vérification~:} tentative de connexion avec le seul mot de passe,
+qui doit échouer~; revue mensuelle des comptes distants.
+\end{boxobjet}
+
+\begin{boxmetier}{RSSI}
+\textbf{Poser les mots justes.} Le RSSI traduit un incident en propriétés
+atteintes et en actifs touchés~: « la disponibilité de la facturation est
+perdue depuis 34 heures~; la confidentialité des données clients est
+probablement atteinte~; l'intégrité des stocks est inconnue ». C'est la
+seule forme qui permette à une direction de décider.
+\end{boxmetier}
+
+\begin{boxmetier}{Développeur}
+\textbf{Appliquer les principes dès la conception.} Valeurs par défaut
+sûres (un nouveau compte n'a aucun droit), médiation complète (chaque
+requête de l'application vérifie les droits), conception ouverte (aucun
+mot de passe dans le code).
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{On protège des actifs essentiels} (informations,
+          processus) à travers leurs actifs supports.
+    \item \textbf{La cybersécurité} combine des mesures techniques,
+          organisationnelles, juridiques et humaines (loi n°~2010/012,
+          art.~4).
+    \item \textbf{Six propriétés}~: confidentialité, intégrité,
+          disponibilité, authenticité, non-répudiation, traçabilité.
+    \item \textbf{Les besoins} se cotent sur une échelle commune, pour
+          hiérarchiser.
+    \item \textbf{Menace, vulnérabilité, impact} composent le risque~; on
+          agit sur les vulnérabilités et l'impact.
+    \item \textbf{Huit principes de conception} guident toute mesure.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: distinguer actif
+essentiel et actif support~; citer et définir les six propriétés~; coter
+un actif en DICP~; distinguer menace et vulnérabilité~; nommer les huit
+principes de Saltzer et Schroeder et en illustrer trois.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.1. Essentiel ou support~? \niveaubase}]
+Classez~: le fichier des clients~; le serveur de base de données~; le
+processus de facturation~; le technicien d'astreinte~; le contrat avec
+SAHEL INFOGÉRANCE~; la liaison entre Douala et Garoua.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.2. Quelle propriété~? \niveaubase}]
+Dites quelle propriété est atteinte~: (a) un virement de 5~millions est
+modifié en 50~millions~; (b) un fournisseur nie avoir envoyé une facture~;
+(c) un concurrent lit les tarifs de LiZbiZ~; (d) le portail de suivi est
+saturé de requêtes~; (e) une action est faite avec un compte partagé.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.3. Le texte de la loi \niveaubase}]
+Relevez, dans la définition légale de la confidentialité, les trois
+moments où l'information doit être protégée, et donnez pour chacun une
+mesure.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.4. Coter \niveaumoyen}]
+Cotez en DICP trois actifs essentiels d'une agence bancaire de la BANQUE
+SANAGA, et justifiez chaque cote de~4.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.5. Menace ou vulnérabilité~? \niveaumoyen}]
+Classez~: un mot de passe par défaut~; une coupure d'électricité~; un
+employé mécontent~; un serveur sans correctif~; une crue du Wouri~; une
+porte de salle serveur laissée ouverte.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.6. Les principes à Garoua \niveaumoyen}]
+Pour trois défaillances de l'Opération GAROUA, indiquez le principe de
+Saltzer et Schroeder qui n'a pas été respecté.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.7. Une mesure \niveaumoyen}]
+Rédigez, sur le modèle de la mesure M-01, la fiche d'une mesure qui
+protège les sauvegardes contre un rançongiciel.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.8. Conception ouverte \niveaumoyen}]
+Un développeur de LiZbiZ propose de « cacher » l'adresse de la page
+d'administration au lieu de la protéger par un mot de passe. Répondez-lui
+avec le principe de conception ouverte.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.9. Acceptabilité \niveauexpert}]
+LiZbiZ impose un mot de passe de 20~caractères changé chaque semaine. Six
+mois plus tard, l'auditeur trouve des mots de passe écrits sur des
+post-it. Analysez la situation avec les principes du chapitre et proposez
+une mesure qui protège mieux.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~1.10. La note du lundi \niveauexpert}]
+Réécrivez la phrase de M.~ETEME, « la sécurité a été percée », en une
+note de cinq lignes qui nomme les actifs touchés, les propriétés atteintes
+et ce qui reste inconnu.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO/IEC~27000, vocabulaire de la sécurité de
+          l'information~\cite{iso27000_2018}.
+    \item J.~Saltzer et M.~Schroeder, \emph{The Protection of Information
+          in Computer Systems}~\cite{saltzer1975}.
+    \item R.~Anderson, \emph{Security Engineering}~\cite{anderson2020}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} On sait maintenant ce que l'on protège. Le
+Chapitre~\ref{chap:menaces} décrit contre quoi~: les attaquants, leurs
+techniques et la chaîne qu'ils suivent.
+\end{boxinfo}

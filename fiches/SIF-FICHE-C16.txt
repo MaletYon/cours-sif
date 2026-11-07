@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C16
+Chapitre 16 : Sécurité des réseaux (2) : équipements et protocoles sûrs
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quel pare-feu examine chaque paquet isolément ?
+      a) Le filtrage sans état
+      b) Le filtrage avec état
+      c) Le pare-feu applicatif
+      d) Le pare-feu de nouvelle génération
+
+ 2. Quel pare-feu n'accepte une réponse que si la demande est sortie ?
+      a) Le filtrage sans état
+      b) Le filtrage avec état
+      c) Le routeur
+      d) Le commutateur
+
+ 3. Dans quel ordre un pare-feu lit-il ses règles ?
+      a) Au hasard
+      b) De la dernière à la première
+      c) Dans l'ordre, et applique la première qui correspond
+      d) Toutes à la fois
+
+ 4. Quelle est la dernière règle d'une bonne table ?
+      a) Tout autoriser
+      b) Autoriser le web
+      c) Aucune
+      d) Un refus général
+
+ 5. Qu'est-ce qu'une règle ombrée ?
+      a) Une règle jamais appliquée car une règle plus large au-dessus l'englobe
+      b) Une règle chiffrée
+      c) Une règle de nuit
+      d) Une règle supprimée
+
+ 6. À Garoua, quelle règle a laissé sortir les 40 Go ?
+      a) La règle 1
+      b) La règle 5 (postes vers Internet, tous ports)
+      c) La règle 3
+      d) La règle 6
+
+ 7. Que doit avoir chaque règle ?
+      a) Une couleur
+      b) Un mot de passe
+      c) Un motif, un propriétaire et une date de revue
+      d) Un numéro de téléphone
+
+ 8. Une règle qui vise un serveur retiré est :
+      a) Ombrée
+      b) Nécessaire
+      c) Applicative
+      d) Inutile
+
+ 9. Quelle est la différence entre IDS et IPS ?
+      a) L'IPS, en coupure, bloque ce qu'il détecte
+      b) L'IDS bloque, l'IPS alerte
+      c) Aucune
+      d) L'IPS chiffre
+
+10. Quelle méthode de détection voit mal les attaques nouvelles ?
+      a) Les anomalies
+      b) Les signatures
+      c) Les deux
+      d) Aucune
+
+11. Quelle méthode produit le plus de faux positifs ?
+      a) Les signatures
+      b) Le chiffrement
+      c) Les anomalies
+      d) La sauvegarde
+
+12. Quel document du NIST traite des IDS et IPS ?
+      a) SP 800-41
+      b) SP 800-88
+      c) SP 800-63B
+      d) SP 800-94
+
+13. Quel protocole négocie les clés d'IPsec ?
+      a) IKEv2
+      b) TLS
+      c) SSH
+      d) ARP
+
+14. Quel VPN convient pour relier Douala et Garoua ?
+      a) Un VPN TLS individuel
+      b) IPsec entre sites
+      c) Aucun
+      d) Telnet
+
+15. Que ne vérifie pas un VPN ?
+      a) Le chiffrement
+      b) L'intégrité du tunnel
+      c) La santé du poste et la légitimité au-delà de l'authentification
+      d) Rien
+
+16. Quelle protection Wi-Fi est cassée ?
+      a) WPA2
+      b) WPA3
+      c) 802.1X
+      d) WEP
+
+17. Quelle vulnérabilité de WPA2 a été publiée en 2017 ?
+      a) KRACK
+      b) Heartbleed
+      c) EternalBlue
+      d) Mirai
+
+18. Quelle authentification offre WPA3-Personnel ?
+      a) WEP
+      b) SAE, résistante aux dictionnaires hors ligne
+      c) Aucune
+      d) Un mot de passe en clair
+
+19. Quelle authentification individuelle recommande-t-on en entreprise ?
+      a) Une clé partagée
+      b) Aucune
+      c) 802.1X avec un serveur RADIUS
+      d) WEP
+
+20. Quel document du NIST traite des pare-feu ?
+      a) SP 800-94
+      b) SP 800-61
+      c) SP 800-34
+      d) SP 800-41
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un pare-feu remplace une politique de sécurité.
+      Vrai / Faux
+
+22. Tout ce qui n'est pas explicitement autorisé doit être refusé.
+      Vrai / Faux
+
+23. À Garoua, la règle 1 autorisait tout depuis le réseau du prestataire.
+      Vrai / Faux
+
+24. Les compteurs à zéro aident à repérer les règles inutiles.
+      Vrai / Faux
+
+25. Un IDS dont personne ne lit les alertes protège quand même.
+      Vrai / Faux
+
+26. Les signatures sont aveugles au trafic chiffré.
+      Vrai / Faux
+
+27. WireGuard est un protocole de VPN récent au code réduit.
+      Vrai / Faux
+
+28. Le réseau Wi-Fi des visiteurs doit être séparé du réseau interne.
+      Vrai / Faux
+
+29. WEP est acceptable dans une agence bancaire.
+      Vrai / Faux
+
+30. Un VPN suffit à rendre légitime tout accès distant.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le pare-feu qui suit les connexions est dit avec ______.
+
+32. Une règle englobée par une règle plus large située au-dessus est dite ______.
+
+33. Le système qui détecte et bloque en coupure a pour sigle ______.
+
+34. Le réseau privé virtuel a pour sigle ______.
+
+35. L'authentification Wi-Fi d'entreprise repose sur la norme IEEE 802.______.
+
+36. La vulnérabilité de WPA2 publiée en 2017 s'appelle ______.
+
+37. Le protocole d'échange de clés d'IPsec est IKEv______.
+
+38. La détection fondée sur des motifs d'attaques connues utilise des ______.
+
+39. Le serveur d'authentification utilisé avec 802.1X est un serveur ______.
+
+40. Le pare-feu qui examine le contenu d'un protocole est dit ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C12
+Chapitre 12 : Éthique et responsabilité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qu'est-ce qui distingue un geste légitime d'un geste malveillant en sécurité ?
+      a) Le mandat, le but et la manière
+      b) L'outil utilisé
+      c) L'heure
+      d) Le langage de programmation
+
+ 2. Que peut entraîner la violation d'un code professionnel ?
+      a) Rien
+      b) Le retrait d'une certification
+      c) Une prime
+      d) Une promotion
+
+ 3. Combien de canons compte le code d'éthique de l'ISC2 ?
+      a) Deux
+      b) Six
+      c) Quatre
+      d) Dix
+
+ 4. Lequel est un canon de l'ISC2 ?
+      a) Maximiser le profit
+      b) Ne jamais divulguer de vulnérabilité
+      c) Obéir à tout ordre
+      d) Protéger la société, le bien commun et l'infrastructure
+
+ 5. Quel organisme publie un code d'éthique de 2018 pour les informaticiens ?
+      a) L'ACM
+      b) L'ANTIC
+      c) Le NIST
+      d) L'OWASP
+
+ 6. Sur quoi les trois codes convergent-ils ?
+      a) Prix, vitesse, volume
+      b) Légalité, honnêteté, compétence, confidentialité
+      c) Secret absolu
+      d) Rien
+
+ 7. Quelle norme décrit la réception des signalements de vulnérabilités par un éditeur ?
+      a) ISO/IEC 27001
+      b) ISO 31000
+      c) ISO/IEC 29147
+      d) ISO/IEC 27037
+
+ 8. Quelle norme décrit le traitement interne des vulnérabilités ?
+      a) ISO/IEC 27002
+      b) ISO 22301
+      c) ISO/IEC 27005
+      d) ISO/IEC 30111
+
+ 9. À qui signale-t-on d'abord une vulnérabilité ?
+      a) À l'éditeur ou à l'exploitant
+      b) Aux médias
+      c) Aux réseaux sociaux
+      d) À un concurrent
+
+10. Quel délai de correction est souvent convenu ?
+      a) 24 heures
+      b) De l'ordre de 90 jours
+      c) Deux ans
+      d) Aucun
+
+11. Que doit faire un découvreur ?
+      a) Télécharger les données pour prouver la faille
+      b) Publier un code d'exploitation
+      c) S'arrêter au minimum nécessaire pour prouver le défaut
+      d) Exiger une rançon
+
+12. Combien d'étapes compte la méthode de résolution d'un dilemme ?
+      a) Trois
+      b) Quatre
+      c) Huit
+      d) Six
+
+13. Quelle est la dernière étape de la méthode ?
+      a) Décider et documenter
+      b) Établir les faits
+      c) Lister les options
+      d) Identifier les parties
+
+14. Que fait l'administrateur à qui le directeur demande de lire les messages d'un salarié ?
+      a) Il les lit discrètement
+      b) Il refuse, conserve les journaux utiles et renvoie vers le conseil juridique et la plainte
+      c) Il les supprime
+      d) Il prévient le salarié
+
+15. Quel article de la loi n° 2010/012 interdit d'intercepter des communications sans consentement ?
+      a) Article 25
+      b) Article 8
+      c) Article 44
+      d) Article 69
+
+16. Quelle condition pour un test d'intrusion ?
+      a) L'accord oral d'un collègue
+      b) Aucune
+      c) Une publication préalable
+      d) Une autorisation écrite du responsable du système
+
+17. Rechercher des vulnérabilités sur Internet est admissible :
+      a) Seulement sur ses propres systèmes ou avec autorisation
+      b) Partout
+      c) Seulement la nuit
+      d) Jamais
+
+18. La surveillance des journaux suppose :
+      a) Un accès pour tous
+      b) Une finalité de sécurité déclarée, un accès limité et une durée fixée
+      c) Une durée illimitée
+      d) Rien
+
+19. L'accès à une boîte de messagerie se fait :
+      a) À l'initiative de l'administrateur
+      b) Sur demande d'un collègue
+      c) Dans un cadre légal et selon une procédure écrite
+      d) Jamais, même légalement
+
+20. Pourquoi les métiers de la sécurité exigent-ils une éthique explicite ?
+      a) Ils sont mal payés
+      b) Ils sont récents
+      c) La loi l'impose seule
+      d) Ils donnent un pouvoir réel sur la vie des autres
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Les mêmes gestes techniques servent à protéger ou à nuire.
+      Vrai / Faux
+
+22. Le code de l'ISACA comprend une exigence de confidentialité.
+      Vrai / Faux
+
+23. Il est responsable de publier un code d'exploitation avant la correction.
+      Vrai / Faux
+
+24. Consulter des données pour démontrer une faille fait passer de la découverte à l'atteinte.
+      Vrai / Faux
+
+25. Un dilemme se résout de mémoire, sans écrit.
+      Vrai / Faux
+
+26. Refuser ou demander un avis fait partie des options possibles.
+      Vrai / Faux
+
+27. Un hameçonnage simulé peut donner lieu à des sanctions individuelles.
+      Vrai / Faux
+
+28. L'auditeur ne teste que ce que sa lettre de mission autorise.
+      Vrai / Faux
+
+29. Les codes professionnels ne s'intéressent qu'à l'employeur.
+      Vrai / Faux
+
+30. L'administrateur doit tracer ses propres accès aux données sensibles.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La divulgation concertée avec l'éditeur est dite ______.
+
+32. L'organisation qui délivre le CISSP et dont le code a quatre canons a pour sigle ______.
+
+33. La première étape de la méthode consiste à établir les ______.
+
+34. La norme sur le traitement interne des vulnérabilités est l'ISO/IEC ______.
+
+35. Tout test exige une autorisation ______.
+
+36. L'interception des communications sans consentement est interdite par l'article ______.
+
+37. L'Association for Computing Machinery a pour sigle ______.
+
+38. L'administrateur signe une ______ qui rappelle ses obligations.
+
+39. La norme sur la divulgation des vulnérabilités est l'ISO/IEC ______.
+
+40. La méthode de résolution d'un dilemme compte ______ étapes.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

@@ -1,0 +1,86 @@
+# Généré par gen_specs.py à partir du livre SIF (SEC3266) ; retouches possibles à la main.
+SPEC = [{'k': 'title',
+  'tag': 'Jour 19 / 30 · Séance de 2 heures',
+  'title': 'Identités et accès (2) : cycle de vie et revue',
+  'sub': 'Qui pouvait se connecter au système de LiZbiZ ?',
+  'right': 'Partie IV · Chapitre 17'},
+ {'k': 'synthese',
+  'title': 'Rappel de la séance précédente',
+  'kicker': 'Jour 18 · Identités et accès (1) : authentifier',
+  'items': ['**IAAA** : identification, authentification, autorisation, traçabilité…',
+            '**Les mots de passe** se veulent longs, sans changement périodique imposé, comparés aux listes '
+            'divulguées.',
+            '**Le second facteur** combine des catégories différentes ; FIDO2 et WebAuthn résistent à '
+            "l'hameçonnage."]},
+ {'k': 'agenda',
+  'items': [('40 min', "**L'Authentification Unique et les Annuaires** ; Le Cycle de Vie et les Privilèges"),
+            ('40 min', '**La Revue des Droits**'),
+            ('20 min', '**Exercice** en séance'),
+            ('10 min', '**À retenir**, travail à la maison')]},
+ {'k': 'chapitre',
+  'num': 'C17',
+  'short': 'Chapitre 17',
+  'part': 'PARTIE IV · SÉCURITÉ TECHNIQUE',
+  'title': 'Identités et Accès',
+  'question': 'Qui pouvait se connecter au système de LiZbiZ ?'},
+ {'k': 'objectifs',
+  'items': ["Décrire l'authentification unique (SAML, OpenID Connect).",
+            'Gérer le cycle de vie des comptes et les comptes à privilèges.',
+            'Conduire une revue des droits.']},
+ {'k': 'points',
+  'title': "L'Authentification Unique et les Annuaires",
+  'kicker': 'Section 17.4',
+  'items': ['Un **annuaire** (Active Directory, LDAP) centralise les comptes et les groupes.']},
+ {'k': 'definition',
+  'title': 'Compte à privilèges',
+  'kicker': 'Définition · Section 17.5',
+  'items': [('Définition',
+             "compte qui peut modifier la configuration, les droits ou la sécurité d'un système "
+             '(administrateur, compte de service puissant). La gestion des accès à privilèges (PAM) les '
+             'place dans un coffre, délivre leurs mots de passe à la demande…')]},
+ {'k': 'table',
+  'title': 'La Revue des Droits',
+  'kicker': 'Section 17.6',
+  'head': ['Catégorie', 'Comptes'],
+  'widths': [9.52, 2.88],
+  'rows': [['Comptes nominatifs de salariés présents', '148'],
+           ['Comptes de salariés partis (orphelins)', '27'],
+           ['Comptes partagés (agences, prestataire)', '9'],
+           ['Comptes de service', '18'],
+           ['Comptes sans titulaire identifiable', '10'],
+           ['Total', '212']]},
+ {'k': 'scenario',
+  'title': 'La Revue des Droits',
+  'label': 'Opération GAROUA. La revue des 212 comptes',
+  'text': ["**Constatations** (rapprochement de l'annuaire et du fichier du personnel, 15 mars) :",
+           "Deux salariés présents n'ont pas de compte (148 sur 150). Parmi les comptes actifs, 14 ont des "
+           "droits d'administrateur du domaine, dont 3 comptes orphelins et le compte partagé du "
+           'prestataire…',
+           '**Analyse** (confiance élevée). 46 comptes (orphelins, partagés et sans titulaire) ne '
+           'correspondent à aucune personne responsable : ce sont autant de portes que personne ne '
+           'surveille.']},
+ {'k': 'synthese',
+  'title': 'À retenir',
+  'kicker': 'Chapitre 17',
+  'items': ['**IAAA** : identification, authentification, autorisation, traçabilité ; un compte partagé '
+            'ruine la traçabilité.',
+            '**Les mots de passe** se veulent longs, sans changement périodique imposé, comparés aux listes '
+            'divulguées.',
+            '**Le second facteur** combine des catégories différentes ; FIDO2 et WebAuthn résistent à '
+            "l'hameçonnage.",
+            "**Le SSO** réduit les mots de passe et concentre le risque sur le fournisseur d'identité.",
+            '**Le cycle de vie** des comptes et la gestion des privilèges ferment les portes oubliées ; la '
+            'revue des droits le vérifie.']},
+ {'k': 'exercice',
+  'title': 'La politique de mots de passe',
+  'duree': '20 minutes, en binôme',
+  'text': 'Travail individuel, puis mise en commun.',
+  'questions': ['La politique actuelle de la BANQUE SANAGA impose 8 caractères, quatre types de caractères '
+                'et un changement tous les 30 jours. Réécrivez-la selon le NIST SP 800-63B et justifiez '
+                'chaque changement.']},
+ {'k': 'maison', 'lecture': ['Chapitre 17, à relire avec ses exercices', 'Préparer : chapitre 18']},
+ {'k': 'fin',
+  'next': 'Jour 20 · Sécurité des systèmes',
+  'items': ["Réduire la surface d'attaque d'un système par le durcissement.",
+            'Appliquer des configurations de référence (CIS Benchmarks).',
+            'Organiser la gestion des correctifs selon le risque.']}]

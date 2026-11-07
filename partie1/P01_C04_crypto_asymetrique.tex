@@ -1,0 +1,414 @@
+% ============================================================================
+% Fichier  : partie1/P01_C04_crypto_asymetrique.tex
+% Titre    : Cryptographie (2) : Asymétrique, Signatures, ICP
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : Diffie et Hellman (1976) ; Rivest, Shamir, Adleman (1978) ;
+% NIST SP 800-57 partie 1 (équivalences de sécurité) ; RFC 5280 (X.509) ;
+% RFC 8446 (TLS 1.3) ; Shor (1994) ; FIPS 203, 204, 205 (août 2024) ;
+% loi n° 2010/012, art. 8 et 18 (texte officiel). Exemples numériques
+% classiques (RSA n = 3233 ; Diffie-Hellman p = 23), vérifiés.
+% ============================================================================
+
+\chapter{Cryptographie (2) : Asymétrique, Signatures, Infrastructures à Clés Publiques}
+\label{chap:crypto-asym}
+\chaptermark{Cryptographie asymétrique}
+
+\epigraph{%
+    « Nous sommes aujourd'hui au bord d'une révolution en cryptographie. »%
+}{Whitfield Diffie et Martin Hellman, 1976}
+
+\niveauChapitre{Fondamental}{Chapitre~\ref{chap:crypto-sym}~; arithmétique
+modulaire élémentaire.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Expliquer le problème de la distribution des clés et sa solution
+          asymétrique.
+    \item Dérouler un échange de Diffie-Hellman et un chiffrement RSA sur de
+          petits nombres.
+    \item Expliquer la signature numérique et ses garanties.
+    \item Décrire un certificat, une infrastructure à clés publiques et la
+          vérification d'une chaîne.
+    \item Décrire la négociation TLS~1.3.
+    \item Situer la menace quantique et les algorithmes post-quantiques.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : comment faire confiance à une clé reçue d'un inconnu~?}
+% ============================================================================
+
+Le technicien de SAHEL INFOGÉRANCE a saisi son mot de passe sur une fausse
+page. Son navigateur affichait pourtant un cadenas~: la connexion était
+chiffrée, mais \emph{vers l'attaquant}. Le chiffrement ne sert à rien si
+l'on ne sait pas à qui appartient la clé. Ce chapitre explique comment la
+cryptographie asymétrique et les certificats répondent à cette question,
+et ce qu'ils ne garantissent pas.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item La distribution des clés (section~\ref{sec:c04-distribution}).
+    \item Diffie-Hellman et RSA (section~\ref{sec:c04-algos}).
+    \item La signature numérique (section~\ref{sec:c04-signature}).
+    \item Certificats et infrastructures à clés publiques (section~\ref{sec:c04-icp}).
+    \item TLS~: tout assembler (section~\ref{sec:c04-tls}).
+    \item La menace quantique (section~\ref{sec:c04-quantique}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{La Distribution des Clés}
+\label{sec:c04-distribution}
+% ============================================================================
+
+Avec le seul chiffrement symétrique, \(n\) personnes qui veulent toutes
+communiquer en secret deux à deux ont besoin de \(n(n-1)/2\) clés, à
+échanger par un canal déjà sûr~: 4\,950 clés pour 100 personnes. En 1976,
+W.~Diffie et M.~Hellman proposent une rupture~: chaque personne a une
+\emph{paire} de clés, l'une publique, l'autre privée~\cite{diffie1976}.
+
+\begin{boxdef}
+\termecle{Cryptographie asymétrique} (à clé publique)~: chaque acteur
+possède une \emph{clé publique}, diffusée librement, et une \emph{clé
+privée}, qu'il garde seul. Ce que l'une chiffre, seule l'autre déchiffre~;
+et il est impraticable de retrouver la clé privée à partir de la clé
+publique.
+\end{boxdef}
+
+Les algorithmes asymétriques sont bien plus lents que les symétriques. En
+pratique, on combine les deux~: l'asymétrique sert à convenir d'une clé
+symétrique de session, qui chiffre ensuite les données. C'est le
+\termecle{chiffrement hybride}.
+
+% ============================================================================
+\section{Diffie-Hellman et RSA}
+\label{sec:c04-algos}
+% ============================================================================
+
+\subsection{L'échange de Diffie-Hellman}
+
+Alice et Bob conviennent publiquement d'un nombre premier \(p\) et d'un
+générateur \(g\). Alice choisit un secret \(a\) et publie
+\(A = g^a \bmod p\)~; Bob choisit \(b\) et publie \(B = g^b \bmod p\).
+Chacun calcule \(K = B^a \bmod p = A^b \bmod p\). Un observateur voit
+\(p\), \(g\), \(A\) et \(B\), mais ne sait pas retrouver \(K\) sans
+résoudre le \emph{logarithme discret}.
+
+\begin{boxinfo}
+\textbf{Exemple avec de petits nombres.} \(p = 23\), \(g = 5\), \(a = 6\),
+\(b = 15\). Alice publie \(A = 5^6 \bmod 23 = 8\)~; Bob publie
+\(B = 5^{15} \bmod 23 = 19\). Alice calcule \(19^6 \bmod 23 = 2\)~; Bob
+calcule \(8^{15} \bmod 23 = 2\). Ils partagent \(K = 2\). En pratique,
+\(p\) a plus de 2\,000 bits, ou l'on utilise des courbes elliptiques.
+\end{boxinfo}
+
+\begin{boxalert}
+\textbf{Limite.} Diffie-Hellman seul ne dit pas \emph{avec qui} on
+échange. Un attaquant placé au milieu fait un échange avec Alice et un
+autre avec Bob. Il faut authentifier les valeurs échangées~: c'est le
+rôle de la signature et des certificats.
+\end{boxalert}
+
+\subsection{RSA}
+
+En 1978, R.~Rivest, A.~Shamir et L.~Adleman publient le premier système
+qui permet à la fois de chiffrer et de signer~\cite{rivest1978}. Sa
+sécurité repose sur la difficulté de factoriser le produit de deux grands
+nombres premiers.
+
+\begin{tableaucours}{L{4.4cm}L{7.8cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Exemple (petits nombres)}
+}
+Choisir deux premiers & \(p = 61\), \(q = 53\) \\
+Module & \(n = pq = 3\,233\) \\
+Indicatrice & \(\varphi(n) = (p-1)(q-1) = 3\,120\) \\
+Exposant public & \(e = 17\) (premier avec 3\,120) \\
+Exposant privé & \(d = 2\,753\), car \(17 \times 2\,753 = 46\,801 = 15
+\times 3\,120 + 1\) \\
+Chiffrer \(m = 65\) & \(c = 65^{17} \bmod 3\,233 = 2\,790\) \\
+Déchiffrer & \(2\,790^{2\,753} \bmod 3\,233 = 65\) \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~4.1. RSA pas à pas}\end{center}
+
+\subsection{Tailles de clés équivalentes}
+
+\begin{tableaucours}{L{3.2cm}L{3.0cm}L{3.0cm}L{3.0cm}}{%
+    \tableauHeader{Niveau (bits)} &
+    \tableauHeader{Symétrique} &
+    \tableauHeader{RSA, DH} &
+    \tableauHeader{Courbes elliptiques}
+}
+112 & 3DES & 2\,048 & 224 \\
+128 & AES-128 & 3\,072 & 256 \\
+192 & AES-192 & 7\,680 & 384 \\
+256 & AES-256 & 15\,360 & 512 \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~4.2. Équivalences de sécurité (d'après le
+NIST SP~800-57)~\cite{nist80057}}\end{center}
+
+% ============================================================================
+\section{La Signature Numérique}
+\label{sec:c04-signature}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Signature numérique}~: valeur calculée sur l'empreinte d'un
+document avec la clé \emph{privée} du signataire, et vérifiable par tous
+avec sa clé \emph{publique}. Elle garantit l'intégrité du document,
+l'authenticité de son origine et, parce que seul le signataire détient la
+clé privée, la non-répudiation.
+\end{boxdef}
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~18} (texte officiel)~:
+\textit{« Une signature électronique avancée doit remplir les conditions
+ci-après~: les données afférentes à la création de la signature sont liées
+exclusivement au signataire et sont sous son contrôle exclusif~; toute
+modification à elle apportée, est facilement décelable~; elle est créée au
+moyen d'un dispositif sécurisé dont les caractéristiques techniques sont
+fixées par un texte du Ministre chargé des Télécommunications~; le
+certificat utilisé pour la génération de la signature est un certificat
+qualifié. »}
+
+\medskip
+\textbf{Analyse.} Chaque condition a sa traduction technique~: clé privée
+sous contrôle exclusif (stockée sur une carte ou un module matériel),
+intégrité (signature sur l'empreinte), dispositif sécurisé, certificat
+qualifié délivré par une autorité autorisée. L'article~17 donne à cette
+signature avancée la même valeur que la signature manuscrite.
+\end{boxjuris}
+
+% ============================================================================
+\section{Certificats et Infrastructures à Clés Publiques}
+\label{sec:c04-icp}
+% ============================================================================
+
+Une clé publique n'est qu'un nombre~: rien ne dit à qui elle appartient.
+Un \termecle{certificat} est un document signé par une \emph{autorité de
+certification}, qui lie une clé publique à une identité, pour une durée
+donnée. Le format standard est X.509~\cite{rfc5280}.
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Champ du certificat} &
+    \tableauHeader{Rôle}
+}
+Sujet & L'identité certifiée (un nom de domaine, une personne) \\
+Clé publique & La clé liée à cette identité \\
+Émetteur & L'autorité qui a signé \\
+Validité & Dates de début et de fin \\
+Usages & Ce que la clé peut faire (signer, chiffrer, authentifier un serveur) \\
+Signature & La signature de l'émetteur sur l'ensemble \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~4.3. Les champs d'un certificat X.509}\end{center}
+
+\begin{boxdef}
+\termecle{Infrastructure à clés publiques} (ICP, ou PKI)~: ensemble des
+autorités, des règles et des moyens qui émettent, publient, révoquent et
+vérifient des certificats. La vérification remonte une \emph{chaîne}~:
+le certificat du serveur est signé par une autorité intermédiaire, signée
+à son tour par une autorité racine, à laquelle on fait confiance a priori.
+\end{boxdef}
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}, article~8} (texte officiel)~:
+\textit{« (1) L'Agence est l'Autorité de Certification Racine. (2) L'Agence
+est l'autorité de certification de l'Administration Publique. »}
+
+\medskip
+\textbf{Analyse.} Au Cameroun, l'ANTIC est la racine de la confiance
+pour les certificats qualifiés. L'activité de certification est soumise à
+autorisation préalable (art.~10).
+\end{boxjuris}
+
+\begin{boxprocedure}
+\textbf{Vérifier un certificat}
+\begin{enumerate}
+    \item Le nom du sujet correspond-il au site ou à la personne attendus~?
+    \item Le certificat est-il dans sa période de validité~?
+    \item Chaque signature de la chaîne est-elle valide, jusqu'à une racine
+          de confiance~?
+    \item Le certificat a-t-il été révoqué (listes de révocation, OCSP)~?
+    \item Les usages autorisés couvrent-ils l'usage qui en est fait~?
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{boxscenario}{Opération GAROUA. Le cadenas de la fausse page}
+\textbf{Constatation.} La fausse page de connexion avait un certificat
+valide, délivré automatiquement pour le domaine de l'attaquant, qui
+imitait celui du fournisseur à une lettre près.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Le cadenas garantit que l'on parle
+bien au détenteur du domaine affiché~; il ne dit pas que ce domaine est
+le bon. L'étape~1 de la procédure, vérifier le nom, aurait suffi. Un
+second facteur d'authentification lié au vrai domaine (clés FIDO2) aurait
+rendu la fausse page inopérante (Chapitre~\ref{chap:iam}).
+\end{boxscenario}
+
+% ============================================================================
+\section{TLS : Tout Assembler}
+\label{sec:c04-tls}
+% ============================================================================
+
+Le protocole TLS, dans sa version~1.3, combine tout ce qui précède~\cite{rfc8446}~:
+
+\begin{enumerate}
+    \item le client et le serveur font un échange de Diffie-Hellman sur
+          courbe elliptique, qui donne une clé de session~;
+    \item le serveur présente son certificat et \emph{signe} l'échange~:
+          le client sait qu'il parle au détenteur du certificat~;
+    \item les données sont ensuite chiffrées avec un chiffrement
+          authentifié (AES-GCM ou ChaCha20-Poly1305).
+\end{enumerate}
+
+Chaque session utilise une clé éphémère~: la compromission ultérieure de
+la clé privée du serveur ne permet pas de déchiffrer les sessions passées
+(\emph{confidentialité persistante}).
+
+% ============================================================================
+\section{La Menace Quantique}
+\label{sec:c04-quantique}
+% ============================================================================
+
+En 1994, P.~Shor montre qu'un ordinateur quantique suffisamment puissant
+factoriserait et calculerait des logarithmes discrets en temps
+polynomial~\cite{shor1994}~: RSA, Diffie-Hellman et les courbes
+elliptiques tomberaient. Un tel ordinateur n'existe pas aujourd'hui, mais
+des données chiffrées et capturées aujourd'hui pourraient être déchiffrées
+demain. En août~2024, le NIST a publié trois normes post-quantiques~:
+ML-KEM pour l'échange de clés (FIPS~203), ML-DSA (FIPS~204) et SLH-DSA
+(FIPS~205) pour les signatures~\cite{fips203,fips204,fips205}. Les
+algorithmes symétriques sont moins touchés~: doubler la taille des clés
+suffit.
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Tenir l'inventaire des certificats.} Un certificat expiré arrête
+un service aussi sûrement qu'une attaque. L'administrateur tient la liste
+des certificats, de leurs dates d'expiration et de leurs autorités, et
+automatise leur renouvellement.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Préparer la migration post-quantique.} Le RSSI inventorie les
+usages de la cryptographie asymétrique (VPN, TLS, signatures,
+sauvegardes chiffrées) et la durée pendant laquelle chaque donnée doit
+rester secrète~: ce sont les premières à migrer.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{La cryptographie asymétrique} résout la distribution des
+          clés~; on l'associe au symétrique (chiffrement hybride).
+    \item \textbf{Diffie-Hellman} établit une clé partagée~; \textbf{RSA}
+          chiffre et signe~; tous deux doivent être authentifiés.
+    \item \textbf{La signature} apporte intégrité, authenticité et
+          non-répudiation~; la loi n°~2010/012 fixe les conditions de la
+          signature avancée (art.~18).
+    \item \textbf{Un certificat} lie une clé à une identité~; on vérifie le
+          nom, la validité, la chaîne et la révocation~; l'ANTIC est la
+          racine camerounaise (art.~8).
+    \item \textbf{TLS~1.3} assemble ces briques~; un cadenas ne garantit pas
+          que le domaine est le bon.
+    \item \textbf{Les algorithmes post-quantiques} sont normalisés depuis
+          2024~; la migration commence par l'inventaire.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: calculer un échange de
+Diffie-Hellman et un chiffrement RSA sur de petits nombres~; expliquer
+pourquoi Diffie-Hellman seul est vulnérable à l'homme du milieu~; lire
+un certificat~; vérifier une chaîne~; décrire TLS~1.3 en trois étapes~;
+citer les normes FIPS~203 à~205.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.1. Nombre de clés \niveaubase}]
+Combien de clés symétriques faut-il pour que 150~salariés de LiZbiZ
+puissent communiquer deux à deux en secret~? Et combien de paires de clés
+asymétriques~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.2. Diffie-Hellman \niveaubase}]
+Avec \(p = 23\) et \(g = 5\), Alice choisit \(a = 4\) et Bob \(b = 3\).
+Calculez \(A\), \(B\) et la clé partagée.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.3. RSA \niveaumoyen}]
+Avec \(p = 5\), \(q = 11\) et \(e = 3\), calculez \(n\), \(\varphi(n)\) et
+\(d\)~; chiffrez puis déchiffrez \(m = 7\).
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.4. Quelle clé~? \niveaubase}]
+Pour chaque opération, dites quelle clé utilise Alice~: chiffrer un
+message pour Bob~; signer un message~; vérifier la signature de Bob~;
+déchiffrer un message reçu.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.5. Lire un certificat \niveaumoyen}]
+Un certificat a pour sujet \texttt{portail.lizbiz.cm}, pour émetteur une
+autorité intermédiaire, une validité du 1\textsuperscript{er}~janvier au
+31~mars~2027, et l'usage « authentification de serveur ». Le portail est
+consulté le 2~avril à l'adresse \texttt{www.lizbiz.cm}. Listez les
+problèmes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.6. L'homme du milieu \niveaumoyen}]
+Décrivez l'attaque de l'homme du milieu contre un Diffie-Hellman non
+authentifié, puis expliquez comment TLS~1.3 l'empêche.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.7. Signature avancée \niveaumoyen}]
+LiZbiZ veut signer ses bons de commande électroniquement. Pour chaque
+condition de l'article~18, proposez une mesure technique.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.8. Confidentialité persistante \niveaumoyen}]
+La clé privée du serveur de LiZbiZ est volée en 2027. Les sessions TLS de
+2026, capturées par un attaquant, sont-elles lisibles~? Distinguez TLS~1.3
+et un ancien échange de clés par RSA.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.9. Inventaire post-quantique \niveauexpert}]
+Dressez, pour la BANQUE SANAGA, un inventaire des usages de la
+cryptographie asymétrique, et classez-les selon l'urgence de leur
+migration post-quantique. Justifiez par la durée de vie des données.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~4.10. La fausse page \niveauexpert}]
+Proposez trois mesures, de natures différentes (humaine, technique,
+cryptographique), qui auraient empêché le vol du mot de passe du
+technicien, et classez-les par efficacité.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item W.~Diffie et M.~Hellman~\cite{diffie1976}~; R.~Rivest, A.~Shamir
+          et L.~Adleman~\cite{rivest1978}.
+    \item RFC~5280 (certificats) et RFC~8446 (TLS~1.3)~\cite{rfc5280,rfc8446}.
+    \item FIPS~203 à~205~\cite{fips203,fips204,fips205}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Les chapitres précédents ont donné les notions et les
+outils. Le Chapitre~\ref{chap:attaques} les éprouve sur l'histoire~: les
+grandes attaques et ce qu'elles ont appris.
+\end{boxinfo}

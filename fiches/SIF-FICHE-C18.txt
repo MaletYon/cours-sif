@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C18
+Chapitre 18 : Sécurité des systèmes
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qu'est-ce que la surface d'attaque ?
+      a) L'ensemble des points par lesquels un système peut être attaqué
+      b) La taille du disque
+      c) Le nombre d'utilisateurs
+      d) La superficie du centre de données
+
+ 2. Quelle action réduit la surface d'attaque ?
+      a) Ajouter des ports ouverts
+      b) Désactiver les services inutiles
+      c) Partager le compte administrateur
+      d) Installer des logiciels de démonstration
+
+ 3. Quelles références vérifiables donnent des règles de durcissement ?
+      a) Les réseaux sociaux
+      b) Les catalogues de vente
+      c) Les CIS Benchmarks
+      d) Le code pénal
+
+ 4. Quel réglage SSH fait partie du durcissement ?
+      a) Autoriser les mots de passe vides
+      b) Ouvrir SSH à Internet sans filtre
+      c) Désactiver les journaux
+      d) Interdire la connexion directe de root
+
+ 5. Pourquoi un mot de passe administrateur local unique par machine ?
+      a) Pour qu'une compromission ne se propage pas à toutes les machines
+      b) Pour aller plus vite
+      c) Pour supprimer le domaine
+      d) Pour éviter les sauvegardes
+
+ 6. Combien d'autres serveurs partageaient le même mot de passe local que FS-02 ?
+      a) Deux
+      b) Onze
+      c) Cinq
+      d) Vingt
+
+ 7. Sous Linux, quel fichier règle les droits d'élévation des utilisateurs ?
+      a) /etc/hosts
+      b) /etc/fstab
+      c) /etc/sudoers
+      d) /etc/motd
+
+ 8. Depuis combien de temps le correctif critique de FS-02 était-il publié ?
+      a) Huit jours
+      b) Un mois
+      c) Huit ans
+      d) Huit mois
+
+ 9. Quel délai de correction le cours propose-t-il pour une faille critique exposée à Internet et exploitée ?
+      a) 72 heures
+      b) 15 jours
+      c) 30 jours
+      d) 90 jours
+
+10. Quel délai propose-t-il pour une faille critique interne, comme celle de FS-02 ?
+      a) 72 heures
+      b) 15 jours
+      c) 30 jours
+      d) Un an
+
+11. Quel délai propose-t-il pour une faille importante sur les postes ?
+      a) 72 heures
+      b) 15 jours
+      c) 30 jours
+      d) Jamais
+
+12. Que fait-on d'un système qui ne peut pas être corrigé ?
+      a) Rien
+      b) On le partage
+      c) On le rend public
+      d) On compense par d'autres mesures (isolement, filtrage, surveillance)
+
+13. Quel document du NIST traite de la gestion des correctifs ?
+      a) SP 800-40
+      b) SP 800-92
+      c) SP 800-207
+      d) SP 800-63B
+
+14. Quel document du NIST traite de la gestion des journaux ?
+      a) SP 800-40
+      b) SP 800-92
+      c) SP 800-41
+      d) SP 800-162
+
+15. Pourquoi copier les journaux hors de la machine ?
+      a) Pour libérer de la place seulement
+      b) C'est plus joli
+      c) Un attaquant qui contrôle la machine peut les effacer
+      d) Ce n'est pas utile
+
+16. Pourquoi synchroniser les horloges des machines ?
+      a) Pour économiser l'énergie
+      b) Pour chiffrer
+      c) Pour sauvegarder
+      d) Pour corréler les événements de plusieurs sources
+
+17. Que fait une liste blanche d'applications ?
+      a) Elle n'autorise que les programmes approuvés
+      b) Elle bloque Internet
+      c) Elle chiffre le disque
+      d) Elle remplace les sauvegardes
+
+18. Quelle exigence l'EDR impose-t-il ?
+      a) Aucune
+      b) Une équipe qui lit et traite ses alertes
+      c) Un réseau plat
+      d) Un mot de passe partagé
+
+19. Quelle est la limite principale d'un antivirus à signatures ?
+      a) Il est trop rapide
+      b) Il chiffre tout
+      c) Il voit mal les menaces nouvelles
+      d) Il est interdit
+
+20. Quel événement faut-il journaliser en priorité ?
+      a) La couleur du fond d'écran
+      b) Le niveau de la batterie
+      c) Les impressions de test
+      d) Les connexions et les échecs d'authentification
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Chaque service actif est une porte potentielle.
+      Vrai / Faux
+
+22. Douze serveurs créés à partir d'une même image partageaient le même mot de passe local.
+      Vrai / Faux
+
+23. Laisser root se connecter directement en SSH est une bonne pratique.
+      Vrai / Faux
+
+24. À Garoua, une personne était chargée de vérifier l'installation des correctifs.
+      Vrai / Faux
+
+25. Les délais de correction se fixent selon le risque.
+      Vrai / Faux
+
+26. Sans journaux, on ne détecte pas et on ne prouve pas.
+      Vrai / Faux
+
+27. Il faut journaliser tout, sans choisir.
+      Vrai / Faux
+
+28. Antivirus, EDR et liste blanche se complètent.
+      Vrai / Faux
+
+29. Un EDR sans personne pour le suivre protège pleinement.
+      Vrai / Faux
+
+30. Un correctif s'applique d'abord sur un environnement de test lorsque c'est possible.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Réduire la surface d'attaque d'un système s'appelle le ______.
+
+32. Le serveur de fichiers non corrigé de Garoua s'appelle FS-______.
+
+33. Les guides de durcissement du Center for Internet Security sont les CIS ______.
+
+34. L'outil de détection et réponse sur les postes a pour sigle ______.
+
+35. Le protocole qui synchronise les horloges a pour sigle ______.
+
+36. Le délai proposé pour une faille critique exposée et exploitée est de ______ heures.
+
+37. Le protocole d'administration à distance chiffré sous Linux est ______.
+
+38. La liste des seuls programmes autorisés est une liste ______.
+
+39. Les journaux se copient hors de la machine vers un serveur ______.
+
+40. Le document NIST sur les correctifs est le SP 800-______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

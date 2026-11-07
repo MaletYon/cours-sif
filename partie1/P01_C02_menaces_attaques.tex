@@ -1,0 +1,400 @@
+% ============================================================================
+% Fichier  : partie1/P01_C02_menaces_attaques.tex
+% Titre    : Menaces, Vulnérabilités et Attaques
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre I », section « Bases de la cybersécurité ».
+% Sources : chaîne d'attaque (Hutchins, Cloppert, Amin, 2011) ; MITRE ATT&CK
+% (Strom et al., 2018) ; CVE ; CVSS v3.1 (FIRST, 2019) ; loi n° 2010/012,
+% art. 65 (2), 66, 69, 70, 86 (texte officiel, cités au Chapitre 11).
+% ============================================================================
+
+\chapter{Menaces, Vulnérabilités et Attaques}
+\label{chap:menaces}
+\chaptermark{Menaces et attaques}
+
+\epigraph{%
+    « L'attaquant n'a besoin de réussir qu'une fois~;\\
+    le défenseur doit tenir à chaque fois, sauf s'il sait détecter. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitre~\ref{chap:proprietes}
+(propriétés, menace, vulnérabilité).}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Classer les sources de menace selon leur motivation et leurs
+          capacités.
+    \item Décrire les principales familles de logiciels malveillants.
+    \item Expliquer l'ingénierie sociale et l'hameçonnage.
+    \item Décrire une attaque comme une chaîne, et la lire avec MITRE
+          ATT\&CK.
+    \item Lire une fiche CVE et un score CVSS.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : qui attaque, comment, et pourquoi a-t-il réussi~?}
+% ============================================================================
+
+L'attaquant de Garoua n'a utilisé aucune technique nouvelle. Un courriel
+trompeur, un mot de passe volé, un correctif manquant, des sauvegardes à
+portée de main~: tout était connu, documenté, et évitable. Comprendre
+comment les attaquants travaillent, c'est savoir où les attendre.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Les sources de menace (section~\ref{sec:c02-sources}).
+    \item Les logiciels malveillants (section~\ref{sec:c02-malware}).
+    \item L'ingénierie sociale (section~\ref{sec:c02-social}).
+    \item Les attaques contre les réseaux et les services (section~\ref{sec:c02-reseau}).
+    \item La chaîne d'attaque et MITRE ATT\&CK (section~\ref{sec:c02-chaine}).
+    \item Vulnérabilités~: CVE et CVSS (section~\ref{sec:c02-cve}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Les Sources de Menace}
+\label{sec:c02-sources}
+% ============================================================================
+
+\begin{tableaucours}{L{3.0cm}L{3.4cm}L{2.6cm}L{3.0cm}}{%
+    \tableauHeader{Source} &
+    \tableauHeader{Motivation} &
+    \tableauHeader{Capacités} &
+    \tableauHeader{Exemple}
+}
+Groupe criminel & Argent~: rançon, revente de données & Élevées,
+organisées & Opération GAROUA \\
+Employé ou complice interne & Argent, vengeance & Accès légitime &
+Fraude aux fournisseurs \\
+Militant (hacktiviste) & Cause politique & Variables & Défiguration de
+site \\
+État ou groupe soutenu & Espionnage, sabotage & Très élevées & Stuxnet
+(Chapitre~\ref{chap:attaques}) \\
+Opportuniste & Curiosité, défi & Faibles, outils tout faits & Balayage
+automatique d'Internet \\
+Erreur et accident & Aucune & Sans objet & Suppression involontaire \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.1. Les sources de menace}\end{center}
+
+Une même organisation n'affronte pas toutes les sources~: une entreprise
+de logistique intéresse surtout les criminels (rançon, fraude) et les
+complices internes. C'est la première question d'une analyse de risques
+(Chapitre~\ref{chap:risques}).
+
+% ============================================================================
+\section{Les Logiciels Malveillants}
+\label{sec:c02-malware}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Logiciel malveillant} (\textit{malware})~: programme conçu pour
+exécuter, à l'insu de l'utilisateur, des actions nuisibles~: voler,
+modifier ou détruire des données, prendre le contrôle d'une machine,
+la rendre indisponible.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.0cm}L{5.4cm}L{3.8cm}}{%
+    \tableauHeader{Famille} &
+    \tableauHeader{Caractéristique} &
+    \tableauHeader{Mesure principale}
+}
+Virus & S'attache à un fichier et se propage quand il est ouvert &
+Antivirus, prudence \\
+Ver & Se propage seul par le réseau, en exploitant une faille & Correctifs,
+segmentation \\
+Cheval de Troie & Se présente comme un logiciel utile & Sources
+logicielles maîtrisées \\
+Rançongiciel & Chiffre les données et exige une rançon~; souvent précédé
+d'un vol (double extorsion) & Sauvegardes hors ligne, détection \\
+Logiciel espion & Collecte des informations (frappes, écran) &
+Durcissement, détection \\
+Porte dérobée, RAT & Donne un accès distant à l'attaquant & Filtrage
+sortant, détection \\
+Botnet & Réseau de machines infectées pilotées à distance & Détection
+des communications de commande \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.2. Les familles de logiciels malveillants}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Croire que l'antivirus suffit.
+
+\smallskip
+\textbf{Règle~:} l'antivirus reconnaît surtout ce qu'il a déjà vu. À
+Garoua, l'attaquant a utilisé des outils d'administration légitimes, que
+l'antivirus ne bloque pas. La détection d'un comportement anormal (une
+connexion à 23~h~12, une copie de 40~Go) est indispensable
+(Chapitre~\ref{chap:operations}).
+\end{boxalert}
+
+% ============================================================================
+\section{L'Ingénierie Sociale}
+\label{sec:c02-social}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Ingénierie sociale}~: manipulation d'une personne pour lui faire
+accomplir une action ou divulguer une information, en exploitant la
+confiance, l'urgence, l'autorité ou la peur. L'\termecle{hameçonnage}
+(\textit{phishing}) en est la forme la plus répandue.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.2cm}L{9.0cm}}{%
+    \tableauHeader{Variante} &
+    \tableauHeader{Description}
+}
+Hameçonnage de masse & Même message envoyé à des milliers de personnes \\
+Hameçonnage ciblé & Message personnalisé pour une personne ou un service \\
+Fraude au président & Un faux dirigeant ordonne un virement urgent \\
+Hameçonnage par SMS ou appel & Faux message d'opérateur ou de banque,
+fréquent avec le Mobile Money \\
+Prétexte & Un faux technicien demande un accès « pour une maintenance » \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.3. Les variantes de l'ingénierie sociale}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Le courriel du 19 février}
+\textbf{Constatation} (message retrouvé dans la boîte du technicien)~:
+l'expéditeur affiche le nom du fournisseur de messagerie, mais le domaine
+de l'adresse diffère d'une lettre~; le message annonce la suspension du
+compte « dans 24~heures »~; le lien mène à une page qui reproduit la
+page de connexion.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Trois signaux classiques~: une
+urgence artificielle, une adresse imitée, une page de connexion hors du
+domaine attendu. Une formation régulière et un second facteur
+d'authentification auraient rendu le vol du mot de passe inutile.
+\end{boxscenario}
+
+% ============================================================================
+\section{Les Attaques contre les Réseaux et les Services}
+\label{sec:c02-reseau}
+% ============================================================================
+
+\begin{tableaucours}{L{3.4cm}L{5.2cm}L{3.6cm}}{%
+    \tableauHeader{Attaque} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Propriété visée}
+}
+Écoute (\textit{sniffing}) & Capturer le trafic en clair & Confidentialité \\
+Homme du milieu & S'interposer entre deux parties & Confidentialité,
+intégrité \\
+Usurpation (\textit{spoofing}) & Se faire passer pour une autre machine &
+Authenticité \\
+Déni de service distribué & Saturer un service depuis de nombreuses
+machines & Disponibilité \\
+Force brute, bourrage d'identifiants & Essayer des mots de passe, ou
+réutiliser ceux qui ont fuité ailleurs & Confidentialité \\
+Injection & Faire exécuter des commandes par une application
+(Chapitre~\ref{chap:applications}) & Toutes \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.4. Attaques contre les réseaux et les
+services}\end{center}
+
+Le détail de ces attaques et des contre-mesures figure aux
+Chapitres~\ref{chap:reseaux1} et~\ref{chap:reseaux2}.
+
+% ============================================================================
+\section{La Chaîne d'Attaque et MITRE ATT\&CK}
+\label{sec:c02-chaine}
+% ============================================================================
+
+En 2011, des chercheurs de Lockheed Martin ont décrit l'intrusion comme une
+\termecle{chaîne d'attaque} en sept étapes, chacune pouvant être
+interrompue~\cite{hutchins2011}. La base MITRE ATT\&CK décrit plus
+finement les \emph{tactiques} (le but de l'attaquant à une étape) et les
+\emph{techniques} (le moyen), observées dans des attaques
+réelles~\cite{strom2018mitre}.
+
+\begin{tableaucours}{L{3.6cm}L{4.6cm}L{4.0cm}}{%
+    \tableauHeader{Tactique ATT\&CK} &
+    \tableauHeader{Opération GAROUA} &
+    \tableauHeader{Mesure qui coupait la chaîne}
+}
+Accès initial & Mot de passe volé, accès distant & Double
+authentification \\
+Découverte & Exploration du réseau interne & Segmentation, détection \\
+Élévation de privilèges & Faille du serveur de fichiers & Correctif \\
+Exfiltration & Copie de 40~Go vers un stockage externe & Filtrage sortant,
+alerte sur volume \\
+Impact & Suppression des sauvegardes, chiffrement & Sauvegardes hors ligne \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.5. L'Opération GAROUA lue avec ATT\&CK}\end{center}
+
+\begin{boxinfo}
+\textbf{L'avantage du défenseur.} La chaîne est un inventaire
+d'occasions~: il suffit de la couper à un endroit pour arrêter l'attaque,
+et de voir un maillon pour la détecter. C'est le principe de la défense en
+profondeur (Chapitre~\ref{chap:architecture}).
+\end{boxinfo}
+
+% ============================================================================
+\section{Vulnérabilités : CVE et CVSS}
+\label{sec:c02-cve}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{CVE} (\textit{Common Vulnerabilities and Exposures})~:
+identifiant public d'une vulnérabilité connue, de la forme
+CVE-année-numéro. \termecle{CVSS} (\textit{Common Vulnerability Scoring
+System})~: méthode de notation de la gravité, de 0 à~10, fondée sur la
+manière dont la vulnérabilité s'exploite et sur ses
+conséquences~\cite{first2019cvss}.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Métrique de base} &
+    \tableauHeader{Question}
+}
+Vecteur d'attaque & Faut-il être sur le réseau, sur place, ou peut-on
+attaquer par Internet~? \\
+Complexité & L'attaque demande-t-elle des conditions particulières~? \\
+Privilèges requis & Faut-il déjà un compte~? \\
+Interaction & Faut-il qu'un utilisateur clique~? \\
+Impacts C, I, D & Que perd-on en confidentialité, intégrité,
+disponibilité~? \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~2.6. Les métriques de base du CVSS}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Classer les correctifs à installer par le seul
+score CVSS.
+
+\smallskip
+\textbf{Règle~:} le score mesure la gravité technique, pas le risque pour
+l'organisation. Une vulnérabilité notée 7,5 sur un serveur exposé à
+Internet et qui porte la facturation passe avant une vulnérabilité notée
+9,0 sur un poste isolé. On croise le score avec l'exposition et la valeur
+de l'actif (Chapitre~\ref{chap:systemes}).
+\end{boxalert}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Penser en chaîne.} L'analyste associe chaque alerte à une
+tactique d'ATT\&CK~: une connexion distante inhabituelle relève de
+l'accès initial, un nouveau compte administrateur de l'élévation de
+privilèges. Deux alertes de tactiques successives sur la même machine
+valent bien plus que deux alertes isolées.
+\end{boxmetier}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Suivre les CVE.} L'administrateur s'abonne aux avis de sécurité de
+ses éditeurs, tient l'inventaire de ses versions, et sait dire en une heure
+si une nouvelle CVE critique le concerne.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Les sources de menace} diffèrent par leur motivation et
+          leurs capacités~; on se protège d'abord contre celles qui visent
+          son activité.
+    \item \textbf{Les logiciels malveillants} forment des familles~;
+          l'antivirus ne suffit pas contre les outils légitimes détournés.
+    \item \textbf{L'ingénierie sociale} exploite la confiance et l'urgence~;
+          un second facteur neutralise le vol de mot de passe.
+    \item \textbf{Une attaque est une chaîne}~; ATT\&CK en décrit les
+          tactiques et les techniques~; chaque maillon est une occasion.
+    \item \textbf{CVE} identifie une vulnérabilité, \textbf{CVSS} en note
+          la gravité technique, qui n'est pas le risque.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: classer une source de
+menace~; distinguer ver, virus, cheval de Troie et rançongiciel~; repérer
+trois signaux d'hameçonnage~; décrire une attaque avec les tactiques
+d'ATT\&CK~; lire les métriques d'un score CVSS.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.1. Quelle famille~? \niveaubase}]
+Classez~: (a) un programme qui chiffre les fichiers et affiche une
+demande de paiement~; (b) un programme qui se propage seul d'un serveur à
+l'autre~; (c) un faux utilitaire de compression qui ouvre un accès
+distant~; (d) dix mille téléphones qui envoient ensemble des requêtes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.2. Les signaux \niveaubase}]
+Listez cinq signaux qui doivent faire douter d'un courriel, et dites
+lesquels étaient présents dans le courriel du 19~février.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.3. Les sources \niveaubase}]
+Pour la BANQUE SANAGA, classez les sources de menace du Tableau~2.1 de la
+plus à la moins préoccupante, et justifiez les deux premières.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.4. La chaîne \niveaumoyen}]
+Une employée de la BANQUE SANAGA reçoit un SMS qui l'invite à
+« confirmer » son compte Mobile Money~; elle saisit son code~; son compte
+est vidé. Décrivez l'attaque en tactiques ATT\&CK et proposez une mesure
+par tactique.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.5. CVSS \niveaumoyen}]
+Une vulnérabilité exploitable par Internet, sans compte ni action de
+l'utilisateur, donne le contrôle complet du serveur. Indiquez la valeur
+attendue de chaque métrique de base et le niveau de gravité.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.6. Classer les correctifs \niveaumoyen}]
+Trois CVE~: 9,8 sur un serveur de test isolé~; 7,5 sur le portail de
+suivi exposé à Internet~; 8,1 sur les postes de la comptabilité. Dans
+quel ordre les corriger~? Justifiez.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.7. Double extorsion \niveaumoyen}]
+Pourquoi les sauvegardes ne suffisent-elles plus contre un rançongiciel
+qui vole les données avant de les chiffrer~? Quelles mesures ajouter~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.8. Le prétexte \niveaumoyen}]
+Un homme se présente à l'agence de Bafoussam comme technicien de SAHEL
+INFOGÉRANCE et demande l'accès à la salle serveur. Rédigez la procédure
+que doit suivre l'agent d'accueil.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.9. Détecter plutôt que bloquer \niveauexpert}]
+Pour chaque tactique du Tableau~2.5, proposez une trace que LiZbiZ aurait
+pu surveiller, et la règle d'alerte correspondante.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~2.10. Profil de menace \niveauexpert}]
+Rédigez le profil de menace d'une agence publique de paiement comme
+l'ANPP~: sources, motivations, techniques probables, actifs visés, et les
+trois mesures prioritaires.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item E.~Hutchins, M.~Cloppert et R.~Amin sur la chaîne
+          d'intrusion~\cite{hutchins2011}.
+    \item La base MITRE ATT\&CK~\cite{strom2018mitre}.
+    \item La spécification du CVSS~v3.1~\cite{first2019cvss}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Plusieurs maillons de la chaîne se protègent par la
+cryptographie~: le secret des données volées, l'intégrité des sauvegardes,
+l'authenticité des connexions. Le Chapitre~\ref{chap:crypto-sym} en pose
+les bases.
+\end{boxinfo}

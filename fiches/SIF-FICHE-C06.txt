@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C06
+Chapitre 6 : Gouvernance de la sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle norme traite de la gouvernance de la sécurité de l'information ?
+      a) ISO/IEC 27014
+      b) ISO 9001
+      c) ISO 22301
+      d) ISO/IEC 27037
+
+ 2. Lequel n'est pas un processus de gouvernance de l'ISO/IEC 27014 ?
+      a) Évaluer
+      b) Programmer
+      c) Orienter
+      d) Surveiller
+
+ 3. Que demande l'article 26 de la loi n° 2010/012 aux exploitants ?
+      a) Un antivirus
+      b) Une certification ISO
+      c) Des systèmes normalisés de gestion continue des risques
+      d) Un audit par jour
+
+ 4. Qui accepte les risques résiduels ?
+      a) L'administrateur
+      b) Le prestataire
+      c) L'auditeur
+      d) La direction
+
+ 5. Qui fixe les besoins de sécurité d'un actif et valide les droits ?
+      a) Le propriétaire de l'actif
+      b) Le technicien
+      c) L'auditeur
+      d) Le prestataire
+
+ 6. Pourquoi éviter de rattacher le RSSI au DSI ?
+      a) C'est interdit par la loi
+      b) Le RSSI contrôlerait son propre supérieur
+      c) Le DSI ne connaît pas la sécurité
+      d) Pour réduire les coûts
+
+ 7. Dans une matrice RACI, que signifie A ?
+      a) Analyse
+      b) Assiste
+      c) Approuve et rend compte
+      d) Audite
+
+ 8. Qui vérifie de façon indépendante que le dispositif fonctionne ?
+      a) Le DSI
+      b) Les utilisateurs
+      c) Le prestataire
+      d) L'audit
+
+ 9. Qui approuve la politique générale de sécurité ?
+      a) La direction générale
+      b) Le RSSI seul
+      c) Le prestataire
+      d) Chaque utilisateur
+
+10. « Les mots de passe comptent au moins 14 caractères » est :
+      a) Une politique générale
+      b) Un standard
+      c) Un guide
+      d) Une procédure
+
+11. De quoi part une politique de sécurité ?
+      a) D'un modèle copié
+      b) Du budget
+      c) Des risques de l'organisation
+      d) D'un logiciel
+
+12. Quand réviser la politique ?
+      a) Jamais
+      b) Tous les dix ans
+      c) Quand le RSSI change
+      d) Au moins chaque année et après chaque incident majeur
+
+13. Quelle clause de l'ISO/IEC 27001 exige une politique ?
+      a) Clause 5.2
+      b) Clause 8.1
+      c) Clause 9.2
+      d) Clause 10.1
+
+14. Quelle norme donne une méthode pour mesurer la sécurité ?
+      a) ISO/IEC 27037
+      b) ISO/IEC 27004
+      c) ISO 31000
+      d) ISO/IEC 29147
+
+15. Lequel n'est pas un élément d'un bon indicateur ?
+      a) Une formule
+      b) Une source
+      c) Une opinion
+      d) Une cible
+
+16. Que vaut un indicateur dont la source n'existe pas ?
+      a) Zéro
+      b) Cent pour cent
+      c) La moyenne
+      d) Inconnu
+
+17. Quelle clause permet de contrôler un prestataire ?
+      a) Le droit d'audit
+      b) La clause de prix
+      c) La réversibilité
+      d) La durée
+
+18. Quelle clause organise la restitution des données en fin de contrat ?
+      a) Le droit d'audit
+      b) La réversibilité
+      c) La notification
+      d) La sous-traitance
+
+19. À qui le RSSI de LiZbiZ est-il rattaché après l'attaque ?
+      a) Au DSI
+      b) Au prestataire
+      c) Au directeur général
+      d) Au commissaire aux comptes
+
+20. À quelle fréquence se réunit le comité de sécurité de LiZbiZ ?
+      a) Chaque semaine
+      b) Chaque année
+      c) Jamais
+      d) Chaque trimestre
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Le management met en œuvre les orientations de la gouvernance.
+      Vrai / Faux
+
+22. Le propriétaire d'un actif est généralement une personne de l'informatique.
+      Vrai / Faux
+
+23. Une politique que personne n'applique peut devenir une preuve contre l'organisation.
+      Vrai / Faux
+
+24. Copier la politique d'une autre organisation suffit.
+      Vrai / Faux
+
+25. Un indicateur doit avoir un responsable.
+      Vrai / Faux
+
+26. La sécurité coûte moins cher quand elle est prévue dès le projet.
+      Vrai / Faux
+
+27. Un prestataire n'a jamais à notifier ses incidents au client.
+      Vrai / Faux
+
+28. Une décision du conseil est déjà un résultat de sécurité.
+      Vrai / Faux
+
+29. Les utilisateurs ont pour rôle de signaler les incidents.
+      Vrai / Faux
+
+30. Installer un pare-feu est un acte de gouvernance.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La matrice qui répartit réaliser, approuver, consulter, informer a pour sigle ______.
+
+32. La politique de sécurité des systèmes d'information a pour sigle ______.
+
+33. Le cinquième processus de gouvernance de l'ISO/IEC 27014 consiste à ______ (faire vérifier de façon indépendante).
+
+34. La norme ISO/IEC de mesure de la sécurité porte le numéro 27______.
+
+35. Le pas à pas d'une opération est une ______.
+
+36. LiZbiZ s'engage à présenter chaque trimestre cinq ______ au conseil.
+
+37. La clause qui autorise le client à contrôler le prestataire est le droit d'______.
+
+38. L'article de la loi n° 2010/012 qui impose une gestion continue des risques est l'article ______.
+
+39. Le comité qui réunit direction, métiers, informatique et RSSI est le comité de ______.
+
+40. Les politiques qui déclinent la politique générale par sujet sont dites ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

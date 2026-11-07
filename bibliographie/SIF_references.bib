@@ -1,0 +1,804 @@
+% Bibliographie du cours SIF (SEC3266) ; seules des références publiées et vérifiables.
+% Les entrées communes au corpus (minka2026nek, first2019cvss, ...) sont copiées
+% depuis les bibliographies d'INF3226 et de SEC4031.
+
+% ---- Partie I : fondements et cryptographie
+@misc{iso27000_2018,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Information security management systems. Overview and vocabulary},
+  howpublished = {ISO/IEC 27000:2018},
+  year         = {2018}
+}
+@book{parker1998,
+  author    = {Parker, Donn B.},
+  title     = {Fighting Computer Crime: A New Framework for Protecting Information},
+  publisher = {Wiley},
+  year      = {1998}
+}
+@article{saltzer1975,
+  author  = {Saltzer, Jerome H. and Schroeder, Michael D.},
+  title   = {The Protection of Information in Computer Systems},
+  journal = {Proceedings of the IEEE},
+  volume  = {63},
+  number  = {9},
+  pages   = {1278--1308},
+  year    = {1975}
+}
+@book{anderson2020,
+  author    = {Anderson, Ross},
+  title     = {Security Engineering: A Guide to Building Dependable Distributed Systems},
+  edition   = {3},
+  publisher = {Wiley},
+  year      = {2020}
+}
+@inproceedings{hutchins2011,
+  author    = {Hutchins, Eric M. and Cloppert, Michael J. and Amin, Rohan M.},
+  title     = {Intelligence-Driven Computer Network Defense Informed by Analysis of Adversary Campaigns and Intrusion Kill Chains},
+  booktitle = {Proceedings of the 6th International Conference on Information Warfare and Security},
+  year      = {2011}
+}
+@techreport{strom2018mitre,
+  author      = {Strom, Blake E. and Applebaum, Andy and Miller, Doug P. and Nickels, Kathryn C. and Pennington, Adam G. and Thomas, Cody B.},
+  title       = {{MITRE ATT\&CK}: Design and Philosophy},
+  institution = {The MITRE Corporation},
+  number      = {MTR180316},
+  year        = {2018}
+}
+@article{kerckhoffs1883,
+  author  = {Kerckhoffs, Auguste},
+  title   = {La cryptographie militaire},
+  journal = {Journal des sciences militaires},
+  volume  = {IX},
+  pages   = {5--38 et 161--191},
+  year    = {1883}
+}
+@techreport{fips197,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {Advanced Encryption Standard (AES)},
+  type        = {FIPS},
+  number      = {197},
+  institution = {NIST},
+  year        = {2001}
+}
+@techreport{nist80038a,
+  author      = {Dworkin, Morris},
+  title       = {Recommendation for Block Cipher Modes of Operation: Methods and Techniques},
+  type        = {NIST Special Publication},
+  number      = {800-38A},
+  institution = {NIST},
+  year        = {2001}
+}
+@techreport{nist80038d,
+  author      = {Dworkin, Morris},
+  title       = {Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC},
+  type        = {NIST Special Publication},
+  number      = {800-38D},
+  institution = {NIST},
+  year        = {2007}
+}
+@inproceedings{wang2005,
+  author    = {Wang, Xiaoyun and Yu, Hongbo},
+  title     = {How to Break {MD5} and Other Hash Functions},
+  booktitle = {Advances in Cryptology, EUROCRYPT 2005},
+  series    = {LNCS},
+  volume    = {3494},
+  pages     = {19--35},
+  publisher = {Springer},
+  year      = {2005}
+}
+@inproceedings{stevens2017,
+  author    = {Stevens, Marc and Bursztein, Elie and Karpman, Pierre and Albertini, Ange and Markov, Yarik},
+  title     = {The First Collision for Full {SHA-1}},
+  booktitle = {Advances in Cryptology, CRYPTO 2017},
+  series    = {LNCS},
+  volume    = {10401},
+  pages     = {570--596},
+  publisher = {Springer},
+  year      = {2017}
+}
+@techreport{fips1804,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {Secure Hash Standard (SHS)},
+  type        = {FIPS},
+  number      = {180-4},
+  institution = {NIST},
+  year        = {2015}
+}
+@techreport{fips202,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {{SHA-3} Standard: Permutation-Based Hash and Extendable-Output Functions},
+  type        = {FIPS},
+  number      = {202},
+  institution = {NIST},
+  year        = {2015}
+}
+@techreport{rfc2104,
+  author      = {Krawczyk, Hugo and Bellare, Mihir and Canetti, Ran},
+  title       = {{HMAC}: Keyed-Hashing for Message Authentication},
+  type        = {RFC},
+  number      = {2104},
+  institution = {IETF},
+  year        = {1997}
+}
+@techreport{nist80063b,
+  author      = {Grassi, Paul A. and others},
+  title       = {Digital Identity Guidelines: Authentication and Lifecycle Management},
+  type        = {NIST Special Publication},
+  number      = {800-63B},
+  institution = {NIST},
+  year        = {2017}
+}
+@book{katz2020,
+  author    = {Katz, Jonathan and Lindell, Yehuda},
+  title     = {Introduction to Modern Cryptography},
+  edition   = {3},
+  publisher = {CRC Press},
+  year      = {2020}
+}
+@article{diffie1976,
+  author  = {Diffie, Whitfield and Hellman, Martin E.},
+  title   = {New Directions in Cryptography},
+  journal = {IEEE Transactions on Information Theory},
+  volume  = {22},
+  number  = {6},
+  pages   = {644--654},
+  year    = {1976}
+}
+@article{rivest1978,
+  author  = {Rivest, Ronald L. and Shamir, Adi and Adleman, Leonard},
+  title   = {A Method for Obtaining Digital Signatures and Public-Key Cryptosystems},
+  journal = {Communications of the ACM},
+  volume  = {21},
+  number  = {2},
+  pages   = {120--126},
+  year    = {1978}
+}
+@techreport{nist80057,
+  author      = {Barker, Elaine},
+  title       = {Recommendation for Key Management: Part 1, General},
+  type        = {NIST Special Publication},
+  number      = {800-57 Part 1 Rev. 5},
+  institution = {NIST},
+  year        = {2020}
+}
+@techreport{rfc5280,
+  author      = {Cooper, David and others},
+  title       = {Internet {X.509} Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile},
+  type        = {RFC},
+  number      = {5280},
+  institution = {IETF},
+  year        = {2008}
+}
+@techreport{rfc8446,
+  author      = {Rescorla, Eric},
+  title       = {The Transport Layer Security (TLS) Protocol Version 1.3},
+  type        = {RFC},
+  number      = {8446},
+  institution = {IETF},
+  year        = {2018}
+}
+@inproceedings{shor1994,
+  author    = {Shor, Peter W.},
+  title     = {Algorithms for Quantum Computation: Discrete Logarithms and Factoring},
+  booktitle = {Proceedings of the 35th Annual Symposium on Foundations of Computer Science},
+  pages     = {124--134},
+  publisher = {IEEE},
+  year      = {1994}
+}
+@techreport{fips203,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {Module-Lattice-Based Key-Encapsulation Mechanism Standard},
+  type        = {FIPS},
+  number      = {203},
+  institution = {NIST},
+  year        = {2024}
+}
+@techreport{fips204,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {Module-Lattice-Based Digital Signature Standard},
+  type        = {FIPS},
+  number      = {204},
+  institution = {NIST},
+  year        = {2024}
+}
+@techreport{fips205,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {Stateless Hash-Based Digital Signature Standard},
+  type        = {FIPS},
+  number      = {205},
+  institution = {NIST},
+  year        = {2024}
+}
+@article{spafford1989,
+  author  = {Spafford, Eugene H.},
+  title   = {The Internet Worm Program: An Analysis},
+  journal = {ACM SIGCOMM Computer Communication Review},
+  volume  = {19},
+  number  = {1},
+  pages   = {17--57},
+  year    = {1989}
+}
+@techreport{falliere2011,
+  author      = {Falliere, Nicolas and O Murchu, Liam and Chien, Eric},
+  title       = {{W32.Stuxnet} Dossier, version 1.4},
+  institution = {Symantec},
+  year        = {2011}
+}
+@techreport{nao2017wannacry,
+  author      = {{National Audit Office}},
+  title       = {Investigation: {WannaCry} Cyber Attack and the {NHS}},
+  number      = {HC 414},
+  institution = {National Audit Office},
+  address     = {Londres},
+  year        = {2017}
+}
+@book{greenberg2019,
+  author    = {Greenberg, Andy},
+  title     = {Sandworm: A New Era of Cyberwar and the Hunt for the Kremlin's Most Dangerous Hackers},
+  publisher = {Doubleday},
+  year      = {2019}
+}
+@misc{cisa2020solarwinds,
+  author       = {{Cybersecurity and Infrastructure Security Agency}},
+  title        = {Advanced Persistent Threat Compromise of Government Agencies, Critical Infrastructure, and Private Sector Organizations},
+  howpublished = {Alerte AA20-352A, 17 décembre 2020},
+  year         = {2020}
+}
+@misc{solarwinds2020,
+  author       = {{SolarWinds Corporation}},
+  title        = {Form 8-K, Current Report},
+  howpublished = {U.S. Securities and Exchange Commission, 14 décembre 2020},
+  year         = {2020}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@manual{first2019cvss,
+  author       = {{Forum of Incident Response and Security Teams}},
+  title        = {Common Vulnerability Scoring System v3.1: Specification Document},
+  organization = {FIRST},
+  year         = {2019}
+}
+@online{minka2026nek,
+  author      = {Minka Mi Nguidjoï, Thierry Emmanuel},
+  title       = {Modelling Epistemic Uncertainty in Information Systems Audit: A Trichotomous Response Instrument and Its Information-Theoretic Properties},
+  year        = {2026},
+  date        = {2026-07-22},
+  eprinttype  = {HAL},
+  eprint      = {hal-05701270},
+  url         = {https://hal.science/hal-05701270},
+  note        = {Prépublication, licence CC BY-NC 4.0},
+  langid      = {english}
+}
+
+% ---- Parties II et III : gouvernance, risques, normes, droit, éthique
+@misc{iso27014_2020,
+  author       = {{ISO/IEC}},
+  title        = {Information security, cybersecurity and privacy protection. Governance of information security},
+  howpublished = {ISO/IEC 27014:2020},
+  year         = {2020}
+}
+@misc{iso27004_2016,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Information security management. Monitoring, measurement, analysis and evaluation},
+  howpublished = {ISO/IEC 27004:2016},
+  year         = {2016}
+}
+@techreport{nist80088,
+  author      = {Kissel, Richard and Regenscheid, Andrew and Scholl, Matthew and Stine, Kevin},
+  title       = {Guidelines for Media Sanitization},
+  type        = {NIST Special Publication},
+  number      = {800-88 Rev. 1},
+  institution = {NIST},
+  year        = {2014}
+}
+@book{cialdini1984,
+  author    = {Cialdini, Robert B.},
+  title     = {Influence: The Psychology of Persuasion},
+  publisher = {William Morrow},
+  year      = {1984}
+}
+@book{cappelli2012,
+  author    = {Cappelli, Dawn M. and Moore, Andrew P. and Trzeciak, Randall F.},
+  title     = {The {CERT} Guide to Insider Threats},
+  publisher = {Addison-Wesley},
+  year      = {2012}
+}
+@techreport{nist80050,
+  author      = {Wilson, Mark and Hash, Joan},
+  title       = {Building an Information Technology Security Awareness and Training Program},
+  type        = {NIST Special Publication},
+  number      = {800-50},
+  institution = {NIST},
+  year        = {2003}
+}
+@misc{isc2ethics,
+  author       = {{ISC2}},
+  title        = {{ISC2} Code of Ethics},
+  howpublished = {\url{https://www.isc2.org/ethics}},
+  year         = {2024}
+}
+@misc{acm2018code,
+  author       = {{Association for Computing Machinery}},
+  title        = {{ACM} Code of Ethics and Professional Conduct},
+  year         = {2018}
+}
+@misc{iso29147_2018,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Vulnerability disclosure},
+  howpublished = {ISO/IEC 29147:2018},
+  year         = {2018}
+}
+@misc{iso30111_2019,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Vulnerability handling processes},
+  howpublished = {ISO/IEC 30111:2019},
+  year         = {2019}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@manual{anssi2018ebios,
+  author       = {{Agence nationale de la sécurité des systèmes d'information}},
+  title        = {{EBIOS} Risk Manager. Le guide},
+  organization = {ANSSI},
+  address      = {Paris},
+  edition      = {version 1.0},
+  year         = {2018}
+}
+@manual{cis2021controls,
+  author       = {{Center for Internet Security}},
+  title        = {{CIS} Critical Security Controls, Version 8},
+  organization = {Center for Internet Security},
+  address      = {East Greenbush, NY},
+  year         = {2021}
+}
+@article{cox2008matrices,
+  author  = {Cox, Louis Anthony, Jr.},
+  title   = {What's Wrong with Risk Matrices?},
+  journal = {Risk Analysis},
+  volume  = {28},
+  number  = {2},
+  pages   = {497--512},
+  year    = {2008}
+}
+@misc{isaca2024ethique,
+  author       = {{ISACA}},
+  title        = {Code of Professional Ethics},
+  howpublished = {Site de l'ISACA, rubrique Code of Professional Ethics},
+  year         = {2024},
+  note         = {Consulté pour la rédaction du cours ; version en vigueur à vérifier}
+}
+@standard{iso27001_2022,
+  author       = {{ISO/IEC}},
+  title        = {{ISO/IEC} 27001:2022 -- Information security, cybersecurity and privacy protection -- Information security management systems -- Requirements},
+  organization = {ISO},
+  address      = {Genève},
+  year         = {2022}
+}
+@standard{iso27002_2022,
+  author       = {{ISO/IEC}},
+  title        = {{ISO/IEC} 27002:2022 -- Information security, cybersecurity and privacy protection -- Information security controls},
+  organization = {ISO},
+  address      = {Genève},
+  year         = {2022}
+}
+@manual{iso27005_2022,
+  author       = {{ISO/IEC}},
+  title        = {{ISO/IEC} 27005:2022. Sécurité de l'information, cybersécurité et protection de la vie privée. Préconisations pour la gestion des risques liés à la sécurité de l'information},
+  organization = {Organisation internationale de normalisation},
+  address      = {Genève},
+  year         = {2022}
+}
+@standard{iso31000_2018,
+  title        = {ISO 31000:2018 -- Management du risque -- Lignes directrices},
+  organization = {Organisation internationale de normalisation},
+  year         = {2018},
+  langid       = {french}
+}
+@legislation{loi2010012,
+  title = {Loi n° 2010/012 du 21 décembre 2010 relative à la cybersécurité et la cybercriminalité au Cameroun},
+  date  = {2010-12-21},
+  note  = {Version anglaise officielle : Law No. 2010/012 of 21 December 2010 relating to cybersecurity and cybercriminality in Cameroon}
+}
+@techreport{nist2024csf,
+  author      = {{National Institute of Standards and Technology}},
+  title       = {The {NIST} Cybersecurity Framework ({CSF}) 2.0},
+  institution = {NIST},
+  type        = {NIST Cybersecurity White Paper},
+  number      = {NIST CSWP 29},
+  address     = {Gaithersburg, MD},
+  year        = {2024}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@misc{budapest2001,
+  author       = {{Council of Europe}},
+  title        = {Convention on Cybercrime},
+  howpublished = {Budapest Convention},
+  year         = {2001}
+}
+@misc{malabo2014,
+  author       = {{African Union}},
+  title        = {African Union Convention on Cyber Security and Personal Data Protection},
+  howpublished = {Malabo Convention},
+  year         = {2014}
+}
+
+% ---- Partie IV : sécurité technique
+@inproceedings{lampson1971,
+  author    = {Lampson, Butler W.},
+  title     = {Protection},
+  booktitle = {Proceedings of the 5th Princeton Conference on Information Sciences and Systems},
+  pages     = {437--443},
+  year      = {1971}
+}
+@techreport{bell1976,
+  author      = {Bell, D. Elliott and LaPadula, Leonard J.},
+  title       = {Secure Computer System: Unified Exposition and Multics Interpretation},
+  institution = {The MITRE Corporation},
+  number      = {MTR-2997 Rev. 1},
+  year        = {1976}
+}
+@techreport{biba1977,
+  author      = {Biba, Kenneth J.},
+  title       = {Integrity Considerations for Secure Computer Systems},
+  institution = {The MITRE Corporation},
+  number      = {MTR-3153 Rev. 1},
+  year        = {1977}
+}
+@inproceedings{clark1987,
+  author    = {Clark, David D. and Wilson, David R.},
+  title     = {A Comparison of Commercial and Military Computer Security Policies},
+  booktitle = {Proceedings of the IEEE Symposium on Security and Privacy},
+  pages     = {184--194},
+  year      = {1987}
+}
+@inproceedings{brewer1989,
+  author    = {Brewer, David F. C. and Nash, Michael J.},
+  title     = {The Chinese Wall Security Policy},
+  booktitle = {Proceedings of the IEEE Symposium on Security and Privacy},
+  pages     = {206--214},
+  year      = {1989}
+}
+@article{sandhu1996,
+  author  = {Sandhu, Ravi S. and Coyne, Edward J. and Feinstein, Hal L. and Youman, Charles E.},
+  title   = {Role-Based Access Control Models},
+  journal = {IEEE Computer},
+  volume  = {29},
+  number  = {2},
+  pages   = {38--47},
+  year    = {1996}
+}
+@techreport{nist800162,
+  author      = {Hu, Vincent C. and others},
+  title       = {Guide to Attribute Based Access Control (ABAC) Definition and Considerations},
+  type        = {NIST Special Publication},
+  number      = {800-162},
+  institution = {NIST},
+  year        = {2014}
+}
+@techreport{nist800207,
+  author      = {Rose, Scott and Borchert, Oliver and Mitchell, Stu and Connelly, Sean},
+  title       = {Zero Trust Architecture},
+  type        = {NIST Special Publication},
+  number      = {800-207},
+  institution = {NIST},
+  year        = {2020}
+}
+@techreport{rfc826,
+  author      = {Plummer, David C.},
+  title       = {An Ethernet Address Resolution Protocol},
+  type        = {RFC},
+  number      = {826},
+  institution = {IETF},
+  year        = {1982}
+}
+@techreport{rfc4987,
+  author      = {Eddy, Wesley},
+  title       = {{TCP SYN} Flooding Attacks and Common Mitigations},
+  type        = {RFC},
+  number      = {4987},
+  institution = {IETF},
+  year        = {2007}
+}
+@techreport{rfc5452,
+  author      = {Hubert, Bert and van Mook, Remco},
+  title       = {Measures for Making {DNS} More Resilient against Forged Answers},
+  type        = {RFC},
+  number      = {5452},
+  institution = {IETF},
+  year        = {2009}
+}
+@techreport{rfc4033,
+  author      = {Arends, Roy and others},
+  title       = {{DNS} Security Introduction and Requirements},
+  type        = {RFC},
+  number      = {4033},
+  institution = {IETF},
+  year        = {2005}
+}
+@book{stevens1994,
+  author    = {Stevens, W. Richard},
+  title     = {{TCP/IP} Illustrated, Volume 1: The Protocols},
+  publisher = {Addison-Wesley},
+  year      = {1994}
+}
+@techreport{nist80041,
+  author      = {Scarfone, Karen and Hoffman, Paul},
+  title       = {Guidelines on Firewalls and Firewall Policy},
+  type        = {NIST Special Publication},
+  number      = {800-41 Rev. 1},
+  institution = {NIST},
+  year        = {2009}
+}
+@techreport{nist80094,
+  author      = {Scarfone, Karen and Mell, Peter},
+  title       = {Guide to Intrusion Detection and Prevention Systems (IDPS)},
+  type        = {NIST Special Publication},
+  number      = {800-94},
+  institution = {NIST},
+  year        = {2007}
+}
+@techreport{rfc7296,
+  author      = {Kaufman, Charlie and others},
+  title       = {Internet Key Exchange Protocol Version 2 ({IKEv2})},
+  type        = {RFC},
+  number      = {7296},
+  institution = {IETF},
+  year        = {2014}
+}
+@inproceedings{vanhoef2017,
+  author    = {Vanhoef, Mathy and Piessens, Frank},
+  title     = {Key Reinstallation Attacks: Forcing Nonce Reuse in {WPA2}},
+  booktitle = {Proceedings of the ACM Conference on Computer and Communications Security (CCS)},
+  year      = {2017}
+}
+@misc{w3c2019webauthn,
+  author       = {{World Wide Web Consortium}},
+  title        = {Web Authentication: An {API} for Accessing Public Key Credentials, Level 1},
+  howpublished = {W3C Recommendation, 4 mars 2019},
+  year         = {2019}
+}
+@misc{oasis2005saml,
+  author       = {{OASIS}},
+  title        = {Security Assertion Markup Language ({SAML}) V2.0},
+  howpublished = {OASIS Standard},
+  year         = {2005}
+}
+@misc{oidc2014,
+  author       = {Sakimura, Nat and Bradley, John and Jones, Michael B. and de Medeiros, Breno and Mortimore, Chuck},
+  title        = {{OpenID} Connect Core 1.0},
+  howpublished = {OpenID Foundation},
+  year         = {2014}
+}
+@techreport{nist800123,
+  author      = {Scarfone, Karen and Jansen, Wayne and Tracy, Miles},
+  title       = {Guide to General Server Security},
+  type        = {NIST Special Publication},
+  number      = {800-123},
+  institution = {NIST},
+  year        = {2008}
+}
+@techreport{nist80040,
+  author      = {Souppaya, Murugiah and Scarfone, Karen},
+  title       = {Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology},
+  type        = {NIST Special Publication},
+  number      = {800-40 Rev. 4},
+  institution = {NIST},
+  year        = {2022}
+}
+@techreport{nist80092,
+  author      = {Kent, Karen and Souppaya, Murugiah},
+  title       = {Guide to Computer Security Log Management},
+  type        = {NIST Special Publication},
+  number      = {800-92},
+  institution = {NIST},
+  year        = {2006}
+}
+@techreport{nist800218,
+  author      = {Souppaya, Murugiah and Scarfone, Karen and Dodson, Donna},
+  title       = {Secure Software Development Framework ({SSDF}) Version 1.1},
+  type        = {NIST Special Publication},
+  number      = {800-218},
+  institution = {NIST},
+  year        = {2022}
+}
+@book{shostack2014,
+  author    = {Shostack, Adam},
+  title     = {Threat Modeling: Designing for Security},
+  publisher = {Wiley},
+  year      = {2014}
+}
+@misc{owaspmasvs,
+  author       = {{OWASP}},
+  title        = {Mobile Application Security Verification Standard ({MASVS})},
+  howpublished = {OWASP Foundation},
+  year         = {2023}
+}
+@techreport{nist800124,
+  author      = {Howell, Gema and others},
+  title       = {Guidelines for Managing the Security of Mobile Devices in the Enterprise},
+  type        = {NIST Special Publication},
+  number      = {800-124 Rev. 2},
+  institution = {NIST},
+  year        = {2023}
+}
+@techreport{nist80061r2,
+  author      = {Cichonski, Paul and Millar, Tom and Grance, Tim and Scarfone, Karen},
+  title       = {Computer Security Incident Handling Guide},
+  type        = {NIST Special Publication},
+  number      = {800-61 Rev. 2},
+  institution = {NIST},
+  year        = {2012}
+}
+@techreport{nist80061r3,
+  author      = {Nelson, Alex and Rekhi, Sanjay and Souppaya, Murugiah and Scarfone, Karen},
+  title       = {Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A {CSF} 2.0 Community Profile},
+  type        = {NIST Special Publication},
+  number      = {800-61 Rev. 3},
+  institution = {NIST},
+  year        = {2025}
+}
+@misc{iso27035_2023,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Information security incident management. Part 1: Principles and process},
+  howpublished = {ISO/IEC 27035-1:2023},
+  year         = {2023}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@manual{csa2021ccm,
+  author       = {{Cloud Security Alliance}},
+  title        = {Cloud Controls Matrix, version 4},
+  organization = {Cloud Security Alliance},
+  year         = {2021}
+}
+@standard{iso19011_2018,
+  title        = {ISO 19011:2018 -- Lignes directrices pour l'audit des systèmes de management},
+  organization = {Organisation internationale de normalisation},
+  year         = {2018},
+  note         = {Troisième édition ; l'édition de 2011 comptait six principes, celle de 2018 en compte sept},
+  langid       = {french}
+}
+@standard{iso27007_2020,
+  author       = {{ISO/IEC}},
+  title        = {{ISO/IEC} 27007:2020 -- Information security, cybersecurity and privacy protection -- Guidelines for information security management systems auditing},
+  organization = {ISO},
+  address      = {Genève},
+  year         = {2020}
+}
+@manual{iso27017_2015,
+  author       = {{ISO/IEC}},
+  title        = {{ISO/IEC} 27017:2015. Code de bonne pratique pour les contrôles de sécurité de l'information fondés sur l'{ISO/IEC} 27002 pour les services du nuage},
+  organization = {Organisation internationale de normalisation},
+  year         = {2015}
+}
+@techreport{nist2008sp800115,
+  author      = {Scarfone, Karen and Souppaya, Murugiah and Cody, Amanda and Orebaugh, Angela},
+  title       = {Technical Guide to Information Security Testing and Assessment},
+  institution = {National Institute of Standards and Technology},
+  type        = {NIST Special Publication},
+  number      = {800-115},
+  year        = {2008}
+}
+@techreport{nist2011sp800145,
+  author      = {Mell, Peter and Grance, Timothy},
+  title       = {The {NIST} Definition of Cloud Computing},
+  institution = {National Institute of Standards and Technology},
+  type        = {NIST Special Publication},
+  number      = {800-145},
+  year        = {2011}
+}
+@manual{owasp2021asvs,
+  author       = {{OWASP Foundation}},
+  title        = {Application Security Verification Standard 4.0.3},
+  organization = {OWASP Foundation},
+  year         = {2021}
+}
+@misc{owasp2021top10,
+  author       = {{OWASP Foundation}},
+  title        = {{OWASP} Top 10:2021},
+  howpublished = {OWASP Foundation, en ligne (owasp.org/Top10)},
+  year         = {2021}
+}
+
+% ---- Parties V et VI : continuité, investigation, défis, mesure
+@misc{iso27031_2011,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Guidelines for information and communication technology readiness for business continuity},
+  howpublished = {ISO/IEC 27031:2011},
+  year         = {2011}
+}
+@techreport{nist80034,
+  author      = {Swanson, Marianne and others},
+  title       = {Contingency Planning Guide for Federal Information Systems},
+  type        = {NIST Special Publication},
+  number      = {800-34 Rev. 1},
+  institution = {NIST},
+  year        = {2010}
+}
+@techreport{nist2023aml,
+  author      = {Vassilev, Apostol and Oprea, Alina and Fordyce, Alie and Anderson, Hyrum},
+  title       = {Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations},
+  type        = {NIST Artificial Intelligence},
+  number      = {100-2 E2023},
+  institution = {NIST},
+  year        = {2024}
+}
+@misc{owasp2023llm,
+  author       = {{OWASP}},
+  title        = {{OWASP} Top 10 for Large Language Model Applications},
+  howpublished = {OWASP Foundation, version 1.1},
+  year         = {2023}
+}
+@inproceedings{antonakakis2017mirai,
+  author    = {Antonakakis, Manos and others},
+  title     = {Understanding the {Mirai} Botnet},
+  booktitle = {Proceedings of the 26th USENIX Security Symposium},
+  pages     = {1093--1110},
+  year      = {2017}
+}
+@techreport{nistir8259,
+  author      = {Fagan, Michael and Megas, Katerina N. and Scarfone, Karen and Smith, Matthew},
+  title       = {Foundational Cybersecurity Activities for {IoT} Device Manufacturers},
+  type        = {NISTIR},
+  number      = {8259},
+  institution = {NIST},
+  year        = {2020}
+}
+@techreport{nist80055,
+  author      = {Chew, Elizabeth and others},
+  title       = {Performance Measurement Guide for Information Security},
+  type        = {NIST Special Publication},
+  number      = {800-55 Rev. 1},
+  institution = {NIST},
+  year        = {2008}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@standard{iso22301_2019,
+  author       = {{ISO}},
+  title        = {{ISO} 22301:2019 -- Security and resilience -- Business continuity management systems -- Requirements},
+  organization = {ISO},
+  address      = {Genève},
+  year         = {2019}
+}
+@online{minka2026auditologie,
+  author      = {Minka Mi Nguidjoï, Thierry Emmanuel},
+  title       = {Vers l'auditologie : un agenda de recherche en science du design pour une science appliquée de la réduction de l'incertitude dans l'audit des systèmes d'information},
+  year        = {2026},
+  date        = {2026-07-22},
+  eprinttype  = {HAL},
+  eprint      = {hal-05701007},
+  url         = {https://hal.science/hal-05701007},
+  note        = {Prépublication, licence CC BY-NC 4.0},
+  langid      = {french}
+}
+
+% ---- Copiées depuis une autre bibliographie du corpus (07/11/2026)
+@misc{iso27037,
+  author       = {{ISO/IEC}},
+  title        = {Information technology. Security techniques. Guidelines for identification, collection, acquisition and preservation of digital evidence},
+  howpublished = {ISO/IEC 27037:2012},
+  year         = {2012}
+}
+@misc{minka2025cro,
+  author       = {Minka Mi Nguidjoi, Thierry Emmanuel and Mani Onana, Franck S. and Djotio Ndié, Thomas},
+  title        = {The {CRO} Trilemma: a formal incompatibility between Confidentiality, Reliability and legal Opposability in Post-Quantum proof systems},
+  howpublished = {Cryptology ePrint Archive, Paper 2025/1348},
+  year         = {2025},
+  url          = {https://eprint.iacr.org/2025/1348}
+}
+@misc{nist80086,
+  author       = {{National Institute of Standards and Technology}},
+  title        = {Guide to Integrating Forensic Techniques into Incident Response},
+  howpublished = {NIST Special Publication 800-86},
+  year         = {2006}
+}
+@techreport{rfc3227,
+  author      = {Brezinski, Dominique and Killalea, Tom},
+  title       = {Guidelines for Evidence Collection and Archiving},
+  institution = {Internet Engineering Task Force},
+  type        = {RFC},
+  number      = {3227},
+  year        = {2002}
+}

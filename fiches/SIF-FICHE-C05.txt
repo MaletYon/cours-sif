@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C05
+Chapitre 5 : Histoire des grandes attaques
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Laquelle n'est pas une question de la grille de lecture ?
+      a) Le cours de bourse
+      b) Le vecteur
+      c) La mesure manquante
+      d) Le signal ignoré
+
+ 2. Comment présenter le coût mondial d'une attaque lu dans la presse ?
+      a) Comme un fait établi
+      b) Comme une estimation, avec sa source
+      c) Ne jamais en parler
+      d) Comme une source primaire
+
+ 3. Lequel est une source primaire ?
+      a) Un article de journal
+      b) Un billet de blogue
+      c) Le rapport de l'organisme touché ou d'une autorité
+      d) Un livre de vulgarisation
+
+ 4. En quelle année le ver Morris s'est-il propagé ?
+      a) 1978
+      b) 1998
+      c) 2008
+      d) 1988
+
+ 5. Qui a publié l'analyse détaillée du ver Morris ?
+      a) E. Spafford
+      b) A. Greenberg
+      c) R. Anderson
+      d) B. Lampson
+
+ 6. Quel organisme a été créé après le ver Morris ?
+      a) Le NIST
+      b) Le CERT/CC
+      c) L'ISO
+      d) L'OWASP
+
+ 7. Pourquoi le ver a-t-il fait s'effondrer des machines ?
+      a) Il effaçait les disques
+      b) Il chiffrait les données
+      c) Il se réinstallait sur des machines déjà infectées
+      d) Il coupait le réseau
+
+ 8. Que visait Stuxnet ?
+      a) Des comptes bancaires
+      b) Des téléphones
+      c) Des sites web
+      d) Des automates industriels pilotant des centrifugeuses
+
+ 9. Comment Stuxnet franchissait-il l'isolement des réseaux industriels ?
+      a) Par clé USB
+      b) Par Wi-Fi
+      c) Par satellite
+      d) Par courriel
+
+10. Avec quoi les pilotes de Stuxnet étaient-ils signés ?
+      a) Aucun certificat
+      b) Des certificats volés
+      c) Des certificats de l'ANTIC
+      d) Des clés symétriques
+
+11. Quelle faille exploitait WannaCry ?
+      a) Une faille inconnue
+      b) Un mot de passe faible
+      c) Une faille de SMBv1, corrigée deux mois plus tôt
+      d) Une injection SQL
+
+12. Quel organisme britannique a enquêté sur WannaCry et le service de santé ?
+      a) Le NIST
+      b) Interpol
+      c) L'ENISA
+      d) Le National Audit Office
+
+13. Comment NotPetya s'est-il d'abord diffusé ?
+      a) Par la mise à jour piégée d'un logiciel de comptabilité
+      b) Par une clé USB
+      c) Par une publicité
+      d) Par SMS
+
+14. Qu'était réellement NotPetya ?
+      a) Un rançongiciel qui rendait les données
+      b) Une arme de destruction déguisée en rançongiciel
+      c) Un logiciel espion
+      d) Un ver inoffensif
+
+15. Par où l'attaque SolarWinds est-elle passée ?
+      a) Un courriel d'hameçonnage
+      b) Un déni de service
+      c) La chaîne de production d'un éditeur de logiciel de supervision
+      d) Une clé USB
+
+16. Combien de clients SolarWinds a-t-il déclaré avoir pu installer la version compromise ?
+      a) Environ 180
+      b) Environ 1 800
+      c) Environ 180 000
+      d) Environ 18 000
+
+17. Quelle leçon tire-t-on de WannaCry ?
+      a) Installer les correctifs à temps
+      b) Supprimer les antivirus
+      c) Fermer Internet
+      d) Payer la rançon
+
+18. Pourquoi un réseau plat aggrave-t-il une attaque ?
+      a) Il est lent
+      b) Une intrusion locale atteint toutes les machines
+      c) Il coûte cher
+      d) Il empêche les sauvegardes
+
+19. Quelle capacité décide souvent de l'issue d'une attaque destructrice ?
+      a) La communication
+      b) Le prix des serveurs
+      c) La capacité à reprendre l'activité
+      d) La taille de l'entreprise
+
+20. Quel point commun relie NotPetya, SolarWinds et l'Opération GAROUA ?
+      a) Une clé USB
+      b) Une faille SMBv1
+      c) Un déni de service
+      d) Un acteur de confiance utilisé comme porte d'entrée
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Les montants des grandes attaques sont presque toujours des estimations.
+      Vrai / Faux
+
+22. Un réseau isolé est forcément protégé.
+      Vrai / Faux
+
+23. Stuxnet visait l'intégrité d'un processus physique.
+      Vrai / Faux
+
+24. Le correctif de la faille exploitée par WannaCry existait avant l'attaque.
+      Vrai / Faux
+
+25. Payer la rançon de NotPetya permettait de récupérer les données.
+      Vrai / Faux
+
+26. Une mise à jour signée par l'éditeur est forcément saine.
+      Vrai / Faux
+
+27. La plupart des grandes attaques exploitent des faiblesses connues.
+      Vrai / Faux
+
+28. À Garoua, un correctif critique publié huit mois plus tôt n'était pas installé.
+      Vrai / Faux
+
+29. Le nombre exact de machines touchées par le ver Morris a été mesuré.
+      Vrai / Faux
+
+30. Le cours cite des attaques africaines sans source primaire accessible.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le premier centre de réponse aux incidents créé en 1988 a pour sigle CERT/______.
+
+32. Le protocole de partage de fichiers exploité par WannaCry est SMB version ______.
+
+33. Le fabricant des automates visés par Stuxnet est ______.
+
+34. Le logiciel de supervision compromis de SolarWinds s'appelle ______.
+
+35. Le logiciel qui se présentait comme un rançongiciel mais détruisait les données s'appelle ______.
+
+36. Un rapport d'autorité ou de l'organisme touché est une source ______.
+
+37. Stuxnet a été découvert en ______.
+
+38. WannaCry s'est propagé le 12 mai ______.
+
+39. L'auteur du ver de 1988 est Robert T. ______.
+
+40. L'agence américaine qui a publié l'alerte sur SolarWinds a pour sigle ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

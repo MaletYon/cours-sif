@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C08
+Chapitre 8 : Sécurité des actifs et des données
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle est la première mesure sur les actifs selon l'ISO/IEC 27002 ?
+      a) L'inventaire
+      b) Le chiffrement
+      c) La sauvegarde
+      d) L'audit
+
+ 2. Qui doit être propriétaire du fichier des clients ?
+      a) Le DSI
+      b) Le directeur commercial
+      c) Le prestataire
+      d) L'administrateur
+
+ 3. Que révèle un équipement découvert sur le réseau et absent de l'inventaire ?
+      a) Rien
+      b) Une erreur de l'outil
+      c) Un signal à examiner
+      d) Une économie
+
+ 4. Quel niveau convient au catalogue public des services ?
+      a) Interne
+      b) Confidentiel
+      c) Secret
+      d) Public
+
+ 5. Quel niveau convient aux mots de passe des comptes d'administration ?
+      a) Secret
+      b) Public
+      c) Interne
+      d) Confidentiel
+
+ 6. Pourquoi ne pas tout classer « confidentiel » ?
+      a) C'est interdit
+      b) Une classification trop haute est ignorée
+      c) Cela coûte trop cher
+      d) La loi impose public
+
+ 7. Quel est le niveau par défaut recommandé ?
+      a) Public
+      b) Confidentiel
+      c) Interne
+      d) Secret
+
+ 8. Quelle loi encadre les données personnelles au Cameroun ?
+      a) Loi n° 2010/012
+      b) Loi n° 2010/013
+      c) Aucune
+      d) Loi n° 2024/017
+
+ 9. Quel risque guette l'étape de partage ?
+      a) L'envoi au mauvais destinataire
+      b) La perte de lisibilité
+      c) La récupération après destruction
+      d) Aucun
+
+10. Quelle mesure réduit l'ampleur d'une fuite ?
+      a) Garder tout indéfiniment
+      b) Fixer et appliquer des durées de conservation
+      c) Copier les données
+      d) Les publier
+
+11. Que contenait le partage FS-02 de Garoua ?
+      a) Seulement des clients actifs
+      b) Rien
+      c) Des dossiers depuis 2015, dont des clients partis depuis plus de cinq ans
+      d) Des logiciels
+
+12. Quel document du NIST traite de l'assainissement des supports ?
+      a) SP 800-61
+      b) SP 800-53
+      c) SP 800-207
+      d) SP 800-88
+
+13. Quel niveau rend la récupération impraticable même en laboratoire ?
+      a) Purger
+      b) Effacer
+      c) Détruire
+      d) Supprimer
+
+14. Quel niveau rend le support inutilisable ?
+      a) Effacer
+      b) Détruire
+      c) Purger
+      d) Formater
+
+15. Pourquoi un fichier supprimé est-il récupérable ?
+      a) Il est copié sur Internet
+      b) Il est chiffré
+      c) L'espace est libéré mais les données ne sont pas écrasées
+      d) Il est en mémoire
+
+16. Quel niveau pour un portable donné à une école ?
+      a) Effacer
+      b) Aucun
+      c) Formater rapidement
+      d) Purger
+
+17. Quel incident historique a utilisé des clés USB ?
+      a) Stuxnet
+      b) WannaCry
+      c) SolarWinds
+      d) Morris
+
+18. Que fait un outil DLP ?
+      a) Il chiffre les disques
+      b) Il repère les données classées qui sortent
+      c) Il sauvegarde
+      d) Il filtre le Wi-Fi
+
+19. Quelle mesure pour les supports amovibles ?
+      a) Les autoriser tous
+      b) Les interdire sans exception
+      c) Bloquer par défaut et n'autoriser que des supports enregistrés et chiffrés
+      d) Les ignorer
+
+20. Qui tient l'inventaire technique des serveurs et logiciels ?
+      a) Le DG
+      b) L'auditeur
+      c) Le client
+      d) L'administrateur systèmes et réseaux
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Ce qui n'est pas inventorié n'est pas protégé.
+      Vrai / Faux
+
+22. Chaque niveau de classification entraîne des règles de manipulation.
+      Vrai / Faux
+
+23. Le propriétaire doit justifier chaque niveau supérieur à « interne ».
+      Vrai / Faux
+
+24. La donnée la mieux protégée est celle que l'on ne garde plus.
+      Vrai / Faux
+
+25. Vider la corbeille efface définitivement les données.
+      Vrai / Faux
+
+26. Un certificat d'effacement indique la méthode, la date et l'opérateur.
+      Vrai / Faux
+
+27. Un DLP fonctionne sans classification des données.
+      Vrai / Faux
+
+28. La classification doit se faire à la création de la donnée.
+      Vrai / Faux
+
+29. Les articles de la loi n° 2024/017 peuvent être appliqués sans lire le texte officiel.
+      Vrai / Faux
+
+30. Un serveur est un actif essentiel.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Les trois niveaux du NIST sont effacer, purger et ______.
+
+32. L'affectation d'une information à un niveau de sensibilité est la ______.
+
+33. Les outils de prévention des fuites ont pour sigle ______.
+
+34. La personne métier qui répond d'un actif est son ______.
+
+35. La dernière étape du cycle de vie des données est la ______.
+
+36. Le guide NIST d'assainissement des supports porte le numéro SP 800-______.
+
+37. Le niveau le plus élevé du schéma du cours est ______.
+
+38. Fixer une durée de ______ limite les données exposées.
+
+39. Stuxnet a franchi un réseau isolé grâce à une clé ______.
+
+40. Le document qui atteste un effacement est un ______ d'effacement.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

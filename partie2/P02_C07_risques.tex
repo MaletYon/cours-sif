@@ -1,0 +1,356 @@
+% ============================================================================
+% Fichier  : partie2/P02_C07_risques.tex
+% Titre    : Analyser et Traiter les Risques de Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre II » (analyse des risques). Cohérence avec INF3226,
+% Chapitres 4 et 5 : échelles 1 à 4, score intolérable à partir de 9,
+% scénario EBIOS du prestataire de Garoua. Sources : ISO 31000:2018 ;
+% ISO/IEC 27005:2022 ; ANSSI, EBIOS Risk Manager (2018) ; Cox (2008).
+% ============================================================================
+
+\chapter{Analyser et Traiter les Risques de Sécurité}
+\label{chap:risques}
+\chaptermark{Risques de sécurité}
+
+\epigraph{%
+    « On ne peut pas tout protéger également~:\\
+    le risque dit où mettre l'effort. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:proprietes},
+\ref{chap:menaces} et~\ref{chap:gouvernance}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Décrire le processus de gestion des risques de l'ISO~31000 et
+          de l'ISO/IEC~27005.
+    \item Distinguer l'approche par actifs et l'approche par scénarios.
+    \item Conduire les cinq ateliers d'EBIOS Risk Manager sur un cas.
+    \item Coter un risque et le placer dans une matrice.
+    \item Choisir une option de traitement et rédiger un plan.
+    \item Connaître les limites des matrices de risque.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : le risque de Garoua avait-il été apprécié~?}
+% ============================================================================
+
+Non. Aucun document de LiZbiZ ne mentionnait l'accès distant du
+prestataire, ni la possibilité de perdre la facturation plusieurs jours.
+Ce chapitre montre comment une appréciation des risques, conduite six mois
+plus tôt, aurait fait apparaître le scénario de mars et désigné les
+mesures qui l'auraient arrêté.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Le processus de gestion des risques (section~\ref{sec:c07-processus}).
+    \item Actifs ou scénarios (section~\ref{sec:c07-approches}).
+    \item EBIOS Risk Manager appliqué à LiZbiZ (section~\ref{sec:c07-ebios}).
+    \item Coter et cartographier (section~\ref{sec:c07-coter}).
+    \item Traiter les risques (section~\ref{sec:c07-traiter}).
+    \item Les limites des matrices (section~\ref{sec:c07-limites}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Le Processus de Gestion des Risques}
+\label{sec:c07-processus}
+% ============================================================================
+
+L'ISO~31000 décrit un processus valable pour tout risque~\cite{iso31000_2018}~;
+l'ISO/IEC~27005 l'applique à la sécurité de l'information~\cite{iso27005_2022}.
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Contenu}
+}
+Établir le contexte & Périmètre, objectifs, critères (échelles,
+appétence) \\
+Identifier & Les sources de risque, les événements, leurs causes et leurs
+conséquences \\
+Analyser & Estimer la vraisemblance et l'impact \\
+Évaluer & Comparer au critère d'acceptation, classer \\
+Traiter & Choisir et mettre en œuvre des options \\
+Surveiller et revoir & Suivre l'évolution des risques et des mesures \\
+Communiquer et enregistrer & À chaque étape, avec les parties
+concernées \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~7.1. Le processus de l'ISO~31000}\end{center}
+
+% ============================================================================
+\section{Actifs ou Scénarios}
+\label{sec:c07-approches}
+% ============================================================================
+
+L'ISO/IEC~27005, dans son édition de 2022, admet deux approches.
+L'\termecle{approche par actifs} part de chaque actif, de ses menaces et
+de ses vulnérabilités~: elle est exhaustive mais produit des listes
+longues. L'\termecle{approche par scénarios} part des événements redoutés
+et des chemins d'attaque~: elle est plus proche de la réalité des
+attaques. EBIOS Risk Manager, la méthode de l'ANSSI, est une approche par
+scénarios~\cite{anssi2018ebios}.
+
+% ============================================================================
+\section{EBIOS Risk Manager appliqué à LiZbiZ}
+\label{sec:c07-ebios}
+% ============================================================================
+
+\begin{tableaucours}{L{2.4cm}L{4.4cm}L{5.4cm}}{%
+    \tableauHeader{Atelier} &
+    \tableauHeader{Question} &
+    \tableauHeader{Résultat chez LiZbiZ}
+}
+1. Cadrage et socle & Que protège-t-on, et quelles règles applique-t-on
+déjà~? & Valeurs métier~: facturation, suivi des expéditions, paiements~;
+événement redouté ER1~: facturation arrêtée plus de 3~jours \\
+2. Sources de risque & Qui pourrait attaquer, et pour quoi~? & Groupe
+criminel (rançon), complice interne (fraude), ancien salarié (revente de
+données) \\
+3. Scénarios stratégiques & Par quel chemin dans l'écosystème~? & Par le
+prestataire de Garoua, qui a un accès distant \\
+4. Scénarios opérationnels & Par quelles étapes techniques~? &
+Hameçonnage, accès distant sans second facteur, serveur non corrigé,
+sauvegardes en ligne, chiffrement \\
+5. Traitement & Quelles mesures, quel risque résiduel~? & Double
+authentification, correctifs sous 30~jours, sauvegardes hors ligne,
+clauses au contrat \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~7.2. Les cinq ateliers d'EBIOS RM chez
+LiZbiZ}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Le scénario était écrit d'avance}
+\textbf{Constatation.} Le scénario opérationnel de l'atelier~4, que le
+cours d'audit (UE INF3226) construit pour LiZbiZ, décrit presque mot pour
+mot l'attaque de mars~: hameçonnage d'un technicien du prestataire, accès
+distant sans double authentification, élévation de privilèges sur un
+serveur non corrigé, destruction des sauvegardes en ligne, chiffrement.
+
+\medskip
+\textbf{Analyse} (confiance élevée). L'attaque n'était pas imprévisible~;
+elle n'avait pas été prévue. Une appréciation des risques en septembre,
+au moment de confier les centres à SAHEL INFOGÉRANCE, aurait suffi.
+\end{boxscenario}
+
+% ============================================================================
+\section{Coter et Cartographier}
+\label{sec:c07-coter}
+% ============================================================================
+
+On cote chaque risque en vraisemblance (V) et en impact (I), de 1 à 4,
+selon des échelles fixées par la direction. Le score est \(V \times I\),
+de 1 à~16.
+
+\begin{tableaucours}{cL{5.2cm}L{5.8cm}}{%
+    \tableauHeader{Niveau} &
+    \tableauHeader{Vraisemblance (sur un an)} &
+    \tableauHeader{Impact}
+}
+1 & Rare & Mineur~: perte de moins de 5~millions FCFA, arrêt de moins de
+4~h \\
+2 & Possible & Modéré~: de 5 à 50~millions, arrêt de moins de 24~h \\
+3 & Probable & Majeur~: de 50 à 500~millions, arrêt de 1 à 3~jours \\
+4 & Quasi certain & Critique~: plus de 500~millions, arrêt de plus de
+3~jours, sanction \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~7.3. Échelles de cotation (convention du cours)}\end{center}
+
+\begin{tableaucours}{L{1.0cm}L{5.6cm}cccL{2.0cm}}{%
+    \tableauHeader{Réf.} &
+    \tableauHeader{Risque} &
+    \tableauHeader{V} &
+    \tableauHeader{I} &
+    \tableauHeader{Score} &
+    \tableauHeader{Zone}
+}
+S1 & Rançongiciel par l'accès distant du prestataire & 3 & 4 & 12 &
+Intolérable \\
+S2 & Vol des données clients & 3 & 3 & 9 & Intolérable \\
+S3 & Fraude au virement par hameçonnage ciblé & 2 & 3 & 6 & À traiter \\
+S4 & Panne du centre de Garoua & 2 & 3 & 6 & À traiter \\
+S5 & Défiguration du portail de suivi & 2 & 2 & 4 & Acceptable \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~7.4. Registre des risques de sécurité de
+LiZbiZ (septembre, avant traitement)}\end{center}
+
+Le conseil a fixé l'appétence~: un score de 9 ou plus est intolérable et
+traité sans délai~; de 5 à 8, il est traité dans l'année~; de 1 à 4, il
+est accepté sous surveillance.
+
+% ============================================================================
+\section{Traiter les Risques}
+\label{sec:c07-traiter}
+% ============================================================================
+
+\begin{tableaucours}{L{2.4cm}L{5.4cm}L{4.4cm}}{%
+    \tableauHeader{Option} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Exemple chez LiZbiZ}
+}
+Réduire & Mettre en place des mesures & Double authentification,
+sauvegardes hors ligne \\
+Transférer & Partager les conséquences financières & Assurance
+cyber~; le risque juridique reste \\
+Éviter & Renoncer à l'activité à risque & Supprimer l'accès distant
+permanent du prestataire \\
+Accepter & Décider en connaissance de cause, par écrit & S5, sous
+surveillance \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~7.5. Les options de traitement}\end{center}
+
+\begin{boxobjet}{M-07 · Sauvegardes hors ligne testées}
+\textbf{Objectif~:} pouvoir reprendre l'activité après un chiffrement
+malveillant. \textbf{Risque traité~:} S1. \textbf{Mise en œuvre~:} une
+copie quotidienne sur un support déconnecté ou immuable, hors du domaine,
+conservée 30~jours. \textbf{Vérification~:} restauration complète d'un
+serveur chaque trimestre, chronométrée et consignée.
+\end{boxobjet}
+
+\begin{boxalert}
+\textbf{Violation typique.} Abaisser la vraisemblance d'un risque dès
+qu'une mesure est \emph{décidée}.
+
+\smallskip
+\textbf{Règle~:} le risque résiduel ne tient compte que des mesures en
+place \emph{et dont l'efficacité est vérifiée}. Une sauvegarde jamais
+restaurée ne réduit aucun risque.
+\end{boxalert}
+
+% ============================================================================
+\section{Les Limites des Matrices}
+\label{sec:c07-limites}
+% ============================================================================
+
+L.~Cox a montré que les matrices de risque peuvent classer des risques
+dans le mauvais ordre~: deux risques de même score peuvent avoir des
+pertes attendues très différentes, et le produit de deux rangs n'est pas
+une grandeur~\cite{cox2008matrices}. Les matrices servent à trier et à
+dialoguer~; pour arbitrer un budget, on complète par une estimation
+chiffrée, en intervalles (méthode FAIR, cours INF3226).
+
+\begin{boxmetier}{RSSI}
+\textbf{Tenir le registre.} Le RSSI tient le registre des risques~: pour
+chacun, son propriétaire, sa cote avant et après traitement, les mesures,
+leur état de vérification, et la décision d'acceptation signée. Il le
+revoit à chaque changement majeur (nouveau prestataire, nouvelle
+application) et après chaque incident.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Tester le registre.} L'auditeur vérifie que chaque mesure qui
+réduit un risque a été testée~; sinon, il recalcule le risque résiduel
+sans elle.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Le processus} (ISO~31000, ISO/IEC~27005)~: contexte,
+          identification, analyse, évaluation, traitement, surveillance.
+    \item \textbf{L'approche par scénarios} (EBIOS RM, cinq ateliers) colle
+          aux attaques réelles~; chez LiZbiZ, elle décrivait l'attaque de
+          mars.
+    \item \textbf{La cotation} \(V \times I\) classe les risques au regard
+          de l'appétence fixée par la direction.
+    \item \textbf{Quatre options}~: réduire, transférer, éviter, accepter~;
+          le résiduel ne compte que les mesures vérifiées.
+    \item \textbf{Les matrices} trient~; elles ne suffisent pas pour
+          arbitrer un budget.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: décrire le processus de
+l'ISO~31000~; distinguer approche par actifs et par scénarios~; dérouler
+les cinq ateliers d'EBIOS RM~; coter un risque et le classer selon
+l'appétence~; choisir une option de traitement~; citer deux limites des
+matrices.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.1. Le processus \niveaubase}]
+Rangez dans l'ordre du processus~: comparer au critère d'acceptation~;
+fixer les échelles~; installer la double authentification~; estimer la
+vraisemblance~; recenser les événements redoutés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.2. Coter \niveaubase}]
+Calculez le score et la zone de~: (a) V~=~4, I~=~2~; (b) V~=~1, I~=~4~;
+(c) V~=~3, I~=~3.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.3. Quelle option~? \niveaubase}]
+Associez une option de traitement à~: souscrire une assurance~; fermer le
+portail de suivi au public~; chiffrer les sauvegardes~; garder un
+serveur obsolète isolé en attendant son remplacement, sur décision écrite.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.4. Atelier 2 \niveaumoyen}]
+Conduisez l'atelier~2 d'EBIOS RM pour la BANQUE SANAGA~: au moins quatre
+sources de risque, leurs objectifs, et lesquelles retenir.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.5. Scénario opérationnel \niveaumoyen}]
+Écrivez le scénario opérationnel du risque S3 (fraude au virement par
+hameçonnage ciblé) en cinq étapes, et une mesure par étape.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.6. Risque résiduel \niveaumoyen}]
+Après traitement, la double authentification est en place et testée~;
+les sauvegardes hors ligne sont achetées mais jamais restaurées. Recotez
+S1 et justifiez.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.7. Transférer \niveaumoyen}]
+Une assurance cyber couvre 300~millions FCFA de pertes. Quels éléments du
+risque S1 reste-t-il à LiZbiZ~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.8. Les limites \niveaumoyen}]
+Deux risques ont le score 8~: V~=~2, I~=~4 et V~=~4, I~=~2. Donnez un
+exemple chiffré où leurs pertes annuelles attendues diffèrent d'un
+facteur 10, et tirez-en la leçon.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.9. Le registre \niveauexpert}]
+Construisez le registre des risques de sécurité de l'ANPP (cinq risques),
+avec cotation, zone, option, mesures et propriétaire.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~7.10. Septembre \niveauexpert}]
+Vous êtes le RSSI de LiZbiZ en septembre, au moment du contrat avec SAHEL
+INFOGÉRANCE. Rédigez la note d'une page au directeur général qui expose
+le risque S1, trois mesures et leur coût approximatif, et demande une
+décision.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO~31000 et ISO/IEC~27005~\cite{iso31000_2018,iso27005_2022}.
+    \item ANSSI, \emph{EBIOS Risk Manager}~\cite{anssi2018ebios}.
+    \item L.~A.~Cox, sur les matrices de risque~\cite{cox2008matrices}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Une appréciation des risques suppose de connaître
+ses actifs. Le Chapitre~\ref{chap:actifs} montre comment les
+inventorier, les classer et les protéger tout au long de leur vie.
+\end{boxinfo}

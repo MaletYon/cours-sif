@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C10
+Chapitre 10 : Normes et référentiels de sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quel organisme normalise au Cameroun ?
+      a) L'ANOR
+      b) L'ANTIC
+      c) La BEAC
+      d) Le MINPOSTEL
+
+ 2. Lequel de ces référentiels se prête à une certification par un tiers ?
+      a) ISO/IEC 27002
+      b) ISO/IEC 27001
+      c) NIST CSF
+      d) CIS Controls
+
+ 3. Que fixe l'ISO/IEC 27001 ?
+      a) Des recommandations de mesures
+      b) Des règles de pare-feu
+      c) Les exigences d'un système de management de la sécurité
+      d) Des tarifs
+
+ 4. Combien de mesures compte l'annexe A de l'édition 2022 ?
+      a) 114
+      b) 35
+      c) 18
+      d) 93
+
+ 5. Combien de mesures technologiques compte l'annexe A de 2022 ?
+      a) 34
+      b) 8
+      c) 14
+      d) 37
+
+ 6. Quelle clause traite de l'audit interne et de la revue de direction ?
+      a) Clause 4
+      b) Clause 9
+      c) Clause 6
+      d) Clause 10
+
+ 7. Quelle clause traite de l'amélioration ?
+      a) Clause 5
+      b) Clause 7
+      c) Clause 10
+      d) Clause 8
+
+ 8. Quel document liste les mesures retenues et exclues avec leur justification ?
+      a) La politique
+      b) Le registre des risques
+      c) Le rapport d'audit
+      d) La déclaration d'applicabilité
+
+ 9. Peut-on exclure une mesure pertinente parce qu'elle est difficile ?
+      a) Non
+      b) Oui
+      c) Seulement avec un auditeur
+      d) Seulement la première année
+
+10. En quelle année le NIST a-t-il publié la version 2.0 du CSF ?
+      a) 2014
+      b) 2024
+      c) 2018
+      d) 2026
+
+11. Combien de fonctions compte le CSF 2.0 ?
+      a) Quatre
+      b) Cinq
+      c) Six
+      d) Huit
+
+12. Quelle fonction a été ajoutée dans la version 2.0 ?
+      a) Identifier
+      b) Protéger
+      c) Répondre
+      d) Gouverner
+
+13. Tester une restauration relève surtout de la fonction :
+      a) Rétablir
+      b) Gouverner
+      c) Détecter
+      d) Identifier
+
+14. Comment le CSF construit-il un plan d'action ?
+      a) Par une liste fixe
+      b) Par l'écart entre un profil actuel et un profil cible
+      c) Par un audit annuel
+      d) Par un score unique
+
+15. Combien de contrôles compte la version 8 des CIS Controls ?
+      a) 10
+      b) 20
+      c) 18
+      d) 93
+
+16. Que réunit le groupe de mise en œuvre IG1 ?
+      a) Les mesures avancées
+      b) Les mesures des États
+      c) Les audits
+      d) L'hygiène de base que toute organisation devrait appliquer
+
+17. À Garoua, le correctif non installé relève du contrôle CIS :
+      a) 7
+      b) 1
+      c) 5
+      d) 15
+
+18. Que recommande le RSSI à M. ETEME en premier ?
+      a) Une certification immédiate
+      b) Le groupe IG1 des CIS Controls
+      c) Rien
+      d) Un nouveau pare-feu
+
+19. Combien de temps vaut un certificat ISO/IEC 27001 ?
+      a) Un an
+      b) Dix ans
+      c) Trois ans, avec des audits de surveillance
+      d) À vie
+
+20. Que garantit une certification ISO/IEC 27001 ?
+      a) L'absence d'incident
+      b) Le respect de la loi
+      c) La qualité des produits
+      d) Qu'un système de management fonctionne sur un périmètre donné
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Une norme reconnue aide à démontrer le respect de l'article 26 de la loi n° 2010/012.
+      Vrai / Faux
+
+22. L'ISO/IEC 27002 se certifie.
+      Vrai / Faux
+
+23. Les mesures de l'annexe A se choisissent selon les risques.
+      Vrai / Faux
+
+24. Le CSF 2.0 est conçu pour toute organisation.
+      Vrai / Faux
+
+25. Les CIS Controls sont adaptés aux petites structures.
+      Vrai / Faux
+
+26. Les référentiels ISO, NIST et CIS sont incompatibles entre eux.
+      Vrai / Faux
+
+27. Un certificat dont le périmètre exclut le service audité ne prouve rien pour lui.
+      Vrai / Faux
+
+28. L'organisme de certification doit être accrédité.
+      Vrai / Faux
+
+29. Appliquer les 93 mesures comme une liste à cocher est la bonne démarche.
+      Vrai / Faux
+
+30. Une table de correspondance permet de couvrir plusieurs référentiels par un seul effort.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Le système de management de la sécurité de l'information a pour sigle ______.
+
+32. La nouvelle fonction du CSF 2.0 est ______.
+
+33. Le premier groupe de mise en œuvre des CIS Controls s'appelle ______.
+
+34. Les clauses d'exigences de l'ISO/IEC 27001 vont de 4 à ______.
+
+35. Les organismes de certification sont encadrés par l'ISO/IEC ______.
+
+36. Le profil qui décrit où l'on veut aller est le profil ______.
+
+37. L'annexe A compte ______ mesures liées aux personnes.
+
+38. La norme qui détaille les mesures de l'annexe A est l'ISO/IEC 27______.
+
+39. Les CIS Controls sont publiés par le Center for Internet ______.
+
+40. Un certificat ISO/IEC 27001 est valable ______ ans.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

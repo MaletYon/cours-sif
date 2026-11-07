@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C26
+Chapitre 26 : Mesurer la sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle norme ISO traite de la mesure de la sécurité de l'information ?
+      a) ISO/IEC 27004
+      b) ISO/IEC 27037
+      c) ISO 22301
+      d) ISO/IEC 27035
+
+ 2. Quel document du NIST traite des mesures de sécurité ?
+      a) SP 800-61
+      b) SP 800-55
+      c) SP 800-88
+      d) SP 800-115
+
+ 3. « Part des serveurs corrigés dans les délais » est un indicateur :
+      a) D'impact
+      b) Financier
+      c) De mise en œuvre
+      d) De satisfaction
+
+ 4. « Part des alertes traitées en moins de quatre heures » est un indicateur :
+      a) De mise en œuvre
+      b) D'inventaire
+      c) Juridique
+      d) D'efficacité
+
+ 5. « Jours d'arrêt de la facturation dus à des incidents » est un indicateur :
+      a) D'impact
+      b) De mise en œuvre
+      c) D'efficacité
+      d) Technique seul
+
+ 6. Que permet la réponse NEK de l'instrument trichotomique ?
+      a) De répondre oui
+      b) De déclarer qu'on ne sait pas, au lieu de deviner
+      c) De répondre non
+      d) D'ignorer la question
+
+ 7. Que se passe-t-il si l'on compte les NEK comme des OUI ?
+      a) La mesure est plus juste
+      b) Rien
+      c) La mesure est trompeuse, gonflée
+      d) La mesure baisse
+
+ 8. Que mesure µ ?
+      a) L'incertitude
+      b) L'entropie
+      c) Le coût
+      d) La conformité, part des OUI
+
+ 9. Que mesure U ?
+      a) La part des NEK, l'incertitude
+      b) La part des OUI
+      c) La part des NON
+      d) Le nombre de questions
+
+10. Quelle est la valeur maximale de H en bits ?
+      a) 1
+      b) log2 3, environ 1,585
+      c) 2
+      d) 3
+
+11. En mars, LiZbiZ a 4 OUI, 6 NON et 10 NEK. Que vaut µ ?
+      a) 0,30
+      b) 0,50
+      c) 0,20
+      d) 0,60
+
+12. En mars, que vaut U ?
+      a) 0,20
+      b) 0,25
+      c) 0,60
+      d) 0,50
+
+13. En septembre, LiZbiZ a 12 OUI, 3 NON et 5 NEK. Que vaut µ ?
+      a) 0,60
+      b) 0,25
+      c) 0,40
+      d) 0,85
+
+14. En septembre, que vaut U ?
+      a) 0,15
+      b) 0,25
+      c) 0,50
+      d) 0,60
+
+15. Que vaut H en mars ?
+      a) 1,353
+      b) 1,585
+      c) 1,485
+      d) 0,500
+
+16. Pour 14 OUI, 4 NON et 2 NEK, que vaut µ ?
+      a) 0,10
+      b) 0,20
+      c) 0,90
+      d) 0,70
+
+17. Pour U = 0,50 sur 20 réponses, quel est l'intervalle à 95 % ?
+      a) Environ 0,30 à 0,70
+      b) Environ 0,45 à 0,55
+      c) Environ 0,11 à 0,47
+      d) Exactement 0,50
+
+18. Que conclure du recouvrement des intervalles de mars et de septembre ?
+      a) La baisse de U est certaine
+      b) La baisse est probable, mais 20 questions ne suffisent pas à l'établir avec certitude
+      c) U a augmenté
+      d) Rien n'a changé
+
+19. Que sont des seuils comme « vert à partir de 80 % » ?
+      a) Des lois
+      b) Des constantes physiques
+      c) Des conventions à déclarer comme telles
+      d) Des normes ISO obligatoires
+
+20. Quel cycle résume le cours ?
+      a) Acheter, installer, oublier
+      b) Chiffrer, signer, publier
+      c) Planifier, attendre, auditer
+      d) Connaître, protéger, détecter, répondre, reprendre, mesurer
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un tableau de bord combine des indicateurs de mise en œuvre, d'efficacité et d'impact.
+      Vrai / Faux
+
+22. Compter les NEK comme des NON révèle qu'on ne sait pas.
+      Vrai / Faux
+
+23. Réduire U est un progrès de la connaissance.
+      Vrai / Faux
+
+24. La conformité de LiZbiZ passe de 0,20 à 0,60 entre mars et septembre.
+      Vrai / Faux
+
+25. Présenter « 60 % de mesures en place » sans dire que 25 % sont inconnues est complet.
+      Vrai / Faux
+
+26. µ, U et H se lisent ensemble.
+      Vrai / Faux
+
+27. Une mesure s'accompagne de son effectif et de sa marge.
+      Vrai / Faux
+
+28. 20 réponses donnent une mesure très précise.
+      Vrai / Faux
+
+29. La sécurité est un état atteint une fois pour toutes.
+      Vrai / Faux
+
+30. Compter les NEK comme des OUI afficherait 85 % en septembre.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La réponse « on ne sait pas » de l'instrument trichotomique est notée ______.
+
+32. La mesure H est l'______ de la répartition des réponses.
+
+33. La mesure U est l'______.
+
+34. La mesure µ est la ______.
+
+35. La norme ISO sur la mesure de la sécurité est l'ISO/IEC ______.
+
+36. L'entropie se mesure en ______.
+
+37. L'instrument OUI, NON, NEK est dit ______.
+
+38. L'intervalle de confiance à petits effectifs utilisé dans le cours porte le nom de ______.
+
+39. En septembre, µ vaut 0,______.
+
+40. Le document NIST sur les mesures est le SP 800-______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

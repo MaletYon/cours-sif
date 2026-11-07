@@ -1,0 +1,349 @@
+% ============================================================================
+% Fichier  : partie4/P04_C22_operations_incidents.tex
+% Titre    : Opérations de Sécurité et Incidents
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre VIII » (opérations de sécurité). Sources : NIST SP
+% 800-61 (Rev. 2, 2012 ; Rev. 3, 2025, alignée sur le CSF 2.0) ; ISO/IEC
+% 27035-1:2023 ; NIST SP 800-92. Délai de détection de l'Opération GAROUA
+% calculé d'après la chronologie du Prologue : 80 h 18 min.
+% ============================================================================
+
+\chapter{Opérations de Sécurité et Incidents}
+\label{chap:operations}
+\chaptermark{Opérations et incidents}
+
+\epigraph{%
+    « On ne choisit pas d'être attaqué~;\\
+    on choisit d'être prêt. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:menaces},
+\ref{chap:reseaux2} et~\ref{chap:systemes}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Décrire l'organisation et les outils d'un centre opérationnel de
+          sécurité.
+    \item Écrire une règle de détection à partir d'une technique
+          d'attaque.
+    \item Dérouler le cycle de réponse aux incidents du NIST et de
+          l'ISO/IEC~27035.
+    \item Classer un incident et décider d'une escalade.
+    \item Rédiger un guide de réponse à un rançongiciel.
+    \item Mesurer la performance de la détection et de la réponse.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : pourquoi a-t-il fallu trois jours pour voir l'attaquant~?}
+% ============================================================================
+
+L'attaquant s'est connecté le 2~mars à 23~h~12~; LiZbiZ l'a découvert le
+6~mars à 7~h~30, soit 80~heures et 18~minutes plus tard, et seulement
+parce que tout était chiffré. Pendant ces trois jours, les journaux
+existaient sur certaines machines, mais personne ne les lisait. Un
+dispositif d'opérations de sécurité transforme des journaux en alertes, et
+des alertes en décisions.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Le centre opérationnel de sécurité (section~\ref{sec:c22-soc}).
+    \item Collecter et corréler~: le SIEM (section~\ref{sec:c22-siem}).
+    \item Le cycle de réponse aux incidents (section~\ref{sec:c22-cycle}).
+    \item Classer et escalader (section~\ref{sec:c22-classer}).
+    \item Le guide de réponse au rançongiciel (section~\ref{sec:c22-guide}).
+    \item Mesurer (section~\ref{sec:c22-mesurer}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Le Centre Opérationnel de Sécurité}
+\label{sec:c22-soc}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Centre opérationnel de sécurité} (SOC)~: équipe, processus et
+outils qui surveillent en continu le système d'information, détectent les
+événements de sécurité, les analysent et déclenchent la réponse.
+\end{boxdef}
+
+\begin{tableaucours}{L{2.6cm}L{9.6cm}}{%
+    \tableauHeader{Niveau} &
+    \tableauHeader{Rôle}
+}
+Niveau~1 & Tri des alertes~: vrai ou faux positif, première
+qualification, escalade \\
+Niveau~2 & Analyse approfondie, corrélation, confinement initial \\
+Niveau~3 & Recherche proactive de menaces, investigation, réglage des
+règles de détection \\
+Responsable & Organisation, indicateurs, liens avec la direction et le
+RSSI \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~22.1. L'organisation d'un SOC}\end{center}
+
+Une entreprise de la taille de LiZbiZ n'a pas les moyens d'un SOC interne
+fonctionnant jour et nuit~; elle peut en confier la surveillance à un
+prestataire, à condition de garder la maîtrise des décisions et des
+journaux.
+
+% ============================================================================
+\section{Collecter et Corréler : le SIEM}
+\label{sec:c22-siem}
+% ============================================================================
+
+Un \termecle{SIEM} (gestion des informations et des événements de
+sécurité) collecte les journaux de toutes les sources, les met dans un
+format commun, les conserve, et applique des règles de corrélation qui
+produisent des alertes~\cite{nist80092}.
+
+\begin{boxoutils}{Une règle de détection, exprimée en pseudo-code}
+\begin{lstlisting}
+regle "Connexion distante hors horaires suivie d'un nouvel administrateur"
+  si   evenement = connexion_vpn_reussie
+   et  heure hors de [07:00 ; 19:00]
+   et  dans les 72 h, sur le meme compte ou depuis la meme adresse :
+       evenement = ajout_au_groupe "Admins du domaine"
+  alors alerte de severite haute, niveau 2
+\end{lstlisting}
+Cette règle couvre deux tactiques ATT\&CK de l'Opération GAROUA~: l'accès
+initial (connexion de 23~h~12) et l'élévation de privilèges (le 4~mars).
+Elle n'aurait fonctionné que si la passerelle et les contrôleurs de domaine
+envoyaient leurs journaux au SIEM.
+\end{boxoutils}
+
+% ============================================================================
+\section{Le Cycle de Réponse aux Incidents}
+\label{sec:c22-cycle}
+% ============================================================================
+
+Le NIST décrit la réponse aux incidents en quatre phases~; sa révision de
+2025 l'aligne sur les six fonctions du CSF~2.0~\cite{nist80061r2,nist80061r3}.
+L'ISO/IEC~27035 en donne une version normalisée~\cite{iso27035_2023}.
+
+\begin{tableaucours}{L{3.8cm}L{8.4cm}}{%
+    \tableauHeader{Phase} &
+    \tableauHeader{Contenu}
+}
+Préparation & Politique, équipe, contacts, outils, guides, exercices \\
+Détection et analyse & Repérer, qualifier, établir le périmètre,
+documenter \\
+Confinement, éradication, rétablissement & Isoler, supprimer la cause,
+restaurer à partir de sources saines, surveiller \\
+Activité post-incident & Retour d'expérience, amélioration des mesures et
+des guides \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~22.2. Le cycle de réponse aux incidents
+(NIST SP~800-61)}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Éradiquer avant d'avoir compris (formater et
+réinstaller la première machine infectée).
+
+\smallskip
+\textbf{Règle~:} on confine d'abord (isoler du réseau, sans éteindre),
+on préserve les preuves (Chapitre~\ref{chap:investigation}), on établit
+le périmètre complet, puis on éradique partout à la fois. Sinon,
+l'attaquant revient par la machine oubliée.
+\end{boxalert}
+
+% ============================================================================
+\section{Classer et Escalader}
+\label{sec:c22-classer}
+% ============================================================================
+
+\begin{tableaucours}{L{2.0cm}L{6.4cm}L{3.8cm}}{%
+    \tableauHeader{Gravité} &
+    \tableauHeader{Critère (exemple)} &
+    \tableauHeader{Escalade}
+}
+Critique & Activité arrêtée, données sensibles exfiltrées, plusieurs sites
+& Direction générale, cellule de crise, sous 1~heure \\
+Haute & Compte à privilèges compromis, serveur touché & RSSI et DSI, sous
+4~heures \\
+Moyenne & Poste infecté isolé, sans propagation & Équipe informatique,
+dans la journée \\
+Basse & Tentative bloquée, hameçonnage signalé & Traitement courant \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~22.3. Grille de gravité des incidents
+(convention à adapter)}\end{center}
+
+% ============================================================================
+\section{Le Guide de Réponse au Rançongiciel}
+\label{sec:c22-guide}
+% ============================================================================
+
+\begin{boxprocedure}
+\textbf{Rançongiciel~: les premières heures}
+\begin{enumerate}
+    \item \textbf{Isoler} les machines touchées du réseau (débrancher ou
+          isoler par l'EDR), \emph{sans les éteindre}.
+    \item \textbf{Couper} les accès distants et les liaisons entre sites
+          pour stopper la propagation.
+    \item \textbf{Protéger les sauvegardes}~: les déconnecter, vérifier
+          qu'elles sont intactes.
+    \item \textbf{Prévenir} le RSSI et la direction selon la grille~;
+          activer la cellule de crise si l'incident est critique.
+    \item \textbf{Préserver} les preuves~: mémoire, journaux, note de rançon,
+          avec leurs empreintes.
+    \item \textbf{Établir le périmètre}~: comptes utilisés, machines
+          touchées, données sorties.
+    \item \textbf{Réinitialiser} les mots de passe des comptes à privilèges
+          depuis un poste sain.
+    \item \textbf{Restaurer} à partir de sauvegardes saines, après
+          éradication, et surveiller.
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{boxscenario}{Opération GAROUA. Ce qu'un guide aurait changé}
+\textbf{Constatations.} À 22~h~05, le technicien d'astreinte redémarre les
+serveurs~; à 7~h~30, les liaisons entre sites sont toujours ouvertes~; les
+mots de passe d'administration ne sont changés que le 9~mars.
+
+\medskip
+\textbf{Analyse} (confiance moyenne). Avec le guide, l'isolement aurait
+remplacé le redémarrage (mémoire préservée), la coupure des liaisons aurait
+protégé Yaoundé et Bafoussam, et la réinitialisation des comptes aurait
+empêché un retour de l'attaquant.
+\end{boxscenario}
+
+% ============================================================================
+\section{Mesurer}
+\label{sec:c22-mesurer}
+% ============================================================================
+
+\begin{tableaucours}{L{4.6cm}L{7.6cm}}{%
+    \tableauHeader{Indicateur} &
+    \tableauHeader{Définition}
+}
+Délai de détection (MTTD) & Durée moyenne entre le début d'un incident et
+sa détection \\
+Délai de réponse (MTTR) & Durée moyenne entre la détection et le
+rétablissement \\
+Taux de faux positifs & Part des alertes qui ne correspondaient à aucun
+incident \\
+Couverture des journaux & Part des systèmes critiques qui envoient leurs
+journaux au SIEM \\
+Couverture des techniques & Part des techniques ATT\&CK prioritaires
+couvertes par une règle \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~22.4. Indicateurs des opérations de sécurité}\end{center}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Documenter chaque alerte.} L'analyste consigne pour chaque alerte
+sa décision (faux positif, incident), ses raisons et ses sources~; ces
+traces servent au réglage des règles et à l'enquête.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Préparer.} Le RSSI fait écrire les guides, tient à jour la liste
+des contacts (direction, juristes, prestataires, autorités), et organise
+chaque année un exercice sur table.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Un SOC} trie, analyse et répond, en niveaux~; il peut être
+          externalisé, pas la décision.
+    \item \textbf{Le SIEM} centralise et corrèle~; une règle vaut ce que
+          valent les journaux qu'il reçoit.
+    \item \textbf{La réponse} suit quatre phases~: préparer, détecter et
+          analyser, confiner-éradiquer-rétablir, tirer les leçons.
+    \item \textbf{On confine avant d'éradiquer}, et l'on préserve les
+          preuves.
+    \item \textbf{Un guide de réponse} fixe les gestes des premières heures.
+    \item \textbf{Délai de détection et délai de réponse} mesurent
+          l'efficacité.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: décrire les niveaux d'un
+SOC~; écrire une règle de corrélation~; nommer les phases de la réponse~;
+classer un incident~; dérouler le guide rançongiciel~; calculer un délai
+de détection.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.1. Le délai \niveaubase}]
+Recalculez le délai de détection de l'Opération GAROUA à partir de la
+chronologie du Prologue.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.2. Les phases \niveaubase}]
+Rangez dans les phases du NIST~: réinitialiser les mots de passe~; écrire
+le guide rançongiciel~; isoler un serveur~; rédiger le retour
+d'expérience~; qualifier une alerte.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.3. Classer \niveaubase}]
+Classez avec la grille du Tableau~22.3~: un courriel d'hameçonnage
+signalé~; un compte d'administrateur utilisé depuis l'étranger~; un poste
+de l'agence de Bafoussam infecté par un virus isolé.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.4. Une règle \niveaumoyen}]
+Écrivez une règle de détection pour l'exfiltration~: un volume sortant
+inhabituel depuis un serveur de fichiers.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.5. Les journaux nécessaires \niveaumoyen}]
+Pour chaque règle de ce chapitre, listez les sources de journaux
+nécessaires et vérifiez qu'elles existaient chez LiZbiZ en mars.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.6. Confiner ou éradiquer \niveaumoyen}]
+Un analyste propose de réinstaller immédiatement le poste infecté qu'il
+vient de trouver. Que lui répondez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.7. Externaliser \niveaumoyen}]
+LiZbiZ veut confier sa surveillance à un SOC externe. Quelles clauses et
+quels indicateurs exiger~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.8. Faux positifs \niveaumoyen}]
+Une règle produit 200~alertes par semaine, dont 3~vraies. Proposez trois
+façons de la régler sans perdre les vraies alertes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.9. Un guide \niveauexpert}]
+Rédigez le guide de réponse à la compromission d'une boîte de
+messagerie (règle de transfert suspecte, Chapitre~\ref{chap:nuage}).
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~22.10. L'exercice sur table \niveauexpert}]
+Concevez un exercice sur table de deux heures pour la direction de LiZbiZ,
+fondé sur l'Opération GAROUA~: injections, rôles, décisions attendues,
+critères d'évaluation.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-61 (révisions 2 et~3)~\cite{nist80061r2,nist80061r3}.
+    \item ISO/IEC~27035-1~\cite{iso27035_2023}.
+    \item NIST SP~800-92, gestion des journaux~\cite{nist80092}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Après l'incident vient la reprise. La
+Partie~\ref{part:avance} commence par la continuité et la reprise
+d'activité (Chapitre~\ref{chap:continuite}).
+\end{boxinfo}

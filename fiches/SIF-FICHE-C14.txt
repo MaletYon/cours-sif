@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C14
+Chapitre 14 : Architecture de sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qu'est-ce que la défense en profondeur ?
+      a) Une superposition de mesures indépendantes de natures différentes
+      b) Un pare-feu très puissant
+      c) Un réseau profond
+      d) Un chiffrement double
+
+ 2. Deux pare-feu identiques en série avec les mêmes règles :
+      a) Sont une défense en profondeur
+      b) Ne sont pas une vraie défense en profondeur
+      c) Doublent la sécurité
+      d) Sont interdits
+
+ 3. À Garoua, pourquoi l'attaque a-t-elle traversé toutes les couches ?
+      a) Les couches étaient trop nombreuses
+      b) Le prestataire l'a aidée
+      c) Chaque couche manquait ou était faible
+      d) Le réseau était segmenté
+
+ 4. Que contient la DMZ ?
+      a) Les bases de données
+      b) Les sauvegardes
+      c) Les postes
+      d) Les services exposés à Internet
+
+ 5. Que vaut une zone sans filtrage des flux ?
+      a) Une simple étiquette
+      b) Une protection forte
+      c) Une DMZ
+      d) Un bastion
+
+ 6. La règle par défaut entre zones est :
+      a) Tout autoriser
+      b) Tout refuser sauf les flux décrits
+      c) Autoriser le web
+      d) Autoriser l'administration
+
+ 7. Depuis quelle zone peut-on administrer les autres ?
+      a) La zone postes
+      b) La DMZ
+      c) La zone administration
+      d) Internet
+
+ 8. Quels flux la zone de sauvegarde accepte-t-elle en entrée ?
+      a) Tous
+      b) Les flux web
+      c) Aucun
+      d) Les seuls flux de sauvegarde
+
+ 9. Pourquoi ne pas administrer depuis un poste qui lit des courriels ?
+      a) Les identifiants d'administration peuvent y être volés
+      b) C'est lent
+      c) C'est interdit par la loi
+      d) Le poste est trop petit
+
+10. Qu'est-ce qu'un bastion ?
+      a) Un pare-feu
+      b) Un point d'administration qui concentre et enregistre les sessions
+      c) Un antivirus
+      d) Un serveur web
+
+11. Les comptes qui administrent le domaine :
+      a) Servent aussi sur les postes
+      b) Sont partagés
+      c) Ne servent pas sur les postes de travail
+      d) N'ont pas de mot de passe
+
+12. Quel document du NIST décrit l'architecture zéro confiance ?
+      a) SP 800-53
+      b) SP 800-88
+      c) SP 800-115
+      d) SP 800-207
+
+13. Quel est le principe central du zéro confiance ?
+      a) N'accorder aucune confiance implicite à l'emplacement réseau
+      b) Faire confiance à l'intérieur du réseau
+      c) Supprimer les pare-feu
+      d) Chiffrer seulement Internet
+
+14. Une session dans une architecture zéro confiance donne accès :
+      a) À tout le réseau
+      b) À une seule ressource
+      c) À Internet
+      d) Au domaine
+
+15. Par quoi commence une organisation sans inventaire ni identités maîtrisées ?
+      a) Par acheter un produit zéro confiance
+      b) Par supprimer son réseau
+      c) Par l'inventaire et la maîtrise des identités
+      d) Par tout chiffrer
+
+16. Où placer la passerelle d'accès distant ?
+      a) Dans la zone données
+      b) Sur un poste
+      c) Dans la zone sauvegarde
+      d) En DMZ, avec double authentification
+
+17. Quels flux entre centres l'architecture cible conserve-t-elle ?
+      a) La réplication des bases
+      b) Tous
+      c) Aucun
+      d) Le web
+
+18. Avec l'architecture cible, qu'aurait ouvert le mot de passe volé ?
+      a) Tout le réseau
+      b) Seulement la passerelle, faute du second facteur
+      c) Les sauvegardes
+      d) Le domaine
+
+19. Quelle information figure dans la matrice des flux ?
+      a) Le salaire
+      b) La couleur
+      c) Source, destination, port, motif, propriétaire
+      d) La date d'achat
+
+20. Quelle couche comprend la politique et la sensibilisation ?
+      a) Physique
+      b) Réseau
+      c) Données
+      d) Organisation
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. La défaillance d'une mesure ne doit pas suffire à tout compromettre.
+      Vrai / Faux
+
+22. Des réseaux virtuels séparés mais sans filtrage protègent efficacement.
+      Vrai / Faux
+
+23. Le bastion est une cible de choix à protéger en priorité.
+      Vrai / Faux
+
+24. Les sauvegardes doivent dépendre du domaine de production.
+      Vrai / Faux
+
+25. Le zéro confiance est un produit que l'on achète.
+      Vrai / Faux
+
+26. Dans le zéro confiance, même un serveur interne exige une authentification.
+      Vrai / Faux
+
+27. L'architecture cible prévoit des journaux centralisés et surveillés.
+      Vrai / Faux
+
+28. La DMZ accueille les bases de données sensibles.
+      Vrai / Faux
+
+29. Un stockage immuable empêche un administrateur compromis d'effacer les sauvegardes.
+      Vrai / Faux
+
+30. Le réseau de LiZbiZ était segmenté avant l'attaque.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La zone qui accueille les services exposés à Internet a pour sigle ______.
+
+32. L'architecture qui n'accorde aucune confiance implicite au réseau est dite zéro ______.
+
+33. Le point d'administration qui enregistre les sessions est un ______.
+
+34. La superposition de mesures indépendantes est la défense en ______.
+
+35. Un réseau sans séparation entre machines est dit ______.
+
+36. Le document NIST sur le zéro confiance porte le numéro SP 800-______.
+
+37. Un stockage qui n'accepte que des ajouts est dit ______.
+
+38. Un ensemble de systèmes de même sensibilité séparé par un filtrage est une zone de ______.
+
+39. Le document qui décrit chaque flux autorisé est la matrice des ______.
+
+40. Dans l'architecture cible, l'administration passe par un ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

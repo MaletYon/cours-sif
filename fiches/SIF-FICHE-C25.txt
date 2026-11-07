@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C25
+Chapitre 25 : IA, objets connectés et post-quantique
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Quelle attaque modifie légèrement une entrée pour tromper un modèle déjà entraîné ?
+      a) L'évasion
+      b) L'empoisonnement
+      c) L'extraction
+      d) La sauvegarde
+
+ 2. Quelle attaque corrompt les données d'entraînement ?
+      a) L'évasion
+      b) L'empoisonnement
+      c) L'extraction
+      d) Le balayage
+
+ 3. Quelle attaque reconstitue un modèle à partir de ses réponses ?
+      a) L'évasion
+      b) L'empoisonnement
+      c) L'extraction
+      d) Le chiffrement
+
+ 4. Détourner un modèle pour générer des courriels d'hameçonnage est une attaque :
+      a) D'évasion
+      b) D'empoisonnement
+      c) D'extraction
+      d) D'abus
+
+ 5. Qu'est-ce que l'injection d'instructions ?
+      a) Des instructions cachées dans un contenu qui détournent un modèle de langage
+      b) Une injection SQL
+      c) Un vaccin
+      d) Une sauvegarde
+
+ 6. Quelle mesure limite l'injection d'instructions ?
+      a) Donner tous les droits au modèle
+      b) Le moindre privilège et la validation humaine des actions sensibles
+      c) Supprimer les journaux
+      d) Rien
+
+ 7. Un assistant résume des courriels et peut envoyer des messages. Quel est le risque ?
+      a) Aucun
+      b) Il devient plus lent
+      c) Un courriel piégé lui fait envoyer des données
+      d) Il oublie les courriels
+
+ 8. Quelles données ne faut-il pas confier à un service d'IA public sans règle ?
+      a) Les recettes de cuisine
+      b) La météo
+      c) Les articles publiés
+      d) Les données confidentielles de l'organisation
+
+ 9. Que ne remplace pas l'IA dans la défense ?
+      a) Les journaux et l'équipe
+      b) Le tri de quelques alertes
+      c) La recherche dans les journaux
+      d) La synthèse d'un rapport
+
+10. Un outil détecte 99 % des attaques avec 1 % de faux positifs, sur 100 000 connexions dont 10 malveillantes. Combien de fausses alertes environ ?
+      a) 10
+      b) 1 000
+      c) 100
+      d) 10 000
+
+11. Comment juger la promesse d'un outil de détection fondé sur l'IA ?
+      a) Sur la plaquette commerciale
+      b) Sur son prix
+      c) Par un essai mesuré sur ses propres données
+      d) Sur son nom
+
+12. Quel réseau de machines a utilisé en 2016 des objets connectés aux identifiants par défaut ?
+      a) Stuxnet
+      b) NotPetya
+      c) SolarWinds
+      d) Mirai
+
+13. Quelle est la première mesure pour des caméras connectées ?
+      a) Changer les identifiants par défaut
+      b) Les exposer à Internet
+      c) Désactiver les mises à jour
+      d) Les mettre sur le réseau des serveurs
+
+14. Où placer les objets connectés ?
+      a) Dans la zone des serveurs
+      b) Dans une zone réseau dédiée
+      c) Dans la zone d'administration
+      d) N'importe où
+
+15. Quelle exigence d'achat le cours fixe-t-il pour un objet connecté ?
+      a) Le prix le plus bas
+      b) Une couleur précise
+      c) Des mises à jour garanties et aucun mot de passe codé en dur
+      d) Aucune
+
+16. Depuis quelle année les normes post-quantiques du NIST sont-elles publiées ?
+      a) 2016
+      b) 2020
+      c) 2030
+      d) 2024
+
+17. Quelles normes du NIST sont post-quantiques ?
+      a) FIPS 203 à 205
+      b) FIPS 140
+      c) SP 800-61
+      d) SP 800-88
+
+18. Par quoi commence la migration post-quantique ?
+      a) Le remplacement de tous les ordinateurs
+      b) L'inventaire cryptographique et la durée de vie des secrets
+      c) L'arrêt du chiffrement
+      d) Rien
+
+19. Que signifie « récolter maintenant, déchiffrer plus tard » ?
+      a) Sauvegarder chaque soir
+      b) Chiffrer deux fois
+      c) Enregistrer aujourd'hui des échanges chiffrés pour les casser demain
+      d) Supprimer les clés
+
+20. Quels algorithmes sont menacés par un futur ordinateur quantique ?
+      a) SHA-256 complètement
+      b) Les mots de passe
+      c) Le Wi-Fi seul
+      d) RSA et les courbes elliptiques
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Un modèle d'apprentissage automatique peut être trompé par une entrée modifiée.
+      Vrai / Faux
+
+22. Un modèle de langage distingue toujours les instructions des données.
+      Vrai / Faux
+
+23. Une action sensible proposée par un modèle doit être validée par un humain.
+      Vrai / Faux
+
+24. L'IA rend inutiles les journaux.
+      Vrai / Faux
+
+25. Sur une population peu attaquée, même un bon détecteur produit beaucoup de faux positifs.
+      Vrai / Faux
+
+26. Les objets connectés sont souvent peu mis à jour.
+      Vrai / Faux
+
+27. Un objet connecté n'a pas besoin d'être inventorié.
+      Vrai / Faux
+
+28. Un secret qui doit rester confidentiel vingt ans est concerné dès aujourd'hui.
+      Vrai / Faux
+
+29. Le chiffrement symétrique doit être abandonné.
+      Vrai / Faux
+
+30. L'agilité cryptographique facilite le remplacement des algorithmes.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. Les instructions cachées qui détournent un modèle de langage relèvent de l'injection d'______.
+
+32. Le réseau de machines de 2016 formé d'objets connectés s'appelle ______.
+
+33. L'attaque qui corrompt les données d'entraînement est l'______.
+
+34. L'attaque qui trompe un modèle entraîné par une entrée modifiée est l'______.
+
+35. La norme du NIST sur l'encapsulation de clés post-quantique est FIPS ______.
+
+36. Les objets connectés ont pour sigle anglais ______.
+
+37. La première étape de la migration est l'______ cryptographique.
+
+38. Une alerte qui ne correspond à aucune attaque est un faux ______.
+
+39. Le grand modèle de langage a pour sigle anglais ______.
+
+40. Le logiciel interne d'un objet connecté est son ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

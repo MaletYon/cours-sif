@@ -1,0 +1,327 @@
+% ============================================================================
+% Fichier  : partie5/P05_C23_continuite.tex
+% Titre    : Continuité et Reprise
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre VIII » (sécurité des opérations). Sources :
+% ISO 22301:2019 ; ISO/IEC 27031:2011 ; NIST SP 800-34 Rev. 1 (2010).
+% Chiffres de la reprise de LiZbiZ : cas fictif, cohérents entre eux.
+% ============================================================================
+
+\chapter{Continuité et Reprise}
+\label{chap:continuite}
+\chaptermark{Continuité et reprise}
+
+\epigraph{%
+    « Une sauvegarde qui n'a jamais été restaurée\\
+    est une hypothèse, pas une sauvegarde. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:risques},
+\ref{chap:architecture} et~\ref{chap:operations}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Conduire une analyse d'impact sur l'activité et fixer des
+          objectifs de reprise.
+    \item Concevoir une stratégie de sauvegarde résistante aux
+          rançongiciels.
+    \item Distinguer plan de continuité et plan de reprise informatique.
+    \item Choisir une stratégie de secours.
+    \item Tester un plan et mesurer les écarts.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : pourquoi a-t-il fallu onze jours pour facturer à nouveau~?}
+% ============================================================================
+
+LiZbiZ a repris sa facturation le 16~mars, onze jours après l'attaque. Les
+sauvegardes en ligne ayant été détruites, il a fallu repartir d'une copie
+de fin janvier retrouvée sur un disque oublié, puis ressaisir six semaines
+de factures à partir des bordereaux papier. Personne n'avait fixé combien
+de jours la facturation pouvait s'arrêter, ni combien de données on
+acceptait de perdre.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item L'analyse d'impact sur l'activité (section~\ref{sec:c23-bia}).
+    \item Les sauvegardes (section~\ref{sec:c23-sauvegardes}).
+    \item Continuité et reprise (section~\ref{sec:c23-plans}).
+    \item Les stratégies de secours (section~\ref{sec:c23-secours}).
+    \item Tester (section~\ref{sec:c23-tester}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{L'Analyse d'Impact sur l'Activité}
+\label{sec:c23-bia}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Analyse d'impact sur l'activité} (BIA)~: étude qui détermine,
+pour chaque activité, l'impact de son interruption dans le temps, et en
+déduit la \termecle{durée maximale d'interruption admissible} (DMIA, ou
+\emph{RTO}) et la \termecle{perte de données maximale admissible}
+(PDMA, ou \emph{RPO})~\cite{iso22301_2019}.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.4cm}L{2.0cm}L{2.0cm}L{4.8cm}}{%
+    \tableauHeader{Activité} &
+    \tableauHeader{RTO} &
+    \tableauHeader{RPO} &
+    \tableauHeader{Justification}
+}
+Facturation & 48~h & 4~h & Trésorerie~; pénalités des clients au-delà de
+deux jours \\
+Suivi des expéditions & 24~h & 1~h & Livraisons bloquées, clients sans
+information \\
+Paiement des fournisseurs & 5~jours & 24~h & Échéances hebdomadaires \\
+Messagerie & 24~h & 24~h & Communication avec les clients \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~23.1. Objectifs de reprise de LiZbiZ
+(fixés en avril, après l'attaque)}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Les écarts de mars}
+\textbf{Constatations.} Durée d'arrêt de la facturation~: du 5~mars
+21~h~40 au 16~mars, soit plus de dix jours, pour un objectif fixé
+après coup à 48~heures. Données perdues~: depuis la copie de fin janvier,
+soit environ six semaines, pour un objectif de 4~heures.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Les écarts sont de l'ordre d'un
+facteur cinq sur la durée et de plusieurs centaines sur les données. Ils
+mesurent l'absence de stratégie de sauvegarde et de reprise, plus encore
+que l'attaque elle-même.
+\end{boxscenario}
+
+% ============================================================================
+\section{Les Sauvegardes}
+\label{sec:c23-sauvegardes}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Règle 3-2-1}~: au moins trois copies des données, sur deux
+supports différents, dont une hors site. Contre les rançongiciels, on y
+ajoute une copie \emph{hors ligne ou immuable}, et la vérification
+régulière de la restauration.
+\end{boxdef}
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Exigence} &
+    \tableauHeader{Pourquoi}
+}
+Fréquence alignée sur le RPO & Un RPO de 4~h exige au moins une sauvegarde
+toutes les 4~h (ou une réplication) \\
+Copie immuable ou hors ligne & L'attaquant administrateur ne peut pas
+l'effacer \\
+Comptes et réseau séparés & La sauvegarde ne dépend pas du domaine
+compromis (Chapitre~\ref{chap:architecture}) \\
+Chiffrement et gestion des clés & La copie hors site ne fuit pas~; la clé
+n'est pas perdue avec le site \\
+Tests de restauration & Seule preuve que la sauvegarde sert \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~23.2. Les exigences d'une stratégie de sauvegarde}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Prendre la réplication pour une sauvegarde.
+
+\smallskip
+\textbf{Règle~:} la réplication copie aussitôt les changements, y compris
+le chiffrement par un rançongiciel ou une suppression par erreur. Elle
+protège contre la panne d'un site, pas contre la corruption des données.
+Il faut des versions conservées dans le temps.
+\end{boxalert}
+
+% ============================================================================
+\section{Continuité et Reprise}
+\label{sec:c23-plans}
+% ============================================================================
+
+\begin{tableaucours}{L{3.4cm}L{4.4cm}L{4.4cm}}{%
+    \tableauHeader{Plan} &
+    \tableauHeader{Objet} &
+    \tableauHeader{Contenu}
+}
+Plan de continuité d'activité (PCA) & Continuer les activités essentielles
+pendant la crise & Modes dégradés, organisation, communication \\
+Plan de reprise informatique (PRA) & Rétablir les systèmes & Ordre de
+reprise, procédures techniques, responsables \\
+Plan de gestion de crise & Décider et communiquer & Cellule de crise,
+contacts, messages \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~23.3. Les plans de continuité}\end{center}
+
+Le NIST SP~800-34 décrit la planification de la contingence des systèmes
+d'information~\cite{nist80034}~; l'ISO/IEC~27031 traite de la préparation
+des technologies à la continuité~\cite{iso27031_2011}. Un mode dégradé
+prévu (facturer sur un modèle de tableur avec une numérotation réservée,
+par exemple) permet de tenir pendant la reprise.
+
+% ============================================================================
+\section{Les Stratégies de Secours}
+\label{sec:c23-secours}
+% ============================================================================
+
+\begin{tableaucours}{L{2.8cm}L{4.6cm}L{2.4cm}L{2.4cm}}{%
+    \tableauHeader{Stratégie} &
+    \tableauHeader{Principe} &
+    \tableauHeader{RTO typique} &
+    \tableauHeader{Coût}
+}
+Site froid & Locaux et alimentation, matériel à installer & Semaines &
+Faible \\
+Site tiède & Matériel installé, données à restaurer & Jours & Moyen \\
+Site chaud & Systèmes prêts, données répliquées & Heures & Élevé \\
+Nuage & Ressources mises en route à la demande & Heures à jours & Selon
+l'usage \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~23.4. Stratégies de secours}\end{center}
+
+LiZbiZ dispose de quatre centres~: avec une architecture adaptée, chacun
+peut servir de secours à un autre, à condition qu'un rançongiciel ne puisse
+pas atteindre les quatre à la fois.
+
+% ============================================================================
+\section{Tester}
+\label{sec:c23-tester}
+% ============================================================================
+
+\begin{tableaucours}{L{3.4cm}L{8.8cm}}{%
+    \tableauHeader{Type de test} &
+    \tableauHeader{Contenu}
+}
+Revue documentaire & Le plan est-il à jour (contacts, systèmes)~? \\
+Exercice sur table & Les responsables déroulent un scénario autour d'une
+table \\
+Test technique partiel & Restauration d'un serveur, chronométrée \\
+Simulation complète & Bascule réelle sur le site de secours \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~23.5. Les tests du plan}\end{center}
+
+\begin{boxobjet}{M-23 · Test trimestriel de restauration}
+\textbf{Objectif~:} prouver que le RTO et le RPO de la facturation sont
+tenus. \textbf{Mise en œuvre~:} chaque trimestre, restauration de
+l'application de facturation sur un environnement isolé, à partir de la
+copie immuable. \textbf{Mesures~:} durée de restauration (comparée au
+RTO), âge des données restaurées (comparé au RPO), anomalies.
+\textbf{Preuve~:} procès-verbal signé, présenté au comité de sécurité.
+\end{boxobjet}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Chronométrer.} L'administrateur mesure la durée réelle de chaque
+restauration et la compare au RTO~; un écart déclenche une révision de la
+stratégie, pas une révision de l'objectif.
+\end{boxmetier}
+
+\begin{boxmetier}{RSSI}
+\textbf{Faire fixer les objectifs par les métiers.} Le RSSI fait fixer RTO
+et RPO par les responsables d'activité, au regard de l'impact, et présente
+à la direction le coût de chaque niveau d'objectif.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{L'analyse d'impact} fixe, par activité, la durée
+          d'interruption (RTO) et la perte de données (RPO) admissibles.
+    \item \textbf{La règle 3-2-1}, complétée d'une copie immuable ou hors
+          ligne, résiste au rançongiciel~; la réplication n'est pas une
+          sauvegarde.
+    \item \textbf{PCA, PRA et plan de crise} répondent à trois besoins~:
+          continuer, rétablir, décider.
+    \item \textbf{Les stratégies de secours} vont du site froid au site
+          chaud, avec des coûts croissants.
+    \item \textbf{Un plan se teste}~; une restauration se chronomètre.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: définir RTO et RPO et
+les fixer à partir de l'impact~; appliquer la règle 3-2-1~; distinguer
+réplication et sauvegarde~; distinguer PCA, PRA et plan de crise~; choisir
+une stratégie de secours~; organiser un test de restauration.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.1. RTO et RPO \niveaubase}]
+Expliquez la différence entre RTO et RPO avec l'exemple de la facturation
+de LiZbiZ.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.2. La fréquence \niveaubase}]
+Avec une sauvegarde chaque nuit à 2~h, quelle est la perte de données
+maximale en cas d'incident à 23~h~59~? Le RPO de la facturation est-il
+tenu~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.3. 3-2-1 \niveaubase}]
+Une entreprise garde ses données sur son serveur et une copie sur un
+disque branché en permanence au même serveur. Combien de règles du 3-2-1
+respecte-t-elle~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.4. Les écarts \niveaumoyen}]
+Calculez, en heures, la durée d'arrêt de la facturation de LiZbiZ en mars
+(en retenant une reprise le 16~mars à 8~h), et le rapport avec le RTO.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.5. Réplication \niveaumoyen}]
+La BANQUE SANAGA réplique sa base en temps réel vers un second site.
+Est-elle protégée contre un rançongiciel~? Que faut-il ajouter~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.6. Mode dégradé \niveaumoyen}]
+Proposez un mode dégradé pour le suivi des expéditions de LiZbiZ pendant
+trois jours sans application.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.7. L'ordre de reprise \niveaumoyen}]
+Dans quel ordre rétablir~: l'annuaire, la base de données, l'application
+de facturation, la messagerie, le portail de suivi~? Justifiez par les
+dépendances et les RTO.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.8. Le procès-verbal \niveaumoyen}]
+Rédigez le procès-verbal d'un test de restauration de la facturation,
+avec les mesures attendues.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.9. Stratégie \niveauexpert}]
+Proposez à LiZbiZ une stratégie de sauvegarde et de secours qui tienne
+les objectifs du Tableau~23.1, en utilisant ses quatre centres.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~23.10. L'exercice \niveauexpert}]
+Concevez un exercice de reprise pour l'ANPP~: scénario, participants,
+déroulé, mesures, critères de réussite.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO~22301~\cite{iso22301_2019}~; ISO/IEC~27031~\cite{iso27031_2011}.
+    \item NIST SP~800-34~\cite{nist80034}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Reprendre l'activité ne dispense pas d'établir les
+faits. Le Chapitre~\ref{chap:investigation} présente les premiers gestes
+de l'investigation numérique.
+\end{boxinfo}

@@ -1,0 +1,233 @@
+NDAP SUKULU · SIF · fiche SIF-FICHE-C13
+Chapitre 13 : Modèles formels de sécurité
+
+Version papier, à utiliser en attendant l'ouverture du portail NDAP SUKULU.
+La fiche complète compte 40 questions. Répondez sur la grille en fin de fiche.
+Durée indicative : 60 minutes. Seuil de réussite : 60 %.
+Les corrections figurent dans le livret de correction du cours.
+
+========================================================================
+Questions à choix multiple (une seule bonne réponse)
+========================================================================
+
+ 1. Qui a proposé la matrice d'accès ?
+      a) B. Lampson
+      b) K. Biba
+      c) D. Clark
+      d) R. Sandhu
+
+ 2. Dans la matrice d'accès, les lignes représentent :
+      a) Les objets
+      b) Les sujets
+      c) Les droits
+      d) Les réseaux
+
+ 3. Une liste de contrôle d'accès correspond à :
+      a) Une ligne de la matrice
+      b) Une case
+      c) Une colonne de la matrice, attachée à l'objet
+      d) Toute la matrice
+
+ 4. Une capacité correspond à :
+      a) Une colonne
+      b) Un mot de passe
+      c) Un journal
+      d) Une ligne, détenue par le sujet
+
+ 5. Quelle propriété protège Bell-LaPadula ?
+      a) La confidentialité
+      b) L'intégrité
+      c) La disponibilité
+      d) La traçabilité
+
+ 6. Quelle règle de Bell-LaPadula interdit l'écriture vers le bas ?
+      a) La règle simple
+      b) La propriété étoile
+      c) La règle de Biba
+      d) La médiation
+
+ 7. Un sujet « confidentiel » peut-il lire un document « secret » selon Bell-LaPadula ?
+      a) Oui
+      b) Seulement le matin
+      c) Non
+      d) Seulement s'il est administrateur
+
+ 8. Quelle règle appartient à Biba ?
+      a) Pas de lecture vers le haut
+      b) Pas de chiffrement
+      c) Pas de journal
+      d) Pas de lecture vers le bas
+
+ 9. Selon Biba, quel objet de LiZbiZ est de plus haute intégrité ?
+      a) Les sauvegardes
+      b) Les courriels
+      c) Les postes
+      d) Le Wi-Fi
+
+10. Quels principes fondent Clark-Wilson ?
+      a) Lecture et écriture libres
+      b) Transactions bien formées et séparation des tâches
+      c) Chiffrement et signature
+      d) Pare-feu et IDS
+
+11. Quelle politique empêche un consultant d'accéder aux données de deux concurrents ?
+      a) Bell-LaPadula
+      b) Biba
+      c) La muraille de Chine (Brewer-Nash)
+      d) RBAC
+
+12. Clark-Wilson protège surtout :
+      a) La confidentialité militaire
+      b) La disponibilité
+      c) Le chiffrement
+      d) L'intégrité dans les entreprises
+
+13. Dans le DAC, qui décide des droits ?
+      a) Le propriétaire de l'objet
+      b) Le système selon des étiquettes
+      c) L'organisation par rôles
+      d) Des règles d'attributs
+
+14. Quelle politique repose sur des étiquettes imposées par le système ?
+      a) DAC
+      b) MAC
+      c) RBAC
+      d) ABAC
+
+15. Quelle politique donne des droits selon la fonction métier ?
+      a) DAC
+      b) MAC
+      c) RBAC
+      d) ABAC
+
+16. « Lecture autorisée si service = finance et heure ouvrée » est une règle :
+      a) DAC
+      b) MAC
+      c) RBAC
+      d) ABAC
+
+17. Quel document du NIST décrit l'ABAC ?
+      a) SP 800-162
+      b) SP 800-207
+      c) SP 800-61
+      d) SP 800-88
+
+18. Pourquoi ne pas créer un rôle par personne ?
+      a) C'est interdit
+      b) Le RBAC dégénère en DAC déguisé
+      c) Les rôles coûtent cher
+      d) Les personnes changent de nom
+
+19. Qui a formalisé les modèles RBAC en 1996 ?
+      a) Bell et LaPadula
+      b) Saltzer et Schroeder
+      c) Sandhu et al.
+      d) Diffie et Hellman
+
+20. Quelle mesure applique Biba aux sauvegardes ?
+      a) Un partage ouvert
+      b) Un mot de passe commun
+      c) Aucune
+      d) Un stockage immuable administré par des comptes distincts
+
+========================================================================
+Vrai ou faux
+========================================================================
+
+21. Les systèmes de fichiers courants utilisent des listes de contrôle d'accès.
+      Vrai / Faux
+
+22. Bell-LaPadula empêche d'écrire des données fausses vers le haut.
+      Vrai / Faux
+
+23. Bell-LaPadula a été conçu pour les systèmes militaires.
+      Vrai / Faux
+
+24. Biba est le dual de Bell-LaPadula pour l'intégrité.
+      Vrai / Faux
+
+25. Dans la muraille de Chine, les droits changent selon l'historique des accès.
+      Vrai / Faux
+
+26. Clark-Wilson demande qu'une seule personne réalise les opérations sensibles.
+      Vrai / Faux
+
+27. SELinux est un exemple de contrôle d'accès obligatoire.
+      Vrai / Faux
+
+28. L'ABAC prend en compte le contexte de la demande.
+      Vrai / Faux
+
+29. Révoquer tous les droits d'une personne est plus simple avec des capacités.
+      Vrai / Faux
+
+30. Le partage d'un dossier par son propriétaire relève du MAC.
+      Vrai / Faux
+
+========================================================================
+Textes à trous
+========================================================================
+
+31. La règle « pas d'écriture vers le bas » s'appelle la propriété ______.
+
+32. La liste des droits attachée à un objet est une liste de contrôle d'______.
+
+33. La muraille de Chine a été formalisée par Brewer et ______.
+
+34. Le contrôle d'accès par rôles a pour sigle ______.
+
+35. Le contrôle d'accès par attributs a pour sigle ______.
+
+36. Le modèle d'intégrité de 1977 porte le nom de ______.
+
+37. Clark-Wilson repose sur des transactions bien ______.
+
+38. Dans la matrice, les colonnes sont les ______.
+
+39. Le contrôle d'accès discrétionnaire a pour sigle ______.
+
+40. Le modèle de Bell et LaPadula protège la ______.
+
+========================================================================
+Grille de réponses   Nom : ............................  Matricule : ............
+========================================================================
+ 1. ............................................
+ 2. ............................................
+ 3. ............................................
+ 4. ............................................
+ 5. ............................................
+ 6. ............................................
+ 7. ............................................
+ 8. ............................................
+ 9. ............................................
+10. ............................................
+11. ............................................
+12. ............................................
+13. ............................................
+14. ............................................
+15. ............................................
+16. ............................................
+17. ............................................
+18. ............................................
+19. ............................................
+20. ............................................
+21. ............................................
+22. ............................................
+23. ............................................
+24. ............................................
+25. ............................................
+26. ............................................
+27. ............................................
+28. ............................................
+29. ............................................
+30. ............................................
+31. ............................................
+32. ............................................
+33. ............................................
+34. ............................................
+35. ............................................
+36. ............................................
+37. ............................................
+38. ............................................
+39. ............................................
+40. ............................................

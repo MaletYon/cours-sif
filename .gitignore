@@ -1,0 +1,26 @@
+# Fichiers de compilation LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.log
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+texput.log
+# Python
+__pycache__/
+# Livret de correction : dépôt privé séparé
+corriges/
+SIF_correction.tex
+SIF_correction.pdf
+# Documents sous licence, à ne jamais publier
+Normes/
+SIF_corriges.tex
+Claude outputs/

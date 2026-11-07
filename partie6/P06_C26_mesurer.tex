@@ -1,0 +1,328 @@
+% ============================================================================
+% Fichier  : partie6/P06_C26_mesurer.tex
+% Titre    : Mesurer la Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : ISO/IEC 27004:2016 ; NIST SP 800-55 Rev. 1 (2008) ; instrument
+% OUI / NON / NEK et mesures mu, U, H (Minka Mi Nguidjoi, 2026, A1, HAL) ;
+% programme de l'auditologie (A0, HAL). Seuls ces deux textes de l'auteur,
+% déposés, sont cités. Valeurs de mu, U, H et intervalles de Wilson
+% calculés le 07/11/2026.
+% ============================================================================
+
+\chapter{Mesurer la Sécurité}
+\label{chap:mesurer}
+\chaptermark{Mesurer la sécurité}
+
+\epigraph{%
+    « Ce que l'on ne sait pas n'est ni conforme, ni non conforme~:\\
+    c'est inconnu, et il faut le dire. »%
+}{Principe du cours}
+
+\niveauChapitre{Expert}{Chapitres~\ref{chap:gouvernance},
+\ref{chap:normes} et~\ref{chap:evaluer}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Construire des indicateurs de sécurité selon l'ISO/IEC~27004.
+    \item Distinguer indicateurs de mise en œuvre, d'efficacité et
+          d'impact.
+    \item Utiliser l'instrument \OUI{}~/ \NON{}~/ \NEK{} pour mesurer ce
+          que l'on sait d'un dispositif.
+    \item Calculer et interpréter la conformité \(\mu\), l'incertitude
+          \(U\) et l'entropie \(H\).
+    \item Dire avec quelle précision une mesure est connue.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : LiZbiZ est-elle mieux protégée six mois après~?}
+% ============================================================================
+
+En septembre, le conseil de LiZbiZ demande si les mesures prises depuis
+mars ont amélioré la sécurité. Le RSSI pourrait répondre par un
+pourcentage de mesures « en place ». Mais une partie des réponses
+recueillies auprès des services sont des « je ne sais pas »~: faut-il les
+compter comme des oui, comme des non, ou les écarter~? Ce chapitre
+répond, et clôt le cours.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Les indicateurs de sécurité (section~\ref{sec:c26-indicateurs}).
+    \item Le problème de l'ignorance (section~\ref{sec:c26-ignorance}).
+    \item Trois mesures~: \(\mu\), \(U\), \(H\) (section~\ref{sec:c26-mesures}).
+    \item La précision d'une mesure (section~\ref{sec:c26-precision}).
+    \item Synthèse du cours (section~\ref{sec:c26-synthese}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Les Indicateurs de Sécurité}
+\label{sec:c26-indicateurs}
+% ============================================================================
+
+L'ISO/IEC~27004 et le NIST SP~800-55 distinguent plusieurs familles
+d'indicateurs~\cite{iso27004_2016,nist80055}.
+
+\begin{tableaucours}{L{3.4cm}L{4.6cm}L{4.2cm}}{%
+    \tableauHeader{Famille} &
+    \tableauHeader{Question} &
+    \tableauHeader{Exemple}
+}
+Mise en œuvre & La mesure existe-t-elle~? & Part des comptes distants
+avec second facteur \\
+Efficacité & Fonctionne-t-elle~? & Part des restaurations réussies dans
+le RTO \\
+Impact & Change-t-elle le résultat~? & Délai de détection des incidents \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~26.1. Familles d'indicateurs}\end{center}
+
+Un indicateur de mise en œuvre est facile à mesurer et peu informatif~;
+un indicateur d'impact est informatif et difficile. Un tableau de bord
+équilibré combine les trois (Chapitre~\ref{chap:gouvernance}).
+
+% ============================================================================
+\section{Le Problème de l'Ignorance}
+\label{sec:c26-ignorance}
+% ============================================================================
+
+Quand on évalue un dispositif par des questions (« les sauvegardes
+sont-elles testées~? »), certaines réponses ne peuvent pas être établies~:
+la pièce n'existe pas, le prestataire ne répond pas, le journal a été
+effacé. Les grilles habituelles ne laissent le choix qu'entre oui et non~;
+elles obligent alors à deviner, et le plus souvent à répondre oui.
+
+\begin{boxdef}
+\termecle{Instrument trichotomique}~: grille dont chaque question admet
+trois réponses~: \OUI{} (la mesure est en place, preuve à l'appui),
+\NON{} (elle ne l'est pas) et \NEK{} (\emph{not enough knowledge}~:
+connaissance insuffisante pour conclure). Il a été formalisé par l'auteur
+dans une prépublication déposée sur HAL~\cite{minka2026nek}, dans le cadre
+d'un programme de recherche plus large~\cite{minka2026auditologie}.
+\end{boxdef}
+
+% ============================================================================
+\section{Trois Mesures : \texorpdfstring{\(\mu\), \(U\), \(H\)}{mu, U, H}}
+\label{sec:c26-mesures}
+% ============================================================================
+
+Sur \(n\) questions, avec \(n_O\) réponses \OUI{}, \(n_N\) \NON{} et
+\(n_K\) \NEK{}~:
+
+\begin{itemize}
+    \item \(\mu = n_O / n\)~: la \termecle{conformité}, part des réponses
+          \OUI{}~;
+    \item \(U = n_K / n\)~: l'\termecle{incertitude}, part des réponses
+          \NEK{}~;
+    \item \(H = -\sum p \log_2 p\), sur les trois proportions~:
+          l'\termecle{entropie}, en bits, au plus \(\log_2 3 \approx 1{,}585\),
+          qui mesure la dispersion des réponses.
+\end{itemize}
+
+\begin{boxlecture}{Les mesures de sécurité de LiZbiZ, mars et septembre}
+Vingt questions sur les mesures clés (second facteur, correctifs,
+sauvegardes, journaux, comptes, contrat du prestataire\ldots), posées
+aux mêmes services.
+
+\medskip
+\begin{tableaucours}{L{2.6cm}cccc}{%
+    \tableauHeader{Date} &
+    \tableauHeader{O / N / K} &
+    \tableauHeader{\(\mu\)} &
+    \tableauHeader{\(U\)} &
+    \tableauHeader{\(H\) (bit)}
+}
+Mars & 4 / 6 / 10 & 0,20 & 0,50 & 1,485 \\
+Septembre & 12 / 3 / 5 & 0,60 & 0,25 & 1,353 \\
+\end{tableaucours}
+
+\medskip
+\textbf{Constatation.} La conformité passe de 0,20 à 0,60 et
+l'incertitude de 0,50 à 0,25. \textbf{Analyse} (confiance moyenne). La
+progression est réelle, mais un quart des réponses reste inconnu~:
+présenter « 60~\% de mesures en place » sans dire que 25~\% sont
+inconnues donnerait au conseil une image trop favorable. Compter les
+\NEK{} comme des \OUI{} afficherait 85~\%~; les compter comme des \NON{},
+60~\% aussi, mais en cachant qu'on ne sait pas.
+
+\hfill\lecture{0{,}60}{0{,}25}{1{,}35}
+\end{boxlecture}
+
+\begin{boxinfo}
+\textbf{Lire les trois mesures ensemble.} \(U\) dit s'il faut d'abord
+chercher la preuve~; \(\mu\) dit ce qui est en place parmi ce que l'on
+sait~; \(H\) dit si les réponses sont homogènes ou dispersées. Une
+réduction de \(U\) est un progrès de la connaissance, même si elle fait
+apparaître des \NON{}.
+\end{boxinfo}
+
+% ============================================================================
+\section{La Précision d'une Mesure}
+\label{sec:c26-precision}
+% ============================================================================
+
+Vingt réponses, c'est peu. Une proportion observée sur un petit nombre de
+cas est connue avec une marge large. L'intervalle de Wilson, adapté aux
+petits effectifs, le montre~: pour \(U = 0{,}50\) sur 20~réponses,
+l'intervalle à 95~\% va environ de 0,30 à 0,70~; pour \(U = 0{,}25\), de
+0,11 à 0,47. Les deux intervalles se recouvrent~: la baisse de
+l'incertitude est probable, mais 20~questions ne suffisent pas à
+l'établir avec certitude. Un rapport rigoureux le dit, et recommande
+d'élargir l'échantillon pour les domaines importants.
+
+\begin{boxalert}
+\textbf{Violation typique.} Présenter « 60~\% » au conseil comme une
+mesure exacte.
+
+\smallskip
+\textbf{Règle~:} une mesure s'accompagne de son effectif et, quand il est
+petit, de sa marge. Les seuils qui servent à classer (« acceptable à
+partir de 80~\% ») sont des conventions, à déclarer comme telles.
+\end{boxalert}
+
+% ============================================================================
+\section{Synthèse du Cours}
+\label{sec:c26-synthese}
+% ============================================================================
+
+\begin{tableaucours}{L{2.8cm}L{9.4cm}}{%
+    \tableauHeader{Partie} &
+    \tableauHeader{Ce qu'elle a apporté face à l'Opération GAROUA}
+}
+I. Fondements & Nommer les pertes (propriétés), comprendre la chaîne
+d'attaque, savoir ce que la cryptographie protège ou non \\
+II. Gouvernance et risques & Un responsable, une politique, une
+appréciation des risques qui décrivait l'attaque d'avance, des actifs
+connus, des personnes formées \\
+III. Normes et droit & Des référentiels pour ne rien oublier~; des
+obligations (journaux, confidentialité) et des infractions \\
+IV. Sécurité technique & Couper chaque maillon~: second facteur,
+segmentation, correctifs, comptes, détection, réponse \\
+V. Défis avancés & Reprendre (sauvegardes immuables, RTO), préserver la
+preuve, juger les technologies nouvelles \\
+VI. Mesurer & Savoir si l'on progresse, et dire ce que l'on ne sait pas \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~26.2. Les six parties du cours et
+l'Opération GAROUA}\end{center}
+
+\begin{boxmetier}{RSSI}
+\textbf{Rendre compte honnêtement.} Le RSSI présente au conseil la
+conformité, l'incertitude et leur évolution, avec l'effectif et la
+marge, et un plan pour réduire d'abord les \NEK{} sur les mesures
+critiques.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Coter \NEK{} quand il le faut.} L'auditeur cote \NEK{} une mesure
+dont il n'a pas pu obtenir la preuve, au lieu de la supposer en place~;
+il indique ce qu'il faudrait pour conclure.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Les indicateurs} mesurent la mise en œuvre, l'efficacité
+          et l'impact~; un tableau de bord les combine.
+    \item \textbf{L'instrument \OUI{}~/ \NON{}~/ \NEK{}} empêche de
+          deviner quand on ne sait pas.
+    \item \textbf{\(\mu\), \(U\) et \(H\)} se lisent ensemble~; réduire
+          \(U\) est un progrès de la connaissance.
+    \item \textbf{Une mesure} s'accompagne de son effectif et de sa marge~;
+          les seuils sont des conventions.
+    \item \textbf{La sécurité} est un cycle~: connaître, protéger,
+          détecter, répondre, reprendre, mesurer.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: distinguer les trois
+familles d'indicateurs~; coter \OUI{}, \NON{} ou \NEK{}~; calculer
+\(\mu\), \(U\) et \(H\)~; expliquer pourquoi compter les \NEK{} comme des
+\OUI{} est trompeur~; dire pourquoi 20~réponses donnent une mesure
+imprécise.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.1. Quelle famille~? \niveaubase}]
+Classez~: nombre de postes avec un EDR~; délai médian de détection~; part
+des alertes traitées en moins de quatre heures.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.2. Coter \niveaubase}]
+Cotez \OUI{}, \NON{} ou \NEK{}~: (a) la politique de sauvegarde existe,
+mais aucun test de restauration n'a été fourni~; (b) le prestataire
+déclare avoir activé le second facteur, sans preuve~; (c) l'extraction de
+l'annuaire montre trois comptes orphelins.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.3. Calculer \niveaubase}]
+Calculez \(\mu\), \(U\) et \(H\) pour 14~\OUI{}, 4~\NON{} et 2~\NEK{}.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.4. Les cas limites \niveaumoyen}]
+Que valent \(\mu\), \(U\) et \(H\) quand toutes les réponses sont \NEK{}~?
+Pourquoi une entropie nulle ne signifie-t-elle pas ici une certitude~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.5. Compter les NEK \niveaumoyen}]
+Reprenez les données de septembre. Calculez la conformité affichée si
+l'on compte les \NEK{} comme des \OUI{}, puis comme des \NON{}. Quelle
+présentation recommandez-vous au conseil~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.6. La marge \niveaumoyen}]
+Expliquez à M.~ETEME, sans formule, pourquoi 20~réponses ne suffisent pas
+à affirmer que l'incertitude a diminué.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.7. Un indicateur d'impact \niveaumoyen}]
+Proposez un indicateur d'impact pour la mesure « double authentification
+de l'accès distant », et la manière de le mesurer.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.8. Réduire U \niveaumoyen}]
+Pour les cinq \NEK{} de septembre, proposez la preuve qui permettrait de
+conclure, et classez-les par priorité.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.9. Le tableau de bord \niveauexpert}]
+Construisez le tableau de bord trimestriel du conseil de LiZbiZ~: six
+indicateurs des trois familles, et la lecture \(\mu\), \(U\), \(H\) des
+vingt mesures clés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~26.10. Synthèse \niveauexpert}]
+Rédigez, en deux pages, le rapport de clôture de l'Opération GAROUA~: ce
+qui s'est passé, ce qui a été corrigé, ce qui reste inconnu, et les
+priorités de l'année suivante.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO/IEC~27004 et NIST SP~800-55~\cite{iso27004_2016,nist80055}.
+    \item L'instrument \OUI{}~/ \NON{}~/ \NEK{}~\cite{minka2026nek} et le
+          programme de l'auditologie~\cite{minka2026auditologie}.
+    \item Les UE INF3226 (audit des systèmes d'information) et SEC4031
+          (investigation numérique), qui prolongent ce cours.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Conclusion du cours.} Sécuriser un système d'information, c'est
+connaître ce que l'on protège, contre qui, avec quelles mesures, et savoir
+vérifier qu'elles fonctionnent. Les annexes rassemblent le glossaire, les
+outils, les modèles et les textes utiles à la pratique.
+\end{boxinfo}

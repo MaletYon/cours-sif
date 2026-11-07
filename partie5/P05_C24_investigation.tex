@@ -1,0 +1,302 @@
+% ============================================================================
+% Fichier  : partie5/P05_C24_investigation.tex
+% Titre    : Premiers Pas en Investigation Numérique
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre VIII » (investigation numérique, chaîne de
+% garde). Sources : ISO/IEC 27037:2012 ; RFC 3227 (2002) ; NIST SP 800-86
+% (2006) ; loi n° 2010/012, art. 52 (3) et 53 (1), texte officiel ; Trilemme
+% CRO (Minka Mi Nguidjoi et al., 2025). Renvoi à l'UE SEC4031.
+% ============================================================================
+
+\chapter{Premiers Pas en Investigation Numérique}
+\label{chap:investigation}
+\chaptermark{Investigation numérique}
+
+\epigraph{%
+    « Tout contact laisse une trace. »%
+}{Edmond Locard}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:crypto-sym},
+\ref{chap:droit} et~\ref{chap:operations}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Expliquer pourquoi la réponse aux incidents doit préserver les
+          preuves.
+    \item Appliquer l'ordre de volatilité.
+    \item Décrire les quatre étapes de l'ISO/IEC~27037.
+    \item Tenir une chaîne de conservation.
+    \item Situer le rôle de l'entreprise, des enquêteurs et de l'expert.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : que reste-t-il pour prouver ce qui s'est passé~?}
+% ============================================================================
+
+LiZbiZ porte plainte. Les enquêteurs demandent les preuves~: la mémoire
+des serveurs a été effacée par le redémarrage de 22~h~05, plusieurs
+journaux locaux ont été écrasés par la réinstallation des machines, et
+personne n'a noté qui a manipulé quoi. Ce chapitre donne les premiers
+gestes qui préservent la preuve~; l'investigation proprement dite fait
+l'objet de l'UE SEC4031.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Réponse et preuve (section~\ref{sec:c24-reponse}).
+    \item L'ordre de volatilité (section~\ref{sec:c24-volatilite}).
+    \item Les quatre étapes de l'ISO/IEC~27037 (section~\ref{sec:c24-27037}).
+    \item La chaîne de conservation (section~\ref{sec:c24-chaine}).
+    \item L'entreprise, l'enquêteur, l'expert (section~\ref{sec:c24-roles}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Réponse et Preuve}
+\label{sec:c24-reponse}
+% ============================================================================
+
+L'objectif de la réponse est de rétablir~; celui de l'investigation est
+d'établir les faits. Les deux se gênent~: réinstaller détruit les traces,
+attendre prolonge l'arrêt. La solution est de préserver \emph{avant}
+d'éradiquer~: images des disques, capture de la mémoire, copie des
+journaux, avec leurs empreintes. Le NIST décrit cette intégration de la
+forensique dans la réponse aux incidents~\cite{nist80086}.
+
+% ============================================================================
+\section{L'Ordre de Volatilité}
+\label{sec:c24-volatilite}
+% ============================================================================
+
+La RFC~3227 recommande de collecter d'abord les données qui disparaissent
+le plus vite~\cite{rfc3227}.
+
+\begin{tableaucours}{cL{5.6cm}L{5.4cm}}{%
+    \tableauHeader{Ordre} &
+    \tableauHeader{Donnée} &
+    \tableauHeader{Disparaît}
+}
+1 & Registres, cache & En quelques nanosecondes \\
+2 & Mémoire vive, processus, connexions réseau & À l'extinction \\
+3 & Fichiers temporaires & Au redémarrage ou au nettoyage \\
+4 & Disques & À la réécriture \\
+5 & Journaux distants, données de surveillance & Selon leur rétention \\
+6 & Configuration physique, topologie & Rarement \\
+7 & Supports d'archive & Très rarement \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~24.1. L'ordre de volatilité (d'après la RFC~3227)}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Ce que le redémarrage a effacé}
+\textbf{Constatation.} À 22~h~05, M.~ABENA redémarre les serveurs de
+Garoua et de Douala.
+
+\medskip
+\textbf{Analyse} (confiance élevée). Le redémarrage a effacé la mémoire
+vive~: les processus de l'attaquant, ses connexions en cours, et
+peut-être des clés de chiffrement qu'un examen de la mémoire aurait pu
+retrouver. Isoler du réseau sans éteindre aurait préservé ces traces.
+\end{boxscenario}
+
+% ============================================================================
+\section{Les Quatre Étapes de l'ISO/IEC 27037}
+\label{sec:c24-27037}
+% ============================================================================
+
+\begin{tableaucours}{L{2.8cm}L{9.4cm}}{%
+    \tableauHeader{Étape} &
+    \tableauHeader{Principe}
+}
+Identification & Repérer les supports et les données qui peuvent
+constituer une preuve \\
+Collecte & Prendre les supports physiques, quand c'est possible et
+légitime \\
+Acquisition & Produire une copie fidèle, vérifiable par empreinte \\
+Préservation & Protéger contre toute altération et tracer chaque accès \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~24.2. Les étapes de l'ISO/IEC~27037~\cite{iso27037}}\end{center}
+
+\begin{boxprocedure}
+\textbf{Acquérir un disque}
+\begin{enumerate}
+    \item Photographier et décrire le support (marque, numéro de série).
+    \item Brancher le disque derrière un bloqueur d'écriture.
+    \item Calculer l'empreinte SHA-256 du disque source.
+    \item Produire l'image (format brut ou E01).
+    \item Calculer l'empreinte de l'image et vérifier qu'elle est identique.
+    \item Consigner chaque étape~: date, heure, personne, outil et version.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{La Chaîne de Conservation}
+\label{sec:c24-chaine}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Chaîne de conservation} (\textit{chain of custody})~: suite
+ininterrompue d'enregistrements qui retrace, pour chaque pièce, qui l'a
+détenue, quand, où et pour quoi faire, depuis sa collecte jusqu'à sa
+production en justice.
+\end{boxdef}
+
+Une rupture dans la chaîne (un disque manipulé sans trace, une image
+modifiée sans empreinte) permet à la défense de contester la pièce. La
+discipline est la même que pour l'auditeur qui remet ses pièces à la
+justice (cours INF3226, Chapitre~29).
+
+\begin{boxinfo}
+\textbf{Le Trilemme CRO.} Une preuve numérique doit être confidentielle
+(elle contient des données sensibles), fiable (elle n'a pas été
+altérée) et opposable (elle peut être produite et discutée en justice).
+Ces trois exigences se tendent~: plus on protège une pièce, moins elle est
+facile à produire et à discuter. Ce cadre, formalisé par l'auteur et ses
+collègues~\cite{minka2025cro}, sert de fil rouge aux UE d'investigation
+numérique SEC4031 et SEC4052.
+\end{boxinfo}
+
+% ============================================================================
+\section{L'Entreprise, l'Enquêteur, l'Expert}
+\label{sec:c24-roles}
+% ============================================================================
+
+\begin{boxjuris}
+\textbf{\loicam{n°~2010/012}} (texte officiel)
+
+\medskip
+\textbf{Article~52, alinéa~3}~: \textit{« Les Officiers de Police
+Judiciaire et les agents habilités de l'Agence peuvent, lors des
+investigations, accéder aux moyens de transport, à tout local à usage
+professionnel, à l'exclusion des domiciles privés, en vue de rechercher,
+de constater les infractions, de demander la communication de tous les
+documents professionnels et en prendre copie, recueillir, sur convocation
+ou sur place, les renseignements et justifications. »}
+
+\medskip
+\textbf{Article~53, alinéa~1}~: \textit{« Les perquisitions en matière de
+cybercriminalité sont susceptibles de porter sur des données qui peuvent
+être des supports physiques ou des copies réalisées en présence des
+personnes qui assistent à la perquisition. »}
+
+\medskip
+\textbf{Analyse.} L'enquête appartient aux officiers de police judiciaire
+et aux agents habilités. L'entreprise victime préserve et remet~; elle
+n'enquête pas sur des personnes et ne qualifie pas les faits
+(Chapitre~\ref{chap:droit}).
+\end{boxjuris}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Préserver d'abord.} Avant toute éradication, l'analyste capture la
+mémoire des machines clés, copie les journaux hors des machines et note
+les empreintes~; il tient un journal de ses actions, heure par heure.
+\end{boxmetier}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Ne pas éteindre.} L'administrateur isole une machine compromise
+du réseau sans l'éteindre, et attend l'équipe de réponse pour la suite.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Préserver avant d'éradiquer}~: images, mémoire, journaux,
+          empreintes.
+    \item \textbf{L'ordre de volatilité} (RFC~3227) commence par la mémoire.
+    \item \textbf{L'ISO/IEC~27037}~: identification, collecte, acquisition,
+          préservation.
+    \item \textbf{La chaîne de conservation} trace chaque détention~; une
+          rupture fragilise la preuve.
+    \item \textbf{L'enquête} appartient aux officiers de police judiciaire
+          (loi n°~2010/012, art.~52 et~53)~; l'entreprise préserve et
+          remet.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: expliquer la tension
+entre réponse et preuve~; citer l'ordre de volatilité~; nommer les étapes
+de l'ISO/IEC~27037~; acquérir un disque avec un bloqueur et des
+empreintes~; tenir une chaîne de conservation~; dire qui enquête.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.1. Volatilité \niveaubase}]
+Classez de la plus à la moins volatile~: un journal envoyé au SIEM~; la
+liste des connexions réseau~; un fichier sur disque~; le contenu de la
+mémoire.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.2. Les étapes \niveaubase}]
+Rangez dans les étapes de l'ISO/IEC~27037~: calculer l'empreinte d'une
+image~; repérer qu'un routeur garde des journaux~; mettre un disque sous
+scellé.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.3. Éteindre~? \niveaubase}]
+Pourquoi isoler une machine du réseau plutôt que l'éteindre~? Dans quel
+cas faut-il quand même l'éteindre~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.4. L'empreinte \niveaumoyen}]
+L'empreinte de l'image diffère de celle du disque source. Que faites-vous,
+et que consignez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.5. La fiche \niveaumoyen}]
+Rédigez la fiche de chaîne de conservation d'un serveur de Garoua, de sa
+saisie à sa remise aux enquêteurs.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.6. Réponse et preuve \niveaumoyen}]
+Le directeur veut réinstaller les serveurs dès le samedi matin. Le RSSI
+veut d'abord les images. Proposez un compromis qui serve les deux
+objectifs.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.7. Les enquêteurs \niveaumoyen}]
+Des enquêteurs demandent « tous les journaux ». Que vérifie LiZbiZ, que
+remet-elle, et comment le trace-t-elle~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.8. CRO \niveaumoyen}]
+Donnez un exemple où protéger la confidentialité d'une pièce rend plus
+difficile son opposabilité.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.9. Le kit \niveauexpert}]
+Composez le kit de première réponse de LiZbiZ~: matériel, logiciels,
+formulaires, contacts, et la procédure qui l'accompagne.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~24.10. Réécrire la nuit \niveauexpert}]
+Réécrivez la nuit du 5 au 6~mars avec les gestes de ce chapitre et du
+Chapitre~\ref{chap:operations}, heure par heure, à partir de 22~h~05.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item ISO/IEC~27037~\cite{iso27037}~; RFC~3227~\cite{rfc3227}~; NIST
+          SP~800-86~\cite{nist80086}.
+    \item Les UE SEC4031 (Introduction à l'investigation numérique) et
+          SEC4052 (Investigation numérique avancée).
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Les attaques et les défenses évoluent avec les
+technologies. Le Chapitre~\ref{chap:emergents} aborde l'intelligence
+artificielle, les objets connectés et la cryptographie post-quantique.
+\end{boxinfo}

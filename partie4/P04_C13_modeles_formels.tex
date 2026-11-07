@@ -1,0 +1,309 @@
+% ============================================================================
+% Fichier  : partie4/P04_C13_modeles_formels.tex
+% Titre    : Modèles Formels de Sécurité
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre IV » (Bell-LaPadula, Biba, Chinese Wall) et
+% « Livre III » (modèles de contrôle d'accès). Sources : Lampson (1971) ;
+% Bell et LaPadula (1976) ; Biba (1977) ; Clark et Wilson (1987) ; Brewer et
+% Nash (1989) ; Sandhu et al. (1996) ; NIST SP 800-162 (2014).
+% ============================================================================
+
+\chapter{Modèles Formels de Sécurité}
+\label{chap:modeles}
+\chaptermark{Modèles formels}
+
+\epigraph{%
+    « Une politique que l'on ne sait pas énoncer\\
+    est une politique que l'on ne sait pas vérifier. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:proprietes}
+et~\ref{chap:actifs}~; notions de logique.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Représenter des droits par une matrice d'accès, des listes et
+          des capacités.
+    \item Énoncer les règles de Bell-LaPadula et de Biba, et ce qu'elles
+          protègent.
+    \item Expliquer les principes de Clark-Wilson et la muraille de Chine.
+    \item Distinguer les politiques DAC, MAC, RBAC et ABAC.
+    \item Choisir un modèle selon la propriété à protéger.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : quelle règle aurait empêché un compte de tout lire~?}
+% ============================================================================
+
+À Garoua, l'attaquant, devenu administrateur du domaine, a pu lire tous
+les dossiers et effacer les sauvegardes. Le système appliquait une règle
+simple~: l'administrateur peut tout. Les modèles formels montrent qu'on
+peut énoncer d'autres règles, plus fines, et les vérifier.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item La matrice d'accès (section~\ref{sec:c13-matrice}).
+    \item Bell-LaPadula~: la confidentialité (section~\ref{sec:c13-blp}).
+    \item Biba~: l'intégrité (section~\ref{sec:c13-biba}).
+    \item Clark-Wilson et la muraille de Chine (section~\ref{sec:c13-commerce}).
+    \item DAC, MAC, RBAC, ABAC (section~\ref{sec:c13-politiques}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{La Matrice d'Accès}
+\label{sec:c13-matrice}
+% ============================================================================
+
+B.~Lampson a proposé de représenter la protection par une matrice dont
+les lignes sont les \emph{sujets} (utilisateurs, processus), les colonnes
+les \emph{objets} (fichiers, tables), et les cases les droits~\cite{lampson1971}.
+
+\begin{tableaucours}{L{3.2cm}L{2.8cm}L{2.8cm}L{3.2cm}}{%
+    \tableauHeader{Sujet} &
+    \tableauHeader{Factures} &
+    \tableauHeader{Paiements} &
+    \tableauHeader{Sauvegardes}
+}
+Mme~OWONA (saisie) & lire & lire, écrire & aucun \\
+Validatrice & lire & lire, valider & aucun \\
+Service de sauvegarde & lire & lire & écrire \\
+Administrateur & lire, écrire & lire, écrire & lire, écrire, effacer \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~13.1. Matrice d'accès (extrait) de LiZbiZ}\end{center}
+
+La matrice se stocke par colonnes (\emph{listes de contrôle d'accès},
+attachées aux objets) ou par lignes (\emph{capacités}, détenues par les
+sujets). Les systèmes de fichiers courants utilisent des listes de
+contrôle d'accès.
+
+% ============================================================================
+\section{Bell-LaPadula : la Confidentialité}
+\label{sec:c13-blp}
+% ============================================================================
+
+Conçu pour les systèmes militaires, le modèle de D.~Bell et L.~LaPadula
+attribue à chaque sujet une \emph{habilitation} et à chaque objet une
+\emph{classification}, ordonnées (non classifié < confidentiel < secret)
+\cite{bell1976}.
+
+\begin{boxdef}
+\termecle{Bell-LaPadula}~: deux règles. \emph{Pas de lecture vers le
+haut}~: un sujet ne lit pas un objet de niveau supérieur à son
+habilitation. \emph{Pas d'écriture vers le bas} (propriété~\(\star\))~:
+un sujet n'écrit pas dans un objet de niveau inférieur, pour qu'une
+information secrète ne fuie pas vers un document moins protégé.
+\end{boxdef}
+
+Le modèle protège la confidentialité, et seulement elle~: rien n'empêche
+un sujet de bas niveau d'écrire n'importe quoi vers le haut.
+
+% ============================================================================
+\section{Biba : l'Intégrité}
+\label{sec:c13-biba}
+% ============================================================================
+
+K.~Biba a proposé le modèle dual, pour l'intégrité~\cite{biba1977}.
+
+\begin{boxdef}
+\termecle{Biba}~: \emph{pas de lecture vers le bas}~: un sujet ne lit pas
+une information de moindre intégrité, qui pourrait le corrompre~; \emph{pas
+d'écriture vers le haut}~: un sujet n'écrit pas dans un objet d'intégrité
+supérieure.
+\end{boxdef}
+
+\begin{boxscenario}{Opération GAROUA. Les sauvegardes selon Biba}
+\textbf{Analyse} (confiance élevée). Les sauvegardes sont l'objet de plus
+haute intégrité~: c'est d'elles que l'on repart. Selon Biba, un sujet de
+moindre intégrité (un compte d'administration du domaine, exposé à
+Internet par l'accès distant) ne devrait pas pouvoir y écrire, ni
+l'effacer. Un système de sauvegarde qui n'accepte que des ajouts
+(stockage immuable), administré par des comptes distincts, applique cette
+règle.
+\end{boxscenario}
+
+% ============================================================================
+\section{Clark-Wilson et la Muraille de Chine}
+\label{sec:c13-commerce}
+% ============================================================================
+
+\subsection{Clark-Wilson}
+
+D.~Clark et D.~Wilson ont montré que les entreprises protègent surtout
+l'intégrité, par deux principes~: les \emph{transactions bien formées}
+(on ne modifie une donnée que par un programme qui la garde cohérente) et
+la \emph{séparation des tâches} (aucune personne ne réalise seule une
+opération sensible)~\cite{clark1987}. Les données contrôlées ne se
+modifient que par des procédures certifiées, et des procédures de
+vérification contrôlent régulièrement leur cohérence.
+
+\subsection{La muraille de Chine}
+
+D.~Brewer et M.~Nash ont formalisé la politique des cabinets de conseil~:
+un consultant qui a eu accès aux données d'une entreprise ne peut plus
+accéder à celles de ses concurrentes~\cite{brewer1989}. Les droits
+changent selon l'historique des accès~: c'est une politique contre les
+conflits d'intérêts.
+
+% ============================================================================
+\section{DAC, MAC, RBAC, ABAC}
+\label{sec:c13-politiques}
+% ============================================================================
+
+\begin{tableaucours}{L{2.2cm}L{4.8cm}L{5.2cm}}{%
+    \tableauHeader{Politique} &
+    \tableauHeader{Qui décide des droits} &
+    \tableauHeader{Exemple}
+}
+DAC & Le propriétaire de l'objet, à sa discrétion & Partage d'un dossier
+Windows \\
+MAC & Le système, selon des étiquettes imposées & Bell-LaPadula~; SELinux \\
+RBAC & L'organisation, par rôle métier~\cite{sandhu1996} & Le rôle
+« comptable fournisseurs » donne les droits nécessaires \\
+ABAC & Des règles sur les attributs du sujet, de l'objet et du
+contexte~\cite{nist800162} & « lecture autorisée si service = finance et
+heure ouvrée et poste géré » \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~13.2. Quatre familles de politiques
+de contrôle d'accès}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Créer un rôle par personne.
+
+\smallskip
+\textbf{Règle~:} un rôle correspond à une fonction métier, pas à un
+individu. Une organisation de 150~personnes doit pouvoir se décrire avec
+quelques dizaines de rôles, revus chaque année~; sinon, le RBAC dégénère
+en DAC déguisé.
+\end{boxalert}
+
+\begin{boxobjet}{M-13 · Séparation des droits d'administration}
+\textbf{Objectif~:} qu'aucun compte ne puisse à la fois administrer la
+production et effacer les sauvegardes. \textbf{Modèle~:} Biba et
+séparation des tâches de Clark-Wilson. \textbf{Mise en œuvre~:} comptes
+d'administration distincts pour le domaine et pour les sauvegardes~;
+stockage de sauvegarde immuable. \textbf{Vérification~:} tentative
+d'effacement d'une sauvegarde avec un compte d'administration du domaine,
+qui doit échouer.
+\end{boxobjet}
+
+\begin{boxmetier}{Développeur}
+\textbf{Implanter un RBAC.} Le développeur vérifie le rôle à chaque
+requête (médiation complète), refuse par défaut, et journalise les
+décisions de refus.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{Tester la séparation des tâches.} L'auditeur croise la matrice
+des droits avec les paires de droits incompatibles (saisir et valider un
+paiement), et liste les comptes qui cumulent.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{La matrice d'accès} relie sujets, objets et droits~; on
+          la stocke en listes de contrôle ou en capacités.
+    \item \textbf{Bell-LaPadula} protège la confidentialité (pas de lecture
+          vers le haut, pas d'écriture vers le bas).
+    \item \textbf{Biba} protège l'intégrité (pas de lecture vers le bas,
+          pas d'écriture vers le haut).
+    \item \textbf{Clark-Wilson}~: transactions bien formées et séparation
+          des tâches~; \textbf{Brewer-Nash}~: pas d'accès à deux
+          concurrents.
+    \item \textbf{DAC, MAC, RBAC, ABAC} diffèrent par qui décide des droits.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: construire une matrice
+d'accès~; énoncer les règles de Bell-LaPadula et de Biba~; expliquer les
+deux principes de Clark-Wilson~; distinguer DAC, MAC, RBAC et ABAC~;
+choisir un modèle selon la propriété à protéger.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.1. Bell-LaPadula \niveaubase}]
+Un sujet habilité « confidentiel » veut lire un document « secret », puis
+écrire dans un document « non classifié ». Que dit le modèle pour chaque
+opération~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.2. Biba \niveaubase}]
+Pourquoi Biba interdit-il de lire vers le bas~? Donnez un exemple tiré
+d'une entreprise.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.3. Quelle politique~? \niveaubase}]
+Classez en DAC, MAC, RBAC ou ABAC~: un utilisateur partage un fichier avec
+un collègue~; le système refuse l'accès hors du réseau de l'entreprise~;
+le rôle « caissier » donne l'accès à la caisse~; des étiquettes de
+classification imposées par le système.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.4. La matrice \niveaumoyen}]
+Construisez la matrice d'accès de l'agence de la BANQUE SANAGA~: guichetier,
+chef d'agence, auditeur interne~; objets~: comptes clients, journal des
+opérations, paramètres de plafonds.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.5. Listes ou capacités \niveaumoyen}]
+Révoquer tous les droits d'un salarié qui part est-il plus simple avec
+des listes de contrôle d'accès ou avec des capacités~? Et retirer l'accès
+de tous à un fichier~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.6. Clark-Wilson \niveaumoyen}]
+Décrivez le paiement d'un fournisseur chez LiZbiZ comme une transaction
+bien formée, avec sa séparation des tâches et sa procédure de vérification.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.7. Muraille de Chine \niveaumoyen}]
+AUDIX CONSEIL audite LiZbiZ et une autre entreprise de logistique.
+Comment appliquer la muraille de Chine à ses auditeurs~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.8. Les deux propriétés \niveaumoyen}]
+Peut-on appliquer en même temps Bell-LaPadula et Biba avec les mêmes
+niveaux~? Qu'en résulte-t-il pour la circulation de l'information~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.9. Une règle ABAC \niveauexpert}]
+Écrivez trois règles ABAC qui auraient limité l'Opération GAROUA (attributs
+du sujet, de la ressource, du contexte).
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~13.10. Des rôles pour LiZbiZ \niveauexpert}]
+Proposez une douzaine de rôles RBAC pour LiZbiZ, avec leurs droits
+principaux et les paires de rôles incompatibles.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item D.~Bell et L.~LaPadula~\cite{bell1976}~; K.~Biba~\cite{biba1977}.
+    \item D.~Clark et D.~Wilson~\cite{clark1987}~; D.~Brewer et
+          M.~Nash~\cite{brewer1989}.
+    \item NIST SP~800-162 (ABAC)~\cite{nist800162}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Les modèles disent quelles règles appliquer~;
+l'architecture dit où les placer. C'est l'objet du
+Chapitre~\ref{chap:architecture}.
+\end{boxinfo}

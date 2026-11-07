@@ -1,0 +1,336 @@
+% ============================================================================
+% Fichier  : partie4/P04_C18_systemes.tex
+% Titre    : Sécurité des Systèmes
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Sources : CIS Benchmarks et CIS Controls v8 (contrôles 4, 7, 8, 10) ;
+% NIST SP 800-40 Rev. 4 (2022, gestion des correctifs) ; NIST SP 800-92
+% (2006, gestion des journaux) ; NIST SP 800-123 (2008, sécurité des
+% serveurs).
+% ============================================================================
+
+\chapter{Sécurité des Systèmes}
+\label{chap:systemes}
+\chaptermark{Sécurité des systèmes}
+
+\epigraph{%
+    « Un service inutile est une porte que l'on paie pour garder. »%
+}{Principe du cours}
+
+\niveauChapitre{Intermédiaire}{Chapitres~\ref{chap:architecture}
+et~\ref{chap:iam}~; administration Windows et Linux.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Réduire la surface d'attaque d'un système par le durcissement.
+    \item Appliquer des configurations de référence (CIS Benchmarks).
+    \item Organiser la gestion des correctifs selon le risque.
+    \item Définir ce qu'il faut journaliser, et comment.
+    \item Situer l'antivirus, l'EDR et la liste blanche d'applications.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : pourquoi le serveur FS-02 n'était-il pas corrigé~?}
+% ============================================================================
+
+Le correctif critique de FS-02 était publié depuis huit mois. Personne ne
+l'avait installé~: le serveur ne figurait pas dans l'outil de mise à jour,
+et personne n'était chargé de vérifier. De plus, FS-02 avait le même mot
+de passe d'administrateur local que onze autres serveurs~: une fois
+obtenu, il ouvrait les douze. Ce chapitre traite de la solidité de chaque
+machine.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Réduire la surface d'attaque (section~\ref{sec:c18-surface}).
+    \item Durcir Windows et Linux (section~\ref{sec:c18-durcir}).
+    \item Gérer les correctifs (section~\ref{sec:c18-correctifs}).
+    \item Journaliser (section~\ref{sec:c18-journaux}).
+    \item Antivirus, EDR et liste blanche (section~\ref{sec:c18-edr}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Réduire la Surface d'Attaque}
+\label{sec:c18-surface}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Surface d'attaque}~: ensemble des points par lesquels un
+attaquant peut interagir avec un système~: services réseau, comptes,
+logiciels installés, interfaces. Le \termecle{durcissement} la réduit en
+supprimant ce qui est inutile et en configurant sûrement ce qui reste.
+\end{boxdef}
+
+Le NIST recommande de partir d'une installation minimale, de retirer les
+services, comptes et logiciels inutiles, et de documenter la
+configuration retenue~\cite{nist800123}. Les CIS Benchmarks donnent, pour
+chaque système, des configurations de référence détaillées et
+vérifiables~\cite{cis2021controls}.
+
+% ============================================================================
+\section{Durcir Windows et Linux}
+\label{sec:c18-durcir}
+% ============================================================================
+
+\begin{tableaucours}{L{4.2cm}L{8.0cm}}{%
+    \tableauHeader{Mesure} &
+    \tableauHeader{Effet}
+}
+Mot de passe d'administrateur local unique par machine (outil de type
+LAPS) & Empêche qu'un mot de passe obtenu sur une machine ouvre toutes les
+autres \\
+Désactivation de SMBv1 et des protocoles anciens & Ferme les vecteurs de
+WannaCry et NotPetya (Chapitre~\ref{chap:attaques}) \\
+Stratégies de groupe (GPO) & Applique une configuration commune à toutes
+les machines du domaine \\
+Pas de droits d'administrateur pour les utilisateurs & Limite l'installation
+de logiciels malveillants \\
+Pare-feu local actif & Filtre même à l'intérieur d'une zone \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~18.1. Durcir Windows (exemples)}\end{center}
+
+\begin{boxoutils}{Vérifier quelques points sur un serveur Linux}
+\begin{lstlisting}
+# connexion SSH : pas de root, pas de mot de passe (clés seulement)
+grep -Ei '^(PermitRootLogin|PasswordAuthentication)' /etc/ssh/sshd_config
+# qui peut devenir root, et sans mot de passe ?
+grep -v '^#' /etc/sudoers /etc/sudoers.d/* | grep -E 'ALL|NOPASSWD'
+# fichiers modifiables par tous dans /etc
+find /etc -type f -perm -o+w
+# services à l'écoute
+ss -tlnp
+\end{lstlisting}
+Chaque ligne affichée appelle une question~: ce service est-il utile~?
+cette règle \texttt{NOPASSWD} est-elle justifiée~?
+\end{boxoutils}
+
+\begin{boxalert}
+\textbf{Violation typique.} Durcir une machine à son installation, puis
+ne plus jamais vérifier.
+
+\smallskip
+\textbf{Règle~:} une configuration dérive (un administrateur pressé, une
+mise à jour, un logiciel ajouté). On la contrôle régulièrement, de
+préférence automatiquement, contre la référence.
+\end{boxalert}
+
+% ============================================================================
+\section{Gérer les Correctifs}
+\label{sec:c18-correctifs}
+% ============================================================================
+
+Le NIST décrit la gestion des correctifs comme une maintenance préventive,
+à planifier selon le risque~\cite{nist80040}.
+
+\begin{boxprocedure}
+\textbf{Le processus de gestion des correctifs}
+\begin{enumerate}
+    \item \textbf{Inventorier} les systèmes et leurs logiciels, avec leurs
+          versions (Chapitre~\ref{chap:actifs}).
+    \item \textbf{Veiller}~: avis des éditeurs, CVE, alertes nationales.
+    \item \textbf{Évaluer}~: gravité (CVSS), exposition, valeur de l'actif,
+          exploitation connue.
+    \item \textbf{Tester} sur un échantillon représentatif.
+    \item \textbf{Déployer} dans le délai fixé pour la catégorie.
+    \item \textbf{Vérifier} que le correctif est installé partout.
+    \item \textbf{Compenser} quand on ne peut pas corriger (isolement,
+          filtrage, surveillance renforcée), sur décision écrite.
+\end{enumerate}
+\end{boxprocedure}
+
+\begin{tableaucours}{L{5.4cm}L{3.0cm}L{3.8cm}}{%
+    \tableauHeader{Catégorie} &
+    \tableauHeader{Délai cible} &
+    \tableauHeader{Exemple}
+}
+Critique, exposée à Internet, exploitée & 72~heures & Passerelle d'accès
+distant \\
+Critique interne & 15~jours & Serveur de fichiers FS-02 \\
+Importante & 30~jours & Postes de travail \\
+Moyenne et faible & Cycle normal & Logiciels bureautiques \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~18.2. Délais de correction proposés pour
+LiZbiZ (convention à valider par la direction)}\end{center}
+
+% ============================================================================
+\section{Journaliser}
+\label{sec:c18-journaux}
+% ============================================================================
+
+Sans journaux, on ne détecte pas et on ne prouve pas. Le NIST SP~800-92
+décrit la gestion des journaux~: génération, transmission, stockage,
+analyse et conservation~\cite{nist80092}.
+
+\begin{tableaucours}{L{4.4cm}L{7.8cm}}{%
+    \tableauHeader{Événement} &
+    \tableauHeader{Pourquoi}
+}
+Connexions réussies et échouées & Détecter la force brute et l'usage
+anormal d'un compte \\
+Création et modification de comptes, de groupes & Détecter l'élévation
+de privilèges \\
+Accès distants & Surveiller la porte d'entrée de l'Opération GAROUA \\
+Lancement de processus & Repérer les outils d'attaque \\
+Modification des règles de sécurité & Détecter la désactivation des
+défenses \\
+Accès aux données sensibles & Répondre à « qui a lu quoi~? » \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~18.3. Les événements à journaliser}\end{center}
+
+Trois conditions rendent les journaux utilisables~: des horloges
+synchronisées (NTP), une copie hors de la machine (un attaquant
+administrateur efface les journaux locaux), et une durée de conservation
+conforme à la loi (Chapitre~\ref{chap:droit}).
+
+% ============================================================================
+\section{Antivirus, EDR et Liste Blanche}
+\label{sec:c18-edr}
+% ============================================================================
+
+\begin{tableaucours}{L{3.2cm}L{4.6cm}L{4.4cm}}{%
+    \tableauHeader{Outil} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Limite}
+}
+Antivirus & Signatures de fichiers malveillants connus & Aveugle aux outils
+légitimes détournés \\
+EDR & Enregistre le comportement des machines, détecte et permet de
+répondre (isoler, tuer un processus) & Exige une équipe qui traite les
+alertes \\
+Liste blanche & N'autorise que les programmes approuvés & Lourde à
+maintenir sur des postes variés \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~18.4. Protéger les postes et les serveurs}\end{center}
+
+\begin{boxscenario}{Opération GAROUA. Douze serveurs, un mot de passe}
+\textbf{Constatation.} FS-02 et onze autres serveurs partageaient le même
+mot de passe d'administrateur local, défini lors de leur installation en
+2023 à partir d'une même image.
+
+\medskip
+\textbf{Analyse} (confiance élevée). La compromission d'un seul serveur a
+donné l'accès aux douze. Un mot de passe local unique et aléatoire par
+machine, géré automatiquement, aurait confiné l'attaquant à FS-02.
+\end{boxscenario}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{Mesurer sa propre hygiène.} L'administrateur publie chaque mois
+le taux de systèmes conformes à la référence, le taux de correctifs
+critiques installés dans les délais, et la liste des exceptions
+compensées.
+\end{boxmetier}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Exploiter l'EDR.} L'analyste traite les alertes de l'EDR, isole
+une machine suspecte à distance, et recherche sur l'ensemble du parc les
+mêmes indicateurs.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{Le durcissement} réduit la surface d'attaque~; les CIS
+          Benchmarks donnent des références vérifiables.
+    \item \textbf{Un mot de passe local unique par machine} empêche la
+          propagation d'une compromission.
+    \item \textbf{Les correctifs} suivent un processus et des délais
+          fondés sur le risque~; ce qui ne peut être corrigé est compensé.
+    \item \textbf{Les journaux} utiles sont choisis, horodatés, copiés hors
+          de la machine et conservés.
+    \item \textbf{Antivirus, EDR et liste blanche} se complètent~; l'EDR
+          exige une équipe.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: définir la surface
+d'attaque~; vérifier la configuration SSH et sudo d'un serveur Linux~;
+dérouler le processus de gestion des correctifs~; fixer des délais par
+catégorie~; dire quels événements journaliser et pourquoi les copier hors
+de la machine.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.1. Surface d'attaque \niveaubase}]
+Listez cinq éléments de la surface d'attaque d'un serveur web, et une
+mesure de réduction pour chacun.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.2. SSH \niveaubase}]
+Que signifient \texttt{PermitRootLogin no} et
+\texttt{PasswordAuthentication no}~? Pourquoi les recommander~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.3. Les délais \niveaubase}]
+Classez dans les catégories du Tableau~18.2~: une faille critique du
+portail de suivi, exploitée sur Internet~; une faille importante du
+navigateur des postes~; une faille critique d'un serveur interne de test.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.4. sudoers \niveaumoyen}]
+La ligne \texttt{technicien ALL=(ALL) NOPASSWD: ALL} figure dans le
+fichier \texttt{sudoers} d'un serveur. Analysez le risque et proposez une
+règle plus restrictive.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.5. Compenser \niveaumoyen}]
+Le logiciel de pesage d'un entrepôt ne fonctionne que sous une version de
+Windows qui ne reçoit plus de correctifs. Proposez des mesures
+compensatoires.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.6. Les journaux \niveaumoyen}]
+Pour l'Opération GAROUA, indiquez quels journaux auraient permis de voir
+chacune des étapes, et où ils auraient dû être copiés.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.7. Horloges \niveaumoyen}]
+Les serveurs de Garoua avaient sept minutes de retard sur ceux de Douala.
+Quelles conséquences pour l'enquête~? Quelle mesure~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.8. Mesurer \niveaumoyen}]
+Rédigez la fiche de l'indicateur « taux de correctifs critiques installés
+dans les délais »~: formule, source, fréquence, cible.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.9. Un standard de durcissement \niveauexpert}]
+Rédigez le standard de durcissement des serveurs Linux de LiZbiZ, en douze
+règles vérifiables, chacune avec sa commande de contrôle.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~18.10. La politique de correctifs \niveauexpert}]
+Rédigez la politique de gestion des correctifs de la BANQUE SANAGA~: rôles,
+processus, délais, exceptions, indicateurs.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item NIST SP~800-40 (correctifs), SP~800-92 (journaux), SP~800-123
+          (serveurs)~\cite{nist80040,nist80092,nist800123}.
+    \item CIS Controls et CIS Benchmarks~\cite{cis2021controls}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Un système durci peut encore exécuter une
+application vulnérable. Le Chapitre~\ref{chap:applications} traite de la
+sécurité des applications.
+\end{boxinfo}

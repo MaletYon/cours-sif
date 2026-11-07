@@ -1,0 +1,329 @@
+% ============================================================================
+% Fichier  : partie2/P02_C09_facteur_humain.tex
+% Titre    : Le Facteur Humain
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Base : brouillon « Livre II » (rôles) et « Livre VIII » (sensibilisation).
+% Sources : ISO/IEC 27002:2022 (mesures 6.1 à 6.8) ; Cialdini (1984) ;
+% Cappelli, Moore et Trzeciak (2012) ; NIST SP 800-50 (2003).
+% ============================================================================
+
+\chapter{Le Facteur Humain}
+\label{chap:humain}
+\chaptermark{Facteur humain}
+
+\epigraph{%
+    « L'utilisateur n'est pas le maillon faible~:\\
+    c'est le maillon que l'on a oublié de former. »%
+}{Principe du cours}
+
+\niveauChapitre{Fondamental}{Chapitres~\ref{chap:menaces}
+et~\ref{chap:gouvernance}.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Expliquer pourquoi l'ingénierie sociale fonctionne, à partir
+          des leviers de l'influence.
+    \item Organiser la sécurité avant, pendant et après l'emploi.
+    \item Concevoir un programme de sensibilisation et en mesurer l'effet.
+    \item Conduire une campagne d'hameçonnage simulé dans un cadre éthique.
+    \item Prévenir et détecter la menace interne.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : le technicien de Garoua était-il fautif~?}
+% ============================================================================
+
+Le technicien de SAHEL INFOGÉRANCE a donné son mot de passe à une fausse
+page. Le blâmer est tentant, et inutile~: personne ne l'avait formé, aucun
+second facteur ne protégeait son compte, et il recevait chaque jour des
+dizaines de courriels urgents. La sécurité qui repose sur la vigilance
+parfaite de chacun échoue toujours~; celle qui combine formation, mesures
+techniques et culture du signalement tient.
+
+\medskip
+\textbf{Plan du chapitre.}
+\begin{enumerate}
+    \item Pourquoi l'ingénierie sociale fonctionne (section~\ref{sec:c09-influence}).
+    \item La sécurité au fil de l'emploi (section~\ref{sec:c09-rh}).
+    \item Sensibiliser et former (section~\ref{sec:c09-sensibiliser}).
+    \item L'hameçonnage simulé (section~\ref{sec:c09-simulation}).
+    \item La menace interne (section~\ref{sec:c09-interne}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{Pourquoi l'Ingénierie Sociale Fonctionne}
+\label{sec:c09-influence}
+% ============================================================================
+
+R.~Cialdini a décrit les leviers qui font qu'une personne accepte une
+demande sans l'examiner~\cite{cialdini1984}. Les attaquants les
+utilisent tous.
+
+\begin{tableaucours}{L{2.8cm}L{5.0cm}L{4.4cm}}{%
+    \tableauHeader{Levier} &
+    \tableauHeader{Principe} &
+    \tableauHeader{Usage par l'attaquant}
+}
+Autorité & On obéit à qui semble légitime & Faux directeur, faux
+technicien \\
+Urgence et rareté & On agit vite quand le temps manque & « Votre compte
+sera suspendu dans 24~h » \\
+Réciprocité & On rend ce que l'on reçoit & Un « cadeau », puis une
+demande \\
+Sympathie & On aide qui nous plaît & Faux collègue chaleureux \\
+Preuve sociale & On fait comme les autres & « Tous vos collègues ont déjà
+validé » \\
+Engagement & On reste cohérent avec ce qu'on a commencé & Une petite
+demande, puis une plus grande \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~9.1. Les leviers de l'influence et
+l'ingénierie sociale}\end{center}
+
+% ============================================================================
+\section{La Sécurité au Fil de l'Emploi}
+\label{sec:c09-rh}
+% ============================================================================
+
+L'ISO/IEC~27002 regroupe les mesures liées aux personnes autour de trois
+moments~\cite{iso27002_2022}.
+
+\begin{tableaucours}{L{2.4cm}L{9.8cm}}{%
+    \tableauHeader{Moment} &
+    \tableauHeader{Mesures}
+}
+Avant & Vérification des antécédents proportionnée au poste~; clauses de
+confidentialité et de sécurité dans le contrat \\
+Pendant & Information sur les règles~; formation~; procédure
+disciplinaire connue~; signalement des incidents \\
+Changement de poste & Revue des droits~: on retire les anciens avant
+d'ajouter les nouveaux \\
+Départ & Retrait de tous les accès le jour du départ~; restitution du
+matériel~; rappel des obligations qui survivent au contrat \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~9.2. La sécurité des ressources humaines}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Les comptes d'un salarié parti restent actifs
+pendant des mois.
+
+\smallskip
+\textbf{Règle~:} les ressources humaines informent l'informatique de
+chaque départ, au plus tard le jour même~; une revue mensuelle rapproche
+la liste des comptes de celle du personnel (Chapitre~\ref{chap:iam}).
+\end{boxalert}
+
+% ============================================================================
+\section{Sensibiliser et Former}
+\label{sec:c09-sensibiliser}
+% ============================================================================
+
+Le NIST distingue la \emph{sensibilisation} (faire connaître les risques
+à tous), la \emph{formation} (donner des compétences à ceux qui en ont
+besoin) et l'\emph{éducation} (former des spécialistes)~\cite{nist80050}.
+
+\begin{boxprocedure}
+\textbf{Construire un programme de sensibilisation}
+\begin{enumerate}
+    \item \textbf{Partir des risques}~: hameçonnage, mots de passe, fraude
+          au président, supports amovibles, signalement.
+    \item \textbf{Cibler}~: un module commun, et des modules par population
+          (comptabilité, administrateurs, prestataires).
+    \item \textbf{Faire court et répété}~: des séquences de dix minutes
+          plusieurs fois par an valent mieux qu'une journée annuelle.
+    \item \textbf{Donner un geste simple}~: « en cas de doute, je signale à
+          tel numéro ».
+    \item \textbf{Mesurer}~: taux de participation, taux de clic et taux
+          de signalement lors des simulations.
+    \item \textbf{Récompenser le signalement}, ne jamais le punir.
+\end{enumerate}
+\end{boxprocedure}
+
+% ============================================================================
+\section{L'Hameçonnage Simulé}
+\label{sec:c09-simulation}
+% ============================================================================
+
+Une campagne d'hameçonnage simulé envoie de faux messages au personnel
+pour mesurer et améliorer ses réflexes. Elle se conduit dans un cadre
+écrit~: approbation de la direction, information préalable des
+représentants du personnel, aucune sanction individuelle, résultats
+agrégés, et une page pédagogique pour qui a cliqué.
+
+\begin{boxscenario}{Opération WOURI. Trois campagnes à la BANQUE SANAGA}
+\textbf{Constatations} (résultats agrégés de trois campagnes sur
+200~agents)~:
+
+\medskip
+\begin{tableaucours}{L{3.0cm}ccc}{%
+    \tableauHeader{Campagne} &
+    \tableauHeader{Ont cliqué} &
+    \tableauHeader{Ont saisi un mot de passe} &
+    \tableauHeader{Ont signalé}
+}
+Janvier & 62 & 31 & 8 \\
+Avril & 38 & 15 & 41 \\
+Juillet & 24 & 7 & 77 \\
+\end{tableaucours}
+
+\medskip
+\textbf{Analyse} (confiance moyenne). Le taux de clic passe de 31~\% à
+12~\%, et surtout le taux de signalement de 4~\% à 38,5~\%. Le second
+indicateur est le plus utile~: un signalement rapide permet de bloquer une
+vraie attaque avant qu'elle ne s'étende. La confiance est moyenne car les
+messages simulés différaient d'une campagne à l'autre.
+\end{boxscenario}
+
+% ============================================================================
+\section{La Menace Interne}
+\label{sec:c09-interne}
+% ============================================================================
+
+\begin{boxdef}
+\termecle{Menace interne}~: risque qu'une personne disposant d'un accès
+légitime (salarié, prestataire, ancien salarié) l'utilise, volontairement
+ou non, au détriment de l'organisation.
+\end{boxdef}
+
+Les travaux du CERT de l'université Carnegie Mellon, fondés sur des
+centaines de cas, distinguent le sabotage, le vol de propriété
+intellectuelle et la fraude, et montrent que des signaux précèdent souvent
+l'acte~: conflit avec la hiérarchie, accès hors des horaires habituels,
+téléchargements inhabituels avant un départ~\cite{cappelli2012}.
+
+\begin{tableaucours}{L{4.0cm}L{8.2cm}}{%
+    \tableauHeader{Mesure} &
+    \tableauHeader{Effet}
+}
+Moindre privilège & Limite ce qu'un initié peut faire \\
+Séparation des tâches & Empêche qu'une seule personne commette et cache
+une fraude \\
+Journalisation des accès sensibles & Permet de détecter et de prouver \\
+Revue des droits & Retire les accès devenus inutiles \\
+Procédure de départ & Ferme les accès avant qu'ils ne servent \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~9.3. Prévenir la menace interne}\end{center}
+
+\begin{boxmetier}{RSSI}
+\textbf{Une culture, pas une police.} Le RSSI fait du signalement un
+réflexe valorisé. Il mesure le délai entre un message suspect et son
+signalement, et le présente au comité de sécurité comme un indicateur de
+santé.
+\end{boxmetier}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{Traiter chaque signalement.} L'analyste répond à chaque
+signalement, même faux~: un remerciement rapide entretient le réflexe. Un
+vrai message d'hameçonnage signalé déclenche la recherche des autres
+destinataires et le blocage du domaine.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce chapitre~:}
+\begin{itemize}
+    \item \textbf{L'ingénierie sociale} exploite des leviers humains
+          normaux~: autorité, urgence, réciprocité, sympathie, preuve
+          sociale, engagement.
+    \item \textbf{La sécurité des personnes} couvre l'avant, le pendant et
+          l'après emploi~; les accès d'un salarié parti se ferment le jour
+          même.
+    \item \textbf{La sensibilisation} est courte, répétée, ciblée et
+          mesurée~; le signalement se récompense.
+    \item \textbf{L'hameçonnage simulé} se conduit dans un cadre écrit, sans
+          sanction individuelle~; le taux de signalement est l'indicateur
+          clé.
+    \item \textbf{La menace interne} se prévient par le moindre privilège,
+          la séparation des tâches, la journalisation et les revues.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: nommer les six leviers
+de l'influence~; organiser la sécurité au départ d'un salarié~; concevoir
+un programme de sensibilisation~; fixer le cadre d'une campagne
+d'hameçonnage simulé~; citer trois signaux de menace interne.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.1. Les leviers \niveaubase}]
+Identifiez les leviers de l'influence dans le courriel du 19~février
+(Chapitre~\ref{chap:menaces}).
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.2. Le départ \niveaubase}]
+Listez, dans l'ordre, les actions à mener le jour du départ d'un
+administrateur systèmes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.3. Les taux \niveaubase}]
+Recalculez, à partir du tableau de l'Opération WOURI, les taux de clic,
+de saisie et de signalement des trois campagnes.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.4. Changement de poste \niveaumoyen}]
+Mme~OWONA passe de la saisie des paiements à leur validation. Que doit-il
+se passer pour ses droits, et pourquoi~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.5. Le cadre \niveaumoyen}]
+Rédigez la note qui autorise une campagne d'hameçonnage simulé à l'ANPP~:
+objectifs, population, règles, traitement des résultats.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.6. Programme \niveaumoyen}]
+Proposez un programme annuel de sensibilisation pour LiZbiZ~: thèmes,
+populations, formats, calendrier, indicateurs.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.7. Signaux \niveaumoyen}]
+Un comptable de LiZbiZ, en conflit avec sa direction, télécharge en une
+nuit l'historique des paiements de cinq ans, deux semaines avant sa
+démission. Quels signaux, quelles mesures auraient permis de le voir~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.8. Sanctionner~? \niveaumoyen}]
+Le directeur de la BANQUE SANAGA veut sanctionner les agents qui ont
+cliqué. Que lui répondez-vous~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.9. Le prestataire \niveauexpert}]
+Les prestataires sont rarement formés par le client. Proposez les clauses
+et les mesures qui étendent le programme humain de LiZbiZ à SAHEL
+INFOGÉRANCE.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~9.10. Fraude au président \niveauexpert}]
+Rédigez la procédure qui protège la direction financière de LiZbiZ
+contre la fraude au président~: vérifications, seuils, double validation,
+contre-appel.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item R.~Cialdini, \emph{Influence}~\cite{cialdini1984}.
+    \item D.~Cappelli, A.~Moore et R.~Trzeciak, \emph{The CERT Guide to
+          Insider Threats}~\cite{cappelli2012}.
+    \item NIST SP~800-50, programme de sensibilisation~\cite{nist80050}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Gouvernance, risques, actifs et personnes forment le
+socle organisationnel. La Partie~\ref{part:normatif} présente les normes
+qui le structurent et le droit qui l'encadre.
+\end{boxinfo}

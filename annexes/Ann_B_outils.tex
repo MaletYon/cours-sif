@@ -1,0 +1,28 @@
+%% ============================================================================
+%% Fichier  : annexes/Ann_B_outils.tex
+%% Titre    : Référentiel des outils
+%% Version  : 1.0 -- novembre 2026
+%% ============================================================================
+
+\chapter{Référentiel des Outils}
+\label{ann:outils}
+
+Les outils cités sont des exemples~; les versions évoluent, et tout usage
+sur un système réel suppose une autorisation écrite (Chapitre~\ref{chap:evaluer}).
+
+\begin{tableaucours}{L{3.6cm}L{6.0cm}L{2.6cm}}{%
+    \tableauHeader{Outil} &
+    \tableauHeader{Usage} &
+    \tableauHeader{Chapitre, lab}
+}
+\texttt{sha256sum}, \texttt{openssl dgst} & Empreintes et HMAC & Ch.~\ref{chap:crypto-sym}, SIF-LAB-01 \\
+\texttt{openssl x509}, \texttt{openssl s\_client} & Lire et vérifier des certificats & Ch.~\ref{chap:crypto-asym}, SIF-LAB-02 \\
+Tableur & Registre des risques, inventaire, cotation & Ch.~\ref{chap:risques}, \ref{chap:actifs} \\
+Wireshark, \texttt{tcpdump} & Capture et analyse du trafic & Ch.~\ref{chap:reseaux1}, SIF-LAB-05 \\
+Suricata, Snort & Détection d'intrusion & Ch.~\ref{chap:reseaux2} \\
+\texttt{ss}, \texttt{grep}, \texttt{find} & Audit de configuration Linux & Ch.~\ref{chap:systemes}, SIF-LAB-08 \\
+Analyse statique, analyse des dépendances & Recherche de défauts dans le code & Ch.~\ref{chap:applications}, SIF-LAB-09 \\
+SIEM & Collecte et corrélation des journaux & Ch.~\ref{chap:operations}, SIF-LAB-10 \\
+Scanners de vulnérabilités & Recherche des faiblesses connues, sur autorisation & Ch.~\ref{chap:evaluer} \\
+Bloqueur d'écriture, outils d'acquisition & Préserver et acquérir la preuve & Ch.~\ref{chap:investigation} \\
+\end{tableaucours}

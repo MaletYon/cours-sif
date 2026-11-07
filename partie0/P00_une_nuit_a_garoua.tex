@@ -1,0 +1,388 @@
+% ============================================================================
+% Fichier  : partie0/P00_une_nuit_a_garoua.tex
+% Titre    : Prologue : Une Nuit à Garoua
+% Auteur   : MINKA MI NGUIDJOÏ Thierry Emmanuel
+% Version  : 1.0 -- novembre 2026
+% ============================================================================
+% Opération GAROUA : réalisation du scénario d'attaque décrit dans INF3226,
+% Chapitre 5 (hameçonnage du prestataire de Garoua, accès distant sans
+% double authentification, serveur non corrigé, sauvegardes en ligne).
+% Personnages communs au corpus : M. ETEME (DG), Mme NKENG (contrôleuse
+% interne), M. KOUNOU (responsable informatique).
+% ============================================================================
+
+\chapter{Prologue : Une Nuit à Garoua}
+\label{chap:prologue}
+\chaptermark{Une nuit à Garoua}
+
+\epigraph{%
+    « On ne protège bien que ce que l'on connaît,\\
+    et l'on ne connaît bien que ce que l'on a mesuré. »%
+}{Principe du cours}
+
+\niveauChapitre{Introductif}{Aucun prérequis~: ce prologue présente le cas
+qui sert de fil rouge au cours et les questions auxquelles il apprend à
+répondre.}
+
+\begin{boxobjectifs}
+\begin{itemize}
+    \item Suivre, heure par heure, le déroulement d'une attaque par
+          rançongiciel dans une entreprise camerounaise.
+    \item Repérer, dans ce récit, les défaillances qui l'ont rendue possible.
+    \item Distinguer une constatation, une hypothèse et une opinion.
+    \item Situer chacune des questions soulevées dans une partie du cours.
+    \item Identifier les métiers de la sécurité et leur rôle dans la crise.
+\end{itemize}
+\end{boxobjectifs}
+
+\bigskip
+
+% ============================================================================
+\section*{Question directrice : comment une entreprise perd-elle tout en une nuit~?}
+% ============================================================================
+
+LiZbiZ\footnote{LiZbiZ, ses dirigeants et ses prestataires sont fictifs~;
+les dates et les montants aussi. Les mécanismes d'attaque décrits sont
+exacts et documentés dans les sources citées au fil du cours.} est une
+entreprise de logistique de Douala. Elle stocke, achemine et livre des
+marchandises pour des importateurs et des distributeurs, dans douze agences.
+Tout repose sur une application intégrée, hébergée dans quatre centres de
+données (Douala, Yaoundé, Garoua, Bafoussam). Un vendredi de mars, à
+21~h~40, la facturation s'arrête. Le lundi suivant, l'entreprise ne peut
+plus ni facturer ni préparer une expédition.
+
+\medskip
+\textbf{Plan du prologue.}
+\begin{enumerate}
+    \item LiZbiZ, son système d'information et ses acteurs (section~\ref{sec:p00-lizbiz}).
+    \item La nuit du 5 au 6 mars (section~\ref{sec:p00-nuit}).
+    \item Ce que l'on sait le lundi matin (section~\ref{sec:p00-lundi}).
+    \item Trente questions, six parties (section~\ref{sec:p00-questions}).
+    \item Les métiers de la sécurité (section~\ref{sec:p00-metiers}).
+\end{enumerate}
+
+\separateur
+
+% ============================================================================
+\section{LiZbiZ, son Système d'Information et ses Acteurs}
+\label{sec:p00-lizbiz}
+% ============================================================================
+
+\begin{tableaucours}{L{3.6cm}L{8.6cm}}{%
+    \tableauHeader{Élément} &
+    \tableauHeader{Description}
+}
+Activité & Logistique~: entreposage, transport, livraison \\
+Implantation & Siège à Douala~; douze agences~; environ 150~salariés \\
+Informatique & Quatre centres de données~; une application intégrée
+(stocks, expéditions, facturation, paiements)~; messagerie en nuage \\
+Direction & M.~ETEME, directeur général~; Mme~NKENG, contrôleuse
+interne~; M.~KOUNOU, responsable informatique \\
+Sécurité & Aucun responsable de la sécurité désigné~; un pare-feu par
+centre~; un antivirus sur les postes \\
+Prestataire & Depuis septembre~2026, la société SAHEL INFOGÉRANCE exploite
+les centres de Garoua et de Bafoussam, avec un accès distant \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~P.1. Fiche d'identité de LiZbiZ}\end{center}
+
+L'organisation de LiZbiZ ressemble à celle de nombreuses entreprises de sa
+taille~: une informatique qui a grandi avec l'activité, un responsable
+informatique qui fait tout, des prestataires appelés au fil des besoins, et
+une sécurité confiée aux produits plutôt qu'à des personnes. Le cours ne
+juge pas cette organisation~; il apprend à la décrire, à mesurer ses
+risques et à la faire évoluer.
+
+\begin{boxinfo}
+\textbf{Un cas, un corpus.} LiZbiZ est aussi le cas principal du cours
+d'audit des systèmes d'information (UE INF3226), qui en audite la
+gouvernance et les contrôles. Ici, on la regarde avec les yeux de celui
+qui doit la protéger.
+\end{boxinfo}
+
+% ============================================================================
+\section{La Nuit du 5 au 6 Mars}
+\label{sec:p00-nuit}
+% ============================================================================
+
+La chronologie ci-dessous a été reconstituée après coup, à partir des
+journaux qui avaient survécu. Les heures sont celles de Douala.
+
+\begin{tableaucours}{L{2.4cm}L{9.8cm}}{%
+    \tableauHeader{Date et heure} &
+    \tableauHeader{Événement (constaté après coup)}
+}
+19 février & Un technicien de SAHEL INFOGÉRANCE reçoit un courriel qui
+imite une alerte de son fournisseur de messagerie, et saisit son mot de
+passe sur une fausse page. \\
+2 mars, 23~h~12 & Connexion à la passerelle d'accès distant de Garoua avec
+le compte du technicien~; aucune double authentification n'est exigée. \\
+3 et 4 mars & Exploration du réseau interne~: découverte d'un serveur de
+fichiers dont un correctif critique, publié huit mois plus tôt, n'a pas
+été installé. \\
+4 mars, 02~h~05 & Obtention de droits d'administrateur sur ce serveur,
+puis sur le domaine. \\
+5 mars, 20~h~30 & Copie de dossiers clients vers un service de stockage
+externe (environ 40~Go). \\
+5 mars, 21~h~15 & Suppression des sauvegardes, stockées sur un partage
+réseau accessible depuis le domaine. \\
+5 mars, 21~h~40 & Chiffrement des serveurs de Garoua et de Douala~; un
+message de rançon s'affiche~: 85~000~dollars en cryptoactifs, sous peine
+de publier les données des clients. \\
+5 mars, 22~h~05 & Le technicien d'astreinte, M.~ABENA, constate que
+l'application ne répond plus et redémarre les serveurs. \\
+6 mars, 07~h~30 & M.~KOUNOU découvre l'ampleur de l'attaque et prévient le
+directeur général. \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~P.2. Chronologie de l'Opération GAROUA}\end{center}
+
+\begin{boxalert}
+\textbf{Violation typique.} Redémarrer les serveurs « pour voir si cela
+repart », comme M.~ABENA à 22~h~05.
+
+\smallskip
+\textbf{Règle~:} un système compromis s'isole du réseau, il ne se redémarre
+pas. Le redémarrage efface la mémoire vive, et avec elle des traces
+précieuses (processus, connexions, parfois des clés). Le Chapitre~\ref{chap:operations}
+et le Chapitre~\ref{chap:investigation} disent quoi faire à la place.
+\end{boxalert}
+
+% ============================================================================
+\section{Ce que l'on Sait le Lundi Matin}
+\label{sec:p00-lundi}
+% ============================================================================
+
+Le lundi 8 mars, à 8~h, M.~ETEME réunit son comité de direction. Chacun
+parle avec assurance. Il faut pourtant trier ce qui est dit.
+
+\begin{tableaucours}{L{6.4cm}L{2.4cm}L{3.4cm}}{%
+    \tableauHeader{Affirmation} &
+    \tableauHeader{Nature} &
+    \tableauHeader{Ce qu'il faudrait}
+}
+« Les serveurs de Garoua et de Douala sont chiffrés. » & Constatation &
+Rien de plus~: c'est visible \\
+« L'attaque vient du prestataire. » & Hypothèse & Les journaux de la
+passerelle d'accès distant \\
+« Les données des clients ont été volées. » & Hypothèse & Les journaux du
+pare-feu, le volume sortant \\
+« On peut tout restaurer depuis les sauvegardes. » & Opinion, fausse &
+Un test de restauration~: les sauvegardes ont été supprimées \\
+« Personne n'aurait pu l'empêcher. » & Opinion & Une analyse des mesures
+manquantes \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~P.3. Trier les affirmations du comité}\end{center}
+
+\begin{boxdef}
+\termecle{Constatation}~: fait vérifiable par un tiers, appuyé sur une
+trace conservée. \termecle{Hypothèse}~: explication plausible, qui reste à
+vérifier. \termecle{Opinion}~: jugement qui ne repose ni sur une trace ni
+sur une démarche.
+\end{boxdef}
+
+Le cours demande de toujours séparer ces trois registres. Un responsable
+de la sécurité qui présente une hypothèse comme une constatation conduit
+sa direction à de mauvaises décisions~; un responsable qui ne dit pas ce
+qu'il ignore lui retire le moyen de décider.
+
+\begin{boxscenario}{Opération GAROUA. Les trois décisions du lundi}
+\textbf{Situation.} Le comité doit décider avant midi~: payer ou non la
+rançon~; prévenir ou non les clients et les autorités~; reconstruire ou
+restaurer.
+
+\medskip
+\textbf{Ce qui manque.} Personne ne sait quelles données sont sorties, ni
+depuis quand l'attaquant était présent, ni si d'autres centres sont
+touchés. LiZbiZ n'a ni plan de réponse aux incidents, ni plan de
+continuité, ni contrat qui oblige SAHEL INFOGÉRANCE à fournir ses journaux.
+Elle doit décider dans le brouillard.
+\end{boxscenario}
+
+% ============================================================================
+\section{Trente Questions, Six Parties}
+\label{sec:p00-questions}
+% ============================================================================
+
+L'Opération GAROUA soulève des questions qu'aucun participant au comité ne
+sait encore traiter. Le cours y répond partie par partie.
+
+\begin{tableaucours}{L{2.4cm}L{7.6cm}L{2.2cm}}{%
+    \tableauHeader{Partie} &
+    \tableauHeader{Questions soulevées par l'Opération GAROUA} &
+    \tableauHeader{Chapitres}
+}
+I. Fondements & Qu'est-ce qui a été atteint~: la confidentialité,
+l'intégrité, la disponibilité~? Qu'est-ce qu'un rançongiciel, une
+élévation de privilèges~? Le chiffrement aurait-il protégé les données
+volées~? & \ref{chap:proprietes} à~\ref{chap:attaques} \\
+II. Gouvernance et risques & Qui était responsable de la sécurité~? Le
+risque avait-il été apprécié~? Quelles données étaient les plus sensibles~?
+Le technicien avait-il été formé~? & \ref{chap:gouvernance} à~\ref{chap:humain} \\
+III. Cadre normatif et juridique & Quelles mesures une norme aurait-elle
+exigées~? Que dit la loi camerounaise sur la notification, sur la
+conservation des journaux~? Peut-on payer une rançon~? & \ref{chap:normes}
+à~\ref{chap:ethique} \\
+IV. Sécurité technique & Pourquoi l'accès distant était-il à un seul
+facteur~? Pourquoi le réseau n'était-il pas segmenté~? Pourquoi le
+correctif n'était-il pas installé~? Pourquoi personne n'a vu la copie de
+40~Go~? & \ref{chap:modeles} à~\ref{chap:operations} \\
+V. Défis avancés & Comment reprendre l'activité~? Comment préserver les
+preuves pour une plainte~? Une IA aurait-elle détecté l'attaque~? &
+\ref{chap:continuite} à~\ref{chap:emergents} \\
+VI. Mesurer & Comment savoir, demain, si LiZbiZ est mieux protégée~? &
+\ref{chap:mesurer} \\
+\end{tableaucours}
+\vspace{-0.8em}
+\begin{center}{\small\itshape Tableau~P.4. Les questions de l'Opération GAROUA et
+les parties du cours}\end{center}
+
+\begin{boxinfo}
+\textbf{Ce que dit la recherche.} Une organisation qui ne sait pas
+répondre à une question sur ses propres systèmes ne doit pas faire comme
+si la réponse était favorable. Le corpus de l'auteur appelle cette
+réponse \NEK{} (« connaissance insuffisante »), à côté de \OUI{} et de
+\NON{}~\cite{minka2026nek}. Le lundi matin, la plupart des réponses de
+LiZbiZ sont des \NEK{}~: c'est le point de départ, non une fatalité.
+\end{boxinfo}
+
+% ============================================================================
+\section{Les Métiers de la Sécurité}
+\label{sec:p00-metiers}
+% ============================================================================
+
+Cinq métiers reviennent tout au long du cours. Chacun aurait pu, à sa
+place, empêcher ou limiter l'Opération GAROUA.
+
+\begin{boxmetier}{RSSI}
+\textbf{Le responsable de la sécurité des systèmes d'information} aurait
+apprécié le risque lié au prestataire, exigé la double authentification et
+une clause d'accès aux journaux, et fait tester les sauvegardes. LiZbiZ
+n'en avait pas.
+\end{boxmetier}
+
+\begin{boxmetier}{Administrateur systèmes et réseaux}
+\textbf{L'administrateur} aurait installé le correctif critique, séparé les
+sauvegardes du domaine et segmenté le réseau entre les centres.
+\end{boxmetier}
+
+\begin{boxmetier}{Analyste SOC}
+\textbf{L'analyste d'un centre opérationnel de sécurité} aurait vu la
+connexion de 23~h~12, l'élévation de privilèges et la copie de 40~Go, à
+condition que les journaux soient collectés et surveillés.
+\end{boxmetier}
+
+\begin{boxmetier}{Développeur}
+\textbf{Le développeur} de l'application intégrée aurait prévu une
+authentification forte, des journaux exploitables et une reprise
+possible à partir de données saines.
+\end{boxmetier}
+
+\begin{boxmetier}{Auditeur de sécurité}
+\textbf{L'auditeur de sécurité} aurait relevé, avant l'attaque,
+l'absence de double authentification, le correctif manquant et la
+fragilité des sauvegardes, et l'aurait écrit dans un rapport adressé à la
+direction.
+\end{boxmetier}
+
+\separateur
+
+\begin{boxresume}
+\textbf{Ce qu'il faut retenir de ce prologue~:}
+\begin{itemize}
+    \item \textbf{Une attaque est une chaîne}~: hameçonnage, accès distant,
+          exploration, élévation de privilèges, exfiltration, destruction
+          des sauvegardes, chiffrement. Chaque maillon était une occasion de
+          l'arrêter.
+    \item \textbf{Constatation, hypothèse, opinion} se distinguent~; une
+          décision prise sur une opinion présentée comme un fait est une
+          mauvaise décision.
+    \item \textbf{Ne pas savoir} est une réponse à signaler (\NEK{}), pas à
+          masquer.
+    \item \textbf{La sécurité est un métier}, réparti entre plusieurs
+          fonctions~; un produit ne remplace aucune d'elles.
+\end{itemize}
+\end{boxresume}
+
+\begin{boxinfo}
+\textbf{Points de contrôle de l'élève.} Je sais~: raconter l'Opération
+GAROUA en sept étapes~; classer une affirmation en constatation, hypothèse
+ou opinion~; associer une question de sécurité à une partie du cours~;
+dire ce que chacun des cinq métiers aurait pu faire.
+\end{boxinfo}
+
+\bigskip
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.1. La chaîne d'attaque \niveaubase}]
+Recopiez les sept étapes de l'attaque (Tableau~P.2) et indiquez, pour
+chacune, une mesure qui l'aurait empêchée ou détectée.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.2. Trier les affirmations \niveaubase}]
+Classez en constatation, hypothèse ou opinion~: (a) « l'attaquant est
+russe »~; (b) « le message de rançon demande 85~000 dollars »~; (c) « le
+prestataire est incompétent »~; (d) « le compte du technicien a servi à
+23~h~12 »~; (e) « les données des clients seront publiées ».
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.3. Ce qui a été atteint \niveaubase}]
+Pour chacune des propriétés confidentialité, intégrité et disponibilité,
+dites si l'Opération GAROUA l'a atteinte, et par quel événement.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.4. Le redémarrage \niveaumoyen}]
+Expliquez à M.~ABENA, en cinq lignes, pourquoi il n'aurait pas dû
+redémarrer les serveurs, et ce qu'il aurait dû faire à 22~h~05.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.5. Le prestataire \niveaumoyen}]
+Listez trois clauses qui auraient dû figurer dans le contrat de SAHEL
+INFOGÉRANCE, et dites pour chacune quel maillon de l'attaque elle
+touchait.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.6. Les sauvegardes \niveaumoyen}]
+Pourquoi des sauvegardes stockées sur un partage du domaine ne protègent
+pas contre un rançongiciel~? Proposez une organisation qui y résiste.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.7. Ce que l'on ignore \niveaumoyen}]
+Le lundi matin, rédigez la liste des questions auxquelles LiZbiZ répond
+\NEK{}, et pour chacune la trace qui permettrait d'y répondre.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.8. Le temps de l'attaquant \niveaumoyen}]
+Calculez la durée entre la première connexion de l'attaquant et le
+chiffrement. Qu'est-ce que cette durée dit des capacités de détection de
+LiZbiZ~?
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.9. La note au directeur \niveauexpert}]
+Rédigez la note d'une page que M.~KOUNOU remet à M.~ETEME le lundi à
+8~h~: ce que l'on sait, ce que l'on ignore, les trois décisions à prendre
+et, pour chacune, ce qu'il recommande.
+\end{boxexo}
+
+\begin{boxexo}[title={\ding{45}\quad Exercice~P.10. Le premier plan \niveauexpert}]
+Proposez à LiZbiZ les cinq premières mesures à prendre dans le mois qui
+suit, classées par priorité, et justifiez l'ordre.
+\end{boxexo}
+
+\bigskip
+
+\begin{boxinfo}
+\textbf{Pour aller plus loin.}
+\begin{itemize}
+    \item Le cas LiZbiZ vu par l'auditeur~: UE INF3226, Prologue et
+          Chapitre~5.
+    \item L'article sur l'instrument \OUI{}~/ \NON{}~/ \NEK{}~\cite{minka2026nek}.
+\end{itemize}
+\end{boxinfo}
+
+\begin{boxinfo}
+\textbf{Transition.} Avant de protéger, il faut savoir ce que l'on protège
+et contre quoi. La Partie~\ref{part:fondements} pose les fondements~: les
+propriétés de sécurité, les menaces et les attaques, la cryptographie, et
+les leçons des grandes attaques.
+\end{boxinfo}
