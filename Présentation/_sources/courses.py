@@ -17,7 +17,7 @@ SIF = {
     "logo_d": "enspy",
     "n_jours": 30,
     "annee": "2026-2027",
-    "dossier": COURS + r"\SEC3266\Présentation",
+    "dossier": COURS + r"\ENSPY\SEC3266\Présentation",
     "fil_rouge": "GAROUA, LIZBIZ, WOURI, MEFOU",
     "parties": [
         ("Prologue", "Une nuit à Garoua", "P00"),
