@@ -1,0 +1,13 @@
+LiZbiZ SA - Agence de Garoua - plan d'adressage (extrait)
+
+10.20.0.1          passerelle (routeur et pare-feu), MAC 00:1a:2b:00:00:01
+10.20.1.5          serveur DNS interne
+10.20.1.11 à .22   les 12 serveurs de l'agence
+10.20.1.30         serveur de dépôt des bordereaux (FTP)
+10.20.3.50         imprimante réseau du deuxième étage
+10.20.7.101 à .124 postes de travail (PC-GAR-01 à PC-GAR-24 ; PC-GAR-07 = 10.20.7.107)
+
+Capture réalisée le 10 mars 2026 de 9 h à 10 h sur le port miroir du commutateur
+principal, à la demande du RSSI.
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

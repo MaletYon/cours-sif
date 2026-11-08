@@ -1,0 +1,10 @@
+ANPP - Revue de code du portail des bénéficiaires (opération MEFOU)
+
+Mandat : revue de sécurité du code source de la version 1.4, à la demande de la
+direction des systèmes d'information de l'ANPP, avant la réouverture du portail.
+Périmètre : le dossier portail_anpp et ses dépendances (requirements.txt).
+Référence : OWASP Top 10 (2021), catégories A01 à A10.
+Les avis de sécurité sur les dépendances figurent dans avis_dependances.csv ;
+une dépendance est en retard si sa version est antérieure à la version corrigée.
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

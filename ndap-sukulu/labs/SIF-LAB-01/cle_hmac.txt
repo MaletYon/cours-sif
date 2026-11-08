@@ -1,0 +1,8 @@
+Clé HMAC du dossier des bordereaux de Garoua (remise sous pli au RSSI).
+Clé (texte, UTF-8) : LiZbiZ-Garoua-sceau-2026
+Algorithme : HMAC-SHA256 sur le contenu exact de chaque fichier.
+
+Exemple de calcul dans un terminal :
+  python3 -c "import hmac,hashlib,sys; print(hmac.new(b'LiZbiZ-Garoua-sceau-2026', open(sys.argv[1],'rb').read(), hashlib.sha256).hexdigest())" FICHIER
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

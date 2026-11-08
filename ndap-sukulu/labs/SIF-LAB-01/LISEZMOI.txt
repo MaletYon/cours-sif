@@ -1,0 +1,32 @@
+SIF-LAB-01, empreintes et HMAC sur les bordereaux de Garoua (opération GAROUA)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  bordereaux_garoua/       les bordereaux tels que retrouvés après l'attaque
+  reference_1er_mars.csv   empreintes SHA-256 et HMAC du 1er mars, conservées hors ligne
+  manifeste_serveur.csv    manifeste conservé sur le serveur compromis
+  cle_hmac.txt             clé HMAC remise au RSSI
+  MANIFESTE_SHA256.txt     empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Calculer l'empreinte SHA-256 de chaque bordereau :
+       cd ~/travail/bordereaux_garoua && sha256sum *.txt
+
+3. Partie A : comparer avec la référence du 1er mars (fichiers modifiés,
+   ajoutés, supprimés).
+
+4. Partie B : comparer avec le manifeste du serveur, puis vérifier les HMAC
+   avec la clé (voir cle_hmac.txt).
+
+5. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

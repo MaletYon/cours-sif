@@ -1,0 +1,11 @@
+LiZbiZ SA - Agence de Garoua
+Bordereau d'expédition FAC-2026-0226
+
+  colis 1  AGRO SAHEL                  624 000 FCFA
+  colis 2  BENOUE CEREALES             304 000 FCFA
+  colis 3  BENOUE CEREALES             133 000 FCFA
+  colis 4  TRANSNORD                   884 000 FCFA
+
+  Total corrigé : 1 945 000 FCFA
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

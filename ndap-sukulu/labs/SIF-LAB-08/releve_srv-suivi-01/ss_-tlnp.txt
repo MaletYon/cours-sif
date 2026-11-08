@@ -1,0 +1,11 @@
+$ sudo ss -tlnp
+State  Recv-Q Send-Q Local Address:Port  Peer Address:Port Process
+LISTEN 0      128    0.0.0.0:22         0.0.0.0:*         users:(("sshd",pid=600,fd=3))
+LISTEN 0      128    0.0.0.0:80         0.0.0.0:*         users:(("nginx",pid=637,fd=3))
+LISTEN 0      128    0.0.0.0:3306       0.0.0.0:*         users:(("mysqld",pid=674,fd=3))
+LISTEN 0      128    0.0.0.0:21         0.0.0.0:*         users:(("vsftpd",pid=711,fd=3))
+LISTEN 0      128    0.0.0.0:111        0.0.0.0:*         users:(("rpcbind",pid=748,fd=3))
+LISTEN 0      128    127.0.0.1:25       0.0.0.0:*         users:(("exim4",pid=785,fd=3))
+LISTEN 0      128    127.0.0.1:631      0.0.0.0:*         users:(("cupsd",pid=822,fd=3))
+LISTEN 0      128    0.0.0.0:8080       0.0.0.0:*         users:(("java",pid=859,fd=3))
+LISTEN 0      128    127.0.0.1:6379     0.0.0.0:*         users:(("redis-server",pid=896,fd=3))

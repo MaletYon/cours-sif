@@ -1,0 +1,10 @@
+LiZbiZ SA - Pare-feu de l'agence de Garoua - table au 6 mars 2026
+
+Le pare-feu lit les règles dans l'ordre et applique la première qui correspond
+(source, destination ET port). « Tout » désigne toute adresse ou tout port.
+L'objet APP-03 désigne un serveur retiré du service en 2025.
+Le compteur indique le nombre de connexions traitées par chaque règle en mars.
+Une règle est ombrée lorsqu'une règle placée au-dessus couvre déjà toutes les
+connexions qu'elle vise : elle ne s'applique jamais.
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

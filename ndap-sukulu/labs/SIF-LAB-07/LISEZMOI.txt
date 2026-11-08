@@ -1,0 +1,27 @@
+SIF-LAB-07, revue des 212 comptes de l'annuaire (opération GAROUA)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  annuaire_2026-03-15.csv    les comptes actifs de l'annuaire
+  personnel_2026-03-15.csv   le fichier du personnel
+  consignes_revue.txt        règles de classement
+  MANIFESTE_SHA256.txt       empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Ouvrir les deux CSV dans LibreOffice Calc. Dans l'annuaire, ajouter une
+   colonne statut avec RECHERCHEV(matricule ; personnel ; 6 ; 0).
+
+3. Partie A : classer les comptes. Partie B : les droits d'administration.
+
+4. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

@@ -1,0 +1,10 @@
+objet;reseaux
+Réseau prestataire;172.16.50.0/24
+Postes;10.20.7.0/24
+Serveurs Garoua;10.20.1.0/24
+APP-03;10.20.1.23/32
+Portail;10.20.2.10/32
+DNS interne;10.20.1.5/32
+Administration;10.20.9.0/24
+Interne;10.0.0.0/8 172.16.0.0/12
+Internet;toute adresse hors de l'objet Interne

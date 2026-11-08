@@ -1,0 +1,15 @@
+LiZbiZ SA - Journaux remis pour l'analyse de l'incident de mars 2026
+
+passerelle_vpn_garoua.csv      connexions à la passerelle d'accès distant (7 février - 5 mars)
+journal_securite_windows.csv   extrait des journaux de sécurité Windows (1er - 5 mars)
+pare-feu_garoua_sorties.csv    connexions sortantes du pare-feu de Garoua (1er - 5 mars)
+
+Les horloges sont synchronisées (heure de Douala). Le compte sahel_maint est le
+compte de maintenance du prestataire SAHEL INFOGÉRANCE, dont les techniciens
+travaillent depuis leurs locaux (adresse 41.205.12.40), en heures ouvrées.
+L'attaque a été découverte par M. KOUNOU le 6 mars à 7 h 30.
+Identifiants d'événements Windows : 4624 ouverture de session, 4672 privilèges
+spéciaux, 4688 création de processus, 4720 création de compte, 4728 ajout à un
+groupe global, 4663 accès à un objet, 7045 installation de service, 1074 redémarrage.
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

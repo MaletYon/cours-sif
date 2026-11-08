@@ -1,0 +1,7 @@
+avis;paquet;version_corrigee;gravite
+DSA-F01;openssh-server;1:9.2p1-2+deb12u3;Élevée
+DSA-F02;openssl;3.0.11-1~deb12u2;Moyenne
+DSA-F03;exim4-daemon-light;4.96-15+deb12u5;Critique
+DSA-F04;cups;2.4.2-3+deb12u7;Élevée
+DSA-F05;libc6;2.36-9+deb12u4;Élevée
+DSA-F06;nginx;1.22.1-9;Moyenne

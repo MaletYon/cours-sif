@@ -1,0 +1,7 @@
+# /etc/sudoers (extrait, commentaires retires)
+Defaults env_reset
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+root    ALL=(ALL:ALL) ALL
+%sudo   ALL=(ALL:ALL) ALL
+deploy  ALL=(ALL) NOPASSWD: ALL
+sahel_maint ALL=(ALL) /usr/bin/systemctl restart suivi

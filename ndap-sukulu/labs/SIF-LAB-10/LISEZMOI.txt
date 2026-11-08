@@ -1,0 +1,29 @@
+SIF-LAB-10, reconstituer l'attaque de Garoua à partir des journaux (opération GAROUA)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  note_rssi.txt                  description des journaux
+  passerelle_vpn_garoua.csv      passerelle d'accès distant
+  journal_securite_windows.csv   journaux de sécurité Windows
+  pare-feu_garoua_sorties.csv    sorties du pare-feu
+  MANIFESTE_SHA256.txt           empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Ouvrir les CSV dans LibreOffice Calc (séparateur « ; »), trier par horodatage,
+   filtrer par compte, adresse ou identifiant d'événement.
+
+3. Partie A : l'accès initial. Partie B : l'élévation de privilèges.
+   Partie C : exfiltration, chiffrement et délai de détection.
+
+4. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

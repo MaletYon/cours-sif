@@ -1,0 +1,15 @@
+LiZbiZ SA - Fiche du serveur srv-suivi-01 et référence de durcissement
+
+Rôle : application de suivi des expéditions (nginx + application Java locale +
+base MariaDB locale). Services prévus sur le réseau : SSH (22) et HTTP (80)
+uniquement ; la base et l'application écoutent en local (127.0.0.1).
+
+Référence SSH (d'après les CIS Benchmarks, adaptée par le RSSI) :
+  PermitRootLogin no ; PasswordAuthentication no ; PermitEmptyPasswords no ;
+  X11Forwarding no ; MaxAuthTries 4 au plus ; LoginGraceTime 60 au plus ; Port 22.
+Comptes : un seul compte d'UID 0 (root) ; pas de sudo sans mot de passe pour ALL.
+Fichiers : les seuls programmes SUID admis sont ceux des paquets du système
+(/usr/bin, /usr/lib) ; aucun fichier de /etc modifiable par tous.
+Correctifs : toute version antérieure à la version corrigée d'un avis est en retard.
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

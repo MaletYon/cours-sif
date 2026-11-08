@@ -1,0 +1,54 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 8205 (0x200d)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CM, O=LiZbiZ SA, CN=LiZbiZ Serveurs CA
+        Validity
+            Not Before: Jun  1 00:00:00 2025 GMT
+            Not After : Jun  1 00:00:00 2027 GMT
+        Subject: C=CM, O=LiZbiZ SA, CN=facturation.lizbiz.cm
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:cb:a9:16:9b:04:0f:ba:7b:60:0d:aa:74:fe:1a:
+                    b4:d5:4b:72:60:82:db:07:ee:27:28:d8:91:c1:ba:
+                    d4:84:86:ab:fd:86:40:71:e2:d4:be:66:d4:bd:b5:
+                    b6:a2:55:df:a7:3d:7d:ad:58:a2:ec:48:ae:cb:c1:
+                    c6:cd:1d:5d:7a:79:31:78:47:c4:de:9a:fe:3e:53:
+                    6e:21:ae:27:c6:d3:df:a4:80:aa:8c:e5:8a:2d:a9:
+                    dc:24:c5:9c:7e:9c:15:85:eb:28:71:f2:b7:d5:06:
+                    72:1e:d1:e4:b7:7b:86:28:66:86:73:8a:94:a8:99:
+                    5f:58:57:e1:ef:2a:07:21:f7
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:facturation.lizbiz.cm
+            X509v3 Subject Key Identifier: 
+                04:3E:A7:76:B1:BD:54:3B:1F:07:9B:6B:0A:3B:BE:04:02:AF:36:6D
+            X509v3 Authority Key Identifier: 
+                59:24:F2:12:18:C9:2C:E5:E5:BF:F4:59:C5:A8:B8:B0:B7:74:6F:87
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        79:b3:55:26:26:6c:45:41:1c:3f:0b:1b:90:d2:62:1e:e9:67:
+        82:08:6e:25:d4:43:61:1a:37:fc:d8:c4:f9:d5:c1:90:bd:26:
+        a5:0b:bb:76:64:32:2b:9c:72:8b:73:f3:8d:32:e4:41:c6:20:
+        cf:a4:47:82:b2:da:84:59:50:59:da:f2:fb:da:98:c7:f9:e9:
+        08:8b:8a:1b:21:d0:2d:bf:12:13:56:62:9c:35:db:f2:32:23:
+        5e:e9:da:ec:25:4b:bb:a9:e9:81:a5:2e:07:96:e1:11:a4:76:
+        a1:e1:18:30:17:16:3d:49:9c:d1:d8:a2:88:bb:d3:93:f4:28:
+        3e:39:cf:46:f9:8c:f3:fe:34:c9:fe:4f:96:0f:46:23:73:0d:
+        3e:67:fd:0c:87:19:dd:0d:07:d2:02:13:a5:b9:50:3f:7a:2d:
+        22:50:08:f9:6a:b1:cd:b5:cc:b8:dd:a2:7b:44:0e:be:0c:8b:
+        6c:06:43:52:8f:df:22:0a:17:40:3f:27:03:32:66:f0:98:2d:
+        e7:7b:60:4d:64:8b:37:02:85:f0:4d:46:d0:81:55:2e:5b:6b:
+        88:67:e7:7f:06:ae:55:11:f1:84:c4:f9:15:02:d8:aa:ba:04:
+        30:ee:ec:73:dd:0e:99:6f:20:0f:a1:03:d4:ac:01:e4:c1:b8:
+        d8:5a:91:3e

@@ -1,0 +1,8 @@
+flux;source;destination;port;description
+F1;172.16.50.14;10.20.1.15;3389;Technicien du prestataire vers un serveur
+F2;10.20.7.107;185.220.101.4;8443;PC-GAR-07 vers un stockage externe (5 mars, 20 h 30)
+F3;10.20.7.112;10.20.1.5;53;Poste vers le DNS interne
+F4;10.20.9.10;10.20.1.12;22;Poste d'administration vers un serveur
+F5;10.20.7.110;10.20.1.14;3389;Poste vers un serveur en bureau à distance
+F6;41.202.219.10;10.20.2.10;443;Client vers le portail de suivi
+F7;10.20.7.110;10.20.1.11;8080;Poste vers un service web interne

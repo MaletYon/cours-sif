@@ -1,0 +1,14 @@
+num;source;destination;ports;action;commentaire;proprietaire;derniere_revue;compteur_mars
+1;Réseau prestataire;Tout;Tout;Autoriser;temporaire, 2026;;;18342
+2;Réseau prestataire;Serveurs Garoua;22,3389;Autoriser;Maintenance;M. KOUNOU;2025-09-01;0
+3;Postes;APP-03;443;Autoriser;Ancienne application;M. KOUNOU;2024-06-10;0
+4;Tout;Portail;443;Autoriser;Portail de suivi;Directeur commercial;2025-11-01;912455
+5;Postes;Internet;Tout;Autoriser;Navigation;;;2716004
+6;Postes;DNS interne;53;Autoriser;Résolution de noms;M. KOUNOU;2025-09-01;340118
+7;Postes;Internet;80,443;Autoriser;Navigation web;M. KOUNOU;2025-09-01;0
+8;Administration;Serveurs Garoua;22,3389;Autoriser;Administration;M. KOUNOU;2025-09-01;4210
+9;Postes;Serveurs Garoua;445;Autoriser;Partage de fichiers;Chef d'agence de Garoua;2025-09-01;88117
+10;Serveurs Garoua;Internet;443;Autoriser;Mises à jour;M. KOUNOU;2025-09-01;15002
+11;Tout;Serveurs Garoua;3389;Refuser;Bloquer le bureau à distance;M. KOUNOU;2025-09-01;731
+12;Postes;Portail;443;Autoriser;Accès des agents au portail;Directeur commercial;2025-11-01;0
+13;Tout;Tout;Tout;Refuser;Règle finale;M. KOUNOU;2025-09-01;52990

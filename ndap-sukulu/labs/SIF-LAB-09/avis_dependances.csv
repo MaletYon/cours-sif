@@ -1,0 +1,6 @@
+avis;paquet;version_corrigee;gravite;resume
+AV-01;Werkzeug;2.2.3;Élevée;Contournement et déni de service (multipart)
+AV-02;Jinja2;3.1.3;Moyenne;Injection d'attributs HTML dans le filtre xmlattr
+AV-03;requests;2.31.0;Moyenne;Fuite d'en-tête Proxy-Authorization lors des redirections
+AV-04;gunicorn;22.0.0;Élevée;Contrebande de requêtes HTTP
+AV-05;Flask;2.2.5;Élevée;Fuite de cookie de session derrière un cache

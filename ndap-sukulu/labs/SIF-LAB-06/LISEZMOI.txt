@@ -1,0 +1,30 @@
+SIF-LAB-06, audit des règles du pare-feu de Garoua (opération GAROUA)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  regles_pare-feu_garoua.csv   les 13 règles, avec propriétaire, date de revue et compteur
+  objets_adresses.csv          les objets d'adresses
+  flux_a_tester.csv            sept connexions à évaluer
+  note_reseau.txt              fonctionnement de la table
+  MANIFESTE_SHA256.txt         empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Partie A : auditer la table (règles ombrées, inutiles, sans propriétaire).
+
+3. Partie B : pour chaque flux, parcourir les règles de haut en bas et retenir
+   la première qui correspond.
+
+4. Partie C : proposer le nettoyage.
+
+5. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

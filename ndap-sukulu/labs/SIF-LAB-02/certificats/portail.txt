@@ -1,0 +1,63 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 8201 (0x2009)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CM, O=LiZbiZ SA, CN=LiZbiZ Serveurs CA
+        Validity
+            Not Before: Jan 15 00:00:00 2026 GMT
+            Not After : Jan 15 00:00:00 2027 GMT
+        Subject: C=CM, O=LiZbiZ SA, CN=portail.lizbiz.cm
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:b0:df:99:a5:62:f7:4f:e7:8e:82:32:31:39:ff:
+                    e6:42:1e:20:1a:2b:9e:ae:23:0d:53:e5:90:f9:cf:
+                    57:36:f4:0d:e9:29:a9:06:98:2d:79:a1:5c:be:9f:
+                    9b:25:15:4d:f6:be:2d:3d:8e:ff:b7:79:c3:7c:56:
+                    41:8d:a7:d6:09:19:94:51:92:54:a6:59:73:50:a5:
+                    e6:34:4c:39:1a:17:5c:50:8c:c1:42:dc:ef:ea:b3:
+                    a9:ca:f6:59:52:db:8a:74:79:36:59:1a:17:86:3a:
+                    08:d7:f4:fc:33:3f:9e:79:51:aa:46:72:0c:51:44:
+                    eb:c7:e2:f3:4a:1a:e1:a5:25:e8:a1:f4:37:a0:cf:
+                    8e:63:2b:23:f9:44:b0:58:7f:69:31:7e:12:f7:23:
+                    18:22:eb:c8:e4:13:02:a7:18:e0:c9:ba:44:ba:b5:
+                    07:b5:6d:37:7f:77:05:19:8c:39:48:d0:af:91:25:
+                    cf:4e:72:fe:17:a9:a8:57:8a:69:c1:82:b6:af:e7:
+                    bc:16:7c:c6:7a:6c:60:f4:31:18:b7:c4:30:db:e8:
+                    ce:98:95:b6:2c:e8:91:20:35:46:c7:7e:7a:d6:84:
+                    f0:e2:b5:d2:9e:fb:26:de:3d:b3:98:1f:78:c3:63:
+                    d2:d6:a4:09:42:a9:b6:0b:b2:b6:d5:8e:ab:bb:35:
+                    f0:df
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:portail.lizbiz.cm
+            X509v3 Subject Key Identifier: 
+                1C:87:99:DE:91:0C:7C:6C:6C:92:EC:A8:62:FC:07:BA:7E:F0:32:FE
+            X509v3 Authority Key Identifier: 
+                59:24:F2:12:18:C9:2C:E5:E5:BF:F4:59:C5:A8:B8:B0:B7:74:6F:87
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        9c:76:84:f4:19:13:71:82:06:37:58:59:d4:d6:01:b8:d3:7d:
+        41:10:61:4a:0a:cf:16:82:66:a3:13:b7:b9:c8:9d:a6:da:31:
+        b2:f7:4a:2b:01:7c:9b:08:ad:1a:0f:95:ea:6d:0b:7f:cb:4a:
+        56:47:86:9a:5a:80:49:03:13:fc:57:28:ab:ce:0f:e0:c9:ac:
+        4c:ab:82:1c:52:8b:ea:27:6d:2e:ea:ea:ac:49:ba:7b:ce:f1:
+        1b:c6:f7:db:e4:39:16:e7:17:c2:8b:a8:d9:ee:f0:8f:73:72:
+        4c:31:03:88:b6:7e:95:4f:99:1f:61:c5:cd:c7:5c:0c:4d:69:
+        18:e6:57:d1:25:ba:93:bf:13:cf:9b:e8:45:73:ea:76:32:11:
+        24:7f:9f:6e:41:5f:69:ff:db:ad:fa:95:da:cb:94:1b:cf:e0:
+        76:aa:85:de:05:a0:6c:e5:3a:82:82:40:5b:9c:c4:82:85:81:
+        8d:03:f6:45:55:a1:b7:0d:29:e6:a3:70:06:63:c6:d2:85:bf:
+        60:e3:3a:27:fd:58:a7:cc:34:8a:37:71:4b:72:dd:98:fe:0d:
+        84:09:64:bb:8f:39:2c:3c:f9:bb:e1:bf:2d:aa:a2:55:fb:8b:
+        1d:32:7a:9c:9e:1a:b8:15:7c:40:00:99:12:06:1e:6c:58:fc:
+        79:67:f9:89

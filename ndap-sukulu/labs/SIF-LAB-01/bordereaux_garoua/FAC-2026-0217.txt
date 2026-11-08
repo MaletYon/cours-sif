@@ -1,0 +1,13 @@
+LiZbiZ SA - Agence de Garoua
+Bordereau d'expédition FAC-2026-0217
+
+  colis 1  MAROUA DISTRIBUTION         849 000 FCFA
+  colis 2  BRASSERIES DU NORD          826 000 FCFA
+  colis 3  GAROUA MOTORS               566 000 FCFA
+  colis 4  SODECOTON                   463 000 FCFA
+  colis 5  NORD BOIS                   134 000 FCFA
+  colis 6  MAROUA DISTRIBUTION         840 000 FCFA
+
+  Total corrigé : 3 678 000 FCFA
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

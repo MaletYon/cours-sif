@@ -1,0 +1,28 @@
+SIF-LAB-05, capture réseau de Garoua du 10 mars (opération GAROUA)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  capture_garoua_2026-03-10.pcap   capture brute (format pcap, lisible par Wireshark ou tcpdump)
+  capture_garoua_2026-03-10.csv    la même capture exportée au format CSV (une ligne par paquet)
+  plan_adressage_garoua.txt        plan d'adressage de l'agence
+  MANIFESTE_SHA256.txt             empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Ouvrir le CSV dans LibreOffice Calc (séparateur « ; ») et poser un filtre
+   automatique. Filtrer la colonne Protocol (FTP, HTTP, ARP) ou chercher
+   « [SYN] Len=0 » dans la colonne Info. En terminal : grep, cut, sort, uniq -c.
+
+3. Partie A : le balayage. Partie B : les protocoles en clair. Partie C : ARP.
+
+4. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

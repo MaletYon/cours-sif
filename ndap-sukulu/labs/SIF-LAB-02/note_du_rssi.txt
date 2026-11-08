@@ -1,0 +1,19 @@
+LiZbiZ SA - Note du RSSI - revue des certificats du 10 mars 2026
+
+Après l'attaque, le comité de sécurité demande l'état des certificats des sept
+services exposés aux salariés et aux clients (inventaire_services.csv).
+
+Critères de conformité retenus pour la revue :
+  C1  valide à la date du 10 mars 2026 ;
+  C2  émis par l'autorité « LiZbiZ Serveurs CA », elle-même émise par
+      « LiZbiZ Racine CA » (racine.crt et inter.crt sont fournis) ;
+  C3  le nom d'hôte du service figure dans l'extension Subject Alternative Name ;
+  C4  clé RSA d'au moins 2048 bits ;
+  C5  signature SHA-256 (sha256WithRSAEncryption).
+
+Lecture d'un certificat : ouvrir le fichier .txt du même nom, ou taper
+  openssl x509 -in certificats/portail.crt -noout -text
+Vérification de chaîne :
+  openssl verify -CAfile certificats/racine.crt -untrusted certificats/inter.crt certificats/portail.crt
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

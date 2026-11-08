@@ -1,0 +1,190 @@
+matricule;nom;prenom;service;agence;statut;date_sortie
+M1001;FOUDA;Roger;Informatique;Yaoundé;présent;
+M1173;TCHAMBA;Bernard;Commercial;Douala;parti;2025-08-19
+M1009;KEMAJOU;Sandrine;Commercial;Bafoussam;présent;
+M1079;ESSOMBA;Josiane;Exploitation;Yaoundé;présent;
+M1013;EBOGO;Fabrice;Exploitation;Douala;présent;
+M1042;ETOA;Pauline;Direction;Douala;présent;
+M1151;NDJANA;Fabrice;Commercial;Yaoundé;parti;2024-11-08
+M1144;KAMGA;Esther;Commercial;Bafoussam;présent;
+M1051;DJOMO;Hervé;Direction;Bafoussam;présent;
+M1107;OUMAROU;Brigitte;Commercial;Douala;présent;
+M1081;NDI;Daniel;Informatique;Bafoussam;présent;
+M1049;SALI;Delphine;Commercial;Yaoundé;présent;
+M1025;KEMAJOU;Mireille;Exploitation;Yaoundé;présent;
+M1179;MBIDA;Irène;Ressources humaines;Douala;parti;2024-07-04
+M1130;BAYIHA;Daniel;Commercial;Yaoundé;présent;
+M1060;KEMAJOU;Laurent;Exploitation;Yaoundé;présent;
+M1017;EBOGO;Laurent;Ressources humaines;Bafoussam;présent;
+M1111;KAMGA;Grâce;Exploitation;Bafoussam;présent;
+M1154;AKONO;Delphine;Direction;Garoua;parti;2024-07-24
+M1058;KEMAJOU;Paul;Exploitation;Yaoundé;présent;
+M1022;EKANI;Nadège;Ressources humaines;Garoua;présent;
+M1119;MBARGA;Alain;Ressources humaines;Douala;présent;
+M1032;MANGA;Josiane;Informatique;Douala;présent;
+M1092;ZANG;Emmanuel;Ressources humaines;Bafoussam;présent;
+M1140;ABENA;Emmanuel;Direction;Garoua;présent;
+M1069;TSALA;Yvette;Ressources humaines;Garoua;présent;
+M1177;EKANI;Fabrice;Exploitation;Douala;parti;2025-12-13
+M1109;TCHAMBA;Alain;Informatique;Douala;présent;
+M1152;ZANG;Delphine;Direction;Bafoussam;parti;2024-06-14
+M1118;ESSOMBA;Hervé;Finance;Bafoussam;présent;
+M1120;TSALA;Roger;Exploitation;Garoua;présent;
+M1054;MANGA;Martin;Informatique;Bafoussam;présent;
+M1182;ETOA;Roger;Direction;Douala;parti;2024-04-25
+M1166;DJOMO;Esther;Exploitation;Bafoussam;parti;2025-03-14
+M1137;ZANG;Yvette;Finance;Garoua;présent;
+M1187;MBARGA;Laurent;Direction;Garoua;parti;2024-05-16
+M1024;AMOUGOU;Sylvie;Informatique;Garoua;présent;
+M1005;NDI;Thomas;Informatique;Bafoussam;présent;
+M1141;AMOUGOU;Martin;Direction;Bafoussam;présent;
+M1181;FOUDA;Fabrice;Informatique;Garoua;parti;2025-10-19
+M1162;MBALLA;Nadège;Ressources humaines;Douala;parti;2024-06-09
+M1116;MENGUE;Brigitte;Informatique;Douala;présent;
+M1156;KEMAJOU;Brigitte;Direction;Douala;parti;2025-07-13
+M1078;DJOMO;Yvette;Finance;Bafoussam;présent;
+M1098;NJOYA;Fadimatou;Finance;Bafoussam;présent;
+M1136;FOUDA;Irène;Informatique;Douala;présent;
+M1186;BIYA;Emmanuel;Ressources humaines;Garoua;parti;2025-05-05
+M1093;MBIDA;Delphine;Ressources humaines;Yaoundé;présent;
+M1036;HAMADOU;Pauline;Ressources humaines;Douala;présent;
+M1020;MBALLA;Yvette;Exploitation;Yaoundé;présent;
+M1171;SALI;Jacques;Ressources humaines;Bafoussam;parti;2024-06-10
+M1040;FOUDA;Bernard;Direction;Garoua;présent;
+M1057;AMOUGOU;Pauline;Finance;Garoua;présent;
+M1174;OUMAROU;Josiane;Ressources humaines;Bafoussam;parti;2025-02-02
+M1103;EBOGO;Brigitte;Finance;Yaoundé;présent;
+M1012;AKONO;Pauline;Commercial;Yaoundé;présent;
+M1167;OUMAROU;Pauline;Commercial;Garoua;parti;2025-08-16
+M1122;MBALLA;Alain;Informatique;Yaoundé;présent;
+M1065;NDI;Laurent;Finance;Yaoundé;présent;
+M1029;MENGUE;Carine;Exploitation;Bafoussam;présent;
+M1164;MBALLA;Serge;Exploitation;Douala;parti;2025-03-26
+M1056;MANGA;Grâce;Commercial;Bafoussam;présent;
+M1082;TSALA;Hervé;Informatique;Douala;présent;
+M1147;MENGUE;Laurent;Exploitation;Bafoussam;présent;
+M1031;BALLA;Emmanuel;Commercial;Douala;présent;
+M1046;SALI;Aïcha;Ressources humaines;Yaoundé;présent;
+M1037;EBOGO;Irène;Informatique;Douala;présent;
+M1097;YAYA;Thomas;Finance;Douala;présent;
+M1169;TCHAMBA;Fabrice;Direction;Yaoundé;parti;2025-06-02
+M1170;EKANI;Mireille;Commercial;Garoua;parti;2025-01-05
+M1155;BAYIHA;Alain;Ressources humaines;Yaoundé;parti;2025-12-22
+M1011;BALLA;Pauline;Finance;Bafoussam;présent;
+M1070;AKONO;Martin;Direction;Garoua;présent;
+M1180;KAMGA;Paul;Informatique;Douala;parti;2025-05-23
+M1085;NNANGA;Grâce;Direction;Garoua;présent;
+M1072;NOAH;Lydie;Informatique;Douala;présent;
+M1050;SALI;Lydie;Informatique;Garoua;présent;
+M1178;HAMADOU;Aïcha;Commercial;Yaoundé;parti;2024-10-09
+M1126;ATANGANA;Grâce;Finance;Bafoussam;présent;
+M1073;MENGUE;Serge;Finance;Douala;présent;
+M1158;ETOA;Josiane;Finance;Garoua;parti;2025-03-06
+M1100;DJOMO;Fabrice;Direction;Bafoussam;présent;
+M1096;NGONO;Roger;Direction;Garoua;présent;
+M1108;YAYA;Bernard;Exploitation;Yaoundé;présent;
+M1018;MANGA;Emmanuel;Informatique;Garoua;présent;
+M1145;TCHAMBA;Thomas;Finance;Yaoundé;présent;
+M1112;ZANG;Grâce;Commercial;Bafoussam;présent;
+M1160;ATANGANA;Fabrice;Commercial;Garoua;parti;2025-06-11
+M1128;ESSOMBA;Thomas;Ressources humaines;Garoua;présent;
+M1027;BIYA;Carine;Commercial;Douala;présent;
+M1124;MBARGA;Brigitte;Direction;Yaoundé;présent;
+M1035;AKONO;Esther;Exploitation;Yaoundé;présent;
+M1117;NOAH;Thomas;Commercial;Yaoundé;présent;
+M1114;NKOLO;Pauline;Exploitation;Yaoundé;présent;
+M1086;MANGA;Yvette;Finance;Yaoundé;présent;
+M1014;AKONO;Serge;Exploitation;Douala;présent;
+M1002;ATANGANA;Brigitte;Informatique;Yaoundé;présent;
+M1064;NANA;Pauline;Finance;Garoua;présent;
+M1148;ETOA;Serge;Informatique;Garoua;présent;
+M1003;TCHAMBA;Carine;Informatique;Garoua;présent;
+M1115;FOUDA;Emmanuel;Exploitation;Garoua;présent;
+M1163;YAYA;Yvette;Finance;Douala;parti;2025-08-13
+M1132;TSALA;Brigitte;Commercial;Douala;présent;
+M1127;OWONA;Mireille;Finance;Douala;présent;
+M1026;EBOGO;Roger;Informatique;Bafoussam;présent;
+M1133;BAYIHA;Roger;Ressources humaines;Bafoussam;présent;
+M1183;AMOUGOU;Thomas;Ressources humaines;Garoua;parti;2026-01-18
+M1068;ZANG;Sandrine;Finance;Douala;présent;
+M1099;BAYIHA;Yvette;Ressources humaines;Douala;présent;
+M1061;ONANA;Mireille;Informatique;Bafoussam;présent;
+M1110;NGONO;Grâce;Ressources humaines;Garoua;présent;
+M1091;YAYA;Laurent;Informatique;Bafoussam;présent;
+M1006;OWONA;Alain;Informatique;Bafoussam;présent;
+M1034;TCHAMBA;Emmanuel;Informatique;Douala;présent;
+M1159;MANGA;Fadimatou;Informatique;Garoua;parti;2024-06-14
+M1123;DJOMO;Roger;Finance;Bafoussam;présent;
+M1131;NDJANA;Daniel;Informatique;Garoua;présent;
+M1172;MENGUE;Fadimatou;Finance;Bafoussam;parti;2025-04-21
+M1161;NDI;Georges;Informatique;Garoua;parti;2024-05-12
+M1041;MOUSSA;Mireille;Finance;Douala;présent;
+M1146;NANA;Fabrice;Informatique;Yaoundé;présent;
+M1062;ETOA;Bernard;Finance;Yaoundé;présent;
+M1094;MENGUE;Aïcha;Direction;Garoua;présent;
+M1083;BIYA;Lydie;Exploitation;Bafoussam;présent;
+M1165;MBIDA;Pauline;Ressources humaines;Garoua;parti;2025-11-21
+M1104;BAYIHA;Bernard;Exploitation;Yaoundé;présent;
+M1150;DJOMO;Irène;Exploitation;Garoua;présent;
+M1088;BELLO;Sylvie;Informatique;Douala;présent;
+M1074;NGONO;Josiane;Finance;Douala;présent;
+M1047;MOUSSA;Fabrice;Finance;Douala;présent;
+M1038;ETOA;Thomas;Commercial;Garoua;présent;
+M1008;TSALA;Emmanuel;Commercial;Bafoussam;présent;
+M1067;NDI;Paul;Ressources humaines;Garoua;présent;
+M1185;ONANA;Sylvie;Direction;Bafoussam;parti;2024-11-28
+M1105;ABDOU;Esther;Exploitation;Yaoundé;présent;
+M1055;ESSOMBA;Sylvie;Exploitation;Yaoundé;présent;
+M1021;OUMAROU;Yvette;Informatique;Bafoussam;présent;
+M1087;KAMGA;Fabrice;Exploitation;Yaoundé;présent;
+M1175;BIYA;Jacques;Commercial;Douala;parti;2025-02-26
+M1142;MBARGA;Hervé;Finance;Bafoussam;présent;
+M1007;ABENA;Sylvie;Commercial;Douala;présent;
+M1048;TSALA;Thomas;Ressources humaines;Yaoundé;présent;
+M1189;NJOYA;Bernard;Direction;Bafoussam;parti;2024-06-25
+M1019;TCHAMBA;Paul;Informatique;Garoua;présent;
+M1044;OUMAROU;Georges;Exploitation;Bafoussam;présent;
+M1153;MBALLA;Esther;Exploitation;Garoua;parti;2024-12-27
+M1134;EBOGO;Grâce;Exploitation;Yaoundé;présent;
+M1016;FOUDA;Alain;Direction;Bafoussam;présent;
+M1139;AMOUGOU;Daniel;Finance;Bafoussam;présent;
+M1053;SALI;Georges;Direction;Bafoussam;présent;
+M1184;ABENA;Aïcha;Informatique;Yaoundé;parti;2024-07-21
+M1059;NDI;Mireille;Exploitation;Yaoundé;présent;
+M1135;AMOUGOU;Esther;Exploitation;Bafoussam;présent;
+M1143;MBALLA;Delphine;Informatique;Yaoundé;présent;
+M1028;ABDOU;Sandrine;Exploitation;Bafoussam;présent;
+M1157;AKONO;Alain;Informatique;Douala;parti;2024-05-24
+M1113;MENGUE;Yvette;Informatique;Bafoussam;présent;
+M1080;TCHAMBA;Georges;Commercial;Yaoundé;présent;
+M1071;MENGUE;Josiane;Informatique;Yaoundé;présent;
+M1075;TSALA;Sylvie;Finance;Bafoussam;présent;
+M1077;ABENA;Fadimatou;Commercial;Garoua;présent;
+M1045;MANGA;Daniel;Commercial;Garoua;présent;
+M1106;OWONA;Fadimatou;Finance;Garoua;présent;
+M1102;OUMAROU;Thomas;Ressources humaines;Bafoussam;présent;
+M1076;FOUDA;Sandrine;Commercial;Yaoundé;présent;
+M1063;ABENA;Thomas;Exploitation;Bafoussam;présent;
+M1121;NJOYA;Sylvie;Direction;Yaoundé;présent;
+M1188;EKANI;Alain;Commercial;Douala;parti;2025-05-26
+M1101;BELLO;Fabrice;Finance;Yaoundé;présent;
+M1052;AKONO;Roger;Finance;Garoua;présent;
+M1039;MANGA;Laurent;Exploitation;Yaoundé;présent;
+M1084;ABDOU;Irène;Direction;Yaoundé;présent;
+M1138;OWONA;Delphine;Direction;Douala;présent;
+M1023;TSALA;Fadimatou;Commercial;Douala;présent;
+M1149;ESSOMBA;Fabrice;Exploitation;Yaoundé;présent;
+M1125;MBARGA;Emmanuel;Informatique;Douala;présent;
+M1176;YAYA;Sandrine;Direction;Douala;parti;2024-09-29
+M1043;NDI;Carine;Informatique;Bafoussam;présent;
+M1015;SALI;Yvette;Direction;Yaoundé;présent;
+M1004;NOAH;Irène;Informatique;Garoua;présent;
+M1090;MBARGA;Serge;Ressources humaines;Douala;présent;
+M1089;YAYA;Nadège;Ressources humaines;Yaoundé;présent;
+M1129;ATANGANA;Sandrine;Informatique;Bafoussam;présent;
+M1066;NJOYA;Lydie;Informatique;Yaoundé;présent;
+M1030;KAMGA;Daniel;Finance;Douala;présent;
+M1168;NKOLO;Sylvie;Informatique;Douala;parti;2025-01-03
+M1033;ETOA;Irène;Direction;Garoua;présent;
+M1010;OWONA;Serge;Informatique;Bafoussam;présent;
+M1095;ZANG;Pauline;Commercial;Garoua;présent;

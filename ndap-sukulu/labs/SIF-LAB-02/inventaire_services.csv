@@ -1,0 +1,8 @@
+service;nom_hote;fichier_certificat
+portail;portail.lizbiz.cm;portail.crt
+suivi;suivi.lizbiz.cm;suivi.crt
+messagerie;messagerie.lizbiz.cm;messagerie.crt
+passerelle-garoua;passerelle-garoua.lizbiz.cm;passerelle-garoua.crt
+facturation;facturation.lizbiz.cm;facturation.crt
+imprimante-gar;imprimante-gar.lizbiz.cm;imprimante-gar.crt
+paie;paie.lizbiz.cm;paie.crt

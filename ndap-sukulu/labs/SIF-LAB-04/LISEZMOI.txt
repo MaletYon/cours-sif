@@ -1,0 +1,27 @@
+SIF-LAB-04, classer les actifs de LiZbiZ et coter leurs besoins (opération LIZBIZ)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  inventaire_actifs_LiZbiZ.xlsx   inventaire de 30 actifs et règles R1 à R5
+  MANIFESTE_SHA256.txt            empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Ouvrir le classeur dans LibreOffice Calc. Utiliser les filtres automatiques
+   (Données > Filtre automatique) sur l'onglet Inventaire.
+
+3. Partie A : propriétaires et classes (règles R1 et R2).
+
+4. Partie B : manipulation et données personnelles (règles R3 à R5).
+
+5. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

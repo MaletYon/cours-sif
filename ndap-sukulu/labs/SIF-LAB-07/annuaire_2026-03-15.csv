@@ -1,0 +1,213 @@
+login;nom_affiche;matricule;type;description;groupes;derniere_connexion;mdp_n_expire_jamais;second_facteur
+dakono;Delphine AKONO;M1154;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2024-07-24;non;non
+dndi;Daniel NDI;M1081;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+sessomba;Sylvie ESSOMBA;M1055;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+tyaya;Thomas YAYA;M1097;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+jbiya;Jacques BIYA;M1175;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+ftsala;Fadimatou TSALA;M1023;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+mmanga;Martin MANGA;M1054;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+demo;;;utilisateur;;Utilisateurs du domaine;2026-03-04;oui;non
+gsali;Georges SALI;M1053;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+emballa;Esther MBALLA;M1153;utilisateur;;Utilisateurs du domaine;2024-12-27;non;non
+svc_messagerie;Compte de service messagerie;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-13;oui;non
+pakono;Pauline AKONO;M1012;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+youmarou;Yvette OUMAROU;M1021;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+embarga;Emmanuel MBARGA;M1125;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+afouda;Alain FOUDA;M1016;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+bbayiha;Bernard BAYIHA;M1104;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+yyaya;Yvette YAYA;M1163;utilisateur;;Utilisateurs du domaine;2025-08-13;non;non
+jmengue;Josiane MENGUE;M1071;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+fowona;Fadimatou OWONA;M1106;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+fkamga;Fabrice KAMGA;M1087;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+btsala;Brigitte TSALA;M1132;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+gndi;Georges NDI;M1161;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+lnjoya;Lydie NJOYA;M1066;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+jessomba;Josiane ESSOMBA;M1079;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+lmengue;Laurent MENGUE;M1147;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+gnnanga;Grâce NNANGA;M1085;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+sakono;Serge AKONO;M1014;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+hessomba;Hervé ESSOMBA;M1118;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+gzang;Grâce ZANG;M1112;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+fndjana;Fabrice NDJANA;M1151;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+iebogo;Irène EBOGO;M1037;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+lnoah;Lydie NOAH;M1072;utilisateur;;Utilisateurs du domaine;2026-03-12;non;non
+pnkolo;Pauline NKOLO;M1114;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+lmanga;Laurent MANGA;M1039;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+ytsala;Yvette TSALA;M1069;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+aowona;Alain OWONA;M1006;utilisateur;;Utilisateurs du domaine;2026-03-15;non;non
+toumarou;Thomas OUMAROU;M1102;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+amballa;Alain MBALLA;M1122;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+dmballa;Delphine MBALLA;M1143;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+eamougou;Esther AMOUGOU;M1135;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+fmoussa;Fabrice MOUSSA;M1047;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+smbarga;Serge MBARGA;M1090;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+stagiaire;;;utilisateur;;Utilisateurs du domaine;2025-09-03;oui;non
+rdjomo;Roger DJOMO;M1123;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+accueil_douala;Poste d'accueil de Douala;;utilisateur;Poste d'accueil de Douala (compte commun);Utilisateurs du domaine;2026-03-13;oui;non
+pndi;Paul NDI;M1067;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+ybayiha;Yvette BAYIHA;M1099;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+fekani;Fabrice EKANI;M1177;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+makono;Martin AKONO;M1070;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+mkemajou;Mireille KEMAJOU;M1025;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+hdjomo;Hervé DJOMO;M1051;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+ekamga;Esther KAMGA;M1144;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+ymballa;Yvette MBALLA;M1020;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+ttchamba;Thomas TCHAMBA;M1145;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+betoa;Bernard ETOA;M1062;utilisateur;;Utilisateurs du domaine;2026-03-15;non;non
+rngono;Roger NGONO;M1096;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+ptchamba;Paul TCHAMBA;M1019;utilisateur;;Utilisateurs du domaine;2026-02-24;non;non
+rebogo;Roger EBOGO;M1026;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+dmanga;Daniel MANGA;M1045;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+tnoah;Thomas NOAH;M1117;utilisateur;;Utilisateurs du domaine;2026-02-24;non;non
+eabena;Emmanuel ABENA;M1140;utilisateur;;Utilisateurs du domaine;2026-02-25;non;non
+emanga;Emmanuel MANGA;M1018;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+pmbida;Pauline MBIDA;M1165;utilisateur;;Utilisateurs du domaine;2026-03-12;non;non
+svc_scan;Compte de service scan;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-15;non;non
+atchamba;Alain TCHAMBA;M1109;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+dmbida;Delphine MBIDA;M1093;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+fnjoya;Fadimatou NJOYA;M1098;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+damougou;Daniel AMOUGOU;M1139;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+mekani;Mireille EKANI;M1170;utilisateur;;Utilisateurs du domaine;2025-01-05;non;non
+pnana;Pauline NANA;M1064;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+user01;;;utilisateur;;Utilisateurs du domaine;2026-01-20;oui;non
+gtchamba;Georges TCHAMBA;M1080;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+idjomo;Irène DJOMO;M1150;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+fatangana;Fabrice ATANGANA;M1160;utilisateur;;Utilisateurs du domaine;2025-06-11;non;non
+rbayiha;Roger BAYIHA;M1133;utilisateur;;Utilisateurs du domaine;2026-03-12;non;non
+gkamga;Grâce KAMGA;M1111;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+fbello;Fabrice BELLO;M1101;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+smengue;Serge MENGUE;M1073;utilisateur;;Utilisateurs du domaine;2026-02-25;non;non
+svc_maj;Compte de service maj;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-14;oui;non
+admin2;;;utilisateur;;Utilisateurs du domaine;2025-06-14;oui;non
+pamougou;Pauline AMOUGOU;M1057;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+svc_ftp_depot;Compte de service ftp_depot;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-15;oui;non
+etchamba;Emmanuel TCHAMBA;M1034;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+mamougou;Martin AMOUGOU;M1141;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+szang;Sandrine ZANG;M1068;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+fdjomo;Fabrice DJOMO;M1100;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+pballa;Pauline BALLA;M1011;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+poumarou;Pauline OUMAROU;M1167;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+bmbarga;Brigitte MBARGA;M1124;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+petoa;Pauline ETOA;M1042;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+ysali;Yvette SALI;M1015;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+eakono;Esther AKONO;M1035;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+tabena;Thomas ABENA;M1063;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+gmanga;Grâce MANGA;M1056;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+mndi;Mireille NDI;M1059;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+ifouda;Irène FOUDA;M1136;utilisateur;;Utilisateurs du domaine;2026-03-15;non;non
+svc_portail;Compte de service portail;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-14;oui;non
+nmballa;Nadège MBALLA;M1162;utilisateur;;Utilisateurs du domaine;2024-06-09;non;non
+boumarou;Brigitte OUMAROU;M1107;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+ymanga;Yvette MANGA;M1086;utilisateur;;Utilisateurs du domaine;2026-03-15;non;non
+phamadou;Pauline HAMADOU;M1036;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+jmanga;Josiane MANGA;M1032;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+sfouda;Sandrine FOUDA;M1076;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+eabdou;Esther ABDOU;M1105;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+etsala;Emmanuel TSALA;M1008;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+sowona;Serge OWONA;M1010;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+yzang;Yvette ZANG;M1137;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+cbiya;Carine BIYA;M1027;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+rakono;Roger AKONO;M1052;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+setoa;Serge ETOA;M1148;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+edjomo;Esther DJOMO;M1166;utilisateur;;Utilisateurs du domaine;2025-03-14;non;non
+rtsala;Roger TSALA;M1120;utilisateur;;Utilisateurs du domaine;2026-02-27;non;non
+svc_rapports;Compte de service rapports;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-13;non;non
+samougou;Sylvie AMOUGOU;M1024;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+svc_annuaire;Compte de service annuaire;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-13;oui;non
+sabdou;Sandrine ABDOU;M1028;utilisateur;;Utilisateurs du domaine;2026-02-25;non;non
+agence_yaounde;Compte commun de l'agence de Yaoundé;;utilisateur;Compte commun de l'agence de Yaoundé;Utilisateurs du domaine;2026-03-12;oui;non
+fmengue;Fadimatou MENGUE;M1172;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+goumarou;Georges OUMAROU;M1044;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+satangana;Sandrine ATANGANA;M1129;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+iabdou;Irène ABDOU;M1084;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+asali;Aïcha SALI;M1046;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+svc_supervision;Compte de service supervision;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-15;oui;non
+ancien_dsi;;;utilisateur;;Utilisateurs du domaine;2025-03-06;oui;non
+joumarou;Josiane OUMAROU;M1174;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+amengue;Aïcha MENGUE;M1094;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+tessomba;Thomas ESSOMBA;M1128;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+jmballa2;;;utilisateur;;Utilisateurs du domaine;2025-11-15;oui;non
+fabena;Fadimatou ABENA;M1077;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+mowona;Mireille OWONA;M1127;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+eballa;Emmanuel BALLA;M1031;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+bkemajou;Brigitte KEMAJOU;M1156;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2026-02-20;non;non
+accueil_bafoussam;Poste d'accueil de Bafoussam;;utilisateur;Poste d'accueil de Bafoussam (compte commun);Utilisateurs du domaine;2026-03-15;oui;non
+lyaya;Laurent YAYA;M1091;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+accueil_garoua;Poste d'accueil de Garoua;;utilisateur;Poste d'accueil de Garoua (compte commun);Utilisateurs du domaine;2026-03-12;oui;non
+cmengue;Carine MENGUE;M1029;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+dndjana;Daniel NDJANA;M1131;utilisateur;;Utilisateurs du domaine;2026-03-12;non;non
+smballa;Serge MBALLA;M1164;utilisateur;;Utilisateurs du domaine;2025-03-26;non;non
+agence_bafoussam;Compte commun de l'agence de Bafoussam;;utilisateur;Compte commun de l'agence de Bafoussam;Utilisateurs du domaine;2026-03-14;oui;non
+ctchamba;Carine TCHAMBA;M1003;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2026-02-26;non;non
+byaya;Bernard YAYA;M1108;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+temp_compta;;;utilisateur;;Utilisateurs du domaine;2025-07-31;oui;non
+jngono;Josiane NGONO;M1074;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+cndi;Carine NDI;M1043;utilisateur;;Utilisateurs du domaine;2026-02-25;non;non
+gatangana;Grâce ATANGANA;M1126;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+nyaya;Nadège YAYA;M1089;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+ftchamba;Fabrice TCHAMBA;M1169;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+efouda;Emmanuel FOUDA;M1115;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+svc_web_intranet;Compte de service web_intranet;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-15;oui;non
+dzang;Delphine ZANG;M1152;utilisateur;;Utilisateurs du domaine;2024-06-14;non;non
+svc_video;Compte de service video;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-13;oui;non
+test01;;;utilisateur;;Utilisateurs du domaine;2025-07-04;oui;non
+pzang;Pauline ZANG;M1095;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+sabena;Sylvie ABENA;M1007;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+test02;;;utilisateur;;Utilisateurs du domaine;2025-08-06;oui;non
+abayiha;Alain BAYIHA;M1155;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2025-12-22;non;non
+htsala;Hervé TSALA;M1082;utilisateur;;Utilisateurs du domaine;2026-02-23;non;non
+jetoa;Josiane ETOA;M1158;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+ydjomo;Yvette DJOMO;M1078;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+snkolo;Sylvie NKOLO;M1168;utilisateur;;Utilisateurs du domaine;2025-01-03;non;non
+dbayiha;Daniel BAYIHA;M1130;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+ietoa;Irène ETOA;M1033;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+accueil_yaounde;Poste d'accueil de Yaoundé;;utilisateur;Poste d'accueil de Yaoundé (compte commun);Utilisateurs du domaine;2026-03-13;oui;non
+pkemajou;Paul KEMAJOU;M1058;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+gngono;Grâce NGONO;M1110;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+ttsala;Thomas TSALA;M1048;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+inoah;Irène NOAH;M1004;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2026-03-10;non;non
+jsali;Jacques SALI;M1171;utilisateur;;Utilisateurs du domaine;2024-06-10;non;non
+bfouda;Bernard FOUDA;M1040;utilisateur;;Utilisateurs du domaine;2026-03-08;non;non
+lsali;Lydie SALI;M1050;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+nekani;Nadège EKANI;M1022;utilisateur;;Utilisateurs du domaine;2026-03-13;non;non
+skemajou;Sandrine KEMAJOU;M1009;utilisateur;;Utilisateurs du domaine;2026-03-03;non;non
+mmoussa;Mireille MOUSSA;M1041;utilisateur;;Utilisateurs du domaine;2026-03-10;non;non
+fmanga;Fadimatou MANGA;M1159;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+ambarga;Alain MBARGA;M1119;utilisateur;;Utilisateurs du domaine;2026-02-24;non;non
+stsala;Sylvie TSALA;M1075;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+snjoya;Sylvie NJOYA;M1121;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+svc_sql_suivi;Compte de service sql_suivi;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-14;oui;non
+svc_antivirus;Compte de service antivirus;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-13;oui;non
+btchamba;Bernard TCHAMBA;M1173;utilisateur;;Utilisateurs du domaine;2026-03-01;non;non
+dkamga;Daniel KAMGA;M1030;utilisateur;;Utilisateurs du domaine;2026-03-07;non;non
+svc_sauvegarde;Compte de service sauvegarde;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-13;oui;non
+gebogo;Grâce EBOGO;M1134;utilisateur;;Utilisateurs du domaine;2026-03-12;non;non
+svc_paie;Compte de service paie;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-15;oui;non
+rfouda;Roger FOUDA;M1001;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2026-03-09;non;non
+hmbarga;Hervé MBARGA;M1142;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+ezang;Emmanuel ZANG;M1092;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+fnana;Fabrice NANA;M1146;utilisateur;;Utilisateurs du domaine;2026-03-11;non;non
+lkemajou;Laurent KEMAJOU;M1060;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+formation;;;utilisateur;;Utilisateurs du domaine;2025-06-12;oui;non
+agence_douala;Compte commun de l'agence de Douala;;utilisateur;Compte commun de l'agence de Douala;Utilisateurs du domaine;2026-03-12;oui;non
+lbiya;Lydie BIYA;M1083;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+agence_garoua;Compte commun de l'agence de Garoua;;utilisateur;Compte commun de l'agence de Garoua;Utilisateurs du domaine;2026-03-11;oui;non
+fessomba;Fabrice ESSOMBA;M1149;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+svc_sql_facturation;Compte de service sql_facturation;;service;Compte de service applicatif;"Utilisateurs du domaine; Admins du domaine";2026-03-14;oui;non
+svc_badges;Compte de service badges;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-13;oui;non
+sahel_maint;Maintenance SAHEL INFOGÉRANCE;;utilisateur;Maintenance SAHEL INFOGÉRANCE (compte commun du prestataire);"Utilisateurs du domaine; Admins du domaine";2026-03-12;oui;non
+lndi;Laurent NDI;M1065;utilisateur;;Utilisateurs du domaine;2026-02-26;non;non
+syaya;Sandrine YAYA;M1176;utilisateur;;Utilisateurs du domaine;2024-09-29;non;non
+dsali;Delphine SALI;M1049;utilisateur;;Utilisateurs du domaine;2026-03-09;non;non
+tndi;Thomas NDI;M1005;utilisateur;;Utilisateurs du domaine;2026-03-02;non;non
+batangana;Brigitte ATANGANA;M1002;utilisateur;;"Utilisateurs du domaine; Admins du domaine";2026-02-24;non;non
+bmengue;Brigitte MENGUE;M1116;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+monana;Mireille ONANA;M1061;utilisateur;;Utilisateurs du domaine;2026-03-05;non;non
+lebogo;Laurent EBOGO;M1017;utilisateur;;Utilisateurs du domaine;2026-02-25;non;non
+sbello;Sylvie BELLO;M1088;utilisateur;;Utilisateurs du domaine;2026-03-04;non;non
+svc_edi_banque;Compte de service edi_banque;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-13;oui;non
+bebogo;Brigitte EBOGO;M1103;utilisateur;;Utilisateurs du domaine;2026-03-06;non;non
+aakono;Alain AKONO;M1157;utilisateur;;Utilisateurs du domaine;2024-05-24;non;non
+dowona;Delphine OWONA;M1138;utilisateur;;Utilisateurs du domaine;2026-03-14;non;non
+febogo;Fabrice EBOGO;M1013;utilisateur;;Utilisateurs du domaine;2026-02-28;non;non
+svc_impression;Compte de service impression;;service;Compte de service applicatif;Utilisateurs du domaine;2026-03-15;oui;non

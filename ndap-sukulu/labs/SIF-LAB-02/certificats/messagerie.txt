@@ -1,0 +1,63 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 8203 (0x200b)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CM, O=LiZbiZ SA, CN=LiZbiZ Serveurs CA
+        Validity
+            Not Before: Feb 28 00:00:00 2025 GMT
+            Not After : Feb 28 00:00:00 2026 GMT
+        Subject: C=CM, O=LiZbiZ SA, CN=messagerie.lizbiz.cm
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:92:11:47:02:52:48:4d:a4:43:25:22:4c:00:52:
+                    29:52:27:96:e9:41:ce:db:8d:59:1c:81:a7:98:9c:
+                    65:0d:55:f2:12:d7:e1:14:c9:df:a1:27:e6:1f:3d:
+                    3e:89:78:01:7c:e0:d2:9b:f3:8c:31:a2:be:0e:27:
+                    89:54:a2:2f:c5:dd:35:9a:cc:0b:20:49:cd:9c:06:
+                    aa:63:52:4c:3d:0c:9f:b2:31:6a:60:f0:36:fa:8b:
+                    c5:1b:42:d4:26:1d:dd:86:cb:5a:eb:45:6c:d5:6d:
+                    58:b2:09:12:8f:9f:67:f7:4e:b6:91:24:eb:5f:e3:
+                    9d:26:48:b3:52:a4:e6:45:2f:86:87:e9:0e:b8:b2:
+                    50:db:84:15:2d:e2:54:e6:8c:de:48:41:af:bc:fb:
+                    bc:80:ea:74:84:49:39:ef:2c:c6:bc:45:8c:e0:55:
+                    b4:fe:ab:1e:da:f8:6a:29:20:03:ea:da:1b:1b:2a:
+                    61:5d:f8:31:90:90:9a:34:15:e9:48:d7:68:67:24:
+                    9a:0d:00:29:b8:0f:95:4d:16:bb:8b:1e:5a:7b:2a:
+                    e5:76:ab:93:dd:92:f4:cf:3a:1e:57:db:77:a8:c2:
+                    77:5a:71:3f:17:58:78:c5:21:28:60:e9:3e:c3:de:
+                    0d:42:53:29:6a:ba:59:70:5f:41:5a:c1:ab:c4:c5:
+                    35:eb
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:messagerie.lizbiz.cm
+            X509v3 Subject Key Identifier: 
+                A1:C1:1E:39:11:99:68:30:AC:0C:1C:F5:07:EF:F1:7D:13:10:52:09
+            X509v3 Authority Key Identifier: 
+                59:24:F2:12:18:C9:2C:E5:E5:BF:F4:59:C5:A8:B8:B0:B7:74:6F:87
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        97:36:e0:f1:c7:42:77:51:b6:28:41:9a:e7:77:f7:c2:57:41:
+        7e:8a:b9:35:24:a9:98:1e:a3:72:33:5c:84:c8:13:e4:db:a9:
+        a3:77:5a:41:c7:46:63:6c:1d:8c:3a:bc:e3:ab:29:0b:cc:f2:
+        3b:04:c1:d5:41:2c:00:31:55:93:81:9d:77:64:3d:da:42:e1:
+        2c:dd:e1:a7:a5:53:36:dd:4f:66:75:ad:0a:0a:56:09:37:04:
+        13:44:a9:48:9d:6c:56:34:1f:6f:b2:bc:67:83:4d:e2:5a:b8:
+        78:57:61:3d:87:c9:af:13:ca:2a:54:83:1f:a4:20:4a:a3:9f:
+        9b:18:8a:d0:72:3c:22:af:ee:96:4b:38:93:10:60:ea:47:df:
+        d2:d1:8c:ae:75:cc:fe:61:07:fe:b8:ad:7f:a1:26:89:77:06:
+        4d:f1:3d:6b:f8:c2:12:25:ed:30:90:bd:b1:93:4e:5d:46:23:
+        14:fd:2e:5d:61:d8:f8:e9:4a:01:52:25:5c:d3:2f:6f:30:63:
+        a7:17:03:9b:d2:47:d3:00:86:22:a4:c4:89:6d:44:4d:85:37:
+        d6:18:da:2a:ff:ac:99:fc:ee:0d:d7:9d:f5:05:0c:73:7a:21:
+        0a:d9:e6:23:0f:80:52:05:83:81:27:0a:d8:20:f6:41:c7:7c:
+        17:bb:84:6d

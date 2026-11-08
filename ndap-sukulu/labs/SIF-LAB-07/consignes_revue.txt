@@ -1,0 +1,15 @@
+LiZbiZ SA - Revue des comptes du 15 mars 2026 (mesure M-17)
+
+L'annuaire ne contient que les comptes ACTIFS. Rapprocher l'annuaire et le
+fichier du personnel par le matricule, puis classer chaque compte :
+  - nominatif d'un salarié présent : matricule d'un salarié au statut « présent » ;
+  - orphelin : matricule d'un salarié au statut « parti » ;
+  - partagé : sans matricule, type utilisateur, avec une description de compte commun ;
+  - de service : type service ;
+  - sans titulaire identifiable : sans matricule, type utilisateur, sans description.
+
+Écarts à désactiver sous huit jours : comptes orphelins, partagés et sans titulaire
+(les comptes partagés sont remplacés par des comptes nominatifs).
+Droits sensibles : groupe « Admins du domaine ».
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

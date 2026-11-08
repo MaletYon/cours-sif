@@ -1,0 +1,165 @@
+/* NDAP SUKULU autonome : feuille de style commune aux deux éditions.
+   Palette reprise du portail NDAP SUKULU (thème sombre) avec un thème clair. */
+:root {
+  --fond: #f4f6f9; --carte: #ffffff; --bord: #d8dee6; --texte: #1b2430; --doux: #5b6b7c;
+  --accent: #1f6fd1; --accent-doux: #e3eefb; --ok: #1f8a3b; --ok-doux: #e3f4e7;
+  --ko: #c23b36; --ko-doux: #fbe7e6; --avert: #a8730c; --avert-doux: #fbf1dc;
+  --ombre: 0 1px 3px rgba(20, 30, 45, .08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="clair"]) {
+    --fond: #0f1419; --carte: #1a2129; --bord: #2b3642; --texte: #e6edf3; --doux: #9fb0c0;
+    --accent: #4a9eff; --accent-doux: #1b2c40; --ok: #2ea043; --ok-doux: #15301e;
+    --ko: #e5534b; --ko-doux: #3a1b1b; --avert: #d29922; --avert-doux: #33280f; --ombre: none;
+  }
+}
+:root[data-theme="sombre"] {
+  --fond: #0f1419; --carte: #1a2129; --bord: #2b3642; --texte: #e6edf3; --doux: #9fb0c0;
+  --accent: #4a9eff; --accent-doux: #1b2c40; --ok: #2ea043; --ok-doux: #15301e;
+  --ko: #e5534b; --ko-doux: #3a1b1b; --avert: #d29922; --avert-doux: #33280f; --ombre: none;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--fond); color: var(--texte);
+  font: 15px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+a { color: var(--accent); }
+button, input, select { font: inherit; }
+
+/* ------------------------------------------------------------ en-tête */
+header.barre {
+  position: sticky; top: 0; z-index: 10; background: var(--carte); border-bottom: 1px solid var(--bord);
+  display: flex; align-items: center; gap: 14px; padding: 8px 18px; flex-wrap: wrap;
+}
+header.barre img { height: 34px; }
+header.barre .bandeau { font-weight: 600; }
+header.barre .sous { color: var(--doux); font-size: 13px; }
+nav.menu { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+nav.menu a {
+  text-decoration: none; color: var(--texte); padding: 6px 12px; border-radius: 8px; font-size: 14px;
+}
+nav.menu a:hover { background: var(--accent-doux); }
+nav.menu a.actif { background: var(--accent); color: #fff; }
+
+main { max-width: 1060px; margin: 0 auto; padding: 22px 18px 40px; }
+footer.pied {
+  text-align: center; color: var(--doux); font-size: 12.5px; padding: 18px; border-top: 1px solid var(--bord);
+}
+footer.pied img { height: 26px; vertical-align: middle; margin-right: 8px; }
+
+h1 { font-size: 24px; margin: 0 0 6px; }
+h2 { font-size: 19px; margin: 26px 0 10px; }
+h3 { font-size: 16px; margin: 18px 0 8px; }
+.doux { color: var(--doux); }
+.petit { font-size: 13px; }
+
+/* ------------------------------------------------------------ cartes et grilles */
+.carte {
+  background: var(--carte); border: 1px solid var(--bord); border-radius: 12px; padding: 16px 18px;
+  box-shadow: var(--ombre);
+}
+.grille { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.grille-2 { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 760px) { .grille-2 { grid-template-columns: 1fr; } }
+.chiffres { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.chiffre .val { font-size: 28px; font-weight: 700; }
+.chiffre .lib { color: var(--doux); font-size: 13px; }
+
+.btn {
+  display: inline-block; border: 1px solid var(--accent); background: var(--accent); color: #fff;
+  padding: 8px 16px; border-radius: 8px; cursor: pointer; text-decoration: none; font-size: 14px;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.second { background: transparent; color: var(--accent); }
+.btn.petit { padding: 4px 10px; font-size: 13px; }
+.btn[disabled] { opacity: .5; cursor: default; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+/* ------------------------------------------------------------ jauges */
+.jauge { height: 8px; background: var(--bord); border-radius: 4px; overflow: hidden; }
+.jauge > span { display: block; height: 100%; background: var(--accent); }
+.jauge.ok > span { background: var(--ok); }
+.jauge.moyen > span { background: var(--avert); }
+.jauge.faible > span { background: var(--ko); }
+.ligne-chap { display: grid; grid-template-columns: 52px 1fr 70px; gap: 10px; align-items: center; padding: 6px 0; }
+.ligne-chap a { text-decoration: none; color: var(--texte); }
+.etiquette {
+  display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 10px; background: var(--accent-doux);
+  color: var(--accent); margin-right: 4px;
+}
+.etiquette.ok { background: var(--ok-doux); color: var(--ok); }
+.etiquette.ko { background: var(--ko-doux); color: var(--ko); }
+.etiquette.avert { background: var(--avert-doux); color: var(--avert); }
+
+/* ------------------------------------------------------------ révision */
+.encadre { border-left: 4px solid var(--accent); background: var(--accent-doux); padding: 10px 14px; border-radius: 6px; margin: 10px 0; }
+.encadre.def { border-color: var(--avert); background: var(--avert-doux); }
+.encadre.retenir { border-color: var(--ok); background: var(--ok-doux); }
+.encadre ul { margin: 6px 0; padding-left: 20px; }
+.encadre li { margin: 4px 0; }
+
+/* ------------------------------------------------------------ questions */
+.question { margin: 12px 0; }
+.question .num { font-weight: 700; color: var(--accent); margin-right: 6px; }
+.question .sect { float: right; }
+.options label {
+  display: block; padding: 7px 10px; margin: 5px 0; border: 1px solid var(--bord); border-radius: 8px; cursor: pointer;
+}
+.options label:hover { border-color: var(--accent); }
+.options input { margin-right: 8px; }
+.question input[type=text] {
+  width: 100%; max-width: 420px; padding: 7px 10px; border: 1px solid var(--bord); border-radius: 8px;
+  background: var(--fond); color: var(--texte);
+}
+.question.juste { border-color: var(--ok); }
+.question.faux { border-color: var(--ko); }
+.options label.bonne { border-color: var(--ok); background: var(--ok-doux); }
+.options label.mauvaise { border-color: var(--ko); background: var(--ko-doux); }
+.correction { margin-top: 8px; font-size: 14px; }
+.correction.ok { color: var(--ok); }
+.correction.ko { color: var(--ko); }
+.explication { color: var(--doux); font-size: 13.5px; margin-top: 4px; }
+
+.bandeau-fiche {
+  position: sticky; top: 52px; z-index: 5; background: var(--carte); border: 1px solid var(--bord);
+  border-radius: 10px; padding: 8px 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+}
+.bandeau-fiche .chrono { font-variant-numeric: tabular-nums; font-weight: 700; }
+.score-grand { font-size: 44px; font-weight: 800; }
+
+/* ------------------------------------------------------------ tableaux */
+table.tab { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.tab th, table.tab td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--bord); }
+table.tab th { color: var(--doux); font-weight: 600; }
+
+/* ------------------------------------------------------------ graphiques */
+svg.graph text { fill: var(--doux); font-size: 11px; }
+svg.graph .axe { stroke: var(--bord); }
+svg.graph .courbe { fill: none; stroke: var(--accent); stroke-width: 2; }
+svg.graph .point { fill: var(--accent); }
+svg.graph .seuil { stroke: var(--avert); stroke-dasharray: 4 4; }
+
+@media (max-width: 600px) {
+  body { font-size: 14.5px; }
+  header.barre { padding: 6px 10px; gap: 8px; }
+  header.barre img { height: 28px; }
+  header.barre .sous { display: none; }
+  nav.menu { margin-left: 0; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  main { padding: 14px 12px 30px; }
+  .bandeau-fiche { top: 88px; }
+  .question .sect { float: none; display: block; margin-bottom: 4px; }
+}
+@media print { header.barre, nav.menu, .actions, footer.pied { display: none; } }
+
+/* Formulaires et messages (connexion, espace enseignant) */
+label.champ { display: block; margin: 10px 0 4px; font-size: 14px; }
+label.champ input, label.champ select { display: block; width: 100%; max-width: 380px; margin-top: 4px; padding: 8px 10px;
+  border: 1px solid var(--bord); border-radius: 8px; background: var(--fond); color: var(--texte); font-size: 15px; }
+.message { margin: 10px 0; padding: 8px 12px; border-radius: 8px; border-left: 4px solid var(--bord); }
+.message:empty { display: none; }
+.message.ok { border-left-color: var(--ok); }
+.message.ko { border-left-color: var(--ko); }
+.message.avert { border-left-color: var(--avert, #c98a00); }
+code { font-family: Consolas, "Courier New", monospace; font-size: .92em; }
+.connexion { max-width: 440px; margin: 24px auto; }

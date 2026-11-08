@@ -1,0 +1,28 @@
+SIF-LAB-08, durcissement du serveur Linux srv-suivi-01 (opération LIZBIZ)
+
+Les pièces du lab se trouvent dans le dossier preuves, en lecture seule, et
+une copie de travail modifiable dans le dossier travail (ouvert au démarrage).
+  fiche_serveur_et_reference.txt    rôle du serveur et référence de durcissement
+  bulletin_securite_mars_2026.csv   avis de sécurité du mois
+  releve_srv-suivi-01/              relevé de configuration (sshd_config, passwd, sudoers, ss, paquets, find)
+  MANIFESTE_SHA256.txt              empreintes de référence (preuves)
+
+Marche à suivre.
+
+1. Vérifier l'intégrité avant toute analyse. Ouvrez un terminal, puis tapez :
+       cd ~/preuves
+       sha256sum -c MANIFESTE_SHA256.txt
+   Chaque fichier doit afficher OK.
+
+2. Lire les fichiers du relevé avec less ou mousepad ; chercher avec grep, par
+   exemple : grep -E '^(PermitRootLogin|PasswordAuthentication)' sshd_config
+   ou awk -F: '$3==0' passwd.
+
+3. Partie A : SSH, comptes et sudo. Partie B : services, correctifs et fichiers.
+
+4. Répondre. Saisissez vos réponses dans le volet Points de contrôle de la
+   page du lab, puis enregistrez. Nombres avec un point ou une virgule
+   décimale ; codes et listes comme indiqué dans chaque question. Quand vous
+   avez terminé, cliquez sur Terminer et corriger pour obtenir votre note.
+
+Toute votre activité dans le terminal est journalisée.

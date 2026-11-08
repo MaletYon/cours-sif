@@ -1,0 +1,66 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4097 (0x1001)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CM, O=LiZbiZ SA, CN=LiZbiZ Racine CA
+        Validity
+            Not Before: Jan 15 00:00:00 2024 GMT
+            Not After : Jan 15 00:00:00 2030 GMT
+        Subject: C=CM, O=LiZbiZ SA, CN=LiZbiZ Serveurs CA
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ad:15:6f:6d:b7:7a:e3:a5:d1:fb:4a:a4:96:00:
+                    2e:c0:7b:0f:01:ac:11:53:f4:59:0d:76:be:e0:56:
+                    fd:74:f0:af:f8:83:24:b4:ad:52:b9:38:35:d4:cd:
+                    b6:b4:4a:c8:82:7b:15:01:a5:96:f7:c9:d3:41:2a:
+                    f9:36:99:13:19:24:cb:62:15:93:05:a8:c7:00:97:
+                    a7:60:7e:1c:04:39:44:22:82:8d:96:41:50:d9:60:
+                    a6:79:c0:b7:11:52:88:41:08:e4:ee:17:50:d4:c0:
+                    2b:94:99:b4:87:80:fa:4d:2c:09:be:ad:5d:23:37:
+                    e6:8a:44:83:3a:7f:7b:5f:ce:cd:f2:3e:d2:72:32:
+                    b2:e4:31:ef:7c:73:3e:aa:25:20:c1:ef:8d:00:59:
+                    7a:46:64:b3:b5:64:1d:b2:23:c8:ae:33:7c:1e:78:
+                    d7:85:b5:da:dd:a3:d0:c1:01:1d:86:c3:b6:15:52:
+                    3f:99:4f:07:bf:c3:3b:24:3e:c4:14:45:68:78:84:
+                    d2:8c:04:6c:75:a9:73:ba:29:6f:e2:0b:8c:f0:ba:
+                    9e:c3:2e:eb:03:e2:9d:05:a1:71:58:30:ee:f7:0e:
+                    07:53:eb:d1:08:47:5d:85:1e:41:fa:26:f9:35:f9:
+                    72:71:1b:be:09:7c:69:10:b9:10:e8:e5:5a:25:44:
+                    b7:5b
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+            X509v3 Subject Key Identifier: 
+                59:24:F2:12:18:C9:2C:E5:E5:BF:F4:59:C5:A8:B8:B0:B7:74:6F:87
+            X509v3 Authority Key Identifier: 
+                BA:FC:DF:9F:69:D1:60:7E:94:2B:4A:82:55:9C:B5:85:6C:3C:35:9C
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        93:44:af:bd:f7:32:aa:c2:c0:bc:6e:45:10:26:a9:c9:9c:28:
+        aa:fd:e1:97:58:3f:b7:45:45:6b:70:ea:f6:87:70:b4:90:5a:
+        39:9d:b2:75:99:45:f6:31:14:a2:7a:a8:0f:da:65:3d:74:76:
+        fb:a2:29:7e:72:e6:6f:5b:0b:9e:70:44:07:2f:51:58:cf:25:
+        af:15:2a:66:c7:9f:8f:6a:27:a3:cf:b6:92:88:94:52:8c:6e:
+        2f:5c:20:6b:ab:75:ef:03:02:63:5f:97:3d:c8:f5:1c:8d:47:
+        20:6e:24:18:1e:c8:41:36:33:ec:0e:3a:44:c8:3d:63:65:f1:
+        79:b9:b1:ae:74:90:ce:50:1a:d3:04:86:1e:07:7a:c8:68:e2:
+        6f:96:37:bb:7b:d3:b8:97:ef:af:7b:ef:5a:e4:34:19:b7:84:
+        90:c7:0a:ed:d9:35:14:bf:39:d9:99:61:e6:77:87:a7:ac:25:
+        8e:21:7f:93:0e:b7:86:0f:5b:a0:c3:dc:a4:31:30:61:3c:7b:
+        2a:73:71:90:0a:08:e8:36:20:e1:27:4d:aa:4e:b9:12:08:84:
+        71:4e:e9:03:dd:7f:a8:dc:35:3c:80:af:31:63:91:27:e3:1f:
+        67:ee:cf:06:76:ef:a4:e7:c2:74:00:8d:f2:91:04:52:25:73:
+        08:d5:3e:bd:e7:c7:2a:9c:aa:78:72:4e:e8:f5:7e:07:95:b9:
+        38:cc:e2:ae:25:33:29:61:8d:32:8b:53:ec:ce:98:3f:51:ac:
+        ef:34:34:66:22:81:21:08:f4:d8:d4:75:99:ee:07:66:4d:2e:
+        83:c8:cb:0c:a9:ae:3f:93:b2:58:f4:45:f6:bb:b1:2a:8e:58:
+        02:75:b3:36:30:e3:71:45:59:61:cc:6e:82:06:04:86:9c:1a:
+        51:bd:16:52:ef:39:75:02:d5:cc:e4:77:b5:4a:8c:c4:2e:db:
+        b2:2c:cb:b7:1c:ca:47:4b:1e:12:63:e2:3b:5c:c5:3e:e9:95:
+        bf:9c:db:86:47:bc

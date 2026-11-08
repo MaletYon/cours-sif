@@ -1,0 +1,63 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 8204 (0x200c)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CM, O=LiZbiZ SA, CN=LiZbiZ Serveurs CA
+        Validity
+            Not Before: Nov  2 00:00:00 2025 GMT
+            Not After : Nov  2 00:00:00 2026 GMT
+        Subject: C=CM, O=LiZbiZ SA, CN=vpn.lizbiz.cm
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:a1:da:bd:4f:e0:f1:13:4a:9a:65:0d:4e:d0:d0:
+                    19:cb:79:85:99:83:b2:3a:62:9a:64:76:06:32:8b:
+                    d1:7d:39:d6:68:28:55:69:6c:5c:fd:e2:d4:6b:95:
+                    03:dd:37:cf:a4:8f:d7:38:c5:6d:f1:39:06:cf:bc:
+                    8c:df:f3:c4:42:3e:bf:14:d8:c3:be:ba:78:5b:66:
+                    b3:81:b5:be:fa:6b:25:9a:c6:a1:ba:e2:d6:b2:1e:
+                    61:91:34:04:7f:85:77:88:79:34:00:8b:d8:e5:ad:
+                    52:28:d7:5e:ee:6b:60:17:fb:9f:25:49:a5:92:64:
+                    ef:a8:6e:c3:3d:09:72:a5:da:99:c2:1a:35:63:f8:
+                    b5:a3:1d:18:f4:9a:ff:57:2f:70:06:57:7c:a3:15:
+                    a6:b6:f2:68:61:21:1f:00:a0:eb:33:9b:a6:a1:37:
+                    ae:b4:2e:55:9c:c2:c1:74:62:43:5f:37:23:9f:de:
+                    e3:21:25:b3:23:55:21:82:c3:e7:22:03:2a:93:1c:
+                    3f:6b:7e:61:2f:c6:a8:f3:15:8d:31:d3:07:28:41:
+                    04:9f:a9:42:05:3f:62:ef:19:87:bc:a5:7b:0e:2b:
+                    5d:8a:60:5c:05:25:b0:fd:53:b5:a3:4c:58:d0:c9:
+                    4e:97:72:84:aa:41:0e:d4:65:36:d9:1d:e8:51:cd:
+                    e1:a3
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:vpn.lizbiz.cm
+            X509v3 Subject Key Identifier: 
+                60:AE:66:E7:80:2B:A1:39:4C:D9:1F:0F:2D:4B:1A:00:6D:C2:FC:94
+            X509v3 Authority Key Identifier: 
+                59:24:F2:12:18:C9:2C:E5:E5:BF:F4:59:C5:A8:B8:B0:B7:74:6F:87
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        51:11:16:89:8b:c1:09:a0:b3:d7:c1:88:f5:a9:c8:10:8b:d5:
+        7c:86:ad:92:ba:1d:c9:3c:60:ba:1a:46:ec:3a:c3:ca:f4:f9:
+        53:4b:70:9b:b8:ab:f8:ff:b2:84:62:c5:b3:a2:c3:ee:15:d1:
+        11:f2:36:33:ac:68:03:61:52:f5:d3:b2:1e:b8:42:ea:a7:1c:
+        fe:e2:86:2c:b0:66:bc:7e:e9:6f:4d:6f:aa:70:08:87:2f:7b:
+        ad:ff:c3:f3:84:23:61:47:4d:03:4d:ce:9d:70:7e:f4:68:04:
+        99:0e:de:d6:fc:bd:ea:28:a7:43:df:3c:01:35:49:82:90:da:
+        17:73:61:09:a0:f4:20:07:12:95:93:75:7d:26:8c:88:b0:0d:
+        ad:d7:74:52:3e:c9:dc:bd:5b:83:a1:80:4e:36:fa:c3:91:8b:
+        8f:e7:f4:d2:73:0d:e2:0c:b0:12:de:2e:92:a2:43:5a:6a:c1:
+        98:72:f8:35:49:3a:c2:ef:fe:62:d3:8a:d7:6c:ae:36:8e:07:
+        b3:e2:72:f6:56:44:d0:ad:72:d1:aa:09:52:45:2c:d5:60:07:
+        8e:31:c1:97:92:68:d5:8f:38:ad:92:74:48:c5:fe:db:78:f2:
+        07:8c:f2:2b:44:ec:3f:25:47:24:5d:e4:84:1e:33:6c:43:dd:
+        89:e8:76:92

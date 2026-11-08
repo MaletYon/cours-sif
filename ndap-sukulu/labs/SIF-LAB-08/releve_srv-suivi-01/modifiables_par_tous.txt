@@ -1,0 +1,6 @@
+$ sudo find / -xdev -perm -0002 \( -type f -o -type d \) -not -path '/proc/*'
+/tmp
+/var/tmp
+/dev/shm
+/etc/cron.d/sauvegarde_suivi
+/srv/ftp/depot

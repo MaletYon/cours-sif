@@ -1,0 +1,12 @@
+LiZbiZ SA - Agence de Garoua
+Bordereau d'expédition FAC-2026-0201
+
+  colis 1  GAROUA MOTORS               681 000 FCFA
+  colis 2  GAROUA MOTORS               594 000 FCFA
+  colis 3  CIMENCAM NORD               707 000 FCFA
+  colis 4  BENOUE CEREALES             724 000 FCFA
+  colis 5  BRASSERIES DU NORD          300 000 FCFA
+
+  Total : 3 006 000 FCFA
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)

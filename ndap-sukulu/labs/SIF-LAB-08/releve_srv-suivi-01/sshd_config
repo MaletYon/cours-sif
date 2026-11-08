@@ -1,0 +1,11 @@
+# /etc/ssh/sshd_config (extrait)
+Include /etc/ssh/sshd_config.d/*.conf
+Port 22
+PermitRootLogin yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+X11Forwarding yes
+MaxAuthTries 10
+LoginGraceTime 30
+UsePAM yes
+Subsystem sftp /usr/lib/openssh/sftp-server

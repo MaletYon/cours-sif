@@ -1,0 +1,13 @@
+LiZbiZ SA - Agence de Garoua
+Bordereau d'expédition FAC-2026-0216
+
+  colis 1  MAROUA DISTRIBUTION         327 000 FCFA
+  colis 2  AGRO SAHEL                  562 000 FCFA
+  colis 3  CIMENCAM NORD               446 000 FCFA
+  colis 4  NORD BOIS                   389 000 FCFA
+  colis 5  TRANSNORD                   692 000 FCFA
+  colis 6  AGRO SAHEL                  531 000 FCFA
+
+  Total : 2 947 000 FCFA
+
+(Document fictif établi pour le cours SEC3266. Noms, dates, adresses et montants fictifs.)
