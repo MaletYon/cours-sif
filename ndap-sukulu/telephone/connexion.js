@@ -44,6 +44,8 @@
     return Math.max(0, Math.ceil((e.t + d * 1000 - Date.now()) / 1000));
   }
 
+  function aDemo() { return Object.keys(I.comptes).some(function (k) { return I.comptes[k].d; }); }
+
   function formulaire(msg) {
     page('<div class="carte"><h1 style="margin-top:0">Connexion</h1>' +
       '<p class="petit doux">' + esc(C.sigle) + " · " + esc(C.titre) +
@@ -52,7 +54,10 @@
       '<form id="f-cnx" autocomplete="on"><label class="champ">Matricule<input id="mat" autocomplete="username" autocapitalize="characters" required></label>' +
       '<label class="champ">Mot de passe<input type="password" id="mdp" autocomplete="current-password" required></label>' +
       '<div class="actions"><button class="btn" type="submit" id="ok">Se connecter</button></div></form>' +
-      '<p id="msg" class="message' + (msg ? " ko" : "") + '">' + esc(msg || "") + "</p></div>");
+      '<p id="msg" class="message' + (msg ? " ko" : "") + '">' + esc(msg || "") + "</p></div>" +
+      (aDemo() ? '<div class="carte"><h3 style="margin-top:0">Essayer NDAP SUKULU</h3><p class="petit">Compte de démonstration, ouvert à tous : ' +
+        "matricule <b>" + esc(K.DEMO.matricule) + "</b>, mot de passe <b>" + esc(K.DEMO.motDePasse) + "</b>. " +
+        "Vos essais restent sur cet appareil et ne sont jamais transmis à l'enseignant.</p></div>" : ""));
     document.getElementById("mat").focus();
     document.getElementById("f-cnx").onsubmit = async function (ev) {
       ev.preventDefault();
@@ -65,9 +70,10 @@
         // même calcul que le compte existe ou non, pour ne pas révéler les matricules inscrits
         var k = await K.clesEtudiant(mdp, compte ? compte.s : K.b64(new Uint8Array(16)), I.iter);
         if (!compte || k.verificateur !== compte.v) throw new Error("refus");
-        var profil = await K.dechiffrer(k.aes, compte.p);
+        // le compte de démonstration a un profil en clair (rien de personnel) ; les autres sont chiffrés
+        var profil = compte.d ? compte.p : await K.dechiffrer(k.aes, compte.p);
         var u = { id: id, v: compte.v, matricule: profil.matricule, nom: profil.nom, prenom: profil.prenom,
-                  aes: k.aesBrut, mac: k.macBrut, ouvert: new Date().toISOString() };
+                  aes: k.aesBrut, mac: k.macBrut, ouvert: new Date().toISOString(), demo: !!compte.d };
         try { sessionStorage.setItem(CLE_SESSION, JSON.stringify(u)); localStorage.removeItem(CLE_ECHECS); } catch (e) {}
         demarrer(u);
       } catch (e) {

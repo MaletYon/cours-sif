@@ -17,6 +17,7 @@
   var D = window.NS_DATA, U = window.NS_UTILISATEUR, I = window.NS_IDENT, K = window.NS_CRYPTO;
   if (!U) return;
   var C = D.cours, CFG = D.config;
+  var DEMO = !!U.demo;   // compte de démonstration : tentatives libres, aucune remise
   var TEL = C.edition === "telephone";
   // Contenu effectif = base + ajouts.js de l'enseignant (après vérification de sa signature).
   var EVALS = [], QUESTIONS = [], ALERTE_AJOUTS = null;
@@ -113,9 +114,20 @@
     $("menu").innerHTML = liens.map(function (l) {
       return '<a href="#/' + l[0] + '"' + (l[0] === actif ? ' class="actif"' : "") + ">" + l[1] + "</a>";
     }).join("") + '<a href="#/deconnexion" title="' + esc(U.prenom + " " + U.nom + " · " + U.matricule) + '">Se déconnecter</a>';
-    main.innerHTML = html;
+    main.innerHTML = (DEMO ? bandeauDemo() : "") + html;
     window.scrollTo(0, 0);
   }
+  function bandeauDemo() {
+    return '<p class="message avert">Compte de démonstration : vos sessions restent sur cet appareil et ne sont jamais transmises à l’enseignant. ' +
+      '<a href="' + esc(K.lienInscription(C)) + '">Demander mon inscription dans la salle de classe</a></p>';
+  }
+  function carteInscription() {
+    return '<div class="carte"><h3 style="margin-top:0">Rejoindre la salle de classe</h3><p>Le compte de démonstration ne remet aucun fichier. ' +
+      "Pour être évalué, demandez votre inscription : le bouton ouvre votre messagerie avec un courriel prérempli, à compléter " +
+      "par votre nom, votre établissement et votre matricule.</p>" +
+      '<div class="actions"><a class="btn" href="' + esc(K.lienInscription(C)) + '">Demander mon inscription</a></div></div>';
+  }
+  function epuise(e, ss) { return !DEMO && ss.length >= e.tentatives; }
   function etiquetteStatut(s) {
     if (s.statut === "remise") return '<span class="etiquette ok">remise' + (s.motif === "temps" ? " (temps écoulé)" : "") + "</span>";
     if (s.statut === "abandonnee") return '<span class="etiquette ko">abandonnée, non remise</span>';
@@ -137,8 +149,10 @@
         '<div class="actions"><a class="btn" href="#/session/' + esc(ec.sid) + '">Reprendre</a></div></div>';
     }
     var aExporter = S.sessions.filter(function (s) { return s.statut !== "en_cours" && !s.exporte; }).length;
-    if (aExporter) h += '<p class="message avert">' + aExporter + ' session(s) terminée(s) pas encore exportée(s). <a href="#/remises">Exporter mon fichier de synthèse</a>.</p>';
-    h += '<p class="petit doux">Chaque évaluation est minutée et compte un nombre limité de tentatives. ' +
+    if (aExporter && !DEMO) h += '<p class="message avert">' + aExporter + ' session(s) terminée(s) pas encore exportée(s). <a href="#/remises">Exporter mon fichier de synthèse</a>.</p>';
+    h += DEMO ? '<p class="petit doux">Chaque évaluation est minutée ; le compte de démonstration a des tentatives illimitées. ' +
+      "La note ne s'affiche pas : les corrigés restent chez l'enseignant, qui ne corrige que les étudiants inscrits.</p>" :
+      '<p class="petit doux">Chaque évaluation est minutée et compte un nombre limité de tentatives. ' +
       "Votre note ne s'affiche pas ici : votre enseignant corrige les fichiers de synthèse et vous transmet les résultats.</p>";
     ["fiche", "lab"].forEach(function (type) {
       var liste = EVALS.filter(function (e) { return e.type === type; });
@@ -147,10 +161,10 @@
         liste.map(function (e) {
           var ss = sessionsDe(e.id), der = ss[ss.length - 1], cours = ss.filter(function (s) { return s.statut === "en_cours"; })[0];
           var bouton = cours ? '<a class="btn petit" href="#/session/' + esc(cours.sid) + '">Reprendre</a>' :
-            ss.length >= e.tentatives ? '<span class="doux petit">tentatives épuisées</span>' :
+            epuise(e, ss) ? '<span class="doux petit">tentatives épuisées</span>' :
             ec ? '<span class="doux petit">une autre session est en cours</span>' :
             '<a class="btn petit" href="#/commencer/' + esc(e.id) + '">Commencer</a>';
-          return "<tr><td>" + esc(e.titre) + "</td><td>" + e.duree + " min</td><td>" + ss.length + " / " + e.tentatives + "</td><td>" +
+          return "<tr><td>" + esc(e.titre) + "</td><td>" + e.duree + " min</td><td>" + ss.length + (DEMO ? "" : " / " + e.tentatives) + "</td><td>" +
             (der ? etiquetteStatut(der) : '<span class="doux">non commencée</span>') + '</td><td style="white-space:nowrap">' + bouton + "</td></tr>";
         }).join("") + "</tbody></table></div>";
     });
@@ -166,9 +180,9 @@
     var ec = enCours();
     if (ec) return (location.hash = "#/session/" + ec.sid);
     var ss = sessionsDe(evId);
-    if (ss.length >= ev.tentatives) { alert("Vous avez utilisé vos " + ev.tentatives + " tentatives pour cette évaluation."); return (location.hash = "#/accueil"); }
+    if (epuise(ev, ss)) { alert("Vous avez utilisé vos " + ev.tentatives + " tentatives pour cette évaluation."); return (location.hash = "#/accueil"); }
     var n = ss.length + 1;
-    if (!confirm(ev.titre + "\n\nTentative " + n + " sur " + ev.tentatives + ", durée " + ev.duree + " minutes.\n\n" +
+    if (!confirm(ev.titre + "\n\nTentative " + n + (DEMO ? "" : " sur " + ev.tentatives) + ", durée " + ev.duree + " minutes.\n\n" +
       "La minuterie démarre maintenant et ne s'arrête pas, même si vous quittez l'application. " +
       "Cette tentative sera décomptée même si vous quittez sans enregistrer.\n\nCommencer ?")) return (location.hash = "#/accueil");
     var debut = new Date();
@@ -328,7 +342,7 @@
     if (verifierEcheances()) sauver();
     var fin = S.sessions.filter(function (s) { return s.statut !== "en_cours"; });
     var h = "<h1>Mes remises</h1>";
-    h += '<div class="carte"><h3 style="margin-top:0">Fichier de synthèse</h3><p>Il regroupe toutes vos sessions terminées (remises et abandonnées). ' +
+    if (DEMO) h += carteInscription(); else h += '<div class="carte"><h3 style="margin-top:0">Fichier de synthèse</h3><p>Il regroupe toutes vos sessions terminées (remises et abandonnées). ' +
       "Il est chiffré pour votre enseignant et scellé avec votre clé : personne d'autre ne peut le lire, et toute modification le rend invalide. " +
       "Remettez-le à votre enseignant (courriel, clé USB…). Vous pouvez l'exporter autant de fois que nécessaire : il est toujours complet.</p>" +
       '<div class="actions"><button class="btn" id="exporter"' + (fin.length ? "" : " disabled") + ">Exporter mon fichier de synthèse (" + fin.length + " session(s))</button></div>" +
@@ -356,6 +370,7 @@
   function message(id, t, c) { var e = $(id); if (e) { e.className = "message " + (c || ""); e.textContent = t; } }
 
   async function exporter(sessions) {
+    if (DEMO) throw new Error("le compte de démonstration ne remet aucun fichier");
     if (!I || !I.cle_publique) throw new Error("clé de l'enseignant absente de cette version");
     var cree = maintenant();
     var contenu = {
@@ -403,7 +418,7 @@
     S.resultats = r; await sauver(); return true;
   }
   async function resultatsAuto() {
-    if (!window.NS_RESULTATS) return null;
+    if (!window.NS_RESULTATS || DEMO) return null;
     try { var r = await lireResultats(window.NS_RESULTATS); await enregistrerResultats(r); return null; }
     catch (e) { return e.message; }
   }
@@ -467,6 +482,7 @@
       (I && I.periode ? "<br>Classe " + esc(I.periode.annee + " · " + I.periode.semestre) : "") +
       '</p><p class="petit doux">Connecté le ' + dateFr(U.ouvert) + ". Fermer l'onglet vous déconnecte.</p>" +
       '<div class="actions"><a class="btn petit second" href="#/deconnexion">Se déconnecter</a></div></div>';
+    if (DEMO) h += carteInscription();
     h += '<h2>Affichage</h2><div class="carte"><div class="actions" style="margin-top:0">' +
       '<button class="btn petit second" data-theme="">Automatique</button><button class="btn petit second" data-theme="clair">Clair</button>' +
       '<button class="btn petit second" data-theme="sombre">Sombre</button></div></div>';

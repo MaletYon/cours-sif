@@ -136,7 +136,8 @@
     document.getElementById("menu").innerHTML = liens.map(function (l) {
       return '<a href="#/' + l[0] + '"' + (l[0] === actif ? ' class="actif"' : "") + ">" + l[1] + "</a>";
     }).join("") + (U.personnel ? "" : '<a href="#/deconnexion" title="' + esc(U.prenom + " " + U.nom + " · " + U.matricule) + '">Se déconnecter</a>');
-    main.innerHTML = html;
+    main.innerHTML = (U.demo ? '<p class="message avert">Compte de démonstration : votre progression reste sur cet appareil. ' +
+      '<a href="' + esc(window.NS_CRYPTO.lienInscription(C)) + '">Demander mon inscription dans la salle de classe</a></p>' : "") + html;
     window.scrollTo(0, 0);
   }
 

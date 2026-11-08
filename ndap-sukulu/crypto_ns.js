@@ -150,7 +150,28 @@
     } catch (e) { return false; }
   }
 
+  // Compte de démonstration, commun à tous les cours. Public par choix, il ne protège rien :
+  // il permet d'essayer la plateforme, n'entre dans aucune classe et ne remet jamais de fichier.
+  // Son entrée dans identifiants.js est calculée de la même façon par construire.py et par l'espace enseignant.
+  var DEMO = { matricule: "ETU001", motDePasse: "eTU001", nom: "ETUDIANT DEMO", prenom: "", contact: "maletyon@proton.me" };
+  function estDemo(m) { return normMatricule(m) === DEMO.matricule; }
+  async function compteDemo(code, iter) {
+    var sel = b64(new Uint8Array(await S.digest("SHA-256", enc.encode("NDAP-SUKULU-DEMO|" + code))).slice(0, 16));
+    var k = await clesEtudiant(DEMO.motDePasse, sel, iter);
+    return { id: await idCompte(code, DEMO.matricule),
+             compte: { s: sel, v: k.verificateur, d: 1, p: { matricule: DEMO.matricule, nom: DEMO.nom, prenom: DEMO.prenom } } };
+  }
+  // Courriel prérempli pour demander son inscription dans la salle de classe d'un cours.
+  function lienInscription(c) {
+    var sujet = "NDAP SUKULU · " + c.sigle + " (" + c.code + ") · demande d'inscription";
+    var corps = "Bonjour,\n\nJ'ai essayé NDAP SUKULU avec le compte de démonstration et je souhaite être inscrit(e) " +
+      "dans la salle de classe du cours " + c.sigle + " (" + c.code + ") : " + c.titre + ".\n\n" +
+      "Nom :\nPrénom :\nÉtablissement :\nFilière et niveau :\nMatricule :\nAnnée académique :\n\nCordialement,\n";
+    return "mailto:" + DEMO.contact + "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
+  }
+
   window.NS_CRYPTO = {
+    DEMO: DEMO, estDemo: estDemo, compteDemo: compteDemo, lienInscription: lienInscription,
     pairePourSignature: pairePourSignature, signerEnseignant: signerEnseignant, verifierEnseignant: verifierEnseignant,
     chiffrerPourEnseignant: chiffrerPourEnseignant, dechiffrerPourEnseignant: dechiffrerPourEnseignant, texteASigner: texteASigner,
     disponible: !!S, ITER_ETUDIANT: ITER_ETUDIANT,
