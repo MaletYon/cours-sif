@@ -28,7 +28,7 @@ dt { font-weight:600; } dd { margin:0; overflow-wrap:anywhere; }
 <body>
 <main>
 <div class="carte">
-  <h1>Vérifier une attestation de module</h1>
+  <h1>Vérifier une attestation ou un badge</h1>
   <p class="doux">NDAP SUKULU by MaletYon · cours universitaires</p>
 </div>
 <div class="carte" id="res" role="status"></div>
@@ -79,7 +79,8 @@ dt { font-weight:600; } dd { margin:0; overflow-wrap:anywhere; }
     var data, sig, t, L;
     try { data = octets(p[0]); sig = octets(p[1]); t = new TextDecoder("utf-8", { fatal: true }).decode(data); L = t.split("\n"); }
     catch (e) { return afficher(false, "Lien illisible", "Le contenu du QR code est endommagé."); }
-    if (L.length !== 8 || L[0] !== "NS-ATT-1") return afficher(false, "Format inconnu", "Ce contenu n'est pas celui d'une attestation de module.");
+    var badge = L.length === 7 && L[0] === "NS-BDG-1";
+    if (!badge && (L.length !== 8 || L[0] !== "NS-ATT-1")) return afficher(false, "Format inconnu", "Ce contenu n'est ni une attestation de module ni un badge de chapitre.");
     if (!I || !I.cle_signature) return afficher(false, "Vérification impossible", "La clé publique de l'enseignant n'est pas publiée pour ce cours.");
     if (I.cours !== L[1]) return afficher(false, "Attestation d'un autre cours", "Cette attestation concerne le cours " + L[1] + ". Cette page vérifie le cours " + I.cours + ".");
     if (!(window.crypto && window.crypto.subtle)) return afficher(false, "Navigateur incompatible", "Ouvrez cette page en https avec un navigateur récent.");
@@ -88,6 +89,11 @@ dt { font-weight:600; } dd { margin:0; overflow-wrap:anywhere; }
       var k = await crypto.subtle.importKey("jwk", I.cle_signature, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
       ok = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, k, sig, data);
     } catch (e) { ok = false; }
+    if (badge) {
+      var lb = [["Titulaire", L[4]], ["Cours", L[1]], ["Chapitre", L[3]], ["Niveau", L[5]], ["Date", dateLongue(L[6])]];
+      if (ok) return afficher(true, "Badge authentique", "La signature de l'enseignant est valide. Niveaux : Acquis dès 60 %, Validé dès 70 %, Maîtrise dès 85 %, Excellence dès 95 %.", lb);
+      return afficher(false, "Signature invalide", "Ce badge n'a pas été signé par la clé actuellement publiée pour ce cours.", lb);
+    }
     var lignes = [["Numéro", L[7]], ["Titulaire", L[4]], ["Cours", L[7].split("/")[0] + " (" + L[1] + ")"], ["Module", L[2] + ". " + L[3]],
                   ["Note du module", L[5] + " %"], ["Date", dateLongue(L[6])]];
     if (ok) afficher(true, "Attestation authentique", "La signature de l'enseignant est valide. Comparez ces informations avec celles de l'attestation imprimée.", lignes);

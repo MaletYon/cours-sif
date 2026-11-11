@@ -12,6 +12,9 @@
   // un espace de stockage par étudiant ; un module personnel garde la clé d'avant la connexion
   var CLE = "ndap-sukulu:" + C.code + (U.personnel ? "" : ":" + U.id);
   var main = document.getElementById("app");
+  // Badges de chapitre (badges.js) et mode d'emploi (aide.js). « badges: false » dans cours.yaml les coupe.
+  var B = window.NS_BADGES, AIDE = window.NS_AIDE;
+  var BADGES_ACTIFS = !!B && CFG.badges !== false;
 
   // ------------------------------------------------------------ outils
   function esc(s) {
@@ -132,7 +135,10 @@
     var liens = [["accueil", "Tableau de bord"], ["cours", "Réviser"], ["fiches", "Fiches"], ["examen", "Examen blanc"]];
     if (A_ORAL) liens.push(["oral", "Grand oral"]);
     if (!TEL && D.labs.length) liens.push(["labs", "Labs"]);
-    liens.push(["progression", "Progression"], ["parametres", "Paramètres"]);
+    liens.push(["progression", "Progression"]);
+    if (BADGES_ACTIFS) liens.push(["badges", "Mes badges"]);
+    if (AIDE) liens.push(["aide", "Mode d'emploi"]);
+    liens.push(["parametres", "Paramètres"]);
     document.getElementById("menu").innerHTML = liens.map(function (l) {
       return '<a href="#/' + l[0] + '"' + (l[0] === actif ? ' class="actif"' : "") + ">" + l[1] + "</a>";
     }).join("") + (U.personnel ? "" : '<a href="#/deconnexion" title="' + esc(U.prenom + " " + U.nom + " · " + U.matricule) + '">Se déconnecter</a>');
@@ -154,6 +160,7 @@
       chiffre(pct(vues, nbQ) + " %", "questions déjà rencontrées") +
       chiffre(sess, "fiches et examens passés") +
       chiffre(sess ? moy + " %" : "–", "score moyen") + "</div>";
+    if (BADGES_ACTIFS) h += B.barre({ code: C.code, liste: listeBadges(), acceptes: P.badges || {} });
 
     var faibles = sectionsFaibles(null, 4);
     h += "<h2>Suggestions</h2>";
@@ -194,6 +201,40 @@
         '.<div class="actions"><a class="btn second" href="#/labs">Voir les labs</a></div></div>';
     }
     cadre("accueil", h);
+  }
+  // ------------------------------------------------------------ badges de chapitre
+  // Mode révision : les scores sont connus sur l'appareil. Meilleur score de la fiche du chapitre
+  // et de ses labs (ordinateur), moyenne par chapitre, tout le chapitre fait.
+  function listeBadges() {
+    return B.calculer(D.chapitres.map(function (c) {
+      var evals = [];
+      if (questionsDe(c.id).length) {
+        var m = null;
+        P.sessions.forEach(function (s) { if (s.type === "fiche" && s.ch === c.id) m = m == null ? s.pct : Math.max(m, s.pct); });
+        evals.push({ titre: "Fiche " + c.court, meilleur: m });
+      }
+      if (!TEL) D.labs.forEach(function (l) {
+        if (l.chapitre !== c.id) return;
+        var e = P.labs[l.id];
+        evals.push({ titre: l.titre, meilleur: e && e.meilleur != null ? e.meilleur : null });
+      });
+      return { id: c.id, court: c.court, titre: c.titre, evals: evals };
+    }));
+  }
+  function vueBadges() {
+    if (!BADGES_ACTIFS) return vueAccueil();
+    P.badges = P.badges || {};
+    var o = { code: C.code, liste: listeBadges(), acceptes: P.badges, titulaire: U.personnel ? "" : U.nom + " " + U.prenom, attente: "" };
+    cadre("badges", B.page(o));
+    B.brancher(o, function (c, a) { P.badges[c.id] = a; sauver(); vueBadges(); });
+  }
+  function vueAide() {
+    if (!AIDE) return vueAccueil();
+    var sections = AIDE.apprenant("revision", C.sigle).filter(function (s) {
+      return (BADGES_ACTIFS || s.id !== "badges") && (!U.personnel || s.id !== "connexion") && (!TEL || s.id !== "lab");
+    });
+    cadre("aide", AIDE.page("Mode d'emploi", "Tout ce qu'il faut savoir pour utiliser NDAP SUKULU, sans quitter l'application.", [{ cle: "apprenant", titre: "Apprenant", sections: sections }]));
+    AIDE.brancher();
   }
   function chiffre(v, l) { return '<div class="carte chiffre"><div class="val">' + v + '</div><div class="lib">' + l + "</div></div>"; }
 
@@ -705,6 +746,8 @@
       case "progression": return vueProgression();
       case "labs": return TEL ? vueAccueil() : vueLabs();
       case "lab": return TEL ? vueAccueil() : vueLab(p[1]);
+      case "badges": return vueBadges();
+      case "aide": return vueAide();
       case "parametres": return vueParametres();
       case "deconnexion": return window.NS_DECONNEXION();
       default: return vueAccueil();

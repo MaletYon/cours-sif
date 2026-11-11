@@ -1,6 +1,6 @@
 /* Édition téléphone : met l'application en cache pour fonctionner hors ligne. */
-var CACHE = "ndap-sukulu-0.1-202611081902";
-var FICHIERS = ["./", "../ajouts.js", "./app.js", "./connexion.js", "./contenus.js", "./crypto_ns.js", "./donnees.js", "./eval.js", "../identifiants.js", "./img/icone-192.png", "./img/icone-32.png", "./img/icone-512.png", "./img/icone.ico", "./img/logo-maletyon.png", "./img/logo-ndap-sukulu.png", "./index.html", "./manifest.webmanifest", "../resultats.js", "./sha256.js", "./style.css"];
+var CACHE = "ndap-sukulu-0.1-202611110951";
+var FICHIERS = ["./", "./aide.js", "../ajouts.js", "./app.js", "./attestation.js", "./badges.js", "./connexion.js", "./contenus.js", "./crypto_ns.js", "./donnees.js", "./eval.js", "../identifiants.js", "./img/icone-192.png", "./img/icone-32.png", "./img/icone-512.png", "./img/icone.ico", "./img/logo-maletyon.png", "./img/logo-ndap-sukulu.png", "./index.html", "./manifest.webmanifest", "./qr.js", "../resultats.js", "./sha256.js", "./style.css"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FICHIERS); }).then(function () { return self.skipWaiting(); }));
 });

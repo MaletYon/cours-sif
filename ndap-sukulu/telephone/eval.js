@@ -24,6 +24,10 @@
   var CLE = "ndap-sukulu-eval:" + C.code + ":" + U.id;
   var main = document.getElementById("app");
   var S = null, CLES = null, ACTIVE = null, CHRONO = null, SAUVE = null;
+  // Badges de chapitre (badges.js) et mode d'emploi (aide.js). « badges: false » dans cours.yaml les coupe.
+  var B = window.NS_BADGES, AIDE = window.NS_AIDE;
+  var BADGES_ACTIFS = !!B && CFG.badges !== false;
+  var ATT = window.NS_ATTESTATION;
 
   // ------------------------------------------------------------ outils
   function esc(s) {
@@ -110,10 +114,12 @@
 
   // ------------------------------------------------------------ gabarit
   function cadre(actif, html) {
-    var liens = [["accueil", "Mes évaluations"], ["remises", "Mes remises"], ["resultats", "Mes résultats"], ["parametres", "Paramètres"]];
+    var liens = [["accueil", "Mes évaluations"], ["remises", "Mes remises"], ["resultats", "Mon relevé de notes"]]
+      .concat(BADGES_ACTIFS ? [["badges", "Mes badges"]] : []).concat(attestationsVisibles() ? [["attestations", "Mes attestations"]] : []).concat(AIDE ? [["aide", "Mode d'emploi"]] : []).concat([["parametres", "Paramètres"]]);
     $("menu").innerHTML = liens.map(function (l) {
       return '<a href="#/' + l[0] + '"' + (l[0] === actif ? ' class="actif"' : "") + ">" + l[1] + "</a>";
     }).join("") + '<a href="#/deconnexion" title="' + esc(U.prenom + " " + U.nom + " · " + U.matricule) + '">Se déconnecter</a>';
+    if (ATT) ATT.quitter();
     main.innerHTML = (DEMO ? bandeauDemo() : "") + html;
     window.scrollTo(0, 0);
   }
@@ -148,12 +154,15 @@
         "</strong> (échéance à " + heure(ec.echeance) + "). Passé ce délai, la session sera close sans être remise.</p>" +
         '<div class="actions"><a class="btn" href="#/session/' + esc(ec.sid) + '">Reprendre</a></div></div>';
     }
+    if (BADGES_ACTIFS && !DEMO) h += B.barre({ code: C.code, liste: listeBadges(), acceptes: S.badges || {} });
+    var attAAccepter = attestationsVisibles() ? modulesResultats().filter(function (m) { return m.attestation && !(S.attestations || {})["M" + m.num]; }).length : 0;
+    if (attAAccepter) h += '<p class="message avert" id="att-a-accepter">' + attAAccepter + " attestation" + (attAAccepter > 1 ? "s" : "") + ' de module à accepter. <a href="#/attestations">Mes attestations</a>.</p>';
     var aExporter = S.sessions.filter(function (s) { return s.statut !== "en_cours" && !s.exporte; }).length;
     if (aExporter && !DEMO) h += '<p class="message avert">' + aExporter + ' session(s) terminée(s) pas encore exportée(s). <a href="#/remises">Exporter mon fichier de synthèse</a>.</p>';
     h += DEMO ? '<p class="petit doux">Chaque évaluation est minutée ; le compte de démonstration a des tentatives illimitées. ' +
       "La note ne s'affiche pas : les corrigés restent chez l'enseignant, qui ne corrige que les étudiants inscrits.</p>" :
       '<p class="petit doux">Chaque évaluation est minutée et compte un nombre limité de tentatives. ' +
-      "Votre note ne s'affiche pas ici : votre enseignant corrige les fichiers de synthèse et vous transmet les résultats.</p>";
+      "Votre note ne s'affiche pas ici : votre enseignant corrige les fichiers de synthèse. Dès que sa correction arrive, vos notes apparaissent dans « Mon relevé de notes », avec vos badges et vos attestations.</p>";
     ["fiche", "lab"].forEach(function (type) {
       var liste = EVALS.filter(function (e) { return e.type === type; });
       if (!liste.length) return;
@@ -425,7 +434,7 @@
   function txtNote(n) { return n == null ? "—" : String(Number(n).toFixed(2)).replace(".", ","); }
   async function vueResultats(info) {
     var erreurAuto = await resultatsAuto();
-    var R = S.resultats, h = "<h1>Mes résultats</h1>";
+    var R = S.resultats, h = "<h1>Mon relevé de notes</h1>";
     if (info) h += '<p class="message ' + info[1] + '">' + esc(info[0]) + "</p>";
     if (erreurAuto) h += '<p class="message ko">Fichier de résultats présent mais refusé : ' + esc(erreurAuto) + "</p>";
     if (!R) {
@@ -436,10 +445,13 @@
       h += '<div class="carte"><p class="doux">Résultats publiés par votre enseignant le ' + dateFr(R.genere) + (R.periode ? " · classe " + esc(R.periode.annee + " · " + R.periode.semestre) : "") +
         ". Note retenue en cas de plusieurs tentatives : " + esc(c.regle) + ".</p>" +
         (c.message ? '<div class="encadre">' + esc(c.message) + "</div>" : "") + "</div>";
-      h += '<div class="chiffres">' + [["Moyenne générale", txtNote(c.moyenne_globale) + " / 20"], ["Moyenne des évaluations remises", txtNote(c.moyenne_remises)],
-        ["Évaluations remises", c.remises + " / " + c.total]].concat(c.rang ? [["Rang", c.rang + " / " + c.effectif]] : []).map(function (x) {
+      var tuiles = c.cc ? [["Note des fiches", txtNote(c.cc.fiches) + " / " + c.cc.sur_fiches]].concat(c.cc.sans_lab ? [] : [["Note des labs", txtNote(c.cc.labs) + " / " + c.cc.sur_labs]])
+          .concat([["Note de contrôle continu", txtNote(c.cc.cc) + " / 20"]]) :
+        [["Moyenne générale", txtNote(c.moyenne_globale) + " / 20"], ["Moyenne des évaluations remises", txtNote(c.moyenne_remises)]];
+      h += '<div class="chiffres" id="releve-chiffres">' + tuiles.concat([["Évaluations remises", c.remises + " / " + c.total]]).concat(c.rang ? [["Rang", c.rang + " / " + c.effectif]] : []).map(function (x) {
           return '<div class="carte chiffre"><div class="val">' + x[1] + '</div><div class="lib">' + x[0] + "</div></div>"; }).join("") + "</div>";
-      h += '<p class="petit doux">Moyenne générale : sur toutes les évaluations du cours, une évaluation non remise comptant 0.</p>';
+      h += '<p class="petit doux">' + (c.cc ? (c.cc.sans_lab ? "La note de contrôle continu repose sur les fiches. " : "Contrôle continu : fiches 60 %, labs 40 %. ") : "") +
+        "Une évaluation non remise compte 0. Le tableau donne toutes vos tentatives et la note retenue pour chaque évaluation.</p>";
       h += '<div style="overflow-x:auto"><table class="tab"><thead><tr><th>Évaluation</th><th>Note retenue</th><th>Tentatives</th></tr></thead><tbody>' +
         c.evaluations.map(function (e) {
           return "<tr><td>" + esc(e.titre) + "</td><td><strong>" + (e.note != null ? txtNote(e.note) + " / 20" : e.etat === "abandon" ? '<span class="doux">abandon</span>' : '<span class="doux">non remise</span>') +
@@ -475,6 +487,139 @@
     };
   }
 
+  // ------------------------------------------------------------ badges de chapitre
+  // L'étudiant n'a ni corrigé ni note : ses badges se calculent sur les résultats publiés et signés
+  // par l'enseignant. Meilleur essai de chaque évaluation, moyenne par chapitre, tout le chapitre remis.
+  function meilleurEssai(e) {
+    var m = null;
+    (e.tentatives || []).forEach(function (t) { if (t.statut === "remise" && t.note != null) m = m == null ? t.note : Math.max(m, t.note); });
+    return m == null ? null : m * 5;   // note sur 20 -> pourcentage
+  }
+  function listeBadges() {
+    var R = S.resultats && S.resultats.contenu, parEval = {}, source = EVALS, parCh = {};
+    if (R) {
+      R.evaluations.forEach(function (e) { parEval[e.id] = e; });
+      source = R.evaluations.map(function (e) { return evParId[e.id] || { id: e.id, titre: e.titre }; });
+    }
+    source.forEach(function (e) {
+      if (!e.ch || !chapParId[e.ch]) return;
+      (parCh[e.ch] = parCh[e.ch] || []).push({ titre: e.titre, meilleur: parEval[e.id] ? meilleurEssai(parEval[e.id]) : null });
+    });
+    return B.calculer(D.chapitres.map(function (c) { return { id: c.id, court: c.court, titre: c.titre, evals: parCh[c.id] || [] }; }));
+  }
+  async function vueBadges() {
+    if (!BADGES_ACTIFS) return vueAccueil();
+    S.badges = S.badges || {};
+    var o = { code: C.code, liste: listeBadges(), acceptes: S.badges, titulaire: U.nom + " " + U.prenom,
+      signes: (S.resultats && S.resultats.contenu.badges) || {}, qr: ATT ? function (lien) { return ATT.qr(lien, "#012F6B"); } : null,
+      attente: DEMO ? "Le compte de démonstration ne reçoit aucun résultat : il ne peut pas gagner de badge." :
+        !S.resultats ? "Vos badges se calculent à partir des résultats publiés par votre enseignant. Aucun résultat n'est encore arrivé." : "" };
+    cadre("badges", B.page(o));
+    B.brancher(o, async function (c, a) { S.badges[c.id] = a; await sauver(); vueBadges(); });
+  }
+
+  // ------------------------------------------------------------ attestations de module
+  // Délivrées et signées par l'enseignant à la publication des résultats. L'étudiant les reçoit avec
+  // ses résultats, les accepte, puis les affiche et les imprime. Rien n'est calculé ni signé ici.
+  function modulesResultats() { var R = S.resultats && S.resultats.contenu; return (R && R.modules) || []; }
+  function attestationsVisibles() {
+    if (!ATT || DEMO || !S) return false;
+    var R = S.resultats && S.resultats.contenu;
+    return R ? !!R.modules : C.code !== "OPJ-APJ";
+  }
+  function vueAttestations(imprimer) {
+    if (!attestationsVisibles()) return vueAccueil();
+    S.attestations = S.attestations || {};
+    var mods = modulesResultats(), R = S.resultats && S.resultats.contenu, seuil = (R && R.seuil_attestation) || 70;
+    if (imprimer) {
+      var m = mods.filter(function (x) { return "M" + x.num === imprimer && x.attestation && S.attestations[imprimer]; })[0];
+      if (!m) return (location.hash = "#/attestations");
+      var x = m.attestation.contexte;
+      cadre("attestations", '<div class="att-outils"><a class="btn second" href="#/attestations">Retour</a><button class="btn" id="att-imprimer" type="button">Imprimer ou enregistrer en PDF</button>' +
+        "<span>A4 paysage, marges « aucune », arrière-plans activés</span></div>" +
+        ATT.html(m.attestation, { titre: x.titre, sigle: x.sigle, pied: x.pied, seuil: x.seuil, enseignant: x.enseignant, mention: x.mention, lien: x.lien, logo: "img/logo-maletyon.png", signature: R.signature_enseignant || null }));
+      ATT.entrer();
+      $("att-imprimer").onclick = function () { window.print(); };
+      return;
+    }
+    var acceptees = mods.filter(function (m) { return m.attestation && S.attestations["M" + m.num]; }).length;
+    var h = "<h1>Mes attestations</h1>" + '<p class="doux">' + esc(U.nom + " " + U.prenom) + " · " + acceptees + " attestation" + (acceptees > 1 ? "s" : "") + " sur " + mods.length + " modules</p>";
+    if (!R) h += '<p class="message avert">Vos attestations arrivent avec les résultats publiés par votre enseignant. Aucun résultat n\'est encore arrivé.</p>';
+    h += '<div class="carte"><p style="margin:0">Un module est une partie du livre. L\'attestation est acquise quand toutes les évaluations du module sont remises, fiches et labs, ' +
+      "avec une moyenne d'au moins <strong>" + seuil + " %</strong>, en retenant votre meilleur essai. Elle est signée par votre enseignant et se vérifie par son QR code.</p></div>";
+    h += mods.map(function (m) {
+      var a = m.attestation, cle = "M" + m.num, acc = a && S.attestations[cle];
+      var etat = acc ? "accepte" : a ? "obtenu" : "verrou";
+      var c = '<div class="carte att-module" data-module="' + cle + '" data-etat="' + etat + '"><h3 style="margin-top:0">Module ' + m.num + " · " + esc(m.titre) + "</h3>";
+      if (acc) c += '<p><span class="etiquette ok">attestation acceptée</span> N° <strong>' + esc(a.numero) + "</strong> · note du module " + a.note + " % · délivrée le " + esc(ATT.dateLongue(a.date)) + "</p>" +
+        '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div class="att-qr-mini" data-lien="' + esc(a.contexte.lien) + '" style="width:96px">' + ATT.qr(a.contexte.lien) + "</div>" +
+        '<div class="actions" style="margin:0"><a class="btn petit" href="#/attestations/imprimer/' + cle + '">Afficher et imprimer</a><a class="btn petit second" href="' + esc(a.contexte.lien) + '" target="_blank" rel="noopener">Vérifier en ligne</a></div></div>';
+      else if (a) c += '<p><span class="etiquette avert">obtenue, à accepter</span> note du module ' + a.note + " %</p>" +
+        '<div class="actions"><button class="btn petit" data-att-accepter="' + cle + '">Accepter cette attestation</button></div>';
+      else c += '<p class="doux" style="margin-bottom:0">' + (!m.total ? "Ce module n'a pas d'évaluation." : m.complet ? "Moyenne de " + m.pct + " %, sous le seuil de " + seuil + " %." :
+        m.remis + " évaluation" + (m.remis > 1 ? "s" : "") + " remise" + (m.remis > 1 ? "s" : "") + " sur " + m.total + ".") + "</p>";
+      return c + "</div>";
+    }).join("");
+    cadre("attestations", h);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-att-accepter]"), function (bt) {
+      bt.onclick = async function () {
+        var cle = bt.getAttribute("data-att-accepter"), m = mods.filter(function (x) { return "M" + x.num === cle; })[0];
+        if (!m || !m.attestation) return;
+        if (!confirm("Accepter l'attestation du module " + m.num + " ?\n\nElle est établie au nom de : " + (m.attestation.nom + " " + (m.attestation.prenom || "")).trim() + ".")) return;
+        S.attestations[cle] = { date: new Date().toISOString(), numero: m.attestation.numero };
+        await sauver(); vueAttestations();
+      };
+    });
+  }
+
+  // ------------------------------------------------------------ mode d'emploi
+  function vueAide() {
+    if (!AIDE) return vueAccueil();
+    var sections = AIDE.apprenant("evaluation", C.sigle).filter(function (s) { return BADGES_ACTIFS || s.id !== "badges"; });
+    cadre("aide", AIDE.page("Mode d'emploi", "Tout ce qu'il faut savoir pour utiliser NDAP SUKULU, sans quitter l'application.", [{ cle: "apprenant", titre: "Apprenant", sections: sections }]));
+    AIDE.brancher();
+  }
+
+  // ------------------------------------------------------------ contexte de session (changement de navigateur)
+  // Tout l'état de l'étudiant (sessions, résultats reçus, badges et attestations acceptés), chiffré avec sa clé.
+  // L'import fusionne : il ajoute ce qui manque et ne retire jamais une session, pour ne pas remettre un compteur à zéro.
+  async function exporterContexte() {
+    await sauver();
+    var o = { format: "ndap-sukulu-contexte", version: 1, cours: C.code, compte: U.id, cree: maintenant(), boite: await K.chiffrer(CLES.aes, S) };
+    var d = new Date(), deux = function (x) { return ("0" + x).slice(-2); };
+    var nom = "NDAP_SUKULU_" + C.code + "_" + U.matricule.replace(/\W+/g, "") + "_contexte_" + d.getFullYear() + deux(d.getMonth() + 1) + deux(d.getDate()) + "_" + deux(d.getHours()) + deux(d.getMinutes()) + ".json";
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(o)], { type: "application/json" }));
+    a.download = nom; document.body.appendChild(a); a.click(); a.remove();
+    return nom;
+  }
+  async function importerContexte(o) {
+    if (!o || o.format !== "ndap-sukulu-contexte") throw new Error("ce n'est pas un contexte de session NDAP SUKULU");
+    if (o.cours !== C.code) throw new Error("contexte du cours " + o.cours + ", pas " + C.code);
+    if (o.compte !== U.id) throw new Error("ce contexte appartient à un autre compte");
+    var X;
+    try { X = await K.dechiffrer(CLES.aes, o.boite); } catch (e) { throw new Error("fichier illisible avec votre compte : il a été modifié, ou votre mot de passe a changé depuis l'export"); }
+    if (!X || !Array.isArray(X.sessions)) throw new Error("contenu inattendu");
+    var r = { sessions: 0, maj: 0, resultats: false, badges: 0, attestations: 0 }, parSid = {};
+    S.sessions.forEach(function (s) { parSid[s.sid] = s; });
+    X.sessions.forEach(function (s) {
+      var local = parSid[s.sid];
+      if (!local) { S.sessions.push(s); parSid[s.sid] = s; r.sessions++; return; }
+      // même session des deux côtés : la version terminée l'emporte sur la version en cours
+      if (local.statut === "en_cours" && s.statut !== "en_cours") { S.sessions[S.sessions.indexOf(local)] = s; parSid[s.sid] = s; r.maj++; }
+    });
+    S.sessions.sort(function (a, b) { return Date.parse(a.debut) - Date.parse(b.debut); });
+    (X.exports || []).forEach(function (e) { if (!(S.exports || []).some(function (y) { return y.t === e.t; })) (S.exports = S.exports || []).push(e); });
+    if (X.resultats && (!S.resultats || Date.parse(X.resultats.genere) > Date.parse(S.resultats.genere))) { S.resultats = X.resultats; r.resultats = true; }
+    S.badges = S.badges || {};
+    Object.keys(X.badges || {}).forEach(function (k) { if (!S.badges[k] || X.badges[k].niveau > S.badges[k].niveau) { S.badges[k] = X.badges[k]; r.badges++; } });
+    S.attestations = S.attestations || {};
+    Object.keys(X.attestations || {}).forEach(function (k) { if (!S.attestations[k]) { S.attestations[k] = X.attestations[k]; r.attestations++; } });
+    verifierEcheances();
+    await sauver();
+    return r;
+  }
+
   // ------------------------------------------------------------ paramètres
   function vueParametres() {
     var h = "<h1>Paramètres</h1>";
@@ -483,6 +628,12 @@
       '</p><p class="petit doux">Connecté le ' + dateFr(U.ouvert) + ". Fermer l'onglet vous déconnecte.</p>" +
       '<div class="actions"><a class="btn petit second" href="#/deconnexion">Se déconnecter</a></div></div>';
     if (DEMO) h += carteInscription();
+    if (!DEMO) h += '<h2>Changer de navigateur ou d\'appareil</h2><div class="carte"><p>Vos sessions, vos résultats, vos badges et vos attestations acceptés sont enregistrés dans ce navigateur, sur cet appareil. ' +
+      "Pour continuer ailleurs, exportez votre contexte de session ici, puis importez-le dans l'autre navigateur après vous y être connecté.</p>" +
+      '<p class="petit doux">Le fichier est chiffré avec votre clé personnelle : lui seul, sans votre mot de passe, ne révèle rien. L\'import complète ce qui existe déjà, il n\'efface rien. ' +
+      "Ce fichier n'est pas une remise : pour être corrigé, exportez toujours votre fichier de synthèse dans « Mes remises ».</p>" +
+      '<div class="actions"><button class="btn" id="ctx-exporter">Exporter mon contexte de session</button>' +
+      '<label class="btn second">Importer un contexte<input type="file" id="ctx-importer" accept=".json" hidden></label></div><p id="msg-ctx"></p></div>';
     h += '<h2>Affichage</h2><div class="carte"><div class="actions" style="margin-top:0">' +
       '<button class="btn petit second" data-theme="">Automatique</button><button class="btn petit second" data-theme="clair">Clair</button>' +
       '<button class="btn petit second" data-theme="sombre">Sombre</button></div></div>';
@@ -490,6 +641,22 @@
       ", version " + esc(D.version) + " du " + esc(D.genere) + ". " + EVALS.length + " évaluations. Vos sessions sont chiffrées sur cet appareil avec votre clé personnelle." +
       "<br>" + esc(C.pied) + "</div>";
     cadre("parametres", h);
+    if ($("ctx-exporter")) {
+      $("ctx-exporter").onclick = async function () {
+        try { message("msg-ctx", "Fichier téléchargé : " + (await exporterContexte()) + ". Rangez-le dans votre dossier Exports.", "ok"); }
+        catch (e) { message("msg-ctx", "Export impossible : " + e.message, "ko"); }
+      };
+      $("ctx-importer").onchange = async function (ev) {
+        var f = ev.target.files[0]; if (!f) return;
+        try {
+          var r = await importerContexte(JSON.parse(await f.text()));
+          message("msg-ctx", "Contexte importé : " + r.sessions + " session" + (r.sessions > 1 ? "s" : "") + " ajoutée" + (r.sessions > 1 ? "s" : "") + ", " + r.maj + " mise" + (r.maj > 1 ? "s" : "") + " à jour" +
+            (r.resultats ? ", résultats repris" : "") + (r.badges ? ", " + r.badges + " badge" + (r.badges > 1 ? "s" : "") + " repris" : "") +
+            (r.attestations ? ", " + r.attestations + " attestation" + (r.attestations > 1 ? "s" : "") + " reprise" + (r.attestations > 1 ? "s" : "") : "") + ".", "ok");
+        } catch (e) { message("msg-ctx", "Fichier refusé : " + e.message, "ko"); }
+        ev.target.value = "";
+      };
+    }
     document.querySelectorAll("[data-theme]").forEach(function (b) {
       b.onclick = function () {
         var t = b.getAttribute("data-theme");
@@ -516,6 +683,9 @@
       case "session": return vueSession(p[1]);
       case "remises": return vueRemises();
       case "resultats": return vueResultats();
+      case "badges": return vueBadges();
+      case "attestations": return vueAttestations(p[1] === "imprimer" ? p[2] : null);
+      case "aide": return vueAide();
       case "parametres": return vueParametres();
       case "deconnexion": return window.NS_DECONNEXION();
       default: return vueAccueil();
@@ -525,7 +695,8 @@
   window.addEventListener("beforeunload", function (e) {
     if (ACTIVE && ACTIVE.statut === "en_cours") { clearTimeout(SAUVE); sauver(); e.preventDefault(); e.returnValue = ""; }
   });
-  indexer().then(charger).then(router).catch(function (e) {
+  // les résultats publiés sont lus dès la connexion : les badges à accepter s'affichent à l'accueil
+  indexer().then(charger).then(function () { return resultatsAuto(); }).then(router).catch(function (e) {
     main.innerHTML = '<div class="carte"><h1>Données illisibles</h1><p>Les sessions enregistrées sur cet appareil ne peuvent pas être déchiffrées avec ce compte (' + esc(e.message) + ").</p></div>";
   });
 })();

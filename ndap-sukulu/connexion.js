@@ -25,7 +25,47 @@
   }
   function page(html) { main.innerHTML = '<div class="connexion">' + html + "</div>"; }
 
-  function demarrer(u) {
+  // Contenu scellé (D.scelle) : il n'existe en clair qu'après la connexion, avec la clé remise au compte.
+  async function desceller(u) {
+    if (!D.scelle) return;
+    var cle = await crypto.subtle.importKey("raw", K.deb64(u.cc), "AES-GCM", false, ["decrypt"]);
+    var plein = await K.dechiffrer(cle, D.scelle);
+    Object.assign(D, plein);
+    delete D.scelle;
+    var attente = {};
+    window.NS_SCELLE = function (id, boite) { if (attente[id]) attente[id](boite); };
+    function charger(rel) {
+      return new Promise(function (ok, ko) {
+        attente[rel] = ok;
+        var s = document.createElement("script");
+        s.src = rel; s.onerror = ko;
+        document.body.appendChild(s);
+      });
+    }
+    async function ouvrirFichier(rel) {
+      var b = await charger(rel);
+      return crypto.subtle.decrypt({ name: "AES-GCM", iv: K.deb64(b.iv) }, cle, K.deb64(b.ct));
+    }
+    document.addEventListener("click", function (ev) {
+      var a = ev.target && ev.target.closest && ev.target.closest("a[href]");
+      if (!a) return;
+      var h = (a.getAttribute("href") || "").split("#"), rel = (D.fichiers_scelles || {})[h[0]];
+      if (!rel) return;
+      ev.preventDefault();
+      var pdf = /\.pdf$/i.test(h[0]);
+      var fen = pdf ? window.open("about:blank", "_blank") : null;
+      ouvrirFichier(rel).then(function (brut) {
+        var url = URL.createObjectURL(new Blob([brut], { type: pdf ? "application/pdf" : "application/octet-stream" }));
+        if (pdf) { fen.location = url + (h[1] ? "#" + h[1] : ""); return; }
+        var t = document.createElement("a");
+        t.href = url; t.download = h[0].split("/").pop();
+        document.body.appendChild(t); t.click(); t.remove();
+      });
+    }, true);
+  }
+
+  async function demarrer(u) {
+    await desceller(u);
     window.NS_UTILISATEUR = u;
     window.NS_DECONNEXION = function () {
       try { sessionStorage.removeItem(CLE_SESSION); } catch (e) {}
@@ -44,7 +84,7 @@
     return Math.max(0, Math.ceil((e.t + d * 1000 - Date.now()) / 1000));
   }
 
-  function aDemo() { return Object.keys(I.comptes).some(function (k) { return I.comptes[k].d; }); }
+  function aDemo() { return !D.scelle && Object.keys(I.comptes).some(function (k) { return I.comptes[k].d; }); }
 
   function formulaire(msg) {
     page('<div class="carte"><h1 style="margin-top:0">Connexion</h1>' +
@@ -71,9 +111,10 @@
         var k = await K.clesEtudiant(mdp, compte ? compte.s : K.b64(new Uint8Array(16)), I.iter);
         if (!compte || k.verificateur !== compte.v) throw new Error("refus");
         // le compte de démonstration a un profil en clair (rien de personnel) ; les autres sont chiffrés
-        var profil = compte.d ? compte.p : await K.dechiffrer(k.aes, compte.p);
+        var profil = compte.d && !compte.p.ct ? compte.p : await K.dechiffrer(k.aes, compte.p);
         var u = { id: id, v: compte.v, matricule: profil.matricule, nom: profil.nom, prenom: profil.prenom,
                   aes: k.aesBrut, mac: k.macBrut, ouvert: new Date().toISOString(), demo: !!compte.d };
+        if (D.scelle) u.cc = (await K.dechiffrer(k.aes, compte.k)).k;
         try { sessionStorage.setItem(CLE_SESSION, JSON.stringify(u)); localStorage.removeItem(CLE_ECHECS); } catch (e) {}
         demarrer(u);
       } catch (e) {
