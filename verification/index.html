@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Vérifier une attestation de module · NDAP SUKULU</title>
+<style>
+:root { --fond:#f4f6f9; --carte:#fff; --texte:#1e1e1e; --doux:#55606d; --bleu:#012f6b; --ok:#1b6b34; --okf:#e6f5ea; --ko:#a31515; --kof:#fdecec; --bord:#d3dae3; }
+@media (prefers-color-scheme: dark) { :root { --fond:#0f1419; --carte:#1a2129; --texte:#e8edf2; --doux:#a7b3c0; --bleu:#8fb8f0; --ok:#7fdc9b; --okf:#14301e; --ko:#ff9a9a; --kof:#3a1a1a; --bord:#333f4c; } }
+* { box-sizing:border-box; }
+body { margin:0; padding:16px; background:var(--fond); color:var(--texte); font:16px/1.5 system-ui,"Segoe UI",Arial,sans-serif; }
+main { max-width:640px; margin:0 auto; }
+.carte { background:var(--carte); border:1px solid var(--bord); border-radius:8px; padding:18px; margin-bottom:14px; }
+h1 { font-size:1.35rem; margin:0 0 4px; color:var(--bleu); }
+.doux { color:var(--doux); font-size:.92rem; margin:0; }
+textarea { width:100%; min-height:110px; margin:10px 0; padding:10px; font:14px/1.4 ui-monospace,Consolas,monospace; color:var(--texte); background:var(--fond); border:1px solid var(--bord); border-radius:6px; }
+button { font:inherit; font-weight:600; padding:10px 16px; border-radius:6px; border:1px solid var(--bleu); background:var(--bleu); color:var(--carte); cursor:pointer; }
+#res { display:none; }
+#res.ok { display:block; background:var(--okf); border-color:var(--ok); }
+#res.ko { display:block; background:var(--kof); border-color:var(--ko); }
+#res h2 { margin:0 0 8px; font-size:1.15rem; }
+#res.ok h2 { color:var(--ok); } #res.ko h2 { color:var(--ko); }
+dl { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; margin:10px 0; }
+dt { font-weight:600; } dd { margin:0; overflow-wrap:anywhere; }
+</style>
+</head>
+<body>
+<main>
+<div class="carte">
+  <h1>Vérifier une attestation de module</h1>
+  <p class="doux">NDAP SUKULU by MaletYon · cours universitaires</p>
+</div>
+<div class="carte" id="res" role="status"></div>
+<div class="carte">
+  <label for="t"><b>Lien du QR code</b></label>
+  <p class="doux">Le QR code d'une attestation ouvre cette page et lance la vérification. Vous pouvez aussi coller ici le lien qu'il contient.</p>
+  <textarea id="t" spellcheck="false" autocomplete="off"></textarea>
+  <button id="v" type="button">Vérifier</button>
+</div>
+<p class="doux">La vérification se fait sur cet appareil. Les informations de l'attestation ne sont pas transmises. Une signature authentique garantit le contenu du QR code : comparez-le avec ce qui est imprimé. L'attestation porte sur un résultat de contrôle continu obtenu à distance. Elle n'est ni un diplôme ni un relevé de notes officiel. © MaletYon 2026</p>
+</main>
+<script src="../ndap-sukulu/identifiants.js"></script>
+<script>
+(function () {
+  "use strict";
+  var champ = document.getElementById("t"), res = document.getElementById("res");
+  var I = window.NS_IDENT || null;
+
+  function octets(b64u) {
+    var s = b64u.replace(/-/g, "+").replace(/_/g, "/"), t = atob(s + "===".slice((s.length + 3) % 4)), o = new Uint8Array(t.length);
+    for (var i = 0; i < t.length; i++) o[i] = t.charCodeAt(i);
+    return o;
+  }
+  function afficher(ok, titre, note, lignes) {
+    res.className = "carte " + (ok ? "ok" : "ko");
+    res.textContent = "";
+    var h = document.createElement("h2"); h.textContent = titre; res.appendChild(h);
+    if (note) { var p = document.createElement("p"); p.className = "doux"; p.textContent = note; res.appendChild(p); }
+    if (lignes) {
+      var dl = document.createElement("dl");
+      lignes.forEach(function (l) {
+        var dt = document.createElement("dt"), dd = document.createElement("dd");
+        dt.textContent = l[0]; dd.textContent = l[1]; dl.appendChild(dt); dl.appendChild(dd);
+      });
+      res.appendChild(dl);
+    }
+    res.scrollIntoView({ block: "nearest" });
+  }
+  function dateLongue(iso) {
+    var d = new Date(iso + "T12:00:00");
+    return isNaN(d) ? iso : d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+  }
+  async function verifier(texte) {
+    var brut = String(texte || "").trim();
+    if (!brut) return afficher(false, "Rien à vérifier", "Scannez le QR code de l'attestation ou collez son lien.");
+    var frag = brut.indexOf("#") >= 0 ? brut.slice(brut.indexOf("#") + 1) : brut, p = frag.split(".");
+    if (p.length !== 2) return afficher(false, "Lien illisible", "Ce contenu n'est pas celui d'une attestation NDAP SUKULU.");
+    var data, sig, t, L;
+    try { data = octets(p[0]); sig = octets(p[1]); t = new TextDecoder("utf-8", { fatal: true }).decode(data); L = t.split("\n"); }
+    catch (e) { return afficher(false, "Lien illisible", "Le contenu du QR code est endommagé."); }
+    if (L.length !== 8 || L[0] !== "NS-ATT-1") return afficher(false, "Format inconnu", "Ce contenu n'est pas celui d'une attestation de module.");
+    if (!I || !I.cle_signature) return afficher(false, "Vérification impossible", "La clé publique de l'enseignant n'est pas publiée pour ce cours.");
+    if (I.cours !== L[1]) return afficher(false, "Attestation d'un autre cours", "Cette attestation concerne le cours " + L[1] + ". Cette page vérifie le cours " + I.cours + ".");
+    if (!(window.crypto && window.crypto.subtle)) return afficher(false, "Navigateur incompatible", "Ouvrez cette page en https avec un navigateur récent.");
+    var ok = false;
+    try {
+      var k = await crypto.subtle.importKey("jwk", I.cle_signature, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+      ok = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, k, sig, data);
+    } catch (e) { ok = false; }
+    var lignes = [["Numéro", L[7]], ["Titulaire", L[4]], ["Cours", L[7].split("/")[0] + " (" + L[1] + ")"], ["Module", L[2] + ". " + L[3]],
+                  ["Note du module", L[5] + " %"], ["Date", dateLongue(L[6])]];
+    if (ok) afficher(true, "Attestation authentique", "La signature de l'enseignant est valide. Comparez ces informations avec celles de l'attestation imprimée.", lignes);
+    else afficher(false, "Signature invalide", "Ce contenu n'a pas été signé par la clé actuellement publiée pour ce cours. Soit il a été modifié, soit le coffre de l'enseignant a été recréé depuis la délivrance. Dans le doute, écrivez à maletyon@proton.me.", lignes);
+  }
+  document.getElementById("v").onclick = function () { verifier(champ.value); };
+  window.addEventListener("hashchange", function () { if (location.hash.length > 1) { champ.value = location.href; verifier(location.href); } });
+  if (location.hash.length > 1) { champ.value = location.href; verifier(location.href); }
+})();
+</script>
+</body>
+</html>
