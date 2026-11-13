@@ -37,7 +37,7 @@ SPEC = [{'k': 'title',
             'Aucun responsable de la sécurité désigné ; un pare-feu par centre ; un antivirus sur les '
             'postes'],
            ['Prestataire',
-            'Depuis septembre 2026, la société SAHEL INFOGÉRANCE exploite les centres de Garoua et de…']]},
+            'Depuis septembre 2025, la société SAHEL INFOGÉRANCE exploite les centres de Garoua et de…']]},
  {'k': 'table',
   'title': 'La Nuit du 5 au 6 Mars',
   'kicker': 'Section 0.2',
